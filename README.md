@@ -2,11 +2,17 @@
 <h2> Hello, I'm Antoine Benevaut!</h2>
 
 <p>
-<a href="https://github.com/abenevaut/github-readme-stats">
-  <img align="center" src="https://github-readme-stats.vercel.app/api?username=abenevaut&show_icons=trues&count_private=true" />
+<a href="https://www.linkedin.com/in/antoine-benevaut-53a39b36/">
+  <img align="center" src="https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/harshkumarkhatri/" />
 </a>
-<a href="https://github.com/abenevaut/github-readme-stats">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=abenevaut&layout=compact&langs_count=10&count_private=true" />
+<a href="https://twitter.com/abenevaut">
+  <img align="center" src="https://img.shields.io/badge/-Twitter-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/abenevaut" />
+</a>
+<a href="https://stackoverflow.com/users/2090870/abenevaut">
+  <img align="center" src="https://img.shields.io/badge/-Stackoverflow-ffffff?style=flat-square&labelColor=ffffff&logo=stackoverflow&logoColor=black&link=https://stackoverflow.com/users/2090870/abenevaut" />
+</a>
+<a href="https://medium.com/@abenevaut">
+  <img align="center" src="https://img.shields.io/badge/-Medium-ffffff?style=flat-square&labelColor=ffffff&logo=medium&logoColor=black&link=https://medium.com/@abenevaut" />
 </a>
 </p>
 
@@ -24,19 +30,17 @@ const abenevaut = {
 </p>
 
 <p>
-<a href="https://www.linkedin.com/in/antoine-benevaut-53a39b36/">
-  <img align="center" src="https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/harshkumarkhatri/" />
+<a href="https://github.com/abenevaut/github-readme-stats">
+  <img align="center" src="https://github-readme-stats.vercel.app/api?username=abenevaut&show_icons=trues&count_private=true" />
 </a>
-<a href="https://twitter.com/abenevaut">
-  <img align="center" src="https://img.shields.io/badge/-Twitter-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/abenevaut" />
-</a>
-<a href="https://stackoverflow.com/users/2090870/abenevaut">
-  <img align="center" src="https://img.shields.io/badge/-Stackoverflow-ffffff?style=flat-square&labelColor=ffffff&logo=stackoverflow&logoColor=black&link=https://stackoverflow.com/users/2090870/abenevaut" />
-</a>
-<a href="https://medium.com/@abenevaut">
-  <img align="center" src="https://img.shields.io/badge/-Medium-ffffff?style=flat-square&labelColor=ffffff&logo=medium&logoColor=black&link=https://medium.com/@abenevaut" />
+<a href="https://github.com/abenevaut/github-readme-stats">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=abenevaut&layout=compact&langs_count=10&count_private=true" />
 </a>
 </p>
+
+
+
+
 
 
 
