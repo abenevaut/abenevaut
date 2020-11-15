@@ -20,10 +20,9 @@
   
 ```javascript
 const abenevaut = {
-  code: [ PHP, Javascript, Typescript, HTML, CSS ],
   tools: [ Laravel, Node, VueJS, SASS, Docker ],
   architecture: [ "microservices", "event-driven", "design system pattern" ],
-  challenge: [ "https://www.root-me.org" ],
+  challenge: [ "https://pokemon-friends.com", "https://www.root-me.org" ],
 }
 ```
 
