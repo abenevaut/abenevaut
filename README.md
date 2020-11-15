@@ -29,12 +29,8 @@ const abenevaut = {
 </p>
 
 <p>
-<a href="https://github.com/abenevaut/github-readme-stats">
-  <img align="center" src="https://github-readme-stats.vercel.app/api?username=abenevaut&show_icons=trues&count_private=true" />
-</a>
-<a href="https://github.com/abenevaut/github-readme-stats">
-  <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=abenevaut&layout=compact&langs_count=10&count_private=true" />
-</a>
+<img align="center" src="https://github-readme-stats.vercel.app/api?username=abenevaut&show_icons=trues&count_private=true" />
+<img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=abenevaut&layout=compact&langs_count=10&count_private=true" />
 </p>
 
 
