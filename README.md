@@ -23,7 +23,7 @@
 </p>
 
 <p>
-  
+
 ```javascript
 const abenevaut = {
   tools: [ Laravel, Node, VueJS, Sass, Docker ],
