@@ -1,4 +1,3 @@
-
 <h2> Hello, I'm Antoine Benevaut!</h2>
 
 <p>
@@ -26,7 +25,7 @@
 
 ```javascript
 const abenevaut = {
-  tools: [ Laravel, Node, VueJS, Sass, Docker ],
+  stack: [ PHP, Laravel, Node, VueJS, Sass, TailwindCSS, Docker ],
   architecture: [ "microservices", "design system pattern", "SOLID", "hexagonal architecture" ],
   challenge: [ "https://www.root-me.org/abenevaut" ],
 };
