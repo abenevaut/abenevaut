@@ -7,6 +7,9 @@
 <a href="https://twitter.com/abenevaut">
   <img align="center" src="https://img.shields.io/badge/-Twitter-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/abenevaut" />
 </a>
+<a href="https://medium.com/@abenevaut">
+  <img align="center" src="https://img.shields.io/badge/-Medium-ffffff?style=flat-square&labelColor=ffffff&logo=medium&logoColor=black&link=https://medium.com/@abenevaut" />
+</a>
 <a href="https://www.youtube.com/channel/UCyMQp72oGGJ39Pde8_JqhOg">
   <img align="center" src="https://img.shields.io/badge/-Youtube-ffffff?style=flat-square&labelColor=ffffff&logo=youtube&logoColor=black&link=https://www.youtube.com/channel/UCyMQp72oGGJ39Pde8_JqhOg" />
 </a>
@@ -16,9 +19,6 @@
 <a href="https://serverfault.com/users/306991/abenevaut">
   <img align="center" src="https://img.shields.io/badge/-Serverfault-ffffff?style=flat-square&labelColor=ffffff&logo=serverfault&logoColor=black&link=https://serverfault.com/users/306991/abenevaut" />
 </a>
-<a href="https://medium.com/@abenevaut">
-  <img align="center" src="https://img.shields.io/badge/-Medium-ffffff?style=flat-square&labelColor=ffffff&logo=medium&logoColor=black&link=https://medium.com/@abenevaut" />
-</a>
 </p>
 
 <p>
@@ -26,7 +26,7 @@
 ```javascript
 const abenevaut = {
   stack: [ PHP, Laravel, Node, VueJS, Sass, TailwindCSS, Docker ],
-  architecture: [ "microservices", "design system pattern", "SOLID", "hexagonal architecture" ],
+  architecture: [ "design system pattern", "SOLID", "hexagonal architecture", "microservices" ],
   challenge: [ "https://www.root-me.org/abenevaut" ],
 };
 ```
