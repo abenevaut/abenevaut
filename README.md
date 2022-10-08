@@ -25,8 +25,8 @@
 
 ```javascript
 const abenevaut = {
-  stack: [ PHP, Laravel, Node, VueJS, Sass, TailwindCSS, Docker ],
-  architecture: [ "design system pattern", "SOLID", "hexagonal architecture", "microservices" ],
+  stack: [ PHP, Laravel, Docker, Node, VueJS, Sass, TailwindCSS ],
+  architecture: [ "SOLID", "domain driven design", "hexagonal architecture", "microservices", "atomic design", "design system pattern" ],
   challenge: [ "https://www.root-me.org/abenevaut" ],
 };
 ```
