@@ -1,0 +1,77 @@
+view: home
+language: en
+seo:
+  title: My portfolio, Antoine Benevaut
+  description: My portfolio
+  keywords: portfolio, projects, achievement
+  author: Antoine Benevaut
+
+portfolio:
+  title: Projects
+  projects:
+    - panacea:
+      capture: images/dixens-panacea.webp
+      title: Panacea
+      brief: Extranet CRM
+      url: https://www.panacea-conseil.com/
+      date: 2016
+    - placedelaformation:
+      capture: images/dixens-placedelaformation.webp
+      title: Place de la formation
+      brief: Extranet CRM
+      url: https://www.placedelaformation.com/
+      date: 2015
+    - addiactive:
+      capture: images/dixens-addiactive.webp
+      title: Addiactive
+      brief: Magazine
+      url:
+      date: 2013
+    - phkd:
+      capture: images/dixens-phkd.webp
+      title: Paris Hapkido Jongshin Dojang
+      brief: Portail associatif
+      url: http://www.parishapkido.fr/
+      date: 2013
+    - easyserviceinformatique:
+      capture: images/dixens-easyserviceinformatique.webp
+      title: Easy service informatique
+      brief: Formation Laravel 5
+      url: https://www.easyserviceinformatique.com/
+      date: 2013
+    - jrpass:
+      capture: images/dixens-jrpass.webp
+      title: Japan rail pass
+      brief: Portail touristique
+      url: https://japanrailpass.fr/
+      date: 2013
+    - apcdna:
+      capture: images/dixens-apcdna.webp
+      title: APCDNA
+      brief: Portail institutionnel
+      url: https://www.apcdna.org/
+      date: 2013
+    - destinationjapon:
+      capture: images/dixens-destinationjapon.webp
+      title: Destination japon
+      brief: Portail touristique
+      url: https://destinationjapon.fr/
+      date: 2013
+    - hideho:
+      capture: images/dixens-hideho.webp
+      title: Hi De Ho blog
+      brief: Portail culturel
+      url: http://www.thehidehoblog.com/
+      date: 2013
+    - alliance:
+      capture: images/dixens-alliance.webp
+      title: Alliance centriste
+      brief: Portail politique
+      url: https://www.alliancecentriste.fr/
+      date: 2013
+    - ronflement:
+      capture: images/dixens-ronflement.webp
+      title: Mon ronflement
+      brief: Portail médical
+      url:
+      date: 2013

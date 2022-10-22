@@ -1,0 +1,146 @@
+view: profile
+language: en
+seo:
+  title: Me, Antoine Benevaut
+  description: My curriculum vitae
+  keywords: curriculum vitae, career, projects
+  author: Antoine Benevaut
+
+bio:
+  title: Me, Antoine Benevaut
+  description: 'Head of Delivery @global-exam, Paris / Passionate / Cat lover / #laravel 😍 / #CSGO addict 👾'
+  links:
+    - location:
+      icon: pin
+      text: Paris, France
+    - github:
+      icon: github
+      text: abenevaut
+      url: https://github.com/abenevaut
+    - twitter:
+      icon: twitter
+      text: '@abenevaut'
+      url: https://twitter.com/abenevaut
+
+projects:
+  - laravel-one:
+    url: https://github.com/abenevaut/laravel-one
+    logo: favicon/android-chrome-96x96.png
+    name: laravel-one
+  - phpunit-slicer:
+    url: https://github.com/abenevaut/phpunit-slicer
+    logo: favicon/android-chrome-96x96.png
+    name: phpunit-slicer
+  - laravel-one:
+    url: https://github.com/abenevaut/laravel-sentry-handler
+    logo: favicon/android-chrome-96x96.png
+    name: laravel-sentry-handler
+  - laravel-ohdear:
+    url: https://github.com/abenevaut/laravel-ohdear
+    logo: favicon/android-chrome-96x96.png
+    name: laravel-ohdear
+  - laravel-asana:
+    url: https://github.com/abenevaut/laravel-asana
+    logo: favicon/android-chrome-96x96.png
+    name: laravel-asana
+
+feed:
+  title: Career
+  company:
+    - dixens:
+      url: http://peexter.com
+      logo: images/dixens-logo.jpeg
+      capture:
+      name: DIXENS
+      position: Web Developer
+      period: Jan 2013 to Sept 2013
+      description: |
+        Au sein d’une société spécialisée dans le développement web, objectif de porter des modules web vers une solution PyroCMS (framework CodeIgniter).
+      how:
+        - En binôme
+      missions:
+        - Analyse de l’existant
+        - Conception de l’architecture
+        - Développement de sites Web
+        - Portage de sites Web vers PyroCMS
+        - Refonte de sites
+        - Réalisation de tests
+        - Mise en production des solutions
+        - Maintenance corrective et évolutive
+      stack:
+        - PHP
+        - PyroCMS
+        - HTML
+        - CSS
+        - JS
+        - JQuery
+        - MySQL
+        - Linux
+
+    - uqar:
+      url: https://www.uqar.ca/
+      logo: images/uqar-logo.jpeg
+      capture:
+      name: UQAR
+      position: Internship - Administrateur Système
+      period: Juin 2012
+      description: |
+        Réalisation d'un environnement de virtualisation grâce au logiciel CloudStack dans sa version 3 permettant de réduite l’achat de matériel et le gain de place.
+      how:
+        - En binôme
+      missions:
+        - Création d’espace collaboratif avec un système d’échange de ressources entre collaborateurs
+        - Mise en place d’une distribution Linux personnalisé pour l’utilisation en client léger à appliquer sur des raspberry pi
+      stack:
+        - Java
+        - CloudStack
+        - Linux
+
+    - thanksdude:
+      url: http://thanksdu.de
+      logo: images/thanksdude-logo.jpeg
+      capture: images/thanksdude-app.webp
+      name: THANKSDU.DE
+      position: Web Developer
+      period: Déc 2011 to Mars 2012
+      description: |
+        Dans le cadre d’un projet associatif, développement du site www.Thanksdu.de, projet de site de ventes aux enchères à but associatif et non lucratif.
+      how:
+        - Au sein d’une équipe de 5 personnes
+      missions:
+        - Analyse du besoin
+        - Conception de l’architecture
+        - Développement du site
+        - Réalisation de tests
+      stack:
+        - PHP
+        - PyroCMS
+        - HTML
+        - CSS
+        - JS
+        - JQuery
+        - MySQL
+        - Linux
+
+    - peexter:
+      url: http://peexter.com
+      logo: images/peexter-logo.webp
+      capture: images/peexter-app.png
+      name: PEEXTER
+      position: Internship - Mobile Developer
+      period: June 2011 to August 2011
+      description: |
+        My mission within Peexter consisted of receiving and distributing their IPhone product.
+        In direct contact with external and foreign engineers, I participated in the translation, development and integration of the new design of the application.
+      missions:
+        - Evolution of the application
+        - Optimization of the application
+        - Functional testing
+        - Collaboration with teams in India
+      stack:
+        - Apple
+        - Mac
+        - IPhone
+        - IPod
+        - Apple Store
+        - Xcode

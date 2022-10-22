@@ -35,7 +35,7 @@ const abenevaut = {
     "microservices",
     "S.O.L.I.D.", "domain driven design", "hexagonal architecture",
     "atomic design", "design system pattern",
-    "mono-repository", "Github actions",
+    "mono-repository", "Github Actions",
   ],
   challenge: [ "https://www.root-me.org/abenevaut" ],
 };

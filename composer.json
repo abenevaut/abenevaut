@@ -1,0 +1,28 @@
+{
+    "name": "abenevaut/www",
+    "type": "project",
+    "description": "Gamepro template for laravel-one.",
+    "keywords": ["gamepro", "laravel-one"],
+    "license": "copyrigth",
+    "require": {
+        "php": "^8.0.2"
+    },
+    "require-dev": {
+        "abenevaut/laravel-one": "^0.1.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
