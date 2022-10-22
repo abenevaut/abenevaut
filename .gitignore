@@ -1,3 +1,4 @@
 /.cache
+/dist/**/*.xml
 /dist/**/*.html
 /projects
