@@ -42,7 +42,7 @@ jobs:
       - name: Generate static pages
         run: |
           composer global require abenevaut/laravel-one
-          laravel-one generate
+          laravel-one generate https://me.abenevaut.dev
       - uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ secrets.ABENEVAUT_GITHUB_TOKEN }}
