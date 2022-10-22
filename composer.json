@@ -3,7 +3,7 @@
     "type": "project",
     "description": "Gamepro template for laravel-one.",
     "keywords": ["gamepro", "laravel-one"],
-    "license": "copyrigth",
+    "license": "proprietary",
     "require": {
         "php": "^8.0.2"
     },
