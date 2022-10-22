@@ -1,14 +1,8 @@
-name: www-release
+name: abenevaut-release
 
 on:
   release:
     types: [ published ]
-    paths:
-      - 'www/**'
-
-defaults:
-  run:
-    working-directory: ./www
 
 env:
   php_version: 8.1
@@ -17,9 +11,9 @@ jobs:
 
   release:
     runs-on: ubuntu-latest
-    if: contains(github.ref, 'refs/tags/www-')
+    if: contains(github.ref, 'refs/tags/')
     concurrency:
-      group: www-release
+      group: abenevaut-release
       cancel-in-progress: false
     steps:
       - name: Checkout project
@@ -28,7 +22,7 @@ jobs:
           fetch-depth: 0
       - name: Get current release tag
         id: branch_name
-        run: echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/www-}
+        run: echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
       - name: Validate composer file
         run: composer validate --strict
       - name: Initialize PHP ${{ env.php_version }}
@@ -52,4 +46,4 @@ jobs:
         with:
           ACCESS_TOKEN: ${{ secrets.ABENEVAUT_GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: www/dist
+          FOLDER: dist
