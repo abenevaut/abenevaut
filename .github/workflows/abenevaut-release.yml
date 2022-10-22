@@ -41,7 +41,8 @@ jobs:
         run: composer install -o --no-interaction --prefer-dist
       - name: Generate static pages
         run: |
-          /vendor/bin/laravel-one generate
+          composer global require abenevaut/laravel-one
+          laravel-one generate
       - uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ secrets.ABENEVAUT_GITHUB_TOKEN }}
