@@ -7,7 +7,8 @@
         <meta name="keywords" content="{{ $seo['keywords'] }}">
         <meta name="author" content="{{ $seo['author'] }}">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="assets/theme.css">
+        <link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="assets/theme.min.css">
     </head>
     <body class="antialiased text-gray-300 bg-dark-100">
         <script type="text/javascript">
@@ -23,6 +24,6 @@
         @include('partials.header')
         @yield('content')
         @include('partials.footer')
-        <script src="assets/theme.js"></script>
+        <script src="assets/theme.min.js"></script>
     </body>
 </html>

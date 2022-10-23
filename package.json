@@ -1,0 +1,32 @@
+{
+  "name": "@abenevaut/abenevaut",
+  "description": "GamePro Theme TailwindCss, extended for abenevaut",
+  "engines": {
+    "node": "^16"
+  },
+  "scripts": {
+    "dev": "npm run development",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "watch": "npm run development -- --watch",
+    "watch-poll": "npm run watch -- --watch-poll",
+    "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "prod": "npm run production",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "homepage": "https://me.abenevaut.dev",
+  "author": "Antoine Benevaut",
+  "license": "proprietary",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:abenevaut/dev.abenevaut.git"
+  },
+  "bugs": {
+    "url": "https://github.com/abenevaut/gamepro/issues"
+  },
+  "devDependencies": {
+    "@abenevaut/resources": "^2.0.0",
+    "@abenevaut/gamepro": "^2.0.6",
+    "cross-env": "^7.0.2",
+    "laravel-mix": "^6.0.49"
+  }
+}

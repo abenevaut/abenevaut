@@ -9,16 +9,16 @@
     "packages-dev": [
         {
             "name": "abenevaut/laravel-one",
-            "version": "0.2.0",
+            "version": "0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/abenevaut/laravel-one.git",
-                "reference": "dd0f9ad76c2c40c796fd2a71d1ee87648f803ccf"
+                "reference": "eea2b410a04557fc98183099fb292c6c3c64ba0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/abenevaut/laravel-one/zipball/dd0f9ad76c2c40c796fd2a71d1ee87648f803ccf",
-                "reference": "dd0f9ad76c2c40c796fd2a71d1ee87648f803ccf",
+                "url": "https://api.github.com/repos/abenevaut/laravel-one/zipball/eea2b410a04557fc98183099fb292c6c3c64ba0c",
+                "reference": "eea2b410a04557fc98183099fb292c6c3c64ba0c",
                 "shasum": ""
             },
             "require": {
@@ -70,7 +70,7 @@
                 "issues": "https://github.com/abenevaut/opensource/issues",
                 "source": "https://github.com/abenevaut/opensource"
             },
-            "time": "2022-10-22T21:36:07+00:00"
+            "time": "2022-10-23T08:15:34+00:00"
         },
         {
             "name": "doctrine/inflector",

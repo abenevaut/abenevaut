@@ -6,6 +6,7 @@ on:
 
 env:
   php_version: 8.1
+  node_version: lts/gallium
 
 jobs:
 
@@ -16,19 +17,46 @@ jobs:
       group: abenevaut-release
       cancel-in-progress: false
     steps:
+
       - name: Checkout project
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+
       - name: Get current release tag
         id: branch_name
         run: echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
-      - name: Validate composer file
-        run: composer validate --strict
+
+      - name: Use Node.js ${{ env.node_version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.node_version }}
+          registry-url: https://npm.pkg.github.com
+
+      - name: Configure Node.js cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-nodejs_${{ env.node_version }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-nodejs_${{ env.node_version }}-
+
+      - name: Setup NPM
+        run: |
+          npm config set "@abenevaut:registry" https://npm.pkg.github.com/
+          npm config set "//npm.pkg.github.com/:_authToken" $NODE_AUTH_TOKEN
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.ABENEVAUT_GITHUB_TOKEN }}
+
+      - name: NPM install
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: npm ci --prefer-offline --no-audit --progress=false
+
       - name: Initialize PHP ${{ env.php_version }}
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ env.php_version }}
+
       - name: Configure Composer cache
         uses: actions/cache@v2
         with:
@@ -36,13 +64,21 @@ jobs:
           key: ${{ runner.os }}-node-php_${{ env.php_version }}-${{ hashFiles('**/composer.json') }}
           restore-keys: |
             ${{ runner.os }}-node-php_${{ env.php_version }}-
+
       - name: Composer install
         if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install -o --no-interaction --prefer-dist
+
+      - name: Validate composer file
+        run: |
+          composer -V
+          composer validate --strict
+
       - name: Generate static pages
         run: |
-          composer global require abenevaut/laravel-one
-          laravel-one generate https://me.abenevaut.dev
+          npm run prod
+          vendor/bin/laravel-one generate https://me.abenevaut.dev
+
       - uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           ACCESS_TOKEN: ${{ secrets.ABENEVAUT_GITHUB_TOKEN }}

@@ -1,4 +1,2 @@
 /.cache
-/dist/**/*.xml
-/dist/**/*.html
-/projects
+/dist
