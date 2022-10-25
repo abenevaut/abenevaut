@@ -2,6 +2,7 @@
 <html lang="{{ $language }}">
     <head>
         <meta charset="UTF-8">
+        <meta name="robots" content="index, follow">
         <title>{{ $seo['title'] }}</title>
         <meta name="description" content="{{ $seo['description'] }}">
         <meta name="keywords" content="{{ $seo['keywords'] }}">

@@ -1,7 +1,7 @@
 {
     "name": "abenevaut/www",
     "type": "project",
-    "description": "Gamepro template for laravel-one.",
+    "description": "GamePro Theme TailwindCss, extended for abenevaut",
     "keywords": ["gamepro", "laravel-one"],
     "license": "proprietary",
     "require": {
