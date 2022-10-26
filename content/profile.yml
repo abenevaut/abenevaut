@@ -47,6 +47,120 @@ projects:
 feed:
   title: Career
   company:
+
+    - globalexam:
+      url: https://global-exam.com
+      logo: images/globalexam-logo.jpeg
+      capture: images/globalexam-app.png
+      name: GlobalExam
+      position: Head of Delivery
+      period: Oct 2020 to present
+      description: |
+        GlobalExam is the leading e-learning solution for academic, university, and professional test preparation.
+        GlobalExam also offers training to improve professional English skills through its Business English solution, which is destined for companies and professionals.
+
+        Our e-learning vision:
+          - Quality: Our training is based on quality content created by certified educators.
+          - Tailor-made: Our objective-based approach allows us to target and reinforce the skills necessary to successfully take a language test or work in English.
+          - Guidance: Our platform guides you day after day as you reach your objectives by offering advice, tracking progress and involving teacher intervention.
+        
+        Created in 2013, GlobalExam is made up of 60 passionate employees who guide over 800 companies, universities and training organizations around the world to reach their language goals. Today, the GlobalExam platform is used by over 1,000,000 learners in more than 60 countries.
+      how:
+        - Au sein d’une équipe Tech de 14 collaborateurs
+      positions:
+        - "Oct 2020 to Sep 2021": Tech Lead
+        - "Oct 2021 to Dec 2021": Lead Dev
+        - "Jan 2022 to present": Head of Delivery
+      missions:
+        - Analyse du besoin client
+        - Conception de l’architecture
+        - Missions d’évolution et de maintenance
+        - Intégration en HTML / CSS / JS
+        - Environnement de tests (tests unitaires et / ou intégration continue)
+        - Organisation du processus de développement
+        - Organisation du processus de mise en production
+        - Documentation des applications
+      stack:
+        - PHP
+        - Laravel 8
+        - Laravel 9
+        - HTML
+        - CSS
+        - JS
+        - VueJS
+        - MySQL
+        - SingleStore
+
+    - creads:
+      url: https://www.creads.com
+      logo: images/creads-logo.jpeg
+      capture: images/creads-app.webp
+      name: Creads
+      position: Web Developer
+      period: July 2017 to Oct 2020
+      description: |
+        Au sein de Creads, développement et la maintenance des API et plateformes de gestion de projets digitaux, solution Saas.
+      how:
+        - Au sein d’une équipe de 10 développeurs
+      missions:
+        - Analyse du besoin client
+        - |
+          Conception de l’architecture
+          - Développement de solution métier
+          - Développement de site vitrine, d’information et / ou de contribution
+          - Développement d’un site d’actualités et médias
+          - Développement de site e-commerce
+        - Missions d’évolution et de maintenance
+        - Intégration en HTML / CSS / JS
+        - Environnement de tests (tests unitaires et / ou intégration continue)
+        - Organisation du processus de mise en production
+        - Documentation des applications
+      stack:
+        - PHP
+        - Symfony 3
+        - HTML
+        - CSS
+        - JS
+        - AngularJS
+        - MySQL
+
+    - abenevaut:
+      url: https://www.abenevaut.dev
+      logo: favicon/android-chrome-96x96.png
+      capture:
+      name: Antoine Benevaut
+      position: Consultant freelance
+      period: July 2014 to June 2017
+      description: |
+        Je vous accompagne dans vos projets web et mobile. Nous assemblons ensemble vos idées pour créer votre projet.
+        Développement de sites Web pour différents clients, vitrines, blogs, applications métiers, CRM.
+      how:
+        - En autonomie
+      missions:
+        - Analyse du besoin client
+        - |
+          Conception de l’architecture
+          - Développement de solution métier
+          - Développement de site vitrine, d’information et / ou de contribution
+          - Développement d’un site d’actualités et médias
+          - Développement de site e-commerce
+        - Missions d’évolution et de maintenance
+        - Intégration en HTML / CSS / JS
+        - Environnement de tests (tests unitaires et / ou intégration continue)
+        - Organisation du processus de mise en production
+        - Documentation des applications
+      stack:
+        - PHP
+        - PyroCMS
+        - Symfony 2
+        - Laravel 5
+        - HTML
+        - CSS
+        - JS
+        - JQuery
+        - MySQL
+        - Linux
+
     - dixens:
       url: http://peexter.com
       logo: images/dixens-logo.jpeg
