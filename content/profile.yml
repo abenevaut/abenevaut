@@ -5,6 +5,8 @@ seo:
   description: My curriculum vitae
   keywords: curriculum vitae, career, projects
   author: Antoine Benevaut
+  og-image: https://me.abenevaut.dev/images/abenevaut-og.webp
+  url: https://me.abenevaut.dev/
 
 bio:
   title: Me, Antoine Benevaut

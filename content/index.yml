@@ -5,6 +5,8 @@ seo:
   description: My portfolio
   keywords: portfolio, projects, achievement
   author: Antoine Benevaut
+  og-image: https://me.abenevaut.dev/images/abenevaut-og.webp
+  url: https://me.abenevaut.dev/
 
 portfolio:
   title: Projects
