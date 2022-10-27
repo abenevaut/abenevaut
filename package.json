@@ -24,7 +24,7 @@
     "url": "https://github.com/abenevaut/gamepro/issues"
   },
   "devDependencies": {
-    "@abenevaut/resources": "^2.0.0",
+    "@abenevaut/resources": "^2.1.0",
     "@abenevaut/gamepro": "^2.0.6",
     "cross-env": "^7.0.2",
     "laravel-mix": "^6.0.49"
