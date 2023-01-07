@@ -1,5 +1,23 @@
 <h2>Antoine Benevaut</h2>
-<h3>PHP & Laravel Consultant - Lead Developer</h3>  
+<h3>PHP & Laravel Consultant - Lead Developer</h3>
+
+```javascript
+const abenevaut = {
+  stack: [
+    Docker,
+    PHP, Laravel,
+    Node, VueJS, TailwindCSS,
+    GIT,
+  ],
+  architecture: [
+    "microservices",
+    "S.O.L.I.D.", "domain driven design", "hexagonal architecture",
+    "atomic design", "design system pattern",
+    "mono-repository", "Github Actions",
+  ],
+  challenge: [ "https://www.root-me.org/abenevaut" ],
+};
+```
 
 <p>
 <a href="https://www.linkedin.com/in/antoine-benevaut-53a39b36/">
@@ -14,31 +32,4 @@
 <a href="https://serverfault.com/users/306991/abenevaut">
   <img align="center" src="https://img.shields.io/badge/-Serverfault-ffffff?style=flat-square&labelColor=ffffff&logo=serverfault&logoColor=black&link=https://serverfault.com/users/306991/abenevaut" />
 </a>
-</p>
-
-<p>
-
-```javascript
-const abenevaut = {
-  stack: [
-    Docker,
-    PHP, Laravel,
-    Node, VueJS, Sass, TailwindCSS,
-    GIT,
-  ],
-  architecture: [
-    "microservices",
-    "S.O.L.I.D.", "domain driven design", "hexagonal architecture",
-    "atomic design", "design system pattern",
-    "mono-repository", "Github Actions",
-  ],
-  challenge: [ "https://www.root-me.org/abenevaut" ],
-};
-```
-
-</p>
-
-<p>
-<img align="center" src="https://github-readme-stats.vercel.app/api?username=abenevaut&show_icons=trues&count_private=true" />
-<img align="center" src="https://github-readme-stats.vercel.app/api/top-langs/?username=abenevaut&layout=compact&langs_count=10&count_private=true" />
 </p>
