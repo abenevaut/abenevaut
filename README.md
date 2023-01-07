@@ -1,4 +1,5 @@
-<h2> Hello, I'm Antoine Benevaut!</h2>
+<h2>Antoine Benevaut</h2>
+<h3>PHP & Laravel Consultant - Lead Developer</h3>  
 
 <p>
 <a href="https://www.linkedin.com/in/antoine-benevaut-53a39b36/">
@@ -6,12 +7,6 @@
 </a>
 <a href="https://twitter.com/abenevaut">
   <img align="center" src="https://img.shields.io/badge/-Twitter-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/abenevaut" />
-</a>
-<a href="https://medium.com/@abenevaut">
-  <img align="center" src="https://img.shields.io/badge/-Medium-ffffff?style=flat-square&labelColor=ffffff&logo=medium&logoColor=black&link=https://medium.com/@abenevaut" />
-</a>
-<a href="https://www.youtube.com/channel/UCyMQp72oGGJ39Pde8_JqhOg">
-  <img align="center" src="https://img.shields.io/badge/-Youtube-ffffff?style=flat-square&labelColor=ffffff&logo=youtube&logoColor=black&link=https://www.youtube.com/channel/UCyMQp72oGGJ39Pde8_JqhOg" />
 </a>
 <a href="https://stackoverflow.com/users/2090870/abenevaut">
   <img align="center" src="https://img.shields.io/badge/-Stackoverflow-ffffff?style=flat-square&labelColor=ffffff&logo=stackoverflow&logoColor=black&link=https://stackoverflow.com/users/2090870/abenevaut" />
