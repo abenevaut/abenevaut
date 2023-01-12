@@ -1,6 +1,12 @@
 @extends('layouts.app', ['language' => $language, 'seo' => $seo])
 
 @section('content')
+<div class="flex flex-col items-center justify-center px-6 py-8 sm:flex-row bg-primary-400">
+    <h2 class="mb-4 text-lg font-medium leading-tight text-center sm:text-left sm:mb-0 sm:leading-normal">#OPENTOWORK</h2>
+    <a class="flex items-center px-4 py-2 text-sm font-bold text-white uppercase bg-white bg-opacity-0 border border-white border-solid sm:ml-6 border-opacity-10 hover:border-opacity-20 hover:bg-opacity-1" href="https://www.linkedin.com/in/abenevaut/" role="button" target="_blank">
+        Connect on <i ya-icon="icon: linkedin;class: ml-3;"></i>
+    </a>
+</div>
 <div class="pb-5 sm:py-6 md:py-12">
     <div class="container">
         <div class="grid grid-cols-1 lg:gap-4 lg:grid-cols-5">
