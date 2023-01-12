@@ -1,6 +1,8 @@
 <h2>Antoine Benevaut</h2>
 <h3>PHP & Laravel Consultant - Lead Developer</h3>
 
+I support you in your web and mobile projects. Let's approach your project from your point of view to build the web that suits you.
+
 ```javascript
 const abenevaut = {
   stack: [

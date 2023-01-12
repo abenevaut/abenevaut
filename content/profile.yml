@@ -11,7 +11,7 @@ seo:
 
 bio:
   title: Me, Antoine Benevaut
-  description: 'Head of Delivery @global-exam, Paris / Passionate / Cat lover / #laravel 😍 / #CSGO addict 👾'
+  description: 'PHP & Laravel Consultant - Lead Developer, Paris / Passionate / Cat lover / #laravel 😍 / #CSGO addict 👾'
   links:
     - location:
       icon: pin
@@ -57,7 +57,7 @@ feed:
       capture: images/globalexam-app.png
       name: GlobalExam
       position: Head of Delivery
-      period: Oct 2020 to present
+      period: Oct 2020 to Jan 2023
       description: |
         GlobalExam is the leading e-learning solution for academic, university, and professional test preparation.
         GlobalExam also offers training to improve professional English skills through its Business English solution, which is destined for companies and professionals.
@@ -69,63 +69,63 @@ feed:
         
         Created in 2013, GlobalExam is made up of 60 passionate employees who guide over 800 companies, universities and training organizations around the world to reach their language goals. Today, the GlobalExam platform is used by over 1,000,000 learners in more than 60 countries.
       how:
-        - Au sein d’une équipe Tech de 14 collaborateurs
+        - Within a team of 15 people
       positions:
         - "Oct 2020 to Sep 2021": Tech Lead
         - "Oct 2021 to Dec 2021": Lead Dev
         - "Jan 2022 to present": Head of Delivery
       missions:
-        - Analyse du besoin client
-        - Conception de l’architecture
-        - Missions d’évolution et de maintenance
-        - Intégration en HTML / CSS / JS
-        - Environnement de tests (tests unitaires et / ou intégration continue)
-        - Organisation du processus de développement
-        - Organisation du processus de mise en production
-        - Documentation des applications
+        - Management of a team of developers (12 people)
+        - Recruitment, onboarding, evaluation, skills development, changes in the organization chart
+        - Management and organization of protocols and Delivery projects; Agile or V operation, in Squads
+        - 'Support upstream of projects: analysis of customer needs, design of architecture, staffing and estimates'
+        - 'Support during projects: follow-up of projects and their developments, action plans in case of unforeseen events, Tech & Product mediator'
+        - Support management and organization
+        - Management and Organization of the technical evolutions of the Delivery
       stack:
+        - Management
+        - Project manager
+        - Project management
+        - Customer relationship
+        - Relations with service providers
         - PHP
-        - Laravel 8
-        - Laravel 9
-        - HTML
-        - CSS
-        - JS
+        - Laravel Framework
+        - TailwindCSS
         - VueJS
         - MySQL
         - SingleStore
+        - Amazon web Services
 
     - creads:
       url: https://www.creads.com
       logo: images/creads-logo.jpeg
       capture: images/creads-app.webp
       name: Creads
-      position: Web Developer
+      position: Senior Web Developer
       period: July 2017 to Oct 2020
       description: |
-        Au sein de Creads, développement et la maintenance des API et plateformes de gestion de projets digitaux, solution Saas.
+        Within Creads, my mission was to develop and maintain APIs and digital project management platforms, Saas solutions.
       how:
-        - Au sein d’une équipe de 10 développeurs
+        - Within a team of 10 people
       missions:
-        - Analyse du besoin client
-        - |
-          Conception de l’architecture
-          - Développement de solution métier
-          - Développement de site vitrine, d’information et / ou de contribution
-          - Développement d’un site d’actualités et médias
-          - Développement de site e-commerce
-        - Missions d’évolution et de maintenance
-        - Intégration en HTML / CSS / JS
-        - Environnement de tests (tests unitaires et / ou intégration continue)
-        - Organisation du processus de mise en production
-        - Documentation des applications
+        - Analysis of customer needs
+        - Architectural design
+        - Business solution development
+        - Evolution and maintenance missions
+        - Integration in HTML / CSS / JS
+        - Testing environment (unit testing and/or continuous integration)
+        - Organization of the production process
+        - Application documentation
       stack:
         - PHP
-        - Symfony 3
+        - Symfony Framework
         - HTML
         - CSS
         - JS
         - AngularJS
+        - VueJS
         - MySQL
+        - Debian
 
     - abenevaut:
       url: https://www.abenevaut.dev
@@ -135,83 +135,118 @@ feed:
       position: Consultant freelance
       period: July 2014 to June 2017
       description: |
-        Je vous accompagne dans vos projets web et mobile. Nous assemblons ensemble vos idées pour créer votre projet.
-        Développement de sites Web pour différents clients, vitrines, blogs, applications métiers, CRM.
+        I support you in your web and mobile projects. We assemble your ideas together to create your project.
+        Development of B2B & B2C websites, showcases, blogs, business applications, CRM.
       how:
-        - En autonomie
+        - Freelance
       missions:
-        - Analyse du besoin client
-        - |
-          Conception de l’architecture
-          - Développement de solution métier
-          - Développement de site vitrine, d’information et / ou de contribution
-          - Développement d’un site d’actualités et médias
-          - Développement de site e-commerce
-        - Missions d’évolution et de maintenance
-        - Intégration en HTML / CSS / JS
-        - Environnement de tests (tests unitaires et / ou intégration continue)
-        - Organisation du processus de mise en production
-        - Documentation des applications
+        - Analysis of customer needs
+        - Architectural design
+        - Business solution development (showcases, media, e-commerce websites ...)
+        - Evolution and maintenance missions
+        - Integration in HTML / CSS / JS
+        - Test environment (unit tests & continuous integration)
+        - Organization of the production process
+        - Application documentation
       stack:
+        - Business development
+        - Project management
+        - Customer relationship
         - PHP
         - PyroCMS
-        - Symfony 2
-        - Laravel 5
+        - CodeIgniter Framework
+        - Symfony Framework
+        - Laravel Framework
+        - HTML
+        - Bootstrap
+        - Javascript
+        - JQuery
+        - MySQL
+        - Linux
+
+    - pdlf:
+      url: https://www.placedelaformation.com
+      logo: images/pdlf-logo.png
+      capture: images/pdlf-app.webp
+      name: Place de la formation
+      position: Web Developer
+      period: Jan 2014 to Sept 2015
+      description: |
+        Within Place de la formation, my mission was to develop and maintain the platform for research, purchase and organization of training.
+      how:
+        - Within a team of 10 people
+      missions:
+        - Analysis of the existing
+        - Architectural design
+        - Solution development
+        - Performing tests
+        - Implementation of solutions
+        - Corrective and evolutionary maintenance
+        - Supporting the team on Git
+      stack:
+        - Project management
+        - PHP
+        - Zend Framework
         - HTML
         - CSS
         - JS
         - JQuery
         - MySQL
-        - Linux
+        - Debian
 
     - dixens:
-      url: http://peexter.com
+      url: https://dixens.net
       logo: images/dixens-logo.jpeg
       capture:
       name: DIXENS
       position: Web Developer
       period: Jan 2013 to Sept 2013
       description: |
-        Au sein d’une société spécialisée dans le développement web, objectif de porter des modules web vers une solution PyroCMS (framework CodeIgniter).
+        Within a company specialized in web development, objective to port web modules to a PyroCMS solution (CodeIgniter framework).
       how:
-        - En binôme
+        - In pairs
       missions:
-        - Analyse de l’existant
-        - Conception de l’architecture
-        - Développement de sites Web
-        - Portage de sites Web vers PyroCMS
-        - Refonte de sites
-        - Réalisation de tests
-        - Mise en production des solutions
-        - Maintenance corrective et évolutive
+        - Analysis of the existing
+        - Architectural design
+        - Website development
+        - Porting websites to PyroCMS
+        - Website redesign
+        - Performing tests
+        - Implementation of solutions
+        - Corrective and evolutionary maintenance
       stack:
+        - Project management
         - PHP
+        - CodeIgniter Framework
         - PyroCMS
+        - Symfony Framework
         - HTML
         - CSS
         - JS
         - JQuery
         - MySQL
-        - Linux
+        - Debian
 
     - uqar:
-      url: https://www.uqar.ca/
+      url: https://www.uqar.ca
       logo: images/uqar-logo.jpeg
       capture:
       name: UQAR
       position: Internship - Administrateur Système
       period: Juin 2012
       description: |
-        Réalisation d'un environnement de virtualisation grâce au logiciel CloudStack dans sa version 3 permettant de réduite l’achat de matériel et le gain de place.
+        Realization of a virtualization environment thanks to the CloudStack software in its version 3 allowing to reduce the purchase of material and the saving of space.
       how:
-        - En binôme
+        - In pairs
       missions:
-        - Création d’espace collaboratif avec un système d’échange de ressources entre collaborateurs
-        - Mise en place d’une distribution Linux personnalisé pour l’utilisation en client léger à appliquer sur des raspberry pi
+        - Creation of a collaborative space with a system for exchanging resources between collaborators
+        - Implementation of a personalized Linux distribution for use as a thin client to be applied on Raspberry Pi
       stack:
+        - Project management
         - Java
         - CloudStack
-        - Linux
+        - Red Hat Linux
+        - Raspberry Pi
 
     - thanksdude:
       url: http://thanksdu.de
@@ -221,23 +256,24 @@ feed:
       position: Web Developer
       period: Déc 2011 to Mars 2012
       description: |
-        Dans le cadre d’un projet associatif, développement du site www.Thanksdu.de, projet de site de ventes aux enchères à but associatif et non lucratif.
+        As part of an associative project, development of the site www.Thanksdu.de, auction site project for associative and non-profit purposes.
       how:
-        - Au sein d’une équipe de 5 personnes
+        - Within a team of 5 people
       missions:
-        - Analyse du besoin
-        - Conception de l’architecture
-        - Développement du site
-        - Réalisation de tests
+        - Analysis of the need
+        - Architectural design
+        - Website development
+        - Functional testing
       stack:
         - PHP
+        - CodeIgniter Framework
         - PyroCMS
         - HTML
         - CSS
-        - JS
+        - Bootstrap
+        - Javascript
         - JQuery
         - MySQL
-        - Linux
 
     - peexter:
       url: http://peexter.com
@@ -255,9 +291,9 @@ feed:
         - Functional testing
         - Collaboration with teams in India
       stack:
-        - Apple
-        - Mac
+        - Relations with service providers
+        - Project management
         - IPhone
-        - IPod
         - Apple Store
         - Xcode
+        - Zend Framework
