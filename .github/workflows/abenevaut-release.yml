@@ -16,6 +16,8 @@ jobs:
     concurrency:
       group: abenevaut-release
       cancel-in-progress: false
+    permissions:
+      contents: write
     steps:
 
       - name: Checkout project
@@ -34,7 +36,7 @@ jobs:
           registry-url: https://npm.pkg.github.com
 
       - name: Configure Node.js cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-nodejs_${{ env.node_version }}-${{ hashFiles('**/package-lock.json') }}
@@ -58,7 +60,7 @@ jobs:
           php-version: ${{ env.php_version }}
 
       - name: Configure Composer cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/vendor
           key: ${{ runner.os }}-node-php_${{ env.php_version }}-${{ hashFiles('**/composer.json') }}
@@ -79,8 +81,7 @@ jobs:
           npm run prod
           vendor/bin/laravel-one generate https://me.abenevaut.dev
 
-      - uses: JamesIves/github-pages-deploy-action@releases/v3
+      - uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
-          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
           FOLDER: dist

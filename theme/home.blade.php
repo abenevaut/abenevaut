@@ -1,5 +1,9 @@
 @extends('layouts.app', ['language' => $language, 'seo' => $seo])
 
+@section('meta')
+    <link rel="canonical" href="https://www.abenevaut.dev/index.html" />
+@endsection
+
 @section('content')
     <div class="py-0 sm:py-8 lg:py-12 pb-12">
         <div class="container">
