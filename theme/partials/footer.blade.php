@@ -32,25 +32,21 @@
 {{--                    <li><a class="inline-block mb-3 text-gray-500 text-md hover:underline hover:text-primary" href="#">PS5</a></li>--}}
 {{--                </ul>--}}
 {{--            </div>--}}
-{{--            <div class="col-span-3 lg:col-span-1">--}}
-{{--                <span class="block mb-6 text-sm font-bold text-white uppercase">News</span>--}}
-{{--                <ul>--}}
-{{--                    <li><a class="inline-block mb-3 text-gray-500 text-md hover:underline hover:text-primary" href="#">Latest News</a></li>--}}
-{{--                    <li><a class="inline-block mb-3 text-gray-500 text-md hover:underline hover:text-primary" href="#">PC</a></li>--}}
-{{--                    <li><a class="inline-block mb-3 text-gray-500 text-md hover:underline hover:text-primary" href="#">PS5</a></li>--}}
-{{--                    <li><a class="inline-block mb-3 text-gray-500 text-md hover:underline hover:text-primary" href="#">Xbox Series X</a></li>--}}
-{{--                    <li><a class="inline-block mb-3 text-gray-500 text-md hover:underline hover:text-primary" href="#">PS4</a></li>--}}
-{{--                    <li><a class="inline-block mb-3 text-gray-500 text-md hover:underline hover:text-primary" href="#">Xbox One</a></li>--}}
-{{--                </ul>--}}
-{{--            </div>--}}
             <div class="col-span-3 lg:col-span-1">
-                <span class="block mb-6 text-sm font-bold text-white uppercase">Projects</span>
+                <span class="block mb-6 text-sm font-bold text-white uppercase">Gaming Projects</span>
+                <ul>
+                    <li><a class="inline-block mb-3 text-gray-500 text-md hover:underline hover:text-primary" href="https://pokemongo.blazedcss.com">Annuaire Pokemon Go</a></li>
+                    <li><a class="inline-block mb-3 text-gray-500 text-md hover:underline hover:text-primary" href="https://pikminbloom.blazedcss.com">Annuaire Pikmin Bloom</a></li>
+                    <li><a class="inline-block mb-3 text-gray-500 text-md hover:underline hover:text-primary" href="https://playperidot.blazedcss.com">Annuaire Peridot</a></li>
+                    <li><a class="inline-block mb-3 text-gray-500 text-md hover:underline hover:text-primary" href="https://nbaallworld.blazedcss.com">Annuaire NBA All-World</a></li>
+                </ul>
+            </div>
+            <div class="col-span-3 lg:col-span-1">
+                <span class="block mb-6 text-sm font-bold text-white uppercase">Opensources Projects</span>
                 <ul>
                     <li><a class="inline-block mb-3 text-gray-500 text-md hover:underline hover:text-primary" target="_blank" href="https://github.com/abenevaut/laravel-one">laravel-one</a></li>
                     <li><a class="inline-block mb-3 text-gray-500 text-md hover:underline hover:text-primary" target="_blank" href="https://github.com/abenevaut/phpunit-slicer">phpunit-slicer</a></li>
                     <li><a class="inline-block mb-3 text-gray-500 text-md hover:underline hover:text-primary" target="_blank" href="https://github.com/abenevaut/laravel-sentry-handler">laravel-sentry-handler</a></li>
-                    <li><a class="inline-block mb-3 text-gray-500 text-md hover:underline hover:text-primary" target="_blank" href="https://github.com/abenevaut/laravel-ohdear">laravel-ohdear</a></li>
-                    <li><a class="inline-block mb-3 text-gray-500 text-md hover:underline hover:text-primary" target="_blank" href="https://github.com/abenevaut/laravel-asana">laravel-asana</a></li>
                 </ul>
             </div>
         </div>

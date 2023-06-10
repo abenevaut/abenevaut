@@ -12,6 +12,30 @@ seo:
 portfolio:
   title: Projects
   projects:
+    - pikminbloom:
+      capture: images/playperidot.png
+      title: playperidot.blazedcss.com
+      brief: Annuaire de joueurs Peridot
+      url: https://playperidot.blazedcss.com
+      date: 2023
+    - pikminbloom:
+      capture: images/pikminbloom.png
+      title: pikminbloom.blazedcss.com
+      brief: Annuaire de joueurs Pikmin Bloom
+      url: https://pikminbloom.blazedcss.com
+      date: 2023
+    - nbaallworld:
+      capture: images/nbaallworld.png
+      title: nbaallworld.blazedcss.com
+      brief: Annuaire de joueurs NBA All-World
+      url: https://nbaallworld.blazedcss.com
+      date: 2023
+    - pokemongolive:
+      capture: images/pokemongolive.png
+      title: pokemongo.blazedcss.com
+      brief: Annuaire de joueurs Pokemon Go
+      url: https://pokemongo.blazedcss.com
+      date: 2022
     - panacea:
       capture: images/dixens-panacea.webp
       title: Panacea
