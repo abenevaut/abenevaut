@@ -1,5 +1,5 @@
 <div class="flex items-center justify-center px-2 h-14 bg-dark-300">
-    <a class="mr-4 lg:ml-2" href="https://www.abenevaut.dev/index.html">
+    <a class="mr-4 lg:ml-2" href="index.html">
         <img src="favicon/android-chrome-96x96.png" alt="Antoine Benevaut" width="48">
     </a>
 

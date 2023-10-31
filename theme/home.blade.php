@@ -1,7 +1,7 @@
 @extends('layouts.app', ['language' => $language, 'seo' => $seo])
 
 @section('meta')
-    <link rel="canonical" href="https://me.abenevaut.dev/index.html" />
+    <link rel="canonical" href="//index.html" />
 @endsection
 
 @section('content')

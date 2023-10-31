@@ -13,7 +13,7 @@
     "prod": "npm run production",
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
-  "homepage": "https://me.abenevaut.dev",
+  "homepage": "https://www.abenevaut.dev",
   "author": "Antoine Benevaut",
   "license": "proprietary",
   "repository": {
