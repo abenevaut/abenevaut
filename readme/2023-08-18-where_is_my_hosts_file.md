@@ -1,5 +1,3 @@
-# Where is my `hosts` file ?
-
 | Logs       |            |
 |------------|------------|
 | created at | 2023-08-18 |
