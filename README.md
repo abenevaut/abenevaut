@@ -25,9 +25,6 @@ const abenevaut = {
 <a href="https://www.linkedin.com/in/antoine-benevaut-53a39b36/">
   <img align="center" src="https://img.shields.io/badge/-LinkedIn-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/harshkumarkhatri/" />
 </a>
-<a href="https://twitter.com/abenevaut">
-  <img align="center" src="https://img.shields.io/badge/-Twitter-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=twitter&logoColor=white&link=https://twitter.com/abenevaut" />
-</a>
 <a href="https://stackoverflow.com/users/2090870/abenevaut">
   <img align="center" src="https://img.shields.io/badge/-Stackoverflow-ffffff?style=flat-square&labelColor=ffffff&logo=stackoverflow&logoColor=black&link=https://stackoverflow.com/users/2090870/abenevaut" />
 </a>
