@@ -1,0 +1,88 @@
+| Logs       |            |
+|------------|------------|
+| created at | 2023-01-12 |
+| updated at | 2023-01-12 |
+
+# Résumé
+
+Cet article présente le cadre d'utilisation du fichier DotEnv (_.env_) disponible sur Laravel pour configurer votre application avec des variables d'environements fournies par la machine qui l'heberge.
+
+# Préambule
+
+[Create and modify environment variables on operating system](/abenevaut.dev/abenevaut.dev/Articles%20Staging/Create%20and%20modify%20environment%20variables%20on%20operating%20system.md)
+
+Tous les logiciels qui se placent entre votre OS et votre code, notamment pour les languages de scripts (PHP, Python etc..), peuvent eux aussi injecter des variables d'environments. C'est le cas pour NGINX et Apache2.
+
+-   [Create and modify environment variables on NGINX](/abenevaut.dev/abenevaut.dev/Articles%20Staging/Create%20and%20modify%20environment%20variables%20on%20NGINX.md)
+-   [Create and modify environment variables on Apache2](/abenevaut.dev/abenevaut.dev/Articles%20Staging/Create%20and%20modify%20environment%20variables%20on%20Apache2.md)
+
+# L'implémentation Laravel
+
+Laravel exploite la librairie [vlucas/phpdotenv](https://github.com/vlucas/phpdotenv) qui a la fonction d'aller chercher la valeur d'une variable d'environnement et dont l'utilisation a été rendu très simple grâce à la classe `Illuminate\Support\Env` et à la fonction `env()` (qui exploite la classe `Env`).
+
+Ainsi, la fonction `env()` va:
+
+-   tenter de trouver une variable dans le fichier `.env`
+    -   si elle existe, la fonction vous retournera sa valeur trouvée dans le `.env`
+    -   si elle n'existe pas
+        -   va tenter de trouver cette variable dans l'environnement de l'OS
+            -   si elle existe, la fonction vous retournera sa valeur fournie par l'OS
+            -   si elle n'existe pas, vous retournera `null`
+
+En cas de recherche infructueuse, la fonction vous permet d'ajouter une valeur par défaut qui vous sera alors retournée.
+
+```javascript
+function env($key, $default = null);
+```
+
+Pour renseigner des variables dans votre fichier DotEnv, la syntaxe est la suivante:
+
+```javascript
+MY_VAR = MY_VALUE;
+APP_NAME = "My Application";
+BOT_NAME = "My Bot";
+```
+
+!! Les variables sont en majuscule et les espaces combles par des underscores ("\_"), cette syntaxe est inspire de celle utilisee sur les systemes d'exploitations.
+!! Notez l'utilisation des simples ou doubles guillemets lorsqu'une valeur contient des espaces. Lorsque vous récupérerez la variable, elle sera disponible sans ces guillemets.
+
+# L'utilisation
+
+Créons un nouveau projet Laravel via composer, comme suit:
+
+```javascript
+composer create-project laravel/laravel example-app
+```
+
+Le fichier composer de votre nouveau projet (`example-app/.composer.json`) a deux instructions post création:
+
+-   `post-root-package-install` qui va copié le fichier `.env.example` en un fichier `.env`
+-   `post-create-project-cmd` qui va configurer la variable d'env `APP_KEY`
+
+!! Le fichier `.env.example` sert de model pour la construction de votre fichier `.env`; je vous conseils de maintenir à jour ce fichier et de le documenter pour que votre application puisse fonctionner correctement lorsque vous l'installez sur un nouvel environment, comme sur un nouveau serveur de production par exemple.
+
+!! Plus d'information sur l'APP_KEY ici
+!! - <https://laravel.com/docs/master/encryption#configuration>
+!! - <https://tighten.com/insights/app-key-and-you/>
+
+!! À ce stade, vous pouvez faire une pause dans la lecture de cette article et commencer à jouer avec votre fichier DotEnv. Pour les plus curieux, paramètres quelques variables d'environnements sur votre machine 😉
+
+Jusqu'ici nous avons décortiquer le fonctionnement de l'utilisation de ce fichier, et vous avez maintenant assez de théorie pour faire quelques tests sur votre OS et votre projet Laravel avec le fichier DotEnv mais dans le fond, à quoi sert-il ?
+
+Sans trop de surprise, **c'est un fichier de configuration** qui permettra le paramètrage de votre application. Les différences notables avec les fichiers de configurations que vous rencontrerez dans le repertoire `config/` sont:
+
+-   ce fichier est destiné a etre une passerelle entre votre application et le serveur qui la sert
+-   ce fichier n'est pas obligatoire et peut etre remplace par des variables d'environments du serveur qui la sert ou encore des variables d'environments injectees par un service d'hebergement cloud (comme laravel vapor et laravel forge)
+-   ce fichier n'a pas de "scope", il n'y a qu'un fichier d'environement alors qu'il peut exister une infinite de fichier de configuration
+-   ce fichier n'est generalement pas commite sur les gestionnaires de versions (GIT etc..) ainsi les informations qu'il contient peuvent etre des donnees sensibles comme des clefs d'API pour un service que vous payez
+    -   Si vous souhaitez tout de meme commit ce fichier, il est possible de l'encrypter pour qu'il soit indechiffrable sur votre gestionnaire de version <https://blog.laravel.com/laravel-new-environment-encryption-commands>
+-   ce fichier permet l'isolation entre les environements de votre application ( `local` pour le developement et les tests et `production` pour votre app en ligne) des donnees qui ne sont attachees qu'a un environement precis pour assurer par exemple que les donnees de tests ne seront pas transmisent a une API de production
+
+# Resources
+
+- https://laravel.com/docs/master/installation#environment-based-configuration
+- https://laravel.com/docs/master/configuration
+- https://laravel.com/docs/master/encryption#configuration
+- https://blog.laravel.com/laravel-new-environment-encryption-commands
+- https://github.com/vlucas/phpdotenv
+- https://tighten.com/insights/app-key-and-you/

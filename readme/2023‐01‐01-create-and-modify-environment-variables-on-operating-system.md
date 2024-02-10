@@ -1,0 +1,42 @@
+| Title block |            |
+|-------------|------------|
+| created at  | 2023-01-01 |
+| updated at  | 2023-01-01 |
+
+Dans un système d'exploitation (_OS, pour operating system_), l'environnement est une suite de variables qui définit une configuration de l'OS et qui est accessible à l'ensemble des logiciels installé sur cet OS.
+
+Vous pouvez personnaliser ces variables à l'échelle de l'OS ou à l'échelle de son terminal.
+
+> Si vous souhaitez essayer, je vous recommande de vérifier la documentation de votre OS ainsi que celle de votre terminal
+
+Les variables les plus populaires sont généralement:
+
+- `PATH` qui indique les repertoires ou sont stockés l'ensemble des logiciels de l'OS
+- `USER` qui indique l'utilisateur connecté
+- `HOME` qui indique le repertoire principale de l'utilisateur connecté
+- `PWD` (_print working directory_) qui indique le repertoire courant où l'utilisateur connecté se situe
+
+Tous les logiciels qui s'executer sur l'OS peuvent injecter des variables d'environments qui seront accessibles durant l'execution du logiciel (la session du logiciel) et accessible dans la stack memoire de ce logiciel. Par exemple, un terminal pourra ajouter des variables d'environments qui seront accessibles depuis le terminal par les logiciels exécutés dans celui-ci.
+
+> **Environment variables** are variables that are available system-wide and are inherited by all spawned child processes and shells.
+>
+> **Shell variables** are variables that apply only to the current shell instance. Each shell such as `zsh` and `bash`, has its own set of internal shell variables.
+>
+> https://linuxize.com/post/how-to-set-and-list-environment-variables-in-linux/
+
+1. Windows
+
+- https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html#GUID-DD6F9982-60D5-48F6-8270-A27EC53807D0
+- sysdm.cpl
+- dif cmd / powershell
+- msys2/bash ?
+
+2. Linux / Mac
+
+- with zsh https://linuxhint.com/set-environment-variable-zsh/
+- with bash
+- `/etc/environment`
+
+# Resources
+
+- https://kinsta.com/fr/base-de-connaissances/variables-environnement/#questce-quune-variable-denvironnement-

@@ -1,0 +1,112 @@
+| Logs       |            |
+|------------|------------|
+| created at | 2023-08-08 |
+| updated at | 2023-08-08 |
+
+# Resume
+
+# Preambule
+
+-   Vous devez etre famillier avec le [PHP Request lifecycle](/abenevaut.dev/abenevaut.dev/Articles%20Staging/PHP%20Request%20lifecycle.md)
+
+# What is YAF request lifecycle?
+
+1/ Le serveur reçoit une requête et par le jeux du rewrite url sais qu’il doit appeler PHP
+
+2/ PHP est initialisé (chargement du php.ini) par le serveur web (IIS) qui transmet les données de la requêtes en cours
+
+-   URI
+-   les données GET, POST, fichier(s) etc.. qui sont transformées en $\_GET, $\_POST, $\_FILES etc..
+-   ressource a exécuter (index.php)
+
+3/ execution du index.php
+
+-   setup de Yaf
+
+-   call du bootstrap (optionnel)
+    -   <https://www.php.net/manual/en/yaf-application.bootstrap.php>
+
+-   run de l’application
+
+    3.1/ setup de Yaf
+
+-   creation de l’application qui consiste a
+    -   parse du fichier config + setup de l’objet configuration ([Yaf_Config_Abstract](https://www.php.net/manual/fr/class.yaf-config-abstract.php))
+    -   utilisation de la config pour se configurer lui-même
+        -   configuration de l’autoloading des controllers, library, modules, plugins
+        -   <http://php.net/manual/en/yaf.configuration.php>
+        -   <https://www.php.net/manual/en/yaf.appconfig.php>
+    -   setup du dispatcher ([Yaf_Dispatcher](https://www.php.net/manual/fr/class.yaf-dispatcher.php))
+        -   le dispatcher va contenir la nouvelle response, c’est son job de distributer la reponse
+        -   il va initialiser le router et la view
+
+Une fois initialisee l’application est accessible en singleton Yaf_Application::app(); Sur les framework developpe en PHP generalement on n’appel pas directement l’application (ou container) car c’est souvent un tres gros objet et cela peut donner envie d’outre passer les contextes de responsabilités des objets;
+
+Toute fois, pour faciliter l’utilisation de l’instance de configuration de l’applicaiton, il semble necessaire de faire une classe utilitaire qui va aller chercher dans l’application l’instance de la configuration.
+
+( Yaf_Application::app()->getConfig()->get($key) ) - Pour rappel, ne permettre que la lecture de la configuration (et donc interdire le “set”) permet d’assurer l’isolation devOps / application
+
+3.2/ call du bootstrap (optionnel)
+
+Le call du bootstrap existe pour initialiser des spécifiques de l’application (il faut retenir qu’il a une utilité 100% Applicative et pas metier (domain)).
+
+L’execution du bootstrap n’est pas obligatoire
+
+Le bootstrap execute toutes les methodes prefixe “\_init“ coder dans la class dans l’ordre (de la premiere a la derniere)
+
+Il base son fonctionnement sur le dispatcher, qui peut etre transmis a chaque methode
+
+-   Il va permettre de gérer de l’autoloading de classe (avec ou sans namespace)
+-   initialiser le router
+-   initialiser des comportement applicatif pour la gestion des utilitaires en ligne de commande
+-   initialiser des comportement applicatif pour la gestion des requetes / responses
+    -   Les plugins ([Yaf_Plugin](https://www.php.net/manual/fr/class.yaf-plugin-abstract.php)) sont des outils mis a dispositions par YAF pour ces cas de gestion. Ils vont utiliser les données de la requête pour modifier le comportement applicatif (validation de droit, renouvellement de session, validation de session etc..) et peuvent egalement composer la response en ajoutant des donnees quand necessaire (toujours ajouter un header dans la reponse (X-Frame-Options=DENY), si requete ajax alors ajouter le header Content-Type: application/json)
+    -   un plugin peut intervenir sur les 6 étapes suivantes du cycle de vie de l’application:
+        -   routerStartup
+        -   routerShutdown
+        -   dispatchLoopStartup
+        -   preDispatch
+        -   postDispatch
+        -   dispatchLoopShutdown
+        -   preResponse → renseigne dans la documentation mais n’est pas call
+-   initialiser les sessions
+-   initialiser les librairies de type singleton qui ont une utilite transverse comme la BDD, les logs etc..
+
+    3.3/ run de l’application
+
+### La méthode run()
+
+    (new \Yaf\Application(PROJECT_PATH . '/app.ini'))     ->bootstrap()     ->run();
+
+Le run peut se faire via le biais de la methode run() qui va recolter les informations serveurs pour constituer la request (baseUri + parametres GET / POST / FILES), en faire une instance et la passer au dispatcher qui va executer le flow applicatif
+
+### La methode du dispatcher
+
+    (new \Yaf\Application(PROJECT_PATH . '/app.ini'))     ->bootstrap()     ->getDispatcher()     ->dispatch(new \Yaf\Request\Simple());
+
+Le run peut se faire via le biais de ladu dispatcher auquel on va preciser immediatement la “route” a executer pour executer le flow applicatif dedie.
+
+Cela peut servir pour mettre en place un systeme de ligne de commande via le contexte applicatif de YAF
+
+### Dans les deux cas, l’execution du flow applicatif est le meme
+
+-   Digérer la requête et la conduire sur la bonne route et ainsi trouver le bon controller a exécuter
+    -   exécution des étapes plugins
+        -   routerStartup
+        -   routerShutdown
+-   Initialiser le controller (qu’il soit dans un module ou non) et la vue associer a la route et executer l’action (methode) du controller
+    -   execution des etapes plugins
+        -   dispatchLoopStartup
+        -   preDispatch
+        -   postDispatch
+        -   dispatchLoopShutdown
+-   Afficher le contenu de la vue
+
+<https://drive.google.com/file/d/1ZQ5fS4Jt6SRZhLfDFPerBue6hgboCywf/view?usp=sharing>
+
+[\[https://drive.google.com/file/d/1ZQ5fS4Jt6SRZhLfDFPerBue6hgboCywf/view?usp=sharing\]](https://drive.google.com/file/d/1ZQ5fS4Jt6SRZhLfDFPerBue6hgboCywf/view?usp=sharing)
+
+# Annexe
+
+-   <https://www.php.net/manual/en/yaf.constants.php>
+-   <https://www.php.net/manual/en/yaf.tutorials.php>

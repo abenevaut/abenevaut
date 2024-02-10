@@ -8,7 +8,7 @@
         "php": "^8.0.2"
     },
     "require-dev": {
-        "abenevaut/laravel-one": "^0.2"
+        "abenevaut/laravel-one": "^0.3"
     },
     "autoload-dev": {
         "psr-4": {

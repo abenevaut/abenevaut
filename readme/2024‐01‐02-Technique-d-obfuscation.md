@@ -1,0 +1,71 @@
+Un lien classique de type
+
+```javascript
+<a href="/page.html">Lien</a>
+```
+
+... devient
+
+```javascript
+<button onClick="window.location.href='/page.html';">Lien</button>
+```
+
+... pour les liens en `target="_blank"`
+
+```javascript
+<button onClick="window.open('/page.html', '_blank');">Lien</button>
+```
+
+
+##
+
+# Sitemap
+
+# **Obfuscation du Sitemap**
+
+L'obfuscation des liens consiste à ne rendre un clic possible sur un lien ou un bouton sans que ce lien ou ce bouton soit un tag HTML `<a href=""></a>` .
+
+Cela permet que:
+
+-   les robots d'indexation (GoogleBot et autres) fassent un mapping cohérent de nos sites en leurs donnant la notion de profondeur
+-   les robots de crawl et d'analyse (services utilisés par le Marketing) de nos sites parcours moins de page et de faire des économies
+
+## Technique d'obfuscation
+
+-   voir [Technique d'obfuscation](/Tech%20&%20Market/Tech%20&%20Market/Sitemap/Technique%20d'obfuscation.md)
+
+## Application de **Obfuscation** au sitemap
+
+### Spécifications B2C
+
+Le sitemap B2C est définit ici: [Plan des pages "Particuliers" du site vitrine](https://www.mindmeister.com/fr/1780666920?t=36pqBBkRJq)
+
+Il représente **l'ensemble des "Cocons"** des pages (un cocon = un ensemble de page) et **le Footer**.
+
+### Spécifications B2B
+
+-   A venir
+
+### **Obfuscation du s**ite vitrine
+
+
+
+## Exemple de regles
+
+-   Les liens vers la home doivent **toujours** être obfusqué
+    -   les liens vers "<https://abenevaut.dev">
+    -   les liens vers "<https://www.abenevaut.dev">
+    -   les liens vers "<https://www.abenevaut.dev/><LANG>"
+-   Les liens vers le site blazedcss.com ne doivent **jamais** être obfusqué
+
+**Liens qui ne doivent JAMAIS être obfusqué sur la Home MAIS TOUJOURS obfusqué sur le reste des pages**
+
+Les liens "Pro" **ne doivent JAMAIS être obfusqué sur la Home MAIS TOUJOURS obfusqué sur le reste des pages**, ci-dessous la liste des liens "Pro"
+
+Le lien "Particulier" ne doit JAMAIS être obfusqué sur la Home Pro (<https://global-exam.com/fr/professionals>) **MAIS TOUJOURS obfusqué sur le reste des pages**
+
+
+**Liens du cocon "Perfectionnement en anglais pro"**
+
+-   Le lien principale **ne doivent JAMAIS être obfusqué sur la Home ni sur les pages du segment "business-english" MAIS TOUJOURS obfusqué sur le reste des pages**
+-   Les liens secondaires **ne doivent JAMAIS être obfusqué sur les pages du segment "business-english" MAIS TOUJOURS obfusqué sur le reste des pages (Home compris)**
