@@ -1,8 +1,15 @@
 ## Readme
 
+- [2024‐01‐27 How to host php website on windows](https://github.com/abenevaut/abenevaut/wiki/2024%E2%80%9001%E2%80%9027-how-to-host-php-website-on-windows)
+- [2024‐01‐02 Technique d obfuscation](https://github.com/abenevaut/abenevaut/wiki/2024%E2%80%9001%E2%80%9002-Technique-d-obfuscation)
+- [2023‐11‐18 Docker shortcuts](https://github.com/abenevaut/abenevaut/wiki/2023%E2%80%9011%E2%80%9018-docker-shortcuts)
+- [2023‐08‐23 SOLID](https://github.com/abenevaut/abenevaut/wiki/2023%E2%80%9008%E2%80%9023-SOLID)
 - [2023‐08‐18 Where is my `hosts` file ?](https://github.com/abenevaut/abenevaut/wiki/2023%E2%80%9008%E2%80%9018-Where-is-my-%60hosts%60-file-%3F)
-- [2023‐08‐18 Where is my `hosts` file ?](https://github.com/abenevaut/abenevaut/wiki/2023%E2%80%9008%E2%80%9018-Where-is-my-%60hosts%60-file-%3F)
-- [2023‐08‐18 Where is my `hosts` file ?](https://github.com/abenevaut/abenevaut/wiki/2023%E2%80%9008%E2%80%9018-Where-is-my-%60hosts%60-file-%3F)
+- [2023‐08‐08 YAF request lifecycle](https://github.com/abenevaut/abenevaut/wiki/2023%E2%80%9008%E2%80%9008-YAF-request-lifecycle)
+- [2023‐08‐01 PHP request lifecycle](https://github.com/abenevaut/abenevaut/wiki/2023%E2%80%9008%E2%80%9001-PHP-request-lifecycle)
+- [2023‐06‐02 Compile PHP on windows](https://github.com/abenevaut/abenevaut/wiki/2023%E2%80%9006%E2%80%9002-compile-PHP-on-windows)
+- [2023‐01‐12 Dotenv environment management on laravel](https://github.com/abenevaut/abenevaut/wiki/2023%E2%80%9001%E2%80%9012-dotenv-environment-management-on-laravel)
+- [2023‐01‐01 Create and modify environment variables on operating system](https://github.com/abenevaut/abenevaut/wiki/2023%E2%80%9001%E2%80%9001-create-and-modify-environment-variables-on-operating-system)
 
 ## Links
 
