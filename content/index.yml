@@ -12,6 +12,18 @@ seo:
 portfolio:
   title: Projects
   projects:
+    - le-driver-mail-failover:
+      capture: https://cdn.laravel-france.com/images/covers/b003323c-0b7d-415d-aec1-f5c442dfdadb.png
+      title: "Le driver mail failover"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/le-driver-mail-failover
+      date: 21-03-2024
+    - utilisez-illuminate-en-dehors-de-laravel:
+      capture: https://cdn.laravel-france.com/images/covers/db0739d5-9318-4bc5-84ce-6069fc5edd73.jpg
+      title: "Utilisez Illuminate en dehors de Laravel"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/utilisez-illuminate-en-dehors-de-laravel
+      date: 04-03-2024
     - pikminbloom:
       capture: images/playperidot.png
       title: playperidot.blazedcss.com
