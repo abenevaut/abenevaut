@@ -6,7 +6,7 @@ on:
 
 env:
   php_version: 8.1
-  node_version: lts/gallium
+  node_version: lts/iron
 
 jobs:
 
