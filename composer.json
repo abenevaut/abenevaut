@@ -5,7 +5,7 @@
     "keywords": ["gamepro", "laravel-one"],
     "license": "proprietary",
     "require": {
-        "php": "^8.2"
+        "php": "^8.1"
     },
     "require-dev": {
         "abenevaut/laravel-one": "^0.4"
