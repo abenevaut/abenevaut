@@ -22,7 +22,7 @@ const abenevaut = {
     "atomic design", "design system pattern",
     "mono-repository", "Github Actions",
   ],
-  challenge: [ "https://www.root-me.org/abenevaut" ],
+  challenges: [ "https://www.root-me.org/abenevaut" ],
 };
 ```
 
@@ -32,5 +32,13 @@ const abenevaut = {
 [![Github Badge](https://img.shields.io/badge/Twitter-1ca0f1?logo=twitter&logoColor=fff&style=flat)](https://twitter.com/abenevaut)
 [![Stack Overflow Badge](https://img.shields.io/badge/Stack%20Overflow-F58025?logo=stackoverflow&logoColor=fff&style=flat)](https://stackoverflow.com/users/2090870/abenevaut)
 [![Serverfault Badge](https://img.shields.io/badge/Serverfault-white?logo=Serverfault&logoColor=000&style=flat)](https://serverfault.com/users/306991/abenevaut)
+
+</p>
+
+<h2>Articles</h2>
+<p>
+  
+- [21 mars 2024 - Le driver mail failover](https://laravel-france.com/posts/le-driver-mail-failover)
+- [04 mars 2024 - Utilisez Illuminate en dehors de Laravel](https://laravel-france.com/posts/utilisez-illuminate-en-dehors-de-laravel)
 
 </p>
