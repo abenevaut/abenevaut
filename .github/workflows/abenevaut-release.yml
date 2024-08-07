@@ -5,7 +5,7 @@ on:
     types: [ published ]
 
 env:
-  php_version: 8.1
+  php_version: 8.3
   node_version: lts/iron
 
 jobs:
