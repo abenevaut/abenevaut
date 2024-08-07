@@ -6,6 +6,7 @@ import laravel from 'laravel-vite-plugin';
 const isDevEnvironment = 'dev' === process.env.NODE_ENV || true;
 
 export default defineConfig({
+  base: '/',
   build: {
     manifest: true,
     sourcemap: true,
