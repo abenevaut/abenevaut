@@ -7676,6 +7676,65 @@ const WithoutRouterProvider = ({ children }) => {
 WithoutRouterProvider.propTypes = {
   children: PropTypes.node.isRequired
 };
+const DEFAULT_DATA_LAYER_NAME = "dataLayer";
+function setDataLayerName(name) {
+}
+function getConfig(nonceOrOptions) {
+  if (typeof nonceOrOptions === "string") {
+    return {
+      dataLayerName: DEFAULT_DATA_LAYER_NAME,
+      nonce: nonceOrOptions
+    };
+  }
+  if (!nonceOrOptions) {
+    return {
+      dataLayerName: DEFAULT_DATA_LAYER_NAME
+    };
+  }
+  return nonceOrOptions;
+}
+function init$2(containerId, containerUrl, nonceOrOptions) {
+  if (!containerId) {
+    console.error("Empty tracking code for Piwik Pro.");
+    return;
+  }
+  if (!containerUrl) {
+    console.error("Empty tracking URL for Piwik Pro.");
+    return;
+  }
+  if (typeof window === "undefined") {
+    console.error("Was not possible to access window. Make sure this module is running in a browser");
+    return;
+  }
+  const config = getConfig(nonceOrOptions);
+  if (config.dataLayerName) {
+    setDataLayerName(config.dataLayerName);
+  }
+  const scriptEl = document.createElement("script");
+  scriptEl.id = "PiwikPROInitializer";
+  scriptEl.async = true;
+  if (config.nonce) {
+    scriptEl.nonce = config.nonce;
+  }
+  scriptEl.text = getInitScript({
+    containerId,
+    containerUrl,
+    dataLayerName: config.dataLayerName
+  });
+  const body = document.getElementsByTagName("body")[0];
+  body.appendChild(scriptEl);
+}
+function getInitScript({ containerId, containerUrl, dataLayerName: dataLayerName2 }) {
+  const dataLayer = dataLayerName2 || DEFAULT_DATA_LAYER_NAME;
+  return `(function(window, document, dataLayerName, id) {
+  window[dataLayerName]=window[dataLayerName]||[],window[dataLayerName].push({start:(new Date).getTime(),event:"stg.start"});var scripts=document.getElementsByTagName('script')[0],tags=document.createElement('script');
+  function stgCreateCookie(a,b,c){var d="";if(c){var e=new Date;e.setTime(e.getTime()+24*c*60*60*1e3),d="; expires="+e.toUTCString();f="; SameSite=Strict"}document.cookie=a+"="+b+d+f+"; path=/"}
+  var isStgDebug=(window.location.href.match("stg_debug")||document.cookie.match("stg_debug"))&&!window.location.href.match("stg_disable_debug");stgCreateCookie("stg_debug",isStgDebug?1:"",isStgDebug?14:-1);
+  var qP=[];dataLayerName!=="dataLayer"&&qP.push("data_layer_name="+dataLayerName),isStgDebug&&qP.push("stg_debug");var qPString=qP.length>0?("?"+qP.join("&")):"";
+  tags.async=!0,tags.src="${containerUrl}/"+id+".js"+qPString,scripts.parentNode.insertBefore(tags,scripts);
+  !function(a,n,i){a[n]=a[n]||{};for(var c=0;c<i.length;c++)!function(i){a[n][i]=a[n][i]||{},a[n][i].api=a[n][i].api||function(){var a=[].slice.call(arguments,0);"string"==typeof a[0]&&window[dataLayerName].push({event:n+"."+i+":"+a[0],parameters:[].slice.call(arguments,1)})}}(i[c])}(window,"ppms",["tm","cm"]);
+  })(window, document, '${dataLayer}', '${containerId}');`;
+}
 var ECOMMERCE_TRACK_EVENT;
 (function(ECOMMERCE_TRACK_EVENT2) {
   ECOMMERCE_TRACK_EVENT2["TRACK_ECOMMERCE_CART_UPDATE"] = "trackEcommerceCartUpdate";
@@ -7766,6 +7825,5549 @@ var ERROR_TRACKING_TRACK_EVENT;
   ERROR_TRACKING_TRACK_EVENT2["ENABLE_JS_ERROR_TRACKING"] = "enableJSErrorTracking";
   ERROR_TRACKING_TRACK_EVENT2["TRACK_ERROR"] = "trackError";
 })(ERROR_TRACKING_TRACK_EVENT || (ERROR_TRACKING_TRACK_EVENT = {}));
+const index$2 = {
+  initialize: init$2,
+  getInitScript
+};
+const objectToString = Object.prototype.toString;
+function isError(wat) {
+  switch (objectToString.call(wat)) {
+    case "[object Error]":
+    case "[object Exception]":
+    case "[object DOMException]":
+      return true;
+    default:
+      return isInstanceOf(wat, Error);
+  }
+}
+function isBuiltin(wat, className) {
+  return objectToString.call(wat) === `[object ${className}]`;
+}
+function isErrorEvent$1(wat) {
+  return isBuiltin(wat, "ErrorEvent");
+}
+function isDOMError(wat) {
+  return isBuiltin(wat, "DOMError");
+}
+function isDOMException(wat) {
+  return isBuiltin(wat, "DOMException");
+}
+function isString$1(wat) {
+  return isBuiltin(wat, "String");
+}
+function isParameterizedString(wat) {
+  return typeof wat === "object" && wat !== null && "__sentry_template_string__" in wat && "__sentry_template_values__" in wat;
+}
+function isPrimitive(wat) {
+  return wat === null || isParameterizedString(wat) || typeof wat !== "object" && typeof wat !== "function";
+}
+function isPlainObject(wat) {
+  return isBuiltin(wat, "Object");
+}
+function isEvent(wat) {
+  return typeof Event !== "undefined" && isInstanceOf(wat, Event);
+}
+function isElement$1(wat) {
+  return typeof Element !== "undefined" && isInstanceOf(wat, Element);
+}
+function isRegExp(wat) {
+  return isBuiltin(wat, "RegExp");
+}
+function isThenable(wat) {
+  return Boolean(wat && wat.then && typeof wat.then === "function");
+}
+function isSyntheticEvent(wat) {
+  return isPlainObject(wat) && "nativeEvent" in wat && "preventDefault" in wat && "stopPropagation" in wat;
+}
+function isInstanceOf(wat, base) {
+  try {
+    return wat instanceof base;
+  } catch (_e2) {
+    return false;
+  }
+}
+function isVueViewModel(wat) {
+  return !!(typeof wat === "object" && wat !== null && (wat.__isVue || wat._isVue));
+}
+function truncate(str, max2 = 0) {
+  if (typeof str !== "string" || max2 === 0) {
+    return str;
+  }
+  return str.length <= max2 ? str : `${str.slice(0, max2)}...`;
+}
+function safeJoin(input, delimiter) {
+  if (!Array.isArray(input)) {
+    return "";
+  }
+  const output = [];
+  for (let i2 = 0; i2 < input.length; i2++) {
+    const value = input[i2];
+    try {
+      if (isVueViewModel(value)) {
+        output.push("[VueViewModel]");
+      } else {
+        output.push(String(value));
+      }
+    } catch (e2) {
+      output.push("[value cannot be serialized]");
+    }
+  }
+  return output.join(delimiter);
+}
+function isMatchingPattern(value, pattern, requireExactStringMatch = false) {
+  if (!isString$1(value)) {
+    return false;
+  }
+  if (isRegExp(pattern)) {
+    return pattern.test(value);
+  }
+  if (isString$1(pattern)) {
+    return requireExactStringMatch ? value === pattern : value.includes(pattern);
+  }
+  return false;
+}
+function stringMatchesSomePattern(testString, patterns = [], requireExactStringMatch = false) {
+  return patterns.some((pattern) => isMatchingPattern(testString, pattern, requireExactStringMatch));
+}
+function applyAggregateErrorsToEvent(exceptionFromErrorImplementation, parser, maxValueLimit = 250, key, limit, event, hint) {
+  if (!event.exception || !event.exception.values || !hint || !isInstanceOf(hint.originalException, Error)) {
+    return;
+  }
+  const originalException = event.exception.values.length > 0 ? event.exception.values[event.exception.values.length - 1] : void 0;
+  if (originalException) {
+    event.exception.values = truncateAggregateExceptions(
+      aggregateExceptionsFromError(
+        exceptionFromErrorImplementation,
+        parser,
+        limit,
+        hint.originalException,
+        key,
+        event.exception.values,
+        originalException,
+        0
+      ),
+      maxValueLimit
+    );
+  }
+}
+function aggregateExceptionsFromError(exceptionFromErrorImplementation, parser, limit, error, key, prevExceptions, exception, exceptionId) {
+  if (prevExceptions.length >= limit + 1) {
+    return prevExceptions;
+  }
+  let newExceptions = [...prevExceptions];
+  if (isInstanceOf(error[key], Error)) {
+    applyExceptionGroupFieldsForParentException(exception, exceptionId);
+    const newException = exceptionFromErrorImplementation(parser, error[key]);
+    const newExceptionId = newExceptions.length;
+    applyExceptionGroupFieldsForChildException(newException, key, newExceptionId, exceptionId);
+    newExceptions = aggregateExceptionsFromError(
+      exceptionFromErrorImplementation,
+      parser,
+      limit,
+      error[key],
+      key,
+      [newException, ...newExceptions],
+      newException,
+      newExceptionId
+    );
+  }
+  if (Array.isArray(error.errors)) {
+    error.errors.forEach((childError, i2) => {
+      if (isInstanceOf(childError, Error)) {
+        applyExceptionGroupFieldsForParentException(exception, exceptionId);
+        const newException = exceptionFromErrorImplementation(parser, childError);
+        const newExceptionId = newExceptions.length;
+        applyExceptionGroupFieldsForChildException(newException, `errors[${i2}]`, newExceptionId, exceptionId);
+        newExceptions = aggregateExceptionsFromError(
+          exceptionFromErrorImplementation,
+          parser,
+          limit,
+          childError,
+          key,
+          [newException, ...newExceptions],
+          newException,
+          newExceptionId
+        );
+      }
+    });
+  }
+  return newExceptions;
+}
+function applyExceptionGroupFieldsForParentException(exception, exceptionId) {
+  exception.mechanism = exception.mechanism || { type: "generic", handled: true };
+  exception.mechanism = {
+    ...exception.mechanism,
+    ...exception.type === "AggregateError" && { is_exception_group: true },
+    exception_id: exceptionId
+  };
+}
+function applyExceptionGroupFieldsForChildException(exception, source, exceptionId, parentId) {
+  exception.mechanism = exception.mechanism || { type: "generic", handled: true };
+  exception.mechanism = {
+    ...exception.mechanism,
+    type: "chained",
+    source,
+    exception_id: exceptionId,
+    parent_id: parentId
+  };
+}
+function truncateAggregateExceptions(exceptions, maxValueLength) {
+  return exceptions.map((exception) => {
+    if (exception.value) {
+      exception.value = truncate(exception.value, maxValueLength);
+    }
+    return exception;
+  });
+}
+const SDK_VERSION = "8.24.0";
+const GLOBAL_OBJ = globalThis;
+function getGlobalSingleton(name, creator, obj) {
+  const gbl = GLOBAL_OBJ;
+  const __SENTRY__ = gbl.__SENTRY__ = gbl.__SENTRY__ || {};
+  const versionedCarrier = __SENTRY__[SDK_VERSION] = __SENTRY__[SDK_VERSION] || {};
+  return versionedCarrier[name] || (versionedCarrier[name] = creator());
+}
+const WINDOW$4 = GLOBAL_OBJ;
+const DEFAULT_MAX_STRING_LENGTH = 80;
+function htmlTreeAsString(elem, options = {}) {
+  if (!elem) {
+    return "<unknown>";
+  }
+  try {
+    let currentElem = elem;
+    const MAX_TRAVERSE_HEIGHT = 5;
+    const out = [];
+    let height = 0;
+    let len = 0;
+    const separator = " > ";
+    const sepLength = separator.length;
+    let nextStr;
+    const keyAttrs = Array.isArray(options) ? options : options.keyAttrs;
+    const maxStringLength = !Array.isArray(options) && options.maxStringLength || DEFAULT_MAX_STRING_LENGTH;
+    while (currentElem && height++ < MAX_TRAVERSE_HEIGHT) {
+      nextStr = _htmlElementAsString(currentElem, keyAttrs);
+      if (nextStr === "html" || height > 1 && len + out.length * sepLength + nextStr.length >= maxStringLength) {
+        break;
+      }
+      out.push(nextStr);
+      len += nextStr.length;
+      currentElem = currentElem.parentNode;
+    }
+    return out.reverse().join(separator);
+  } catch (_oO) {
+    return "<unknown>";
+  }
+}
+function _htmlElementAsString(el2, keyAttrs) {
+  const elem = el2;
+  const out = [];
+  if (!elem || !elem.tagName) {
+    return "";
+  }
+  if (WINDOW$4.HTMLElement) {
+    if (elem instanceof HTMLElement && elem.dataset) {
+      if (elem.dataset["sentryComponent"]) {
+        return elem.dataset["sentryComponent"];
+      }
+      if (elem.dataset["sentryElement"]) {
+        return elem.dataset["sentryElement"];
+      }
+    }
+  }
+  out.push(elem.tagName.toLowerCase());
+  const keyAttrPairs = keyAttrs && keyAttrs.length ? keyAttrs.filter((keyAttr) => elem.getAttribute(keyAttr)).map((keyAttr) => [keyAttr, elem.getAttribute(keyAttr)]) : null;
+  if (keyAttrPairs && keyAttrPairs.length) {
+    keyAttrPairs.forEach((keyAttrPair) => {
+      out.push(`[${keyAttrPair[0]}="${keyAttrPair[1]}"]`);
+    });
+  } else {
+    if (elem.id) {
+      out.push(`#${elem.id}`);
+    }
+    const className = elem.className;
+    if (className && isString$1(className)) {
+      const classes = className.split(/\s+/);
+      for (const c2 of classes) {
+        out.push(`.${c2}`);
+      }
+    }
+  }
+  const allowedAttrs = ["aria-label", "type", "name", "title", "alt"];
+  for (const k2 of allowedAttrs) {
+    const attr = elem.getAttribute(k2);
+    if (attr) {
+      out.push(`[${k2}="${attr}"]`);
+    }
+  }
+  return out.join("");
+}
+function getLocationHref() {
+  try {
+    return WINDOW$4.document.location.href;
+  } catch (oO) {
+    return "";
+  }
+}
+function getComponentName(elem) {
+  if (!WINDOW$4.HTMLElement) {
+    return null;
+  }
+  let currentElem = elem;
+  const MAX_TRAVERSE_HEIGHT = 5;
+  for (let i2 = 0; i2 < MAX_TRAVERSE_HEIGHT; i2++) {
+    if (!currentElem) {
+      return null;
+    }
+    if (currentElem instanceof HTMLElement) {
+      if (currentElem.dataset["sentryComponent"]) {
+        return currentElem.dataset["sentryComponent"];
+      }
+      if (currentElem.dataset["sentryElement"]) {
+        return currentElem.dataset["sentryElement"];
+      }
+    }
+    currentElem = currentElem.parentNode;
+  }
+  return null;
+}
+const DEBUG_BUILD$3 = typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__;
+const PREFIX = "Sentry Logger ";
+const CONSOLE_LEVELS = [
+  "debug",
+  "info",
+  "warn",
+  "error",
+  "log",
+  "assert",
+  "trace"
+];
+const originalConsoleMethods = {};
+function consoleSandbox(callback) {
+  if (!("console" in GLOBAL_OBJ)) {
+    return callback();
+  }
+  const console2 = GLOBAL_OBJ.console;
+  const wrappedFuncs = {};
+  const wrappedLevels = Object.keys(originalConsoleMethods);
+  wrappedLevels.forEach((level) => {
+    const originalConsoleMethod = originalConsoleMethods[level];
+    wrappedFuncs[level] = console2[level];
+    console2[level] = originalConsoleMethod;
+  });
+  try {
+    return callback();
+  } finally {
+    wrappedLevels.forEach((level) => {
+      console2[level] = wrappedFuncs[level];
+    });
+  }
+}
+function makeLogger() {
+  let enabled = false;
+  const logger2 = {
+    enable: () => {
+      enabled = true;
+    },
+    disable: () => {
+      enabled = false;
+    },
+    isEnabled: () => enabled
+  };
+  if (DEBUG_BUILD$3) {
+    CONSOLE_LEVELS.forEach((name) => {
+      logger2[name] = (...args) => {
+        if (enabled) {
+          consoleSandbox(() => {
+            GLOBAL_OBJ.console[name](`${PREFIX}[${name}]:`, ...args);
+          });
+        }
+      };
+    });
+  } else {
+    CONSOLE_LEVELS.forEach((name) => {
+      logger2[name] = () => void 0;
+    });
+  }
+  return logger2;
+}
+const logger = makeLogger();
+const DSN_REGEX = /^(?:(\w+):)\/\/(?:(\w+)(?::(\w+)?)?@)([\w.-]+)(?::(\d+))?\/(.+)/;
+function isValidProtocol(protocol) {
+  return protocol === "http" || protocol === "https";
+}
+function dsnToString(dsn, withPassword = false) {
+  const { host, path, pass, port, projectId, protocol, publicKey } = dsn;
+  return `${protocol}://${publicKey}${withPassword && pass ? `:${pass}` : ""}@${host}${port ? `:${port}` : ""}/${path ? `${path}/` : path}${projectId}`;
+}
+function dsnFromString(str) {
+  const match = DSN_REGEX.exec(str);
+  if (!match) {
+    consoleSandbox(() => {
+      console.error(`Invalid Sentry Dsn: ${str}`);
+    });
+    return void 0;
+  }
+  const [protocol, publicKey, pass = "", host = "", port = "", lastPath = ""] = match.slice(1);
+  let path = "";
+  let projectId = lastPath;
+  const split = projectId.split("/");
+  if (split.length > 1) {
+    path = split.slice(0, -1).join("/");
+    projectId = split.pop();
+  }
+  if (projectId) {
+    const projectMatch = projectId.match(/^\d+/);
+    if (projectMatch) {
+      projectId = projectMatch[0];
+    }
+  }
+  return dsnFromComponents({ host, pass, path, projectId, port, protocol, publicKey });
+}
+function dsnFromComponents(components) {
+  return {
+    protocol: components.protocol,
+    publicKey: components.publicKey || "",
+    pass: components.pass || "",
+    host: components.host,
+    port: components.port || "",
+    path: components.path || "",
+    projectId: components.projectId
+  };
+}
+function validateDsn(dsn) {
+  if (!DEBUG_BUILD$3) {
+    return true;
+  }
+  const { port, projectId, protocol } = dsn;
+  const requiredComponents = ["protocol", "publicKey", "host", "projectId"];
+  const hasMissingRequiredComponent = requiredComponents.find((component) => {
+    if (!dsn[component]) {
+      logger.error(`Invalid Sentry Dsn: ${component} missing`);
+      return true;
+    }
+    return false;
+  });
+  if (hasMissingRequiredComponent) {
+    return false;
+  }
+  if (!projectId.match(/^\d+$/)) {
+    logger.error(`Invalid Sentry Dsn: Invalid projectId ${projectId}`);
+    return false;
+  }
+  if (!isValidProtocol(protocol)) {
+    logger.error(`Invalid Sentry Dsn: Invalid protocol ${protocol}`);
+    return false;
+  }
+  if (port && isNaN(parseInt(port, 10))) {
+    logger.error(`Invalid Sentry Dsn: Invalid port ${port}`);
+    return false;
+  }
+  return true;
+}
+function makeDsn(from) {
+  const components = typeof from === "string" ? dsnFromString(from) : dsnFromComponents(from);
+  if (!components || !validateDsn(components)) {
+    return void 0;
+  }
+  return components;
+}
+class SentryError extends Error {
+  /** Display name of this error instance. */
+  constructor(message, logLevel = "warn") {
+    super(message);
+    this.message = message;
+    this.name = new.target.prototype.constructor.name;
+    Object.setPrototypeOf(this, new.target.prototype);
+    this.logLevel = logLevel;
+  }
+}
+function fill(source, name, replacementFactory) {
+  if (!(name in source)) {
+    return;
+  }
+  const original = source[name];
+  const wrapped = replacementFactory(original);
+  if (typeof wrapped === "function") {
+    markFunctionWrapped(wrapped, original);
+  }
+  source[name] = wrapped;
+}
+function addNonEnumerableProperty(obj, name, value) {
+  try {
+    Object.defineProperty(obj, name, {
+      // enumerable: false, // the default, so we can save on bundle size by not explicitly setting it
+      value,
+      writable: true,
+      configurable: true
+    });
+  } catch (o_O) {
+    DEBUG_BUILD$3 && logger.log(`Failed to add non-enumerable property "${name}" to object`, obj);
+  }
+}
+function markFunctionWrapped(wrapped, original) {
+  try {
+    const proto = original.prototype || {};
+    wrapped.prototype = original.prototype = proto;
+    addNonEnumerableProperty(wrapped, "__sentry_original__", original);
+  } catch (o_O) {
+  }
+}
+function getOriginalFunction(func) {
+  return func.__sentry_original__;
+}
+function urlEncode(object) {
+  return Object.keys(object).map((key) => `${encodeURIComponent(key)}=${encodeURIComponent(object[key])}`).join("&");
+}
+function convertToPlainObject(value) {
+  if (isError(value)) {
+    return {
+      message: value.message,
+      name: value.name,
+      stack: value.stack,
+      ...getOwnProperties(value)
+    };
+  } else if (isEvent(value)) {
+    const newObj = {
+      type: value.type,
+      target: serializeEventTarget(value.target),
+      currentTarget: serializeEventTarget(value.currentTarget),
+      ...getOwnProperties(value)
+    };
+    if (typeof CustomEvent !== "undefined" && isInstanceOf(value, CustomEvent)) {
+      newObj.detail = value.detail;
+    }
+    return newObj;
+  } else {
+    return value;
+  }
+}
+function serializeEventTarget(target) {
+  try {
+    return isElement$1(target) ? htmlTreeAsString(target) : Object.prototype.toString.call(target);
+  } catch (_oO) {
+    return "<unknown>";
+  }
+}
+function getOwnProperties(obj) {
+  if (typeof obj === "object" && obj !== null) {
+    const extractedProps = {};
+    for (const property in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, property)) {
+        extractedProps[property] = obj[property];
+      }
+    }
+    return extractedProps;
+  } else {
+    return {};
+  }
+}
+function extractExceptionKeysForMessage(exception, maxLength = 40) {
+  const keys = Object.keys(convertToPlainObject(exception));
+  keys.sort();
+  const firstKey = keys[0];
+  if (!firstKey) {
+    return "[object has no keys]";
+  }
+  if (firstKey.length >= maxLength) {
+    return truncate(firstKey, maxLength);
+  }
+  for (let includedKeys = keys.length; includedKeys > 0; includedKeys--) {
+    const serialized = keys.slice(0, includedKeys).join(", ");
+    if (serialized.length > maxLength) {
+      continue;
+    }
+    if (includedKeys === keys.length) {
+      return serialized;
+    }
+    return truncate(serialized, maxLength);
+  }
+  return "";
+}
+function dropUndefinedKeys(inputValue) {
+  const memoizationMap = /* @__PURE__ */ new Map();
+  return _dropUndefinedKeys(inputValue, memoizationMap);
+}
+function _dropUndefinedKeys(inputValue, memoizationMap) {
+  if (isPojo(inputValue)) {
+    const memoVal = memoizationMap.get(inputValue);
+    if (memoVal !== void 0) {
+      return memoVal;
+    }
+    const returnValue = {};
+    memoizationMap.set(inputValue, returnValue);
+    for (const key of Object.keys(inputValue)) {
+      if (typeof inputValue[key] !== "undefined") {
+        returnValue[key] = _dropUndefinedKeys(inputValue[key], memoizationMap);
+      }
+    }
+    return returnValue;
+  }
+  if (Array.isArray(inputValue)) {
+    const memoVal = memoizationMap.get(inputValue);
+    if (memoVal !== void 0) {
+      return memoVal;
+    }
+    const returnValue = [];
+    memoizationMap.set(inputValue, returnValue);
+    inputValue.forEach((item) => {
+      returnValue.push(_dropUndefinedKeys(item, memoizationMap));
+    });
+    return returnValue;
+  }
+  return inputValue;
+}
+function isPojo(input) {
+  if (!isPlainObject(input)) {
+    return false;
+  }
+  try {
+    const name = Object.getPrototypeOf(input).constructor.name;
+    return !name || name === "Object";
+  } catch (e2) {
+    return true;
+  }
+}
+const STACKTRACE_FRAME_LIMIT = 50;
+const UNKNOWN_FUNCTION = "?";
+const WEBPACK_ERROR_REGEXP = /\(error: (.*)\)/;
+const STRIP_FRAME_REGEXP = /captureMessage|captureException/;
+function createStackParser(...parsers) {
+  const sortedParsers = parsers.sort((a3, b2) => a3[0] - b2[0]).map((p2) => p2[1]);
+  return (stack, skipFirstLines = 0, framesToPop = 0) => {
+    const frames = [];
+    const lines = stack.split("\n");
+    for (let i2 = skipFirstLines; i2 < lines.length; i2++) {
+      const line = lines[i2];
+      if (line.length > 1024) {
+        continue;
+      }
+      const cleanedLine = WEBPACK_ERROR_REGEXP.test(line) ? line.replace(WEBPACK_ERROR_REGEXP, "$1") : line;
+      if (cleanedLine.match(/\S*Error: /)) {
+        continue;
+      }
+      for (const parser of sortedParsers) {
+        const frame2 = parser(cleanedLine);
+        if (frame2) {
+          frames.push(frame2);
+          break;
+        }
+      }
+      if (frames.length >= STACKTRACE_FRAME_LIMIT + framesToPop) {
+        break;
+      }
+    }
+    return stripSentryFramesAndReverse(frames.slice(framesToPop));
+  };
+}
+function stackParserFromStackParserOptions(stackParser) {
+  if (Array.isArray(stackParser)) {
+    return createStackParser(...stackParser);
+  }
+  return stackParser;
+}
+function stripSentryFramesAndReverse(stack) {
+  if (!stack.length) {
+    return [];
+  }
+  const localStack = Array.from(stack);
+  if (/sentryWrapped/.test(getLastStackFrame(localStack).function || "")) {
+    localStack.pop();
+  }
+  localStack.reverse();
+  if (STRIP_FRAME_REGEXP.test(getLastStackFrame(localStack).function || "")) {
+    localStack.pop();
+    if (STRIP_FRAME_REGEXP.test(getLastStackFrame(localStack).function || "")) {
+      localStack.pop();
+    }
+  }
+  return localStack.slice(0, STACKTRACE_FRAME_LIMIT).map((frame2) => ({
+    ...frame2,
+    filename: frame2.filename || getLastStackFrame(localStack).filename,
+    function: frame2.function || UNKNOWN_FUNCTION
+  }));
+}
+function getLastStackFrame(arr) {
+  return arr[arr.length - 1] || {};
+}
+const defaultFunctionName = "<anonymous>";
+function getFunctionName(fn) {
+  try {
+    if (!fn || typeof fn !== "function") {
+      return defaultFunctionName;
+    }
+    return fn.name || defaultFunctionName;
+  } catch (e2) {
+    return defaultFunctionName;
+  }
+}
+function getFramesFromEvent(event) {
+  const exception = event.exception;
+  if (exception) {
+    const frames = [];
+    try {
+      exception.values.forEach((value) => {
+        if (value.stacktrace.frames) {
+          frames.push(...value.stacktrace.frames);
+        }
+      });
+      return frames;
+    } catch (_oO) {
+      return void 0;
+    }
+  }
+  return void 0;
+}
+const handlers = {};
+const instrumented = {};
+function addHandler(type, handler) {
+  handlers[type] = handlers[type] || [];
+  handlers[type].push(handler);
+}
+function maybeInstrument(type, instrumentFn) {
+  if (!instrumented[type]) {
+    instrumentFn();
+    instrumented[type] = true;
+  }
+}
+function triggerHandlers(type, data) {
+  const typeHandlers = type && handlers[type];
+  if (!typeHandlers) {
+    return;
+  }
+  for (const handler of typeHandlers) {
+    try {
+      handler(data);
+    } catch (e2) {
+      DEBUG_BUILD$3 && logger.error(
+        `Error while triggering instrumentation handler.
+Type: ${type}
+Name: ${getFunctionName(handler)}
+Error:`,
+        e2
+      );
+    }
+  }
+}
+function addConsoleInstrumentationHandler(handler) {
+  const type = "console";
+  addHandler(type, handler);
+  maybeInstrument(type, instrumentConsole);
+}
+function instrumentConsole() {
+  if (!("console" in GLOBAL_OBJ)) {
+    return;
+  }
+  CONSOLE_LEVELS.forEach(function(level) {
+    if (!(level in GLOBAL_OBJ.console)) {
+      return;
+    }
+    fill(GLOBAL_OBJ.console, level, function(originalConsoleMethod) {
+      originalConsoleMethods[level] = originalConsoleMethod;
+      return function(...args) {
+        const handlerData = { args, level };
+        triggerHandlers("console", handlerData);
+        const log = originalConsoleMethods[level];
+        log && log.apply(GLOBAL_OBJ.console, args);
+      };
+    });
+  });
+}
+const WINDOW$3 = GLOBAL_OBJ;
+function supportsFetch() {
+  if (!("fetch" in WINDOW$3)) {
+    return false;
+  }
+  try {
+    new Headers();
+    new Request("http://www.example.com");
+    new Response();
+    return true;
+  } catch (e2) {
+    return false;
+  }
+}
+function isNativeFunction(func) {
+  return func && /^function\s+\w+\(\)\s+\{\s+\[native code\]\s+\}$/.test(func.toString());
+}
+function supportsNativeFetch() {
+  if (typeof EdgeRuntime === "string") {
+    return true;
+  }
+  if (!supportsFetch()) {
+    return false;
+  }
+  if (isNativeFunction(WINDOW$3.fetch)) {
+    return true;
+  }
+  let result = false;
+  const doc = WINDOW$3.document;
+  if (doc && typeof doc.createElement === "function") {
+    try {
+      const sandbox = doc.createElement("iframe");
+      sandbox.hidden = true;
+      doc.head.appendChild(sandbox);
+      if (sandbox.contentWindow && sandbox.contentWindow.fetch) {
+        result = isNativeFunction(sandbox.contentWindow.fetch);
+      }
+      doc.head.removeChild(sandbox);
+    } catch (err) {
+      DEBUG_BUILD$3 && logger.warn("Could not create sandbox iframe for pure fetch check, bailing to window.fetch: ", err);
+    }
+  }
+  return result;
+}
+const ONE_SECOND_IN_MS = 1e3;
+function dateTimestampInSeconds() {
+  return Date.now() / ONE_SECOND_IN_MS;
+}
+function createUnixTimestampInSecondsFunc() {
+  const { performance: performance2 } = GLOBAL_OBJ;
+  if (!performance2 || !performance2.now) {
+    return dateTimestampInSeconds;
+  }
+  const approxStartingTimeOrigin = Date.now() - performance2.now();
+  const timeOrigin = performance2.timeOrigin == void 0 ? approxStartingTimeOrigin : performance2.timeOrigin;
+  return () => {
+    return (timeOrigin + performance2.now()) / ONE_SECOND_IN_MS;
+  };
+}
+const timestampInSeconds = createUnixTimestampInSecondsFunc();
+(() => {
+  const { performance: performance2 } = GLOBAL_OBJ;
+  if (!performance2 || !performance2.now) {
+    return void 0;
+  }
+  const threshold = 3600 * 1e3;
+  const performanceNow = performance2.now();
+  const dateNow = Date.now();
+  const timeOriginDelta = performance2.timeOrigin ? Math.abs(performance2.timeOrigin + performanceNow - dateNow) : threshold;
+  const timeOriginIsReliable = timeOriginDelta < threshold;
+  const navigationStart = performance2.timing && performance2.timing.navigationStart;
+  const hasNavigationStart = typeof navigationStart === "number";
+  const navigationStartDelta = hasNavigationStart ? Math.abs(navigationStart + performanceNow - dateNow) : threshold;
+  const navigationStartIsReliable = navigationStartDelta < threshold;
+  if (timeOriginIsReliable || navigationStartIsReliable) {
+    if (timeOriginDelta <= navigationStartDelta) {
+      return performance2.timeOrigin;
+    } else {
+      return navigationStart;
+    }
+  }
+  return dateNow;
+})();
+function addFetchInstrumentationHandler(handler, skipNativeFetchCheck) {
+  const type = "fetch";
+  addHandler(type, handler);
+  maybeInstrument(type, () => instrumentFetch(void 0, skipNativeFetchCheck));
+}
+function instrumentFetch(onFetchResolved, skipNativeFetchCheck = false) {
+  if (skipNativeFetchCheck && !supportsNativeFetch()) {
+    return;
+  }
+  fill(GLOBAL_OBJ, "fetch", function(originalFetch) {
+    return function(...args) {
+      const { method, url } = parseFetchArgs(args);
+      const handlerData = {
+        args,
+        fetchData: {
+          method,
+          url
+        },
+        startTimestamp: timestampInSeconds() * 1e3
+      };
+      {
+        triggerHandlers("fetch", {
+          ...handlerData
+        });
+      }
+      const virtualStackTrace = new Error().stack;
+      return originalFetch.apply(GLOBAL_OBJ, args).then(
+        async (response) => {
+          {
+            triggerHandlers("fetch", {
+              ...handlerData,
+              endTimestamp: timestampInSeconds() * 1e3,
+              response
+            });
+          }
+          return response;
+        },
+        (error) => {
+          triggerHandlers("fetch", {
+            ...handlerData,
+            endTimestamp: timestampInSeconds() * 1e3,
+            error
+          });
+          if (isError(error) && error.stack === void 0) {
+            error.stack = virtualStackTrace;
+            addNonEnumerableProperty(error, "framesToPop", 1);
+          }
+          throw error;
+        }
+      );
+    };
+  });
+}
+function hasProp(obj, prop) {
+  return !!obj && typeof obj === "object" && !!obj[prop];
+}
+function getUrlFromResource(resource) {
+  if (typeof resource === "string") {
+    return resource;
+  }
+  if (!resource) {
+    return "";
+  }
+  if (hasProp(resource, "url")) {
+    return resource.url;
+  }
+  if (resource.toString) {
+    return resource.toString();
+  }
+  return "";
+}
+function parseFetchArgs(fetchArgs) {
+  if (fetchArgs.length === 0) {
+    return { method: "GET", url: "" };
+  }
+  if (fetchArgs.length === 2) {
+    const [url, options] = fetchArgs;
+    return {
+      url: getUrlFromResource(url),
+      method: hasProp(options, "method") ? String(options.method).toUpperCase() : "GET"
+    };
+  }
+  const arg = fetchArgs[0];
+  return {
+    url: getUrlFromResource(arg),
+    method: hasProp(arg, "method") ? String(arg.method).toUpperCase() : "GET"
+  };
+}
+let _oldOnErrorHandler = null;
+function addGlobalErrorInstrumentationHandler(handler) {
+  const type = "error";
+  addHandler(type, handler);
+  maybeInstrument(type, instrumentError);
+}
+function instrumentError() {
+  _oldOnErrorHandler = GLOBAL_OBJ.onerror;
+  GLOBAL_OBJ.onerror = function(msg, url, line, column, error) {
+    const handlerData = {
+      column,
+      error,
+      line,
+      msg,
+      url
+    };
+    triggerHandlers("error", handlerData);
+    if (_oldOnErrorHandler && !_oldOnErrorHandler.__SENTRY_LOADER__) {
+      return _oldOnErrorHandler.apply(this, arguments);
+    }
+    return false;
+  };
+  GLOBAL_OBJ.onerror.__SENTRY_INSTRUMENTED__ = true;
+}
+let _oldOnUnhandledRejectionHandler = null;
+function addGlobalUnhandledRejectionInstrumentationHandler(handler) {
+  const type = "unhandledrejection";
+  addHandler(type, handler);
+  maybeInstrument(type, instrumentUnhandledRejection);
+}
+function instrumentUnhandledRejection() {
+  _oldOnUnhandledRejectionHandler = GLOBAL_OBJ.onunhandledrejection;
+  GLOBAL_OBJ.onunhandledrejection = function(e2) {
+    const handlerData = e2;
+    triggerHandlers("unhandledrejection", handlerData);
+    if (_oldOnUnhandledRejectionHandler && !_oldOnUnhandledRejectionHandler.__SENTRY_LOADER__) {
+      return _oldOnUnhandledRejectionHandler.apply(this, arguments);
+    }
+    return true;
+  };
+  GLOBAL_OBJ.onunhandledrejection.__SENTRY_INSTRUMENTED__ = true;
+}
+function getSDKSource() {
+  return "npm";
+}
+function memoBuilder() {
+  const hasWeakSet = typeof WeakSet === "function";
+  const inner2 = hasWeakSet ? /* @__PURE__ */ new WeakSet() : [];
+  function memoize(obj) {
+    if (hasWeakSet) {
+      if (inner2.has(obj)) {
+        return true;
+      }
+      inner2.add(obj);
+      return false;
+    }
+    for (let i2 = 0; i2 < inner2.length; i2++) {
+      const value = inner2[i2];
+      if (value === obj) {
+        return true;
+      }
+    }
+    inner2.push(obj);
+    return false;
+  }
+  function unmemoize(obj) {
+    if (hasWeakSet) {
+      inner2.delete(obj);
+    } else {
+      for (let i2 = 0; i2 < inner2.length; i2++) {
+        if (inner2[i2] === obj) {
+          inner2.splice(i2, 1);
+          break;
+        }
+      }
+    }
+  }
+  return [memoize, unmemoize];
+}
+function uuid4() {
+  const gbl = GLOBAL_OBJ;
+  const crypto = gbl.crypto || gbl.msCrypto;
+  let getRandomByte = () => Math.random() * 16;
+  try {
+    if (crypto && crypto.randomUUID) {
+      return crypto.randomUUID().replace(/-/g, "");
+    }
+    if (crypto && crypto.getRandomValues) {
+      getRandomByte = () => {
+        const typedArray = new Uint8Array(1);
+        crypto.getRandomValues(typedArray);
+        return typedArray[0];
+      };
+    }
+  } catch (_2) {
+  }
+  return ("10000000100040008000" + 1e11).replace(
+    /[018]/g,
+    (c2) => (
+      // eslint-disable-next-line no-bitwise
+      (c2 ^ (getRandomByte() & 15) >> c2 / 4).toString(16)
+    )
+  );
+}
+function getFirstException(event) {
+  return event.exception && event.exception.values ? event.exception.values[0] : void 0;
+}
+function getEventDescription(event) {
+  const { message, event_id: eventId } = event;
+  if (message) {
+    return message;
+  }
+  const firstException = getFirstException(event);
+  if (firstException) {
+    if (firstException.type && firstException.value) {
+      return `${firstException.type}: ${firstException.value}`;
+    }
+    return firstException.type || firstException.value || eventId || "<unknown>";
+  }
+  return eventId || "<unknown>";
+}
+function addExceptionTypeValue(event, value, type) {
+  const exception = event.exception = event.exception || {};
+  const values = exception.values = exception.values || [];
+  const firstException = values[0] = values[0] || {};
+  if (!firstException.value) {
+    firstException.value = value || "";
+  }
+  if (!firstException.type) {
+    firstException.type = "Error";
+  }
+}
+function addExceptionMechanism(event, newMechanism) {
+  const firstException = getFirstException(event);
+  if (!firstException) {
+    return;
+  }
+  const defaultMechanism = { type: "generic", handled: true };
+  const currentMechanism = firstException.mechanism;
+  firstException.mechanism = { ...defaultMechanism, ...currentMechanism, ...newMechanism };
+  if (newMechanism && "data" in newMechanism) {
+    const mergedData = { ...currentMechanism && currentMechanism.data, ...newMechanism.data };
+    firstException.mechanism.data = mergedData;
+  }
+}
+function checkOrSetAlreadyCaught(exception) {
+  if (exception && exception.__sentry_captured__) {
+    return true;
+  }
+  try {
+    addNonEnumerableProperty(exception, "__sentry_captured__", true);
+  } catch (err) {
+  }
+  return false;
+}
+function arrayify(maybeArray) {
+  return Array.isArray(maybeArray) ? maybeArray : [maybeArray];
+}
+function normalize(input, depth = 100, maxProperties = Infinity) {
+  try {
+    return visit("", input, depth, maxProperties);
+  } catch (err) {
+    return { ERROR: `**non-serializable** (${err})` };
+  }
+}
+function normalizeToSize(object, depth = 3, maxSize = 100 * 1024) {
+  const normalized = normalize(object, depth);
+  if (jsonSize(normalized) > maxSize) {
+    return normalizeToSize(object, depth - 1, maxSize);
+  }
+  return normalized;
+}
+function visit(key, value, depth = Infinity, maxProperties = Infinity, memo2 = memoBuilder()) {
+  const [memoize, unmemoize] = memo2;
+  if (value == null || // this matches null and undefined -> eqeq not eqeqeq
+  ["number", "boolean", "string"].includes(typeof value) && !Number.isNaN(value)) {
+    return value;
+  }
+  const stringified = stringifyValue(key, value);
+  if (!stringified.startsWith("[object ")) {
+    return stringified;
+  }
+  if (value["__sentry_skip_normalization__"]) {
+    return value;
+  }
+  const remainingDepth = typeof value["__sentry_override_normalization_depth__"] === "number" ? value["__sentry_override_normalization_depth__"] : depth;
+  if (remainingDepth === 0) {
+    return stringified.replace("object ", "");
+  }
+  if (memoize(value)) {
+    return "[Circular ~]";
+  }
+  const valueWithToJSON = value;
+  if (valueWithToJSON && typeof valueWithToJSON.toJSON === "function") {
+    try {
+      const jsonValue = valueWithToJSON.toJSON();
+      return visit("", jsonValue, remainingDepth - 1, maxProperties, memo2);
+    } catch (err) {
+    }
+  }
+  const normalized = Array.isArray(value) ? [] : {};
+  let numAdded = 0;
+  const visitable = convertToPlainObject(value);
+  for (const visitKey in visitable) {
+    if (!Object.prototype.hasOwnProperty.call(visitable, visitKey)) {
+      continue;
+    }
+    if (numAdded >= maxProperties) {
+      normalized[visitKey] = "[MaxProperties ~]";
+      break;
+    }
+    const visitValue = visitable[visitKey];
+    normalized[visitKey] = visit(visitKey, visitValue, remainingDepth - 1, maxProperties, memo2);
+    numAdded++;
+  }
+  unmemoize(value);
+  return normalized;
+}
+function stringifyValue(key, value) {
+  try {
+    if (key === "domain" && value && typeof value === "object" && value._events) {
+      return "[Domain]";
+    }
+    if (key === "domainEmitter") {
+      return "[DomainEmitter]";
+    }
+    if (typeof global !== "undefined" && value === global) {
+      return "[Global]";
+    }
+    if (typeof window !== "undefined" && value === window) {
+      return "[Window]";
+    }
+    if (typeof document !== "undefined" && value === document) {
+      return "[Document]";
+    }
+    if (isVueViewModel(value)) {
+      return "[VueViewModel]";
+    }
+    if (isSyntheticEvent(value)) {
+      return "[SyntheticEvent]";
+    }
+    if (typeof value === "number" && value !== value) {
+      return "[NaN]";
+    }
+    if (typeof value === "function") {
+      return `[Function: ${getFunctionName(value)}]`;
+    }
+    if (typeof value === "symbol") {
+      return `[${String(value)}]`;
+    }
+    if (typeof value === "bigint") {
+      return `[BigInt: ${String(value)}]`;
+    }
+    const objName = getConstructorName(value);
+    if (/^HTML(\w*)Element$/.test(objName)) {
+      return `[HTMLElement: ${objName}]`;
+    }
+    return `[object ${objName}]`;
+  } catch (err) {
+    return `**non-serializable** (${err})`;
+  }
+}
+function getConstructorName(value) {
+  const prototype = Object.getPrototypeOf(value);
+  return prototype ? prototype.constructor.name : "null prototype";
+}
+function utf8Length(value) {
+  return ~-encodeURI(value).split(/%..|./).length;
+}
+function jsonSize(value) {
+  return utf8Length(JSON.stringify(value));
+}
+var States;
+(function(States2) {
+  const PENDING = 0;
+  States2[States2["PENDING"] = PENDING] = "PENDING";
+  const RESOLVED = 1;
+  States2[States2["RESOLVED"] = RESOLVED] = "RESOLVED";
+  const REJECTED = 2;
+  States2[States2["REJECTED"] = REJECTED] = "REJECTED";
+})(States || (States = {}));
+function resolvedSyncPromise(value) {
+  return new SyncPromise((resolve) => {
+    resolve(value);
+  });
+}
+function rejectedSyncPromise(reason) {
+  return new SyncPromise((_2, reject) => {
+    reject(reason);
+  });
+}
+class SyncPromise {
+  constructor(executor) {
+    SyncPromise.prototype.__init.call(this);
+    SyncPromise.prototype.__init2.call(this);
+    SyncPromise.prototype.__init3.call(this);
+    SyncPromise.prototype.__init4.call(this);
+    this._state = States.PENDING;
+    this._handlers = [];
+    try {
+      executor(this._resolve, this._reject);
+    } catch (e2) {
+      this._reject(e2);
+    }
+  }
+  /** JSDoc */
+  then(onfulfilled, onrejected) {
+    return new SyncPromise((resolve, reject) => {
+      this._handlers.push([
+        false,
+        (result) => {
+          if (!onfulfilled) {
+            resolve(result);
+          } else {
+            try {
+              resolve(onfulfilled(result));
+            } catch (e2) {
+              reject(e2);
+            }
+          }
+        },
+        (reason) => {
+          if (!onrejected) {
+            reject(reason);
+          } else {
+            try {
+              resolve(onrejected(reason));
+            } catch (e2) {
+              reject(e2);
+            }
+          }
+        }
+      ]);
+      this._executeHandlers();
+    });
+  }
+  /** JSDoc */
+  catch(onrejected) {
+    return this.then((val) => val, onrejected);
+  }
+  /** JSDoc */
+  finally(onfinally) {
+    return new SyncPromise((resolve, reject) => {
+      let val;
+      let isRejected;
+      return this.then(
+        (value) => {
+          isRejected = false;
+          val = value;
+          if (onfinally) {
+            onfinally();
+          }
+        },
+        (reason) => {
+          isRejected = true;
+          val = reason;
+          if (onfinally) {
+            onfinally();
+          }
+        }
+      ).then(() => {
+        if (isRejected) {
+          reject(val);
+          return;
+        }
+        resolve(val);
+      });
+    });
+  }
+  /** JSDoc */
+  __init() {
+    this._resolve = (value) => {
+      this._setResult(States.RESOLVED, value);
+    };
+  }
+  /** JSDoc */
+  __init2() {
+    this._reject = (reason) => {
+      this._setResult(States.REJECTED, reason);
+    };
+  }
+  /** JSDoc */
+  __init3() {
+    this._setResult = (state, value) => {
+      if (this._state !== States.PENDING) {
+        return;
+      }
+      if (isThenable(value)) {
+        void value.then(this._resolve, this._reject);
+        return;
+      }
+      this._state = state;
+      this._value = value;
+      this._executeHandlers();
+    };
+  }
+  /** JSDoc */
+  __init4() {
+    this._executeHandlers = () => {
+      if (this._state === States.PENDING) {
+        return;
+      }
+      const cachedHandlers = this._handlers.slice();
+      this._handlers = [];
+      cachedHandlers.forEach((handler) => {
+        if (handler[0]) {
+          return;
+        }
+        if (this._state === States.RESOLVED) {
+          handler[1](this._value);
+        }
+        if (this._state === States.REJECTED) {
+          handler[2](this._value);
+        }
+        handler[0] = true;
+      });
+    };
+  }
+}
+function makePromiseBuffer(limit) {
+  const buffer = [];
+  function isReady() {
+    return limit === void 0 || buffer.length < limit;
+  }
+  function remove(task) {
+    return buffer.splice(buffer.indexOf(task), 1)[0] || Promise.resolve(void 0);
+  }
+  function add(taskProducer) {
+    if (!isReady()) {
+      return rejectedSyncPromise(new SentryError("Not adding Promise because buffer limit was reached."));
+    }
+    const task = taskProducer();
+    if (buffer.indexOf(task) === -1) {
+      buffer.push(task);
+    }
+    void task.then(() => remove(task)).then(
+      null,
+      () => remove(task).then(null, () => {
+      })
+    );
+    return task;
+  }
+  function drain(timeout) {
+    return new SyncPromise((resolve, reject) => {
+      let counter = buffer.length;
+      if (!counter) {
+        return resolve(true);
+      }
+      const capturedSetTimeout = setTimeout(() => {
+        if (timeout && timeout > 0) {
+          resolve(false);
+        }
+      }, timeout);
+      buffer.forEach((item) => {
+        void resolvedSyncPromise(item).then(() => {
+          if (!--counter) {
+            clearTimeout(capturedSetTimeout);
+            resolve(true);
+          }
+        }, reject);
+      });
+    });
+  }
+  return {
+    $: buffer,
+    add,
+    drain
+  };
+}
+function parseUrl$1(url) {
+  if (!url) {
+    return {};
+  }
+  const match = url.match(/^(([^:/?#]+):)?(\/\/([^/?#]*))?([^?#]*)(\?([^#]*))?(#(.*))?$/);
+  if (!match) {
+    return {};
+  }
+  const query = match[6] || "";
+  const fragment = match[8] || "";
+  return {
+    host: match[4],
+    path: match[5],
+    protocol: match[2],
+    search: query,
+    hash: fragment,
+    relative: match[5] + query + fragment
+    // everything minus origin
+  };
+}
+const validSeverityLevels = ["fatal", "error", "warning", "log", "info", "debug"];
+function severityLevelFromString(level) {
+  return level === "warn" ? "warning" : validSeverityLevels.includes(level) ? level : "log";
+}
+const SENTRY_BAGGAGE_KEY_PREFIX = "sentry-";
+const SENTRY_BAGGAGE_KEY_PREFIX_REGEX = /^sentry-/;
+function baggageHeaderToDynamicSamplingContext(baggageHeader) {
+  const baggageObject = parseBaggageHeader(baggageHeader);
+  if (!baggageObject) {
+    return void 0;
+  }
+  const dynamicSamplingContext = Object.entries(baggageObject).reduce((acc, [key, value]) => {
+    if (key.match(SENTRY_BAGGAGE_KEY_PREFIX_REGEX)) {
+      const nonPrefixedKey = key.slice(SENTRY_BAGGAGE_KEY_PREFIX.length);
+      acc[nonPrefixedKey] = value;
+    }
+    return acc;
+  }, {});
+  if (Object.keys(dynamicSamplingContext).length > 0) {
+    return dynamicSamplingContext;
+  } else {
+    return void 0;
+  }
+}
+function parseBaggageHeader(baggageHeader) {
+  if (!baggageHeader || !isString$1(baggageHeader) && !Array.isArray(baggageHeader)) {
+    return void 0;
+  }
+  if (Array.isArray(baggageHeader)) {
+    return baggageHeader.reduce((acc, curr) => {
+      const currBaggageObject = baggageHeaderToObject(curr);
+      Object.entries(currBaggageObject).forEach(([key, value]) => {
+        acc[key] = value;
+      });
+      return acc;
+    }, {});
+  }
+  return baggageHeaderToObject(baggageHeader);
+}
+function baggageHeaderToObject(baggageHeader) {
+  return baggageHeader.split(",").map((baggageEntry) => baggageEntry.split("=").map((keyOrValue) => decodeURIComponent(keyOrValue.trim()))).reduce((acc, [key, value]) => {
+    if (key && value) {
+      acc[key] = value;
+    }
+    return acc;
+  }, {});
+}
+function createEnvelope(headers, items = []) {
+  return [headers, items];
+}
+function addItemToEnvelope(envelope, newItem) {
+  const [headers, items] = envelope;
+  return [headers, [...items, newItem]];
+}
+function forEachEnvelopeItem(envelope, callback) {
+  const envelopeItems = envelope[1];
+  for (const envelopeItem of envelopeItems) {
+    const envelopeItemType = envelopeItem[0].type;
+    const result = callback(envelopeItem, envelopeItemType);
+    if (result) {
+      return true;
+    }
+  }
+  return false;
+}
+function encodeUTF8(input) {
+  return GLOBAL_OBJ.__SENTRY__ && GLOBAL_OBJ.__SENTRY__.encodePolyfill ? GLOBAL_OBJ.__SENTRY__.encodePolyfill(input) : new TextEncoder().encode(input);
+}
+function serializeEnvelope(envelope) {
+  const [envHeaders, items] = envelope;
+  let parts = JSON.stringify(envHeaders);
+  function append(next) {
+    if (typeof parts === "string") {
+      parts = typeof next === "string" ? parts + next : [encodeUTF8(parts), next];
+    } else {
+      parts.push(typeof next === "string" ? encodeUTF8(next) : next);
+    }
+  }
+  for (const item of items) {
+    const [itemHeaders, payload] = item;
+    append(`
+${JSON.stringify(itemHeaders)}
+`);
+    if (typeof payload === "string" || payload instanceof Uint8Array) {
+      append(payload);
+    } else {
+      let stringifiedPayload;
+      try {
+        stringifiedPayload = JSON.stringify(payload);
+      } catch (e2) {
+        stringifiedPayload = JSON.stringify(normalize(payload));
+      }
+      append(stringifiedPayload);
+    }
+  }
+  return typeof parts === "string" ? parts : concatBuffers(parts);
+}
+function concatBuffers(buffers) {
+  const totalLength = buffers.reduce((acc, buf) => acc + buf.length, 0);
+  const merged = new Uint8Array(totalLength);
+  let offset2 = 0;
+  for (const buffer of buffers) {
+    merged.set(buffer, offset2);
+    offset2 += buffer.length;
+  }
+  return merged;
+}
+function createAttachmentEnvelopeItem(attachment) {
+  const buffer = typeof attachment.data === "string" ? encodeUTF8(attachment.data) : attachment.data;
+  return [
+    dropUndefinedKeys({
+      type: "attachment",
+      length: buffer.length,
+      filename: attachment.filename,
+      content_type: attachment.contentType,
+      attachment_type: attachment.attachmentType
+    }),
+    buffer
+  ];
+}
+const ITEM_TYPE_TO_DATA_CATEGORY_MAP = {
+  session: "session",
+  sessions: "session",
+  attachment: "attachment",
+  transaction: "transaction",
+  event: "error",
+  client_report: "internal",
+  user_report: "default",
+  profile: "profile",
+  profile_chunk: "profile",
+  replay_event: "replay",
+  replay_recording: "replay",
+  check_in: "monitor",
+  feedback: "feedback",
+  span: "span",
+  statsd: "metric_bucket"
+};
+function envelopeItemTypeToDataCategory(type) {
+  return ITEM_TYPE_TO_DATA_CATEGORY_MAP[type];
+}
+function getSdkMetadataForEnvelopeHeader(metadataOrEvent) {
+  if (!metadataOrEvent || !metadataOrEvent.sdk) {
+    return;
+  }
+  const { name, version } = metadataOrEvent.sdk;
+  return { name, version };
+}
+function createEventEnvelopeHeaders(event, sdkInfo, tunnel, dsn) {
+  const dynamicSamplingContext = event.sdkProcessingMetadata && event.sdkProcessingMetadata.dynamicSamplingContext;
+  return {
+    event_id: event.event_id,
+    sent_at: (/* @__PURE__ */ new Date()).toISOString(),
+    ...sdkInfo && { sdk: sdkInfo },
+    ...!!tunnel && dsn && { dsn: dsnToString(dsn) },
+    ...dynamicSamplingContext && {
+      trace: dropUndefinedKeys({ ...dynamicSamplingContext })
+    }
+  };
+}
+function createClientReportEnvelope(discarded_events, dsn, timestamp) {
+  const clientReportItem = [
+    { type: "client_report" },
+    {
+      timestamp: dateTimestampInSeconds(),
+      discarded_events
+    }
+  ];
+  return createEnvelope(dsn ? { dsn } : {}, [clientReportItem]);
+}
+const DEFAULT_RETRY_AFTER = 60 * 1e3;
+function parseRetryAfterHeader(header, now2 = Date.now()) {
+  const headerDelay = parseInt(`${header}`, 10);
+  if (!isNaN(headerDelay)) {
+    return headerDelay * 1e3;
+  }
+  const headerDate = Date.parse(`${header}`);
+  if (!isNaN(headerDate)) {
+    return headerDate - now2;
+  }
+  return DEFAULT_RETRY_AFTER;
+}
+function disabledUntil(limits, dataCategory) {
+  return limits[dataCategory] || limits.all || 0;
+}
+function isRateLimited(limits, dataCategory, now2 = Date.now()) {
+  return disabledUntil(limits, dataCategory) > now2;
+}
+function updateRateLimits(limits, { statusCode, headers }, now2 = Date.now()) {
+  const updatedRateLimits = {
+    ...limits
+  };
+  const rateLimitHeader = headers && headers["x-sentry-rate-limits"];
+  const retryAfterHeader = headers && headers["retry-after"];
+  if (rateLimitHeader) {
+    for (const limit of rateLimitHeader.trim().split(",")) {
+      const [retryAfter, categories, , , namespaces] = limit.split(":", 5);
+      const headerDelay = parseInt(retryAfter, 10);
+      const delay2 = (!isNaN(headerDelay) ? headerDelay : 60) * 1e3;
+      if (!categories) {
+        updatedRateLimits.all = now2 + delay2;
+      } else {
+        for (const category of categories.split(";")) {
+          if (category === "metric_bucket") {
+            if (!namespaces || namespaces.split(";").includes("custom")) {
+              updatedRateLimits[category] = now2 + delay2;
+            }
+          } else {
+            updatedRateLimits[category] = now2 + delay2;
+          }
+        }
+      }
+    }
+  } else if (retryAfterHeader) {
+    updatedRateLimits.all = now2 + parseRetryAfterHeader(retryAfterHeader, now2);
+  } else if (statusCode === 429) {
+    updatedRateLimits.all = now2 + 60 * 1e3;
+  }
+  return updatedRateLimits;
+}
+function generatePropagationContext() {
+  return {
+    traceId: uuid4(),
+    spanId: uuid4().substring(16)
+  };
+}
+const WINDOW$2 = GLOBAL_OBJ;
+function supportsHistory() {
+  const chromeVar = WINDOW$2.chrome;
+  const isChromePackagedApp = chromeVar && chromeVar.app && chromeVar.app.runtime;
+  const hasHistoryApi = "history" in WINDOW$2 && !!WINDOW$2.history.pushState && !!WINDOW$2.history.replaceState;
+  return !isChromePackagedApp && hasHistoryApi;
+}
+const DEBUG_BUILD$2 = typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__;
+function getMainCarrier() {
+  getSentryCarrier(GLOBAL_OBJ);
+  return GLOBAL_OBJ;
+}
+function getSentryCarrier(carrier) {
+  const __SENTRY__ = carrier.__SENTRY__ = carrier.__SENTRY__ || {};
+  __SENTRY__.version = __SENTRY__.version || SDK_VERSION;
+  return __SENTRY__[SDK_VERSION] = __SENTRY__[SDK_VERSION] || {};
+}
+function makeSession(context) {
+  const startingTime = timestampInSeconds();
+  const session = {
+    sid: uuid4(),
+    init: true,
+    timestamp: startingTime,
+    started: startingTime,
+    duration: 0,
+    status: "ok",
+    errors: 0,
+    ignoreDuration: false,
+    toJSON: () => sessionToJSON(session)
+  };
+  if (context) {
+    updateSession(session, context);
+  }
+  return session;
+}
+function updateSession(session, context = {}) {
+  if (context.user) {
+    if (!session.ipAddress && context.user.ip_address) {
+      session.ipAddress = context.user.ip_address;
+    }
+    if (!session.did && !context.did) {
+      session.did = context.user.id || context.user.email || context.user.username;
+    }
+  }
+  session.timestamp = context.timestamp || timestampInSeconds();
+  if (context.abnormal_mechanism) {
+    session.abnormal_mechanism = context.abnormal_mechanism;
+  }
+  if (context.ignoreDuration) {
+    session.ignoreDuration = context.ignoreDuration;
+  }
+  if (context.sid) {
+    session.sid = context.sid.length === 32 ? context.sid : uuid4();
+  }
+  if (context.init !== void 0) {
+    session.init = context.init;
+  }
+  if (!session.did && context.did) {
+    session.did = `${context.did}`;
+  }
+  if (typeof context.started === "number") {
+    session.started = context.started;
+  }
+  if (session.ignoreDuration) {
+    session.duration = void 0;
+  } else if (typeof context.duration === "number") {
+    session.duration = context.duration;
+  } else {
+    const duration = session.timestamp - session.started;
+    session.duration = duration >= 0 ? duration : 0;
+  }
+  if (context.release) {
+    session.release = context.release;
+  }
+  if (context.environment) {
+    session.environment = context.environment;
+  }
+  if (!session.ipAddress && context.ipAddress) {
+    session.ipAddress = context.ipAddress;
+  }
+  if (!session.userAgent && context.userAgent) {
+    session.userAgent = context.userAgent;
+  }
+  if (typeof context.errors === "number") {
+    session.errors = context.errors;
+  }
+  if (context.status) {
+    session.status = context.status;
+  }
+}
+function closeSession(session, status) {
+  let context = {};
+  if (session.status === "ok") {
+    context = { status: "exited" };
+  }
+  updateSession(session, context);
+}
+function sessionToJSON(session) {
+  return dropUndefinedKeys({
+    sid: `${session.sid}`,
+    init: session.init,
+    // Make sure that sec is converted to ms for date constructor
+    started: new Date(session.started * 1e3).toISOString(),
+    timestamp: new Date(session.timestamp * 1e3).toISOString(),
+    status: session.status,
+    errors: session.errors,
+    did: typeof session.did === "number" || typeof session.did === "string" ? `${session.did}` : void 0,
+    duration: session.duration,
+    abnormal_mechanism: session.abnormal_mechanism,
+    attrs: {
+      release: session.release,
+      environment: session.environment,
+      ip_address: session.ipAddress,
+      user_agent: session.userAgent
+    }
+  });
+}
+const SCOPE_SPAN_FIELD = "_sentrySpan";
+function _setSpanForScope(scope, span) {
+  if (span) {
+    addNonEnumerableProperty(scope, SCOPE_SPAN_FIELD, span);
+  } else {
+    delete scope[SCOPE_SPAN_FIELD];
+  }
+}
+function _getSpanForScope(scope) {
+  return scope[SCOPE_SPAN_FIELD];
+}
+const DEFAULT_MAX_BREADCRUMBS = 100;
+class ScopeClass {
+  /** Flag if notifying is happening. */
+  /** Callback for client to receive scope changes. */
+  /** Callback list that will be called during event processing. */
+  /** Array of breadcrumbs. */
+  /** User */
+  /** Tags */
+  /** Extra */
+  /** Contexts */
+  /** Attachments */
+  /** Propagation Context for distributed tracing */
+  /**
+   * A place to stash data which is needed at some point in the SDK's event processing pipeline but which shouldn't get
+   * sent to Sentry
+   */
+  /** Fingerprint */
+  /** Severity */
+  /**
+   * Transaction Name
+   *
+   * IMPORTANT: The transaction name on the scope has nothing to do with root spans/transaction objects.
+   * It's purpose is to assign a transaction to the scope that's added to non-transaction events.
+   */
+  /** Session */
+  /** Request Mode Session Status */
+  /** The client on this scope */
+  /** Contains the last event id of a captured event.  */
+  // NOTE: Any field which gets added here should get added not only to the constructor but also to the `clone` method.
+  constructor() {
+    this._notifyingListeners = false;
+    this._scopeListeners = [];
+    this._eventProcessors = [];
+    this._breadcrumbs = [];
+    this._attachments = [];
+    this._user = {};
+    this._tags = {};
+    this._extra = {};
+    this._contexts = {};
+    this._sdkProcessingMetadata = {};
+    this._propagationContext = generatePropagationContext();
+  }
+  /**
+   * @inheritDoc
+   */
+  clone() {
+    const newScope = new ScopeClass();
+    newScope._breadcrumbs = [...this._breadcrumbs];
+    newScope._tags = { ...this._tags };
+    newScope._extra = { ...this._extra };
+    newScope._contexts = { ...this._contexts };
+    newScope._user = this._user;
+    newScope._level = this._level;
+    newScope._session = this._session;
+    newScope._transactionName = this._transactionName;
+    newScope._fingerprint = this._fingerprint;
+    newScope._eventProcessors = [...this._eventProcessors];
+    newScope._requestSession = this._requestSession;
+    newScope._attachments = [...this._attachments];
+    newScope._sdkProcessingMetadata = { ...this._sdkProcessingMetadata };
+    newScope._propagationContext = { ...this._propagationContext };
+    newScope._client = this._client;
+    newScope._lastEventId = this._lastEventId;
+    _setSpanForScope(newScope, _getSpanForScope(this));
+    return newScope;
+  }
+  /**
+   * @inheritDoc
+   */
+  setClient(client2) {
+    this._client = client2;
+  }
+  /**
+   * @inheritDoc
+   */
+  setLastEventId(lastEventId) {
+    this._lastEventId = lastEventId;
+  }
+  /**
+   * @inheritDoc
+   */
+  getClient() {
+    return this._client;
+  }
+  /**
+   * @inheritDoc
+   */
+  lastEventId() {
+    return this._lastEventId;
+  }
+  /**
+   * @inheritDoc
+   */
+  addScopeListener(callback) {
+    this._scopeListeners.push(callback);
+  }
+  /**
+   * @inheritDoc
+   */
+  addEventProcessor(callback) {
+    this._eventProcessors.push(callback);
+    return this;
+  }
+  /**
+   * @inheritDoc
+   */
+  setUser(user) {
+    this._user = user || {
+      email: void 0,
+      id: void 0,
+      ip_address: void 0,
+      username: void 0
+    };
+    if (this._session) {
+      updateSession(this._session, { user });
+    }
+    this._notifyScopeListeners();
+    return this;
+  }
+  /**
+   * @inheritDoc
+   */
+  getUser() {
+    return this._user;
+  }
+  /**
+   * @inheritDoc
+   */
+  getRequestSession() {
+    return this._requestSession;
+  }
+  /**
+   * @inheritDoc
+   */
+  setRequestSession(requestSession) {
+    this._requestSession = requestSession;
+    return this;
+  }
+  /**
+   * @inheritDoc
+   */
+  setTags(tags) {
+    this._tags = {
+      ...this._tags,
+      ...tags
+    };
+    this._notifyScopeListeners();
+    return this;
+  }
+  /**
+   * @inheritDoc
+   */
+  setTag(key, value) {
+    this._tags = { ...this._tags, [key]: value };
+    this._notifyScopeListeners();
+    return this;
+  }
+  /**
+   * @inheritDoc
+   */
+  setExtras(extras) {
+    this._extra = {
+      ...this._extra,
+      ...extras
+    };
+    this._notifyScopeListeners();
+    return this;
+  }
+  /**
+   * @inheritDoc
+   */
+  setExtra(key, extra) {
+    this._extra = { ...this._extra, [key]: extra };
+    this._notifyScopeListeners();
+    return this;
+  }
+  /**
+   * @inheritDoc
+   */
+  setFingerprint(fingerprint) {
+    this._fingerprint = fingerprint;
+    this._notifyScopeListeners();
+    return this;
+  }
+  /**
+   * @inheritDoc
+   */
+  setLevel(level) {
+    this._level = level;
+    this._notifyScopeListeners();
+    return this;
+  }
+  /**
+   * @inheritDoc
+   */
+  setTransactionName(name) {
+    this._transactionName = name;
+    this._notifyScopeListeners();
+    return this;
+  }
+  /**
+   * @inheritDoc
+   */
+  setContext(key, context) {
+    if (context === null) {
+      delete this._contexts[key];
+    } else {
+      this._contexts[key] = context;
+    }
+    this._notifyScopeListeners();
+    return this;
+  }
+  /**
+   * @inheritDoc
+   */
+  setSession(session) {
+    if (!session) {
+      delete this._session;
+    } else {
+      this._session = session;
+    }
+    this._notifyScopeListeners();
+    return this;
+  }
+  /**
+   * @inheritDoc
+   */
+  getSession() {
+    return this._session;
+  }
+  /**
+   * @inheritDoc
+   */
+  update(captureContext) {
+    if (!captureContext) {
+      return this;
+    }
+    const scopeToMerge = typeof captureContext === "function" ? captureContext(this) : captureContext;
+    const [scopeInstance, requestSession] = scopeToMerge instanceof Scope ? [scopeToMerge.getScopeData(), scopeToMerge.getRequestSession()] : isPlainObject(scopeToMerge) ? [captureContext, captureContext.requestSession] : [];
+    const { tags, extra, user, contexts, level, fingerprint = [], propagationContext } = scopeInstance || {};
+    this._tags = { ...this._tags, ...tags };
+    this._extra = { ...this._extra, ...extra };
+    this._contexts = { ...this._contexts, ...contexts };
+    if (user && Object.keys(user).length) {
+      this._user = user;
+    }
+    if (level) {
+      this._level = level;
+    }
+    if (fingerprint.length) {
+      this._fingerprint = fingerprint;
+    }
+    if (propagationContext) {
+      this._propagationContext = propagationContext;
+    }
+    if (requestSession) {
+      this._requestSession = requestSession;
+    }
+    return this;
+  }
+  /**
+   * @inheritDoc
+   */
+  clear() {
+    this._breadcrumbs = [];
+    this._tags = {};
+    this._extra = {};
+    this._user = {};
+    this._contexts = {};
+    this._level = void 0;
+    this._transactionName = void 0;
+    this._fingerprint = void 0;
+    this._requestSession = void 0;
+    this._session = void 0;
+    _setSpanForScope(this, void 0);
+    this._attachments = [];
+    this._propagationContext = generatePropagationContext();
+    this._notifyScopeListeners();
+    return this;
+  }
+  /**
+   * @inheritDoc
+   */
+  addBreadcrumb(breadcrumb, maxBreadcrumbs) {
+    const maxCrumbs = typeof maxBreadcrumbs === "number" ? maxBreadcrumbs : DEFAULT_MAX_BREADCRUMBS;
+    if (maxCrumbs <= 0) {
+      return this;
+    }
+    const mergedBreadcrumb = {
+      timestamp: dateTimestampInSeconds(),
+      ...breadcrumb
+    };
+    const breadcrumbs = this._breadcrumbs;
+    breadcrumbs.push(mergedBreadcrumb);
+    this._breadcrumbs = breadcrumbs.length > maxCrumbs ? breadcrumbs.slice(-maxCrumbs) : breadcrumbs;
+    this._notifyScopeListeners();
+    return this;
+  }
+  /**
+   * @inheritDoc
+   */
+  getLastBreadcrumb() {
+    return this._breadcrumbs[this._breadcrumbs.length - 1];
+  }
+  /**
+   * @inheritDoc
+   */
+  clearBreadcrumbs() {
+    this._breadcrumbs = [];
+    this._notifyScopeListeners();
+    return this;
+  }
+  /**
+   * @inheritDoc
+   */
+  addAttachment(attachment) {
+    this._attachments.push(attachment);
+    return this;
+  }
+  /**
+   * @inheritDoc
+   */
+  clearAttachments() {
+    this._attachments = [];
+    return this;
+  }
+  /** @inheritDoc */
+  getScopeData() {
+    return {
+      breadcrumbs: this._breadcrumbs,
+      attachments: this._attachments,
+      contexts: this._contexts,
+      tags: this._tags,
+      extra: this._extra,
+      user: this._user,
+      level: this._level,
+      fingerprint: this._fingerprint || [],
+      eventProcessors: this._eventProcessors,
+      propagationContext: this._propagationContext,
+      sdkProcessingMetadata: this._sdkProcessingMetadata,
+      transactionName: this._transactionName,
+      span: _getSpanForScope(this)
+    };
+  }
+  /**
+   * @inheritDoc
+   */
+  setSDKProcessingMetadata(newData) {
+    this._sdkProcessingMetadata = { ...this._sdkProcessingMetadata, ...newData };
+    return this;
+  }
+  /**
+   * @inheritDoc
+   */
+  setPropagationContext(context) {
+    this._propagationContext = context;
+    return this;
+  }
+  /**
+   * @inheritDoc
+   */
+  getPropagationContext() {
+    return this._propagationContext;
+  }
+  /**
+   * @inheritDoc
+   */
+  captureException(exception, hint) {
+    const eventId = hint && hint.event_id ? hint.event_id : uuid4();
+    if (!this._client) {
+      logger.warn("No client configured on scope - will not capture exception!");
+      return eventId;
+    }
+    const syntheticException = new Error("Sentry syntheticException");
+    this._client.captureException(
+      exception,
+      {
+        originalException: exception,
+        syntheticException,
+        ...hint,
+        event_id: eventId
+      },
+      this
+    );
+    return eventId;
+  }
+  /**
+   * @inheritDoc
+   */
+  captureMessage(message, level, hint) {
+    const eventId = hint && hint.event_id ? hint.event_id : uuid4();
+    if (!this._client) {
+      logger.warn("No client configured on scope - will not capture message!");
+      return eventId;
+    }
+    const syntheticException = new Error(message);
+    this._client.captureMessage(
+      message,
+      level,
+      {
+        originalException: message,
+        syntheticException,
+        ...hint,
+        event_id: eventId
+      },
+      this
+    );
+    return eventId;
+  }
+  /**
+   * @inheritDoc
+   */
+  captureEvent(event, hint) {
+    const eventId = hint && hint.event_id ? hint.event_id : uuid4();
+    if (!this._client) {
+      logger.warn("No client configured on scope - will not capture event!");
+      return eventId;
+    }
+    this._client.captureEvent(event, { ...hint, event_id: eventId }, this);
+    return eventId;
+  }
+  /**
+   * This will be called on every set call.
+   */
+  _notifyScopeListeners() {
+    if (!this._notifyingListeners) {
+      this._notifyingListeners = true;
+      this._scopeListeners.forEach((callback) => {
+        callback(this);
+      });
+      this._notifyingListeners = false;
+    }
+  }
+}
+const Scope = ScopeClass;
+function getDefaultCurrentScope() {
+  return getGlobalSingleton("defaultCurrentScope", () => new Scope());
+}
+function getDefaultIsolationScope() {
+  return getGlobalSingleton("defaultIsolationScope", () => new Scope());
+}
+class AsyncContextStack {
+  constructor(scope, isolationScope) {
+    let assignedScope;
+    if (!scope) {
+      assignedScope = new Scope();
+    } else {
+      assignedScope = scope;
+    }
+    let assignedIsolationScope;
+    if (!isolationScope) {
+      assignedIsolationScope = new Scope();
+    } else {
+      assignedIsolationScope = isolationScope;
+    }
+    this._stack = [{ scope: assignedScope }];
+    this._isolationScope = assignedIsolationScope;
+  }
+  /**
+   * Fork a scope for the stack.
+   */
+  withScope(callback) {
+    const scope = this._pushScope();
+    let maybePromiseResult;
+    try {
+      maybePromiseResult = callback(scope);
+    } catch (e2) {
+      this._popScope();
+      throw e2;
+    }
+    if (isThenable(maybePromiseResult)) {
+      return maybePromiseResult.then(
+        (res) => {
+          this._popScope();
+          return res;
+        },
+        (e2) => {
+          this._popScope();
+          throw e2;
+        }
+      );
+    }
+    this._popScope();
+    return maybePromiseResult;
+  }
+  /**
+   * Get the client of the stack.
+   */
+  getClient() {
+    return this.getStackTop().client;
+  }
+  /**
+   * Returns the scope of the top stack.
+   */
+  getScope() {
+    return this.getStackTop().scope;
+  }
+  /**
+   * Get the isolation scope for the stack.
+   */
+  getIsolationScope() {
+    return this._isolationScope;
+  }
+  /**
+   * Returns the topmost scope layer in the order domain > local > process.
+   */
+  getStackTop() {
+    return this._stack[this._stack.length - 1];
+  }
+  /**
+   * Push a scope to the stack.
+   */
+  _pushScope() {
+    const scope = this.getScope().clone();
+    this._stack.push({
+      client: this.getClient(),
+      scope
+    });
+    return scope;
+  }
+  /**
+   * Pop a scope from the stack.
+   */
+  _popScope() {
+    if (this._stack.length <= 1) return false;
+    return !!this._stack.pop();
+  }
+}
+function getAsyncContextStack() {
+  const registry = getMainCarrier();
+  const sentry = getSentryCarrier(registry);
+  return sentry.stack = sentry.stack || new AsyncContextStack(getDefaultCurrentScope(), getDefaultIsolationScope());
+}
+function withScope$1(callback) {
+  return getAsyncContextStack().withScope(callback);
+}
+function withSetScope(scope, callback) {
+  const stack = getAsyncContextStack();
+  return stack.withScope(() => {
+    stack.getStackTop().scope = scope;
+    return callback(scope);
+  });
+}
+function withIsolationScope(callback) {
+  return getAsyncContextStack().withScope(() => {
+    return callback(getAsyncContextStack().getIsolationScope());
+  });
+}
+function getStackAsyncContextStrategy() {
+  return {
+    withIsolationScope,
+    withScope: withScope$1,
+    withSetScope,
+    withSetIsolationScope: (_isolationScope, callback) => {
+      return withIsolationScope(callback);
+    },
+    getCurrentScope: () => getAsyncContextStack().getScope(),
+    getIsolationScope: () => getAsyncContextStack().getIsolationScope()
+  };
+}
+function getAsyncContextStrategy(carrier) {
+  const sentry = getSentryCarrier(carrier);
+  if (sentry.acs) {
+    return sentry.acs;
+  }
+  return getStackAsyncContextStrategy();
+}
+function getCurrentScope() {
+  const carrier = getMainCarrier();
+  const acs = getAsyncContextStrategy(carrier);
+  return acs.getCurrentScope();
+}
+function getIsolationScope() {
+  const carrier = getMainCarrier();
+  const acs = getAsyncContextStrategy(carrier);
+  return acs.getIsolationScope();
+}
+function getGlobalScope() {
+  return getGlobalSingleton("globalScope", () => new Scope());
+}
+function withScope(...rest) {
+  const carrier = getMainCarrier();
+  const acs = getAsyncContextStrategy(carrier);
+  if (rest.length === 2) {
+    const [scope, callback] = rest;
+    if (!scope) {
+      return acs.withScope(callback);
+    }
+    return acs.withSetScope(scope, callback);
+  }
+  return acs.withScope(rest[0]);
+}
+function getClient() {
+  return getCurrentScope().getClient();
+}
+const METRICS_SPAN_FIELD = "_sentryMetrics";
+function getMetricSummaryJsonForSpan(span) {
+  const storage = span[METRICS_SPAN_FIELD];
+  if (!storage) {
+    return void 0;
+  }
+  const output = {};
+  for (const [, [exportKey, summary]] of storage) {
+    const arr = output[exportKey] || (output[exportKey] = []);
+    arr.push(dropUndefinedKeys(summary));
+  }
+  return output;
+}
+const SEMANTIC_ATTRIBUTE_SENTRY_SOURCE = "sentry.source";
+const SEMANTIC_ATTRIBUTE_SENTRY_SAMPLE_RATE = "sentry.sample_rate";
+const SEMANTIC_ATTRIBUTE_SENTRY_OP = "sentry.op";
+const SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN = "sentry.origin";
+const SPAN_STATUS_UNSET = 0;
+const SPAN_STATUS_OK = 1;
+const TRACE_FLAG_SAMPLED = 1;
+function spanToTraceContext(span) {
+  const { spanId: span_id, traceId: trace_id } = span.spanContext();
+  const { parent_span_id } = spanToJSON(span);
+  return dropUndefinedKeys({ parent_span_id, span_id, trace_id });
+}
+function spanTimeInputToSeconds(input) {
+  if (typeof input === "number") {
+    return ensureTimestampInSeconds(input);
+  }
+  if (Array.isArray(input)) {
+    return input[0] + input[1] / 1e9;
+  }
+  if (input instanceof Date) {
+    return ensureTimestampInSeconds(input.getTime());
+  }
+  return timestampInSeconds();
+}
+function ensureTimestampInSeconds(timestamp) {
+  const isMs = timestamp > 9999999999;
+  return isMs ? timestamp / 1e3 : timestamp;
+}
+function spanToJSON(span) {
+  if (spanIsSentrySpan(span)) {
+    return span.getSpanJSON();
+  }
+  try {
+    const { spanId: span_id, traceId: trace_id } = span.spanContext();
+    if (spanIsOpenTelemetrySdkTraceBaseSpan(span)) {
+      const { attributes, startTime, name, endTime, parentSpanId, status } = span;
+      return dropUndefinedKeys({
+        span_id,
+        trace_id,
+        data: attributes,
+        description: name,
+        parent_span_id: parentSpanId,
+        start_timestamp: spanTimeInputToSeconds(startTime),
+        // This is [0,0] by default in OTEL, in which case we want to interpret this as no end time
+        timestamp: spanTimeInputToSeconds(endTime) || void 0,
+        status: getStatusMessage(status),
+        op: attributes[SEMANTIC_ATTRIBUTE_SENTRY_OP],
+        origin: attributes[SEMANTIC_ATTRIBUTE_SENTRY_ORIGIN],
+        _metrics_summary: getMetricSummaryJsonForSpan(span)
+      });
+    }
+    return {
+      span_id,
+      trace_id
+    };
+  } catch (e2) {
+    return {};
+  }
+}
+function spanIsOpenTelemetrySdkTraceBaseSpan(span) {
+  const castSpan = span;
+  return !!castSpan.attributes && !!castSpan.startTime && !!castSpan.name && !!castSpan.endTime && !!castSpan.status;
+}
+function spanIsSentrySpan(span) {
+  return typeof span.getSpanJSON === "function";
+}
+function spanIsSampled(span) {
+  const { traceFlags } = span.spanContext();
+  return traceFlags === TRACE_FLAG_SAMPLED;
+}
+function getStatusMessage(status) {
+  if (!status || status.code === SPAN_STATUS_UNSET) {
+    return void 0;
+  }
+  if (status.code === SPAN_STATUS_OK) {
+    return "ok";
+  }
+  return status.message || "unknown_error";
+}
+const ROOT_SPAN_FIELD = "_sentryRootSpan";
+function getRootSpan(span) {
+  return span[ROOT_SPAN_FIELD] || span;
+}
+const DEFAULT_ENVIRONMENT = "production";
+const FROZEN_DSC_FIELD = "_frozenDsc";
+function getDynamicSamplingContextFromClient(trace_id, client2) {
+  const options = client2.getOptions();
+  const { publicKey: public_key } = client2.getDsn() || {};
+  const dsc = dropUndefinedKeys({
+    environment: options.environment || DEFAULT_ENVIRONMENT,
+    release: options.release,
+    public_key,
+    trace_id
+  });
+  client2.emit("createDsc", dsc);
+  return dsc;
+}
+function getDynamicSamplingContextFromSpan(span) {
+  const client2 = getClient();
+  if (!client2) {
+    return {};
+  }
+  const dsc = getDynamicSamplingContextFromClient(spanToJSON(span).trace_id || "", client2);
+  const rootSpan = getRootSpan(span);
+  const frozenDsc = rootSpan[FROZEN_DSC_FIELD];
+  if (frozenDsc) {
+    return frozenDsc;
+  }
+  const traceState = rootSpan.spanContext().traceState;
+  const traceStateDsc = traceState && traceState.get("sentry.dsc");
+  const dscOnTraceState = traceStateDsc && baggageHeaderToDynamicSamplingContext(traceStateDsc);
+  if (dscOnTraceState) {
+    return dscOnTraceState;
+  }
+  const jsonSpan = spanToJSON(rootSpan);
+  const attributes = jsonSpan.data || {};
+  const maybeSampleRate = attributes[SEMANTIC_ATTRIBUTE_SENTRY_SAMPLE_RATE];
+  if (maybeSampleRate != null) {
+    dsc.sample_rate = `${maybeSampleRate}`;
+  }
+  const source = attributes[SEMANTIC_ATTRIBUTE_SENTRY_SOURCE];
+  const name = jsonSpan.description;
+  if (source !== "url" && name) {
+    dsc.transaction = name;
+  }
+  dsc.sampled = String(spanIsSampled(rootSpan));
+  client2.emit("createDsc", dsc, rootSpan);
+  return dsc;
+}
+function parseSampleRate(sampleRate) {
+  if (typeof sampleRate === "boolean") {
+    return Number(sampleRate);
+  }
+  const rate = typeof sampleRate === "string" ? parseFloat(sampleRate) : sampleRate;
+  if (typeof rate !== "number" || isNaN(rate) || rate < 0 || rate > 1) {
+    DEBUG_BUILD$2 && logger.warn(
+      `[Tracing] Given sample rate is invalid. Sample rate must be a boolean or a number between 0 and 1. Got ${JSON.stringify(
+        sampleRate
+      )} of type ${JSON.stringify(typeof sampleRate)}.`
+    );
+    return void 0;
+  }
+  return rate;
+}
+function enhanceEventWithSdkInfo(event, sdkInfo) {
+  if (!sdkInfo) {
+    return event;
+  }
+  event.sdk = event.sdk || {};
+  event.sdk.name = event.sdk.name || sdkInfo.name;
+  event.sdk.version = event.sdk.version || sdkInfo.version;
+  event.sdk.integrations = [...event.sdk.integrations || [], ...sdkInfo.integrations || []];
+  event.sdk.packages = [...event.sdk.packages || [], ...sdkInfo.packages || []];
+  return event;
+}
+function createSessionEnvelope(session, dsn, metadata, tunnel) {
+  const sdkInfo = getSdkMetadataForEnvelopeHeader(metadata);
+  const envelopeHeaders = {
+    sent_at: (/* @__PURE__ */ new Date()).toISOString(),
+    ...sdkInfo && { sdk: sdkInfo },
+    ...!!tunnel && dsn && { dsn: dsnToString(dsn) }
+  };
+  const envelopeItem = "aggregates" in session ? [{ type: "sessions" }, session] : [{ type: "session" }, session.toJSON()];
+  return createEnvelope(envelopeHeaders, [envelopeItem]);
+}
+function createEventEnvelope(event, dsn, metadata, tunnel) {
+  const sdkInfo = getSdkMetadataForEnvelopeHeader(metadata);
+  const eventType = event.type && event.type !== "replay_event" ? event.type : "event";
+  enhanceEventWithSdkInfo(event, metadata && metadata.sdk);
+  const envelopeHeaders = createEventEnvelopeHeaders(event, sdkInfo, tunnel, dsn);
+  delete event.sdkProcessingMetadata;
+  const eventItem = [{ type: eventType }, event];
+  return createEnvelope(envelopeHeaders, [eventItem]);
+}
+function notifyEventProcessors(processors, event, hint, index2 = 0) {
+  return new SyncPromise((resolve, reject) => {
+    const processor = processors[index2];
+    if (event === null || typeof processor !== "function") {
+      resolve(event);
+    } else {
+      const result = processor({ ...event }, hint);
+      DEBUG_BUILD$2 && processor.id && result === null && logger.log(`Event processor "${processor.id}" dropped event`);
+      if (isThenable(result)) {
+        void result.then((final) => notifyEventProcessors(processors, final, hint, index2 + 1).then(resolve)).then(null, reject);
+      } else {
+        void notifyEventProcessors(processors, result, hint, index2 + 1).then(resolve).then(null, reject);
+      }
+    }
+  });
+}
+function applyScopeDataToEvent(event, data) {
+  const { fingerprint, span, breadcrumbs, sdkProcessingMetadata } = data;
+  applyDataToEvent(event, data);
+  if (span) {
+    applySpanToEvent(event, span);
+  }
+  applyFingerprintToEvent(event, fingerprint);
+  applyBreadcrumbsToEvent(event, breadcrumbs);
+  applySdkMetadataToEvent(event, sdkProcessingMetadata);
+}
+function mergeScopeData(data, mergeData) {
+  const {
+    extra,
+    tags,
+    user,
+    contexts,
+    level,
+    sdkProcessingMetadata,
+    breadcrumbs,
+    fingerprint,
+    eventProcessors,
+    attachments,
+    propagationContext,
+    transactionName,
+    span
+  } = mergeData;
+  mergeAndOverwriteScopeData(data, "extra", extra);
+  mergeAndOverwriteScopeData(data, "tags", tags);
+  mergeAndOverwriteScopeData(data, "user", user);
+  mergeAndOverwriteScopeData(data, "contexts", contexts);
+  mergeAndOverwriteScopeData(data, "sdkProcessingMetadata", sdkProcessingMetadata);
+  if (level) {
+    data.level = level;
+  }
+  if (transactionName) {
+    data.transactionName = transactionName;
+  }
+  if (span) {
+    data.span = span;
+  }
+  if (breadcrumbs.length) {
+    data.breadcrumbs = [...data.breadcrumbs, ...breadcrumbs];
+  }
+  if (fingerprint.length) {
+    data.fingerprint = [...data.fingerprint, ...fingerprint];
+  }
+  if (eventProcessors.length) {
+    data.eventProcessors = [...data.eventProcessors, ...eventProcessors];
+  }
+  if (attachments.length) {
+    data.attachments = [...data.attachments, ...attachments];
+  }
+  data.propagationContext = { ...data.propagationContext, ...propagationContext };
+}
+function mergeAndOverwriteScopeData(data, prop, mergeVal) {
+  if (mergeVal && Object.keys(mergeVal).length) {
+    data[prop] = { ...data[prop] };
+    for (const key in mergeVal) {
+      if (Object.prototype.hasOwnProperty.call(mergeVal, key)) {
+        data[prop][key] = mergeVal[key];
+      }
+    }
+  }
+}
+function applyDataToEvent(event, data) {
+  const { extra, tags, user, contexts, level, transactionName } = data;
+  const cleanedExtra = dropUndefinedKeys(extra);
+  if (cleanedExtra && Object.keys(cleanedExtra).length) {
+    event.extra = { ...cleanedExtra, ...event.extra };
+  }
+  const cleanedTags = dropUndefinedKeys(tags);
+  if (cleanedTags && Object.keys(cleanedTags).length) {
+    event.tags = { ...cleanedTags, ...event.tags };
+  }
+  const cleanedUser = dropUndefinedKeys(user);
+  if (cleanedUser && Object.keys(cleanedUser).length) {
+    event.user = { ...cleanedUser, ...event.user };
+  }
+  const cleanedContexts = dropUndefinedKeys(contexts);
+  if (cleanedContexts && Object.keys(cleanedContexts).length) {
+    event.contexts = { ...cleanedContexts, ...event.contexts };
+  }
+  if (level) {
+    event.level = level;
+  }
+  if (transactionName && event.type !== "transaction") {
+    event.transaction = transactionName;
+  }
+}
+function applyBreadcrumbsToEvent(event, breadcrumbs) {
+  const mergedBreadcrumbs = [...event.breadcrumbs || [], ...breadcrumbs];
+  event.breadcrumbs = mergedBreadcrumbs.length ? mergedBreadcrumbs : void 0;
+}
+function applySdkMetadataToEvent(event, sdkProcessingMetadata) {
+  event.sdkProcessingMetadata = {
+    ...event.sdkProcessingMetadata,
+    ...sdkProcessingMetadata
+  };
+}
+function applySpanToEvent(event, span) {
+  event.contexts = {
+    trace: spanToTraceContext(span),
+    ...event.contexts
+  };
+  event.sdkProcessingMetadata = {
+    dynamicSamplingContext: getDynamicSamplingContextFromSpan(span),
+    ...event.sdkProcessingMetadata
+  };
+  const rootSpan = getRootSpan(span);
+  const transactionName = spanToJSON(rootSpan).description;
+  if (transactionName && !event.transaction && event.type === "transaction") {
+    event.transaction = transactionName;
+  }
+}
+function applyFingerprintToEvent(event, fingerprint) {
+  event.fingerprint = event.fingerprint ? arrayify(event.fingerprint) : [];
+  if (fingerprint) {
+    event.fingerprint = event.fingerprint.concat(fingerprint);
+  }
+  if (event.fingerprint && !event.fingerprint.length) {
+    delete event.fingerprint;
+  }
+}
+function prepareEvent(options, event, hint, scope, client2, isolationScope) {
+  const { normalizeDepth = 3, normalizeMaxBreadth = 1e3 } = options;
+  const prepared = {
+    ...event,
+    event_id: event.event_id || hint.event_id || uuid4(),
+    timestamp: event.timestamp || dateTimestampInSeconds()
+  };
+  const integrations = hint.integrations || options.integrations.map((i2) => i2.name);
+  applyClientOptions(prepared, options);
+  applyIntegrationsMetadata(prepared, integrations);
+  if (client2) {
+    client2.emit("applyFrameMetadata", event);
+  }
+  if (event.type === void 0) {
+    applyDebugIds(prepared, options.stackParser);
+  }
+  const finalScope = getFinalScope(scope, hint.captureContext);
+  if (hint.mechanism) {
+    addExceptionMechanism(prepared, hint.mechanism);
+  }
+  const clientEventProcessors = client2 ? client2.getEventProcessors() : [];
+  const data = getGlobalScope().getScopeData();
+  if (isolationScope) {
+    const isolationData = isolationScope.getScopeData();
+    mergeScopeData(data, isolationData);
+  }
+  if (finalScope) {
+    const finalScopeData = finalScope.getScopeData();
+    mergeScopeData(data, finalScopeData);
+  }
+  const attachments = [...hint.attachments || [], ...data.attachments];
+  if (attachments.length) {
+    hint.attachments = attachments;
+  }
+  applyScopeDataToEvent(prepared, data);
+  const eventProcessors = [
+    ...clientEventProcessors,
+    // Run scope event processors _after_ all other processors
+    ...data.eventProcessors
+  ];
+  const result = notifyEventProcessors(eventProcessors, prepared, hint);
+  return result.then((evt) => {
+    if (evt) {
+      applyDebugMeta(evt);
+    }
+    if (typeof normalizeDepth === "number" && normalizeDepth > 0) {
+      return normalizeEvent(evt, normalizeDepth, normalizeMaxBreadth);
+    }
+    return evt;
+  });
+}
+function applyClientOptions(event, options) {
+  const { environment, release, dist, maxValueLength = 250 } = options;
+  if (!("environment" in event)) {
+    event.environment = "environment" in options ? environment : DEFAULT_ENVIRONMENT;
+  }
+  if (event.release === void 0 && release !== void 0) {
+    event.release = release;
+  }
+  if (event.dist === void 0 && dist !== void 0) {
+    event.dist = dist;
+  }
+  if (event.message) {
+    event.message = truncate(event.message, maxValueLength);
+  }
+  const exception = event.exception && event.exception.values && event.exception.values[0];
+  if (exception && exception.value) {
+    exception.value = truncate(exception.value, maxValueLength);
+  }
+  const request = event.request;
+  if (request && request.url) {
+    request.url = truncate(request.url, maxValueLength);
+  }
+}
+const debugIdStackParserCache = /* @__PURE__ */ new WeakMap();
+function applyDebugIds(event, stackParser) {
+  const debugIdMap = GLOBAL_OBJ._sentryDebugIds;
+  if (!debugIdMap) {
+    return;
+  }
+  let debugIdStackFramesCache;
+  const cachedDebugIdStackFrameCache = debugIdStackParserCache.get(stackParser);
+  if (cachedDebugIdStackFrameCache) {
+    debugIdStackFramesCache = cachedDebugIdStackFrameCache;
+  } else {
+    debugIdStackFramesCache = /* @__PURE__ */ new Map();
+    debugIdStackParserCache.set(stackParser, debugIdStackFramesCache);
+  }
+  const filenameDebugIdMap = Object.entries(debugIdMap).reduce(
+    (acc, [debugIdStackTrace, debugIdValue]) => {
+      let parsedStack;
+      const cachedParsedStack = debugIdStackFramesCache.get(debugIdStackTrace);
+      if (cachedParsedStack) {
+        parsedStack = cachedParsedStack;
+      } else {
+        parsedStack = stackParser(debugIdStackTrace);
+        debugIdStackFramesCache.set(debugIdStackTrace, parsedStack);
+      }
+      for (let i2 = parsedStack.length - 1; i2 >= 0; i2--) {
+        const stackFrame = parsedStack[i2];
+        if (stackFrame.filename) {
+          acc[stackFrame.filename] = debugIdValue;
+          break;
+        }
+      }
+      return acc;
+    },
+    {}
+  );
+  try {
+    event.exception.values.forEach((exception) => {
+      exception.stacktrace.frames.forEach((frame2) => {
+        if (frame2.filename) {
+          frame2.debug_id = filenameDebugIdMap[frame2.filename];
+        }
+      });
+    });
+  } catch (e2) {
+  }
+}
+function applyDebugMeta(event) {
+  const filenameDebugIdMap = {};
+  try {
+    event.exception.values.forEach((exception) => {
+      exception.stacktrace.frames.forEach((frame2) => {
+        if (frame2.debug_id) {
+          if (frame2.abs_path) {
+            filenameDebugIdMap[frame2.abs_path] = frame2.debug_id;
+          } else if (frame2.filename) {
+            filenameDebugIdMap[frame2.filename] = frame2.debug_id;
+          }
+          delete frame2.debug_id;
+        }
+      });
+    });
+  } catch (e2) {
+  }
+  if (Object.keys(filenameDebugIdMap).length === 0) {
+    return;
+  }
+  event.debug_meta = event.debug_meta || {};
+  event.debug_meta.images = event.debug_meta.images || [];
+  const images = event.debug_meta.images;
+  Object.entries(filenameDebugIdMap).forEach(([filename, debug_id]) => {
+    images.push({
+      type: "sourcemap",
+      code_file: filename,
+      debug_id
+    });
+  });
+}
+function applyIntegrationsMetadata(event, integrationNames) {
+  if (integrationNames.length > 0) {
+    event.sdk = event.sdk || {};
+    event.sdk.integrations = [...event.sdk.integrations || [], ...integrationNames];
+  }
+}
+function normalizeEvent(event, depth, maxBreadth) {
+  if (!event) {
+    return null;
+  }
+  const normalized = {
+    ...event,
+    ...event.breadcrumbs && {
+      breadcrumbs: event.breadcrumbs.map((b2) => ({
+        ...b2,
+        ...b2.data && {
+          data: normalize(b2.data, depth, maxBreadth)
+        }
+      }))
+    },
+    ...event.user && {
+      user: normalize(event.user, depth, maxBreadth)
+    },
+    ...event.contexts && {
+      contexts: normalize(event.contexts, depth, maxBreadth)
+    },
+    ...event.extra && {
+      extra: normalize(event.extra, depth, maxBreadth)
+    }
+  };
+  if (event.contexts && event.contexts.trace && normalized.contexts) {
+    normalized.contexts.trace = event.contexts.trace;
+    if (event.contexts.trace.data) {
+      normalized.contexts.trace.data = normalize(event.contexts.trace.data, depth, maxBreadth);
+    }
+  }
+  if (event.spans) {
+    normalized.spans = event.spans.map((span) => {
+      return {
+        ...span,
+        ...span.data && {
+          data: normalize(span.data, depth, maxBreadth)
+        }
+      };
+    });
+  }
+  return normalized;
+}
+function getFinalScope(scope, captureContext) {
+  if (!captureContext) {
+    return scope;
+  }
+  const finalScope = scope ? scope.clone() : new Scope();
+  finalScope.update(captureContext);
+  return finalScope;
+}
+function parseEventHintOrCaptureContext(hint) {
+  {
+    return void 0;
+  }
+}
+function captureException(exception, hint) {
+  return getCurrentScope().captureException(exception, parseEventHintOrCaptureContext());
+}
+function captureEvent(event, hint) {
+  return getCurrentScope().captureEvent(event, hint);
+}
+function setContext(name, context) {
+  getIsolationScope().setContext(name, context);
+}
+function startSession(context) {
+  const client2 = getClient();
+  const isolationScope = getIsolationScope();
+  const currentScope = getCurrentScope();
+  const { release, environment = DEFAULT_ENVIRONMENT } = client2 && client2.getOptions() || {};
+  const { userAgent } = GLOBAL_OBJ.navigator || {};
+  const session = makeSession({
+    release,
+    environment,
+    user: currentScope.getUser() || isolationScope.getUser(),
+    ...userAgent && { userAgent },
+    ...context
+  });
+  const currentSession = isolationScope.getSession();
+  if (currentSession && currentSession.status === "ok") {
+    updateSession(currentSession, { status: "exited" });
+  }
+  endSession();
+  isolationScope.setSession(session);
+  currentScope.setSession(session);
+  return session;
+}
+function endSession() {
+  const isolationScope = getIsolationScope();
+  const currentScope = getCurrentScope();
+  const session = currentScope.getSession() || isolationScope.getSession();
+  if (session) {
+    closeSession(session);
+  }
+  _sendSessionUpdate();
+  isolationScope.setSession();
+  currentScope.setSession();
+}
+function _sendSessionUpdate() {
+  const isolationScope = getIsolationScope();
+  const currentScope = getCurrentScope();
+  const client2 = getClient();
+  const session = currentScope.getSession() || isolationScope.getSession();
+  if (session && client2) {
+    client2.captureSession(session);
+  }
+}
+function captureSession(end = false) {
+  if (end) {
+    endSession();
+    return;
+  }
+  _sendSessionUpdate();
+}
+const SENTRY_API_VERSION = "7";
+function getBaseApiEndpoint(dsn) {
+  const protocol = dsn.protocol ? `${dsn.protocol}:` : "";
+  const port = dsn.port ? `:${dsn.port}` : "";
+  return `${protocol}//${dsn.host}${port}${dsn.path ? `/${dsn.path}` : ""}/api/`;
+}
+function _getIngestEndpoint(dsn) {
+  return `${getBaseApiEndpoint(dsn)}${dsn.projectId}/envelope/`;
+}
+function _encodedAuth(dsn, sdkInfo) {
+  return urlEncode({
+    // We send only the minimum set of required information. See
+    // https://github.com/getsentry/sentry-javascript/issues/2572.
+    sentry_key: dsn.publicKey,
+    sentry_version: SENTRY_API_VERSION,
+    ...sdkInfo && { sentry_client: `${sdkInfo.name}/${sdkInfo.version}` }
+  });
+}
+function getEnvelopeEndpointWithUrlEncodedAuth(dsn, tunnel, sdkInfo) {
+  return tunnel ? tunnel : `${_getIngestEndpoint(dsn)}?${_encodedAuth(dsn, sdkInfo)}`;
+}
+const installedIntegrations = [];
+function filterDuplicates(integrations) {
+  const integrationsByName = {};
+  integrations.forEach((currentInstance) => {
+    const { name } = currentInstance;
+    const existingInstance = integrationsByName[name];
+    if (existingInstance && !existingInstance.isDefaultInstance && currentInstance.isDefaultInstance) {
+      return;
+    }
+    integrationsByName[name] = currentInstance;
+  });
+  return Object.values(integrationsByName);
+}
+function getIntegrationsToSetup(options) {
+  const defaultIntegrations = options.defaultIntegrations || [];
+  const userIntegrations = options.integrations;
+  defaultIntegrations.forEach((integration) => {
+    integration.isDefaultInstance = true;
+  });
+  let integrations;
+  if (Array.isArray(userIntegrations)) {
+    integrations = [...defaultIntegrations, ...userIntegrations];
+  } else if (typeof userIntegrations === "function") {
+    integrations = arrayify(userIntegrations(defaultIntegrations));
+  } else {
+    integrations = defaultIntegrations;
+  }
+  const finalIntegrations = filterDuplicates(integrations);
+  const debugIndex = finalIntegrations.findIndex((integration) => integration.name === "Debug");
+  if (debugIndex > -1) {
+    const [debugInstance] = finalIntegrations.splice(debugIndex, 1);
+    finalIntegrations.push(debugInstance);
+  }
+  return finalIntegrations;
+}
+function setupIntegrations(client2, integrations) {
+  const integrationIndex = {};
+  integrations.forEach((integration) => {
+    if (integration) {
+      setupIntegration(client2, integration, integrationIndex);
+    }
+  });
+  return integrationIndex;
+}
+function afterSetupIntegrations(client2, integrations) {
+  for (const integration of integrations) {
+    if (integration && integration.afterAllSetup) {
+      integration.afterAllSetup(client2);
+    }
+  }
+}
+function setupIntegration(client2, integration, integrationIndex) {
+  if (integrationIndex[integration.name]) {
+    DEBUG_BUILD$2 && logger.log(`Integration skipped because it was already installed: ${integration.name}`);
+    return;
+  }
+  integrationIndex[integration.name] = integration;
+  if (installedIntegrations.indexOf(integration.name) === -1 && typeof integration.setupOnce === "function") {
+    integration.setupOnce();
+    installedIntegrations.push(integration.name);
+  }
+  if (integration.setup && typeof integration.setup === "function") {
+    integration.setup(client2);
+  }
+  if (typeof integration.preprocessEvent === "function") {
+    const callback = integration.preprocessEvent.bind(integration);
+    client2.on("preprocessEvent", (event, hint) => callback(event, hint, client2));
+  }
+  if (typeof integration.processEvent === "function") {
+    const callback = integration.processEvent.bind(integration);
+    const processor = Object.assign((event, hint) => callback(event, hint, client2), {
+      id: integration.name
+    });
+    client2.addEventProcessor(processor);
+  }
+  DEBUG_BUILD$2 && logger.log(`Integration installed: ${integration.name}`);
+}
+function defineIntegration(fn) {
+  return fn;
+}
+const ALREADY_SEEN_ERROR = "Not capturing exception because it's already been captured.";
+class BaseClient {
+  /** Options passed to the SDK. */
+  /** The client Dsn, if specified in options. Without this Dsn, the SDK will be disabled. */
+  /** Array of set up integrations. */
+  /** Number of calls being processed */
+  /** Holds flushable  */
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  /**
+   * Initializes this client instance.
+   *
+   * @param options Options for the client.
+   */
+  constructor(options) {
+    this._options = options;
+    this._integrations = {};
+    this._numProcessing = 0;
+    this._outcomes = {};
+    this._hooks = {};
+    this._eventProcessors = [];
+    if (options.dsn) {
+      this._dsn = makeDsn(options.dsn);
+    } else {
+      DEBUG_BUILD$2 && logger.warn("No DSN provided, client will not send events.");
+    }
+    if (this._dsn) {
+      const url = getEnvelopeEndpointWithUrlEncodedAuth(
+        this._dsn,
+        options.tunnel,
+        options._metadata ? options._metadata.sdk : void 0
+      );
+      this._transport = options.transport({
+        tunnel: this._options.tunnel,
+        recordDroppedEvent: this.recordDroppedEvent.bind(this),
+        ...options.transportOptions,
+        url
+      });
+    }
+  }
+  /**
+   * @inheritDoc
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  captureException(exception, hint, scope) {
+    const eventId = uuid4();
+    if (checkOrSetAlreadyCaught(exception)) {
+      DEBUG_BUILD$2 && logger.log(ALREADY_SEEN_ERROR);
+      return eventId;
+    }
+    const hintWithEventId = {
+      event_id: eventId,
+      ...hint
+    };
+    this._process(
+      this.eventFromException(exception, hintWithEventId).then(
+        (event) => this._captureEvent(event, hintWithEventId, scope)
+      )
+    );
+    return hintWithEventId.event_id;
+  }
+  /**
+   * @inheritDoc
+   */
+  captureMessage(message, level, hint, currentScope) {
+    const hintWithEventId = {
+      event_id: uuid4(),
+      ...hint
+    };
+    const eventMessage = isParameterizedString(message) ? message : String(message);
+    const promisedEvent = isPrimitive(message) ? this.eventFromMessage(eventMessage, level, hintWithEventId) : this.eventFromException(message, hintWithEventId);
+    this._process(promisedEvent.then((event) => this._captureEvent(event, hintWithEventId, currentScope)));
+    return hintWithEventId.event_id;
+  }
+  /**
+   * @inheritDoc
+   */
+  captureEvent(event, hint, currentScope) {
+    const eventId = uuid4();
+    if (hint && hint.originalException && checkOrSetAlreadyCaught(hint.originalException)) {
+      DEBUG_BUILD$2 && logger.log(ALREADY_SEEN_ERROR);
+      return eventId;
+    }
+    const hintWithEventId = {
+      event_id: eventId,
+      ...hint
+    };
+    const sdkProcessingMetadata = event.sdkProcessingMetadata || {};
+    const capturedSpanScope = sdkProcessingMetadata.capturedSpanScope;
+    this._process(this._captureEvent(event, hintWithEventId, capturedSpanScope || currentScope));
+    return hintWithEventId.event_id;
+  }
+  /**
+   * @inheritDoc
+   */
+  captureSession(session) {
+    if (!(typeof session.release === "string")) {
+      DEBUG_BUILD$2 && logger.warn("Discarded session because of missing or non-string release");
+    } else {
+      this.sendSession(session);
+      updateSession(session, { init: false });
+    }
+  }
+  /**
+   * @inheritDoc
+   */
+  getDsn() {
+    return this._dsn;
+  }
+  /**
+   * @inheritDoc
+   */
+  getOptions() {
+    return this._options;
+  }
+  /**
+   * @see SdkMetadata in @sentry/types
+   *
+   * @return The metadata of the SDK
+   */
+  getSdkMetadata() {
+    return this._options._metadata;
+  }
+  /**
+   * @inheritDoc
+   */
+  getTransport() {
+    return this._transport;
+  }
+  /**
+   * @inheritDoc
+   */
+  flush(timeout) {
+    const transport = this._transport;
+    if (transport) {
+      this.emit("flush");
+      return this._isClientDoneProcessing(timeout).then((clientFinished) => {
+        return transport.flush(timeout).then((transportFlushed) => clientFinished && transportFlushed);
+      });
+    } else {
+      return resolvedSyncPromise(true);
+    }
+  }
+  /**
+   * @inheritDoc
+   */
+  close(timeout) {
+    return this.flush(timeout).then((result) => {
+      this.getOptions().enabled = false;
+      this.emit("close");
+      return result;
+    });
+  }
+  /** Get all installed event processors. */
+  getEventProcessors() {
+    return this._eventProcessors;
+  }
+  /** @inheritDoc */
+  addEventProcessor(eventProcessor) {
+    this._eventProcessors.push(eventProcessor);
+  }
+  /** @inheritdoc */
+  init() {
+    if (this._isEnabled()) {
+      this._setupIntegrations();
+    }
+  }
+  /**
+   * Gets an installed integration by its name.
+   *
+   * @returns The installed integration or `undefined` if no integration with that `name` was installed.
+   */
+  getIntegrationByName(integrationName) {
+    return this._integrations[integrationName];
+  }
+  /**
+   * @inheritDoc
+   */
+  addIntegration(integration) {
+    const isAlreadyInstalled = this._integrations[integration.name];
+    setupIntegration(this, integration, this._integrations);
+    if (!isAlreadyInstalled) {
+      afterSetupIntegrations(this, [integration]);
+    }
+  }
+  /**
+   * @inheritDoc
+   */
+  sendEvent(event, hint = {}) {
+    this.emit("beforeSendEvent", event, hint);
+    let env = createEventEnvelope(event, this._dsn, this._options._metadata, this._options.tunnel);
+    for (const attachment of hint.attachments || []) {
+      env = addItemToEnvelope(env, createAttachmentEnvelopeItem(attachment));
+    }
+    const promise = this.sendEnvelope(env);
+    if (promise) {
+      promise.then((sendResponse) => this.emit("afterSendEvent", event, sendResponse), null);
+    }
+  }
+  /**
+   * @inheritDoc
+   */
+  sendSession(session) {
+    const env = createSessionEnvelope(session, this._dsn, this._options._metadata, this._options.tunnel);
+    this.sendEnvelope(env);
+  }
+  /**
+   * @inheritDoc
+   */
+  recordDroppedEvent(reason, category, eventOrCount) {
+    if (this._options.sendClientReports) {
+      const count2 = typeof eventOrCount === "number" ? eventOrCount : 1;
+      const key = `${reason}:${category}`;
+      DEBUG_BUILD$2 && logger.log(`Recording outcome: "${key}"${count2 > 1 ? ` (${count2} times)` : ""}`);
+      this._outcomes[key] = (this._outcomes[key] || 0) + count2;
+    }
+  }
+  // Keep on() & emit() signatures in sync with types' client.ts interface
+  /* eslint-disable @typescript-eslint/unified-signatures */
+  /** @inheritdoc */
+  /** @inheritdoc */
+  on(hook, callback) {
+    const hooks = this._hooks[hook] = this._hooks[hook] || [];
+    hooks.push(callback);
+    return () => {
+      const cbIndex = hooks.indexOf(callback);
+      if (cbIndex > -1) {
+        hooks.splice(cbIndex, 1);
+      }
+    };
+  }
+  /** @inheritdoc */
+  /** @inheritdoc */
+  emit(hook, ...rest) {
+    const callbacks = this._hooks[hook];
+    if (callbacks) {
+      callbacks.forEach((callback) => callback(...rest));
+    }
+  }
+  /**
+   * @inheritdoc
+   */
+  sendEnvelope(envelope) {
+    this.emit("beforeEnvelope", envelope);
+    if (this._isEnabled() && this._transport) {
+      return this._transport.send(envelope).then(null, (reason) => {
+        DEBUG_BUILD$2 && logger.error("Error while sending event:", reason);
+        return reason;
+      });
+    }
+    DEBUG_BUILD$2 && logger.error("Transport disabled");
+    return resolvedSyncPromise({});
+  }
+  /* eslint-enable @typescript-eslint/unified-signatures */
+  /** Setup integrations for this client. */
+  _setupIntegrations() {
+    const { integrations } = this._options;
+    this._integrations = setupIntegrations(this, integrations);
+    afterSetupIntegrations(this, integrations);
+  }
+  /** Updates existing session based on the provided event */
+  _updateSessionFromEvent(session, event) {
+    let crashed = false;
+    let errored = false;
+    const exceptions = event.exception && event.exception.values;
+    if (exceptions) {
+      errored = true;
+      for (const ex of exceptions) {
+        const mechanism = ex.mechanism;
+        if (mechanism && mechanism.handled === false) {
+          crashed = true;
+          break;
+        }
+      }
+    }
+    const sessionNonTerminal = session.status === "ok";
+    const shouldUpdateAndSend = sessionNonTerminal && session.errors === 0 || sessionNonTerminal && crashed;
+    if (shouldUpdateAndSend) {
+      updateSession(session, {
+        ...crashed && { status: "crashed" },
+        errors: session.errors || Number(errored || crashed)
+      });
+      this.captureSession(session);
+    }
+  }
+  /**
+   * Determine if the client is finished processing. Returns a promise because it will wait `timeout` ms before saying
+   * "no" (resolving to `false`) in order to give the client a chance to potentially finish first.
+   *
+   * @param timeout The time, in ms, after which to resolve to `false` if the client is still busy. Passing `0` (or not
+   * passing anything) will make the promise wait as long as it takes for processing to finish before resolving to
+   * `true`.
+   * @returns A promise which will resolve to `true` if processing is already done or finishes before the timeout, and
+   * `false` otherwise
+   */
+  _isClientDoneProcessing(timeout) {
+    return new SyncPromise((resolve) => {
+      let ticked = 0;
+      const tick = 1;
+      const interval = setInterval(() => {
+        if (this._numProcessing == 0) {
+          clearInterval(interval);
+          resolve(true);
+        } else {
+          ticked += tick;
+          if (timeout && ticked >= timeout) {
+            clearInterval(interval);
+            resolve(false);
+          }
+        }
+      }, tick);
+    });
+  }
+  /** Determines whether this SDK is enabled and a transport is present. */
+  _isEnabled() {
+    return this.getOptions().enabled !== false && this._transport !== void 0;
+  }
+  /**
+   * Adds common information to events.
+   *
+   * The information includes release and environment from `options`,
+   * breadcrumbs and context (extra, tags and user) from the scope.
+   *
+   * Information that is already present in the event is never overwritten. For
+   * nested objects, such as the context, keys are merged.
+   *
+   * @param event The original event.
+   * @param hint May contain additional information about the original exception.
+   * @param currentScope A scope containing event metadata.
+   * @returns A new event with more information.
+   */
+  _prepareEvent(event, hint, currentScope, isolationScope = getIsolationScope()) {
+    const options = this.getOptions();
+    const integrations = Object.keys(this._integrations);
+    if (!hint.integrations && integrations.length > 0) {
+      hint.integrations = integrations;
+    }
+    this.emit("preprocessEvent", event, hint);
+    if (!event.type) {
+      isolationScope.setLastEventId(event.event_id || hint.event_id);
+    }
+    return prepareEvent(options, event, hint, currentScope, this, isolationScope).then((evt) => {
+      if (evt === null) {
+        return evt;
+      }
+      const propagationContext = {
+        ...isolationScope.getPropagationContext(),
+        ...currentScope ? currentScope.getPropagationContext() : void 0
+      };
+      const trace = evt.contexts && evt.contexts.trace;
+      if (!trace && propagationContext) {
+        const { traceId: trace_id, spanId, parentSpanId, dsc } = propagationContext;
+        evt.contexts = {
+          trace: dropUndefinedKeys({
+            trace_id,
+            span_id: spanId,
+            parent_span_id: parentSpanId
+          }),
+          ...evt.contexts
+        };
+        const dynamicSamplingContext = dsc ? dsc : getDynamicSamplingContextFromClient(trace_id, this);
+        evt.sdkProcessingMetadata = {
+          dynamicSamplingContext,
+          ...evt.sdkProcessingMetadata
+        };
+      }
+      return evt;
+    });
+  }
+  /**
+   * Processes the event and logs an error in case of rejection
+   * @param event
+   * @param hint
+   * @param scope
+   */
+  _captureEvent(event, hint = {}, scope) {
+    return this._processEvent(event, hint, scope).then(
+      (finalEvent) => {
+        return finalEvent.event_id;
+      },
+      (reason) => {
+        if (DEBUG_BUILD$2) {
+          const sentryError = reason;
+          if (sentryError.logLevel === "log") {
+            logger.log(sentryError.message);
+          } else {
+            logger.warn(sentryError);
+          }
+        }
+        return void 0;
+      }
+    );
+  }
+  /**
+   * Processes an event (either error or message) and sends it to Sentry.
+   *
+   * This also adds breadcrumbs and context information to the event. However,
+   * platform specific meta data (such as the User's IP address) must be added
+   * by the SDK implementor.
+   *
+   *
+   * @param event The event to send to Sentry.
+   * @param hint May contain additional information about the original exception.
+   * @param currentScope A scope containing event metadata.
+   * @returns A SyncPromise that resolves with the event or rejects in case event was/will not be send.
+   */
+  _processEvent(event, hint, currentScope) {
+    const options = this.getOptions();
+    const { sampleRate } = options;
+    const isTransaction = isTransactionEvent(event);
+    const isError2 = isErrorEvent(event);
+    const eventType = event.type || "error";
+    const beforeSendLabel = `before send for type \`${eventType}\``;
+    const parsedSampleRate = typeof sampleRate === "undefined" ? void 0 : parseSampleRate(sampleRate);
+    if (isError2 && typeof parsedSampleRate === "number" && Math.random() > parsedSampleRate) {
+      this.recordDroppedEvent("sample_rate", "error", event);
+      return rejectedSyncPromise(
+        new SentryError(
+          `Discarding event because it's not included in the random sample (sampling rate = ${sampleRate})`,
+          "log"
+        )
+      );
+    }
+    const dataCategory = eventType === "replay_event" ? "replay" : eventType;
+    const sdkProcessingMetadata = event.sdkProcessingMetadata || {};
+    const capturedSpanIsolationScope = sdkProcessingMetadata.capturedSpanIsolationScope;
+    return this._prepareEvent(event, hint, currentScope, capturedSpanIsolationScope).then((prepared) => {
+      if (prepared === null) {
+        this.recordDroppedEvent("event_processor", dataCategory, event);
+        throw new SentryError("An event processor returned `null`, will not send event.", "log");
+      }
+      const isInternalException = hint.data && hint.data.__sentry__ === true;
+      if (isInternalException) {
+        return prepared;
+      }
+      const result = processBeforeSend(this, options, prepared, hint);
+      return _validateBeforeSendResult(result, beforeSendLabel);
+    }).then((processedEvent) => {
+      if (processedEvent === null) {
+        this.recordDroppedEvent("before_send", dataCategory, event);
+        if (isTransaction) {
+          const spans = event.spans || [];
+          const spanCount = 1 + spans.length;
+          this.recordDroppedEvent("before_send", "span", spanCount);
+        }
+        throw new SentryError(`${beforeSendLabel} returned \`null\`, will not send event.`, "log");
+      }
+      const session = currentScope && currentScope.getSession();
+      if (!isTransaction && session) {
+        this._updateSessionFromEvent(session, processedEvent);
+      }
+      if (isTransaction) {
+        const spanCountBefore = processedEvent.sdkProcessingMetadata && processedEvent.sdkProcessingMetadata.spanCountBeforeProcessing || 0;
+        const spanCountAfter = processedEvent.spans ? processedEvent.spans.length : 0;
+        const droppedSpanCount = spanCountBefore - spanCountAfter;
+        if (droppedSpanCount > 0) {
+          this.recordDroppedEvent("before_send", "span", droppedSpanCount);
+        }
+      }
+      const transactionInfo = processedEvent.transaction_info;
+      if (isTransaction && transactionInfo && processedEvent.transaction !== event.transaction) {
+        const source = "custom";
+        processedEvent.transaction_info = {
+          ...transactionInfo,
+          source
+        };
+      }
+      this.sendEvent(processedEvent, hint);
+      return processedEvent;
+    }).then(null, (reason) => {
+      if (reason instanceof SentryError) {
+        throw reason;
+      }
+      this.captureException(reason, {
+        data: {
+          __sentry__: true
+        },
+        originalException: reason
+      });
+      throw new SentryError(
+        `Event processing pipeline threw an error, original event will not be sent. Details have been sent as a new event.
+Reason: ${reason}`
+      );
+    });
+  }
+  /**
+   * Occupies the client with processing and event
+   */
+  _process(promise) {
+    this._numProcessing++;
+    void promise.then(
+      (value) => {
+        this._numProcessing--;
+        return value;
+      },
+      (reason) => {
+        this._numProcessing--;
+        return reason;
+      }
+    );
+  }
+  /**
+   * Clears outcomes on this client and returns them.
+   */
+  _clearOutcomes() {
+    const outcomes = this._outcomes;
+    this._outcomes = {};
+    return Object.entries(outcomes).map(([key, quantity]) => {
+      const [reason, category] = key.split(":");
+      return {
+        reason,
+        category,
+        quantity
+      };
+    });
+  }
+  /**
+   * Sends client reports as an envelope.
+   */
+  _flushOutcomes() {
+    DEBUG_BUILD$2 && logger.log("Flushing outcomes...");
+    const outcomes = this._clearOutcomes();
+    if (outcomes.length === 0) {
+      DEBUG_BUILD$2 && logger.log("No outcomes to send");
+      return;
+    }
+    if (!this._dsn) {
+      DEBUG_BUILD$2 && logger.log("No dsn provided, will not send outcomes");
+      return;
+    }
+    DEBUG_BUILD$2 && logger.log("Sending outcomes:", outcomes);
+    const envelope = createClientReportEnvelope(outcomes, this._options.tunnel && dsnToString(this._dsn));
+    this.sendEnvelope(envelope);
+  }
+  /**
+   * @inheritDoc
+   */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+}
+function _validateBeforeSendResult(beforeSendResult, beforeSendLabel) {
+  const invalidValueError = `${beforeSendLabel} must return \`null\` or a valid event.`;
+  if (isThenable(beforeSendResult)) {
+    return beforeSendResult.then(
+      (event) => {
+        if (!isPlainObject(event) && event !== null) {
+          throw new SentryError(invalidValueError);
+        }
+        return event;
+      },
+      (e2) => {
+        throw new SentryError(`${beforeSendLabel} rejected with ${e2}`);
+      }
+    );
+  } else if (!isPlainObject(beforeSendResult) && beforeSendResult !== null) {
+    throw new SentryError(invalidValueError);
+  }
+  return beforeSendResult;
+}
+function processBeforeSend(client2, options, event, hint) {
+  const { beforeSend, beforeSendTransaction, beforeSendSpan } = options;
+  if (isErrorEvent(event) && beforeSend) {
+    return beforeSend(event, hint);
+  }
+  if (isTransactionEvent(event)) {
+    if (event.spans && beforeSendSpan) {
+      const processedSpans = [];
+      for (const span of event.spans) {
+        const processedSpan = beforeSendSpan(span);
+        if (processedSpan) {
+          processedSpans.push(processedSpan);
+        } else {
+          client2.recordDroppedEvent("before_send", "span");
+        }
+      }
+      event.spans = processedSpans;
+    }
+    if (beforeSendTransaction) {
+      if (event.spans) {
+        const spanCountBefore = event.spans.length;
+        event.sdkProcessingMetadata = {
+          ...event.sdkProcessingMetadata,
+          spanCountBeforeProcessing: spanCountBefore
+        };
+      }
+      return beforeSendTransaction(event, hint);
+    }
+  }
+  return event;
+}
+function isErrorEvent(event) {
+  return event.type === void 0;
+}
+function isTransactionEvent(event) {
+  return event.type === "transaction";
+}
+function initAndBind(clientClass, options) {
+  if (options.debug === true) {
+    if (DEBUG_BUILD$2) {
+      logger.enable();
+    } else {
+      consoleSandbox(() => {
+        console.warn("[Sentry] Cannot initialize SDK with `debug` option using a non-debug bundle.");
+      });
+    }
+  }
+  const scope = getCurrentScope();
+  scope.update(options.initialScope);
+  const client2 = new clientClass(options);
+  setCurrentClient(client2);
+  client2.init();
+  return client2;
+}
+function setCurrentClient(client2) {
+  getCurrentScope().setClient(client2);
+}
+const DEFAULT_TRANSPORT_BUFFER_SIZE = 64;
+function createTransport(options, makeRequest, buffer = makePromiseBuffer(
+  options.bufferSize || DEFAULT_TRANSPORT_BUFFER_SIZE
+)) {
+  let rateLimits = {};
+  const flush = (timeout) => buffer.drain(timeout);
+  function send(envelope) {
+    const filteredEnvelopeItems = [];
+    forEachEnvelopeItem(envelope, (item, type) => {
+      const dataCategory = envelopeItemTypeToDataCategory(type);
+      if (isRateLimited(rateLimits, dataCategory)) {
+        const event = getEventForEnvelopeItem(item, type);
+        options.recordDroppedEvent("ratelimit_backoff", dataCategory, event);
+      } else {
+        filteredEnvelopeItems.push(item);
+      }
+    });
+    if (filteredEnvelopeItems.length === 0) {
+      return resolvedSyncPromise({});
+    }
+    const filteredEnvelope = createEnvelope(envelope[0], filteredEnvelopeItems);
+    const recordEnvelopeLoss = (reason) => {
+      forEachEnvelopeItem(filteredEnvelope, (item, type) => {
+        const event = getEventForEnvelopeItem(item, type);
+        options.recordDroppedEvent(reason, envelopeItemTypeToDataCategory(type), event);
+      });
+    };
+    const requestTask = () => makeRequest({ body: serializeEnvelope(filteredEnvelope) }).then(
+      (response) => {
+        if (response.statusCode !== void 0 && (response.statusCode < 200 || response.statusCode >= 300)) {
+          DEBUG_BUILD$2 && logger.warn(`Sentry responded with status code ${response.statusCode} to sent event.`);
+        }
+        rateLimits = updateRateLimits(rateLimits, response);
+        return response;
+      },
+      (error) => {
+        recordEnvelopeLoss("network_error");
+        throw error;
+      }
+    );
+    return buffer.add(requestTask).then(
+      (result) => result,
+      (error) => {
+        if (error instanceof SentryError) {
+          DEBUG_BUILD$2 && logger.error("Skipped sending event because buffer is full.");
+          recordEnvelopeLoss("queue_overflow");
+          return resolvedSyncPromise({});
+        } else {
+          throw error;
+        }
+      }
+    );
+  }
+  return {
+    send,
+    flush
+  };
+}
+function getEventForEnvelopeItem(item, type) {
+  if (type !== "event" && type !== "transaction") {
+    return void 0;
+  }
+  return Array.isArray(item) ? item[1] : void 0;
+}
+function applySdkMetadata(options, name, names = [name], source = "npm") {
+  const metadata = options._metadata || {};
+  if (!metadata.sdk) {
+    metadata.sdk = {
+      name: `sentry.javascript.${name}`,
+      packages: names.map((name2) => ({
+        name: `${source}:@sentry/${name2}`,
+        version: SDK_VERSION
+      })),
+      version: SDK_VERSION
+    };
+  }
+  options._metadata = metadata;
+}
+const DEFAULT_BREADCRUMBS = 100;
+function addBreadcrumb(breadcrumb, hint) {
+  const client2 = getClient();
+  const isolationScope = getIsolationScope();
+  if (!client2) return;
+  const { beforeBreadcrumb = null, maxBreadcrumbs = DEFAULT_BREADCRUMBS } = client2.getOptions();
+  if (maxBreadcrumbs <= 0) return;
+  const timestamp = dateTimestampInSeconds();
+  const mergedBreadcrumb = { timestamp, ...breadcrumb };
+  const finalBreadcrumb = beforeBreadcrumb ? consoleSandbox(() => beforeBreadcrumb(mergedBreadcrumb, hint)) : mergedBreadcrumb;
+  if (finalBreadcrumb === null) return;
+  if (client2.emit) {
+    client2.emit("beforeAddBreadcrumb", finalBreadcrumb, hint);
+  }
+  isolationScope.addBreadcrumb(finalBreadcrumb, maxBreadcrumbs);
+}
+let originalFunctionToString;
+const INTEGRATION_NAME$6 = "FunctionToString";
+const SETUP_CLIENTS = /* @__PURE__ */ new WeakMap();
+const _functionToStringIntegration = () => {
+  return {
+    name: INTEGRATION_NAME$6,
+    setupOnce() {
+      originalFunctionToString = Function.prototype.toString;
+      try {
+        Function.prototype.toString = function(...args) {
+          const originalFunction = getOriginalFunction(this);
+          const context = SETUP_CLIENTS.has(getClient()) && originalFunction !== void 0 ? originalFunction : this;
+          return originalFunctionToString.apply(context, args);
+        };
+      } catch (e2) {
+      }
+    },
+    setup(client2) {
+      SETUP_CLIENTS.set(client2, true);
+    }
+  };
+};
+const functionToStringIntegration = defineIntegration(_functionToStringIntegration);
+const DEFAULT_IGNORE_ERRORS = [
+  /^Script error\.?$/,
+  /^Javascript error: Script error\.? on line 0$/,
+  /^ResizeObserver loop completed with undelivered notifications.$/,
+  // The browser logs this when a ResizeObserver handler takes a bit longer. Usually this is not an actual issue though. It indicates slowness.
+  /^Cannot redefine property: googletag$/,
+  // This is thrown when google tag manager is used in combination with an ad blocker
+  "undefined is not an object (evaluating 'a.L')",
+  // Random error that happens but not actionable or noticeable to end-users.
+  `can't redefine non-configurable property "solana"`,
+  // Probably a browser extension or custom browser (Brave) throwing this error
+  "vv().getRestrictions is not a function. (In 'vv().getRestrictions(1,a)', 'vv().getRestrictions' is undefined)",
+  // Error thrown by GTM, seemingly not affecting end-users
+  "Can't find variable: _AutofillCallbackHandler"
+  // Unactionable error in instagram webview https://developers.facebook.com/community/threads/320013549791141/
+];
+const INTEGRATION_NAME$5 = "InboundFilters";
+const _inboundFiltersIntegration = (options = {}) => {
+  return {
+    name: INTEGRATION_NAME$5,
+    processEvent(event, _hint, client2) {
+      const clientOptions = client2.getOptions();
+      const mergedOptions = _mergeOptions(options, clientOptions);
+      return _shouldDropEvent$1(event, mergedOptions) ? null : event;
+    }
+  };
+};
+const inboundFiltersIntegration = defineIntegration(_inboundFiltersIntegration);
+function _mergeOptions(internalOptions = {}, clientOptions = {}) {
+  return {
+    allowUrls: [...internalOptions.allowUrls || [], ...clientOptions.allowUrls || []],
+    denyUrls: [...internalOptions.denyUrls || [], ...clientOptions.denyUrls || []],
+    ignoreErrors: [
+      ...internalOptions.ignoreErrors || [],
+      ...clientOptions.ignoreErrors || [],
+      ...internalOptions.disableErrorDefaults ? [] : DEFAULT_IGNORE_ERRORS
+    ],
+    ignoreTransactions: [...internalOptions.ignoreTransactions || [], ...clientOptions.ignoreTransactions || []],
+    ignoreInternal: internalOptions.ignoreInternal !== void 0 ? internalOptions.ignoreInternal : true
+  };
+}
+function _shouldDropEvent$1(event, options) {
+  if (options.ignoreInternal && _isSentryError(event)) {
+    DEBUG_BUILD$2 && logger.warn(`Event dropped due to being internal Sentry Error.
+Event: ${getEventDescription(event)}`);
+    return true;
+  }
+  if (_isIgnoredError(event, options.ignoreErrors)) {
+    DEBUG_BUILD$2 && logger.warn(
+      `Event dropped due to being matched by \`ignoreErrors\` option.
+Event: ${getEventDescription(event)}`
+    );
+    return true;
+  }
+  if (_isUselessError(event)) {
+    DEBUG_BUILD$2 && logger.warn(
+      `Event dropped due to not having an error message, error type or stacktrace.
+Event: ${getEventDescription(
+        event
+      )}`
+    );
+    return true;
+  }
+  if (_isIgnoredTransaction(event, options.ignoreTransactions)) {
+    DEBUG_BUILD$2 && logger.warn(
+      `Event dropped due to being matched by \`ignoreTransactions\` option.
+Event: ${getEventDescription(event)}`
+    );
+    return true;
+  }
+  if (_isDeniedUrl(event, options.denyUrls)) {
+    DEBUG_BUILD$2 && logger.warn(
+      `Event dropped due to being matched by \`denyUrls\` option.
+Event: ${getEventDescription(
+        event
+      )}.
+Url: ${_getEventFilterUrl(event)}`
+    );
+    return true;
+  }
+  if (!_isAllowedUrl(event, options.allowUrls)) {
+    DEBUG_BUILD$2 && logger.warn(
+      `Event dropped due to not being matched by \`allowUrls\` option.
+Event: ${getEventDescription(
+        event
+      )}.
+Url: ${_getEventFilterUrl(event)}`
+    );
+    return true;
+  }
+  return false;
+}
+function _isIgnoredError(event, ignoreErrors) {
+  if (event.type || !ignoreErrors || !ignoreErrors.length) {
+    return false;
+  }
+  return _getPossibleEventMessages(event).some((message) => stringMatchesSomePattern(message, ignoreErrors));
+}
+function _isIgnoredTransaction(event, ignoreTransactions) {
+  if (event.type !== "transaction" || !ignoreTransactions || !ignoreTransactions.length) {
+    return false;
+  }
+  const name = event.transaction;
+  return name ? stringMatchesSomePattern(name, ignoreTransactions) : false;
+}
+function _isDeniedUrl(event, denyUrls) {
+  if (!denyUrls || !denyUrls.length) {
+    return false;
+  }
+  const url = _getEventFilterUrl(event);
+  return !url ? false : stringMatchesSomePattern(url, denyUrls);
+}
+function _isAllowedUrl(event, allowUrls) {
+  if (!allowUrls || !allowUrls.length) {
+    return true;
+  }
+  const url = _getEventFilterUrl(event);
+  return !url ? true : stringMatchesSomePattern(url, allowUrls);
+}
+function _getPossibleEventMessages(event) {
+  const possibleMessages = [];
+  if (event.message) {
+    possibleMessages.push(event.message);
+  }
+  let lastException;
+  try {
+    lastException = event.exception.values[event.exception.values.length - 1];
+  } catch (e2) {
+  }
+  if (lastException) {
+    if (lastException.value) {
+      possibleMessages.push(lastException.value);
+      if (lastException.type) {
+        possibleMessages.push(`${lastException.type}: ${lastException.value}`);
+      }
+    }
+  }
+  return possibleMessages;
+}
+function _isSentryError(event) {
+  try {
+    return event.exception.values[0].type === "SentryError";
+  } catch (e2) {
+  }
+  return false;
+}
+function _getLastValidUrl(frames = []) {
+  for (let i2 = frames.length - 1; i2 >= 0; i2--) {
+    const frame2 = frames[i2];
+    if (frame2 && frame2.filename !== "<anonymous>" && frame2.filename !== "[native code]") {
+      return frame2.filename || null;
+    }
+  }
+  return null;
+}
+function _getEventFilterUrl(event) {
+  try {
+    let frames;
+    try {
+      frames = event.exception.values[0].stacktrace.frames;
+    } catch (e2) {
+    }
+    return frames ? _getLastValidUrl(frames) : null;
+  } catch (oO) {
+    DEBUG_BUILD$2 && logger.error(`Cannot extract url for event ${getEventDescription(event)}`);
+    return null;
+  }
+}
+function _isUselessError(event) {
+  if (event.type) {
+    return false;
+  }
+  if (!event.exception || !event.exception.values || event.exception.values.length === 0) {
+    return false;
+  }
+  return (
+    // No top-level message
+    !event.message && // There are no exception values that have a stacktrace, a non-generic-Error type or value
+    !event.exception.values.some((value) => value.stacktrace || value.type && value.type !== "Error" || value.value)
+  );
+}
+const INTEGRATION_NAME$4 = "Dedupe";
+const _dedupeIntegration = () => {
+  let previousEvent;
+  return {
+    name: INTEGRATION_NAME$4,
+    processEvent(currentEvent) {
+      if (currentEvent.type) {
+        return currentEvent;
+      }
+      try {
+        if (_shouldDropEvent(currentEvent, previousEvent)) {
+          DEBUG_BUILD$2 && logger.warn("Event dropped due to being a duplicate of previously captured event.");
+          return null;
+        }
+      } catch (_oO) {
+      }
+      return previousEvent = currentEvent;
+    }
+  };
+};
+const dedupeIntegration = defineIntegration(_dedupeIntegration);
+function _shouldDropEvent(currentEvent, previousEvent) {
+  if (!previousEvent) {
+    return false;
+  }
+  if (_isSameMessageEvent(currentEvent, previousEvent)) {
+    return true;
+  }
+  if (_isSameExceptionEvent(currentEvent, previousEvent)) {
+    return true;
+  }
+  return false;
+}
+function _isSameMessageEvent(currentEvent, previousEvent) {
+  const currentMessage = currentEvent.message;
+  const previousMessage = previousEvent.message;
+  if (!currentMessage && !previousMessage) {
+    return false;
+  }
+  if (currentMessage && !previousMessage || !currentMessage && previousMessage) {
+    return false;
+  }
+  if (currentMessage !== previousMessage) {
+    return false;
+  }
+  if (!_isSameFingerprint(currentEvent, previousEvent)) {
+    return false;
+  }
+  if (!_isSameStacktrace(currentEvent, previousEvent)) {
+    return false;
+  }
+  return true;
+}
+function _isSameExceptionEvent(currentEvent, previousEvent) {
+  const previousException = _getExceptionFromEvent(previousEvent);
+  const currentException = _getExceptionFromEvent(currentEvent);
+  if (!previousException || !currentException) {
+    return false;
+  }
+  if (previousException.type !== currentException.type || previousException.value !== currentException.value) {
+    return false;
+  }
+  if (!_isSameFingerprint(currentEvent, previousEvent)) {
+    return false;
+  }
+  if (!_isSameStacktrace(currentEvent, previousEvent)) {
+    return false;
+  }
+  return true;
+}
+function _isSameStacktrace(currentEvent, previousEvent) {
+  let currentFrames = getFramesFromEvent(currentEvent);
+  let previousFrames = getFramesFromEvent(previousEvent);
+  if (!currentFrames && !previousFrames) {
+    return true;
+  }
+  if (currentFrames && !previousFrames || !currentFrames && previousFrames) {
+    return false;
+  }
+  currentFrames = currentFrames;
+  previousFrames = previousFrames;
+  if (previousFrames.length !== currentFrames.length) {
+    return false;
+  }
+  for (let i2 = 0; i2 < previousFrames.length; i2++) {
+    const frameA = previousFrames[i2];
+    const frameB = currentFrames[i2];
+    if (frameA.filename !== frameB.filename || frameA.lineno !== frameB.lineno || frameA.colno !== frameB.colno || frameA.function !== frameB.function) {
+      return false;
+    }
+  }
+  return true;
+}
+function _isSameFingerprint(currentEvent, previousEvent) {
+  let currentFingerprint = currentEvent.fingerprint;
+  let previousFingerprint = previousEvent.fingerprint;
+  if (!currentFingerprint && !previousFingerprint) {
+    return true;
+  }
+  if (currentFingerprint && !previousFingerprint || !currentFingerprint && previousFingerprint) {
+    return false;
+  }
+  currentFingerprint = currentFingerprint;
+  previousFingerprint = previousFingerprint;
+  try {
+    return !!(currentFingerprint.join("") === previousFingerprint.join(""));
+  } catch (_oO) {
+    return false;
+  }
+}
+function _getExceptionFromEvent(event) {
+  return event.exception && event.exception.values && event.exception.values[0];
+}
+const WINDOW$1 = GLOBAL_OBJ;
+let ignoreOnError = 0;
+function shouldIgnoreOnError() {
+  return ignoreOnError > 0;
+}
+function ignoreNextOnError() {
+  ignoreOnError++;
+  setTimeout(() => {
+    ignoreOnError--;
+  });
+}
+function wrap(fn, options = {}, before) {
+  if (typeof fn !== "function") {
+    return fn;
+  }
+  try {
+    const wrapper = fn.__sentry_wrapped__;
+    if (wrapper) {
+      return wrapper;
+    }
+    if (getOriginalFunction(fn)) {
+      return fn;
+    }
+  } catch (e2) {
+    return fn;
+  }
+  const sentryWrapped = function() {
+    const args = Array.prototype.slice.call(arguments);
+    try {
+      if (before && typeof before === "function") ;
+      const wrappedArguments = args.map((arg) => wrap(arg, options));
+      return fn.apply(this, wrappedArguments);
+    } catch (ex) {
+      ignoreNextOnError();
+      withScope((scope) => {
+        scope.addEventProcessor((event) => {
+          if (options.mechanism) {
+            addExceptionTypeValue(event, void 0);
+            addExceptionMechanism(event, options.mechanism);
+          }
+          event.extra = {
+            ...event.extra,
+            arguments: args
+          };
+          return event;
+        });
+        captureException(ex);
+      });
+      throw ex;
+    }
+  };
+  try {
+    for (const property in fn) {
+      if (Object.prototype.hasOwnProperty.call(fn, property)) {
+        sentryWrapped[property] = fn[property];
+      }
+    }
+  } catch (_oO) {
+  }
+  markFunctionWrapped(sentryWrapped, fn);
+  addNonEnumerableProperty(fn, "__sentry_wrapped__", sentryWrapped);
+  try {
+    const descriptor = Object.getOwnPropertyDescriptor(sentryWrapped, "name");
+    if (descriptor.configurable) {
+      Object.defineProperty(sentryWrapped, "name", {
+        get() {
+          return fn.name;
+        }
+      });
+    }
+  } catch (_oO) {
+  }
+  return sentryWrapped;
+}
+const DEBUG_BUILD$1 = typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__;
+function exceptionFromError(stackParser, ex) {
+  const frames = parseStackFrames(stackParser, ex);
+  const exception = {
+    type: ex && ex.name,
+    value: extractMessage(ex)
+  };
+  if (frames.length) {
+    exception.stacktrace = { frames };
+  }
+  if (exception.type === void 0 && exception.value === "") {
+    exception.value = "Unrecoverable error caught";
+  }
+  return exception;
+}
+function eventFromPlainObject(stackParser, exception, syntheticException, isUnhandledRejection) {
+  const client2 = getClient();
+  const normalizeDepth = client2 && client2.getOptions().normalizeDepth;
+  const errorFromProp = getErrorPropertyFromObject(exception);
+  const extra = {
+    __serialized__: normalizeToSize(exception, normalizeDepth)
+  };
+  if (errorFromProp) {
+    return {
+      exception: {
+        values: [exceptionFromError(stackParser, errorFromProp)]
+      },
+      extra
+    };
+  }
+  const event = {
+    exception: {
+      values: [
+        {
+          type: isEvent(exception) ? exception.constructor.name : isUnhandledRejection ? "UnhandledRejection" : "Error",
+          value: getNonErrorObjectExceptionValue(exception, { isUnhandledRejection })
+        }
+      ]
+    },
+    extra
+  };
+  if (syntheticException) {
+    const frames = parseStackFrames(stackParser, syntheticException);
+    if (frames.length) {
+      event.exception.values[0].stacktrace = { frames };
+    }
+  }
+  return event;
+}
+function eventFromError(stackParser, ex) {
+  return {
+    exception: {
+      values: [exceptionFromError(stackParser, ex)]
+    }
+  };
+}
+function parseStackFrames(stackParser, ex) {
+  const stacktrace = ex.stacktrace || ex.stack || "";
+  const skipLines = getSkipFirstStackStringLines(ex);
+  const framesToPop = getPopFirstTopFrames(ex);
+  try {
+    return stackParser(stacktrace, skipLines, framesToPop);
+  } catch (e2) {
+  }
+  return [];
+}
+const reactMinifiedRegexp = /Minified React error #\d+;/i;
+function getSkipFirstStackStringLines(ex) {
+  if (ex && reactMinifiedRegexp.test(ex.message)) {
+    return 1;
+  }
+  return 0;
+}
+function getPopFirstTopFrames(ex) {
+  if (typeof ex.framesToPop === "number") {
+    return ex.framesToPop;
+  }
+  return 0;
+}
+function extractMessage(ex) {
+  const message = ex && ex.message;
+  if (!message) {
+    return "No error message";
+  }
+  if (message.error && typeof message.error.message === "string") {
+    return message.error.message;
+  }
+  return message;
+}
+function eventFromException(stackParser, exception, hint, attachStacktrace) {
+  const syntheticException = hint && hint.syntheticException || void 0;
+  const event = eventFromUnknownInput(stackParser, exception, syntheticException, attachStacktrace);
+  addExceptionMechanism(event);
+  event.level = "error";
+  if (hint && hint.event_id) {
+    event.event_id = hint.event_id;
+  }
+  return resolvedSyncPromise(event);
+}
+function eventFromMessage(stackParser, message, level = "info", hint, attachStacktrace) {
+  const syntheticException = hint && hint.syntheticException || void 0;
+  const event = eventFromString(stackParser, message, syntheticException, attachStacktrace);
+  event.level = level;
+  if (hint && hint.event_id) {
+    event.event_id = hint.event_id;
+  }
+  return resolvedSyncPromise(event);
+}
+function eventFromUnknownInput(stackParser, exception, syntheticException, attachStacktrace, isUnhandledRejection) {
+  let event;
+  if (isErrorEvent$1(exception) && exception.error) {
+    const errorEvent = exception;
+    return eventFromError(stackParser, errorEvent.error);
+  }
+  if (isDOMError(exception) || isDOMException(exception)) {
+    const domException = exception;
+    if ("stack" in exception) {
+      event = eventFromError(stackParser, exception);
+    } else {
+      const name = domException.name || (isDOMError(domException) ? "DOMError" : "DOMException");
+      const message = domException.message ? `${name}: ${domException.message}` : name;
+      event = eventFromString(stackParser, message, syntheticException, attachStacktrace);
+      addExceptionTypeValue(event, message);
+    }
+    if ("code" in domException) {
+      event.tags = { ...event.tags, "DOMException.code": `${domException.code}` };
+    }
+    return event;
+  }
+  if (isError(exception)) {
+    return eventFromError(stackParser, exception);
+  }
+  if (isPlainObject(exception) || isEvent(exception)) {
+    const objectException = exception;
+    event = eventFromPlainObject(stackParser, objectException, syntheticException, isUnhandledRejection);
+    addExceptionMechanism(event, {
+      synthetic: true
+    });
+    return event;
+  }
+  event = eventFromString(stackParser, exception, syntheticException, attachStacktrace);
+  addExceptionTypeValue(event, `${exception}`);
+  addExceptionMechanism(event, {
+    synthetic: true
+  });
+  return event;
+}
+function eventFromString(stackParser, message, syntheticException, attachStacktrace) {
+  const event = {};
+  if (attachStacktrace && syntheticException) {
+    const frames = parseStackFrames(stackParser, syntheticException);
+    if (frames.length) {
+      event.exception = {
+        values: [{ value: message, stacktrace: { frames } }]
+      };
+    }
+  }
+  if (isParameterizedString(message)) {
+    const { __sentry_template_string__, __sentry_template_values__ } = message;
+    event.logentry = {
+      message: __sentry_template_string__,
+      params: __sentry_template_values__
+    };
+    return event;
+  }
+  event.message = message;
+  return event;
+}
+function getNonErrorObjectExceptionValue(exception, { isUnhandledRejection }) {
+  const keys = extractExceptionKeysForMessage(exception);
+  const captureType = isUnhandledRejection ? "promise rejection" : "exception";
+  if (isErrorEvent$1(exception)) {
+    return `Event \`ErrorEvent\` captured as ${captureType} with message \`${exception.message}\``;
+  }
+  if (isEvent(exception)) {
+    const className = getObjectClassName(exception);
+    return `Event \`${className}\` (type=${exception.type}) captured as ${captureType}`;
+  }
+  return `Object captured as ${captureType} with keys: ${keys}`;
+}
+function getObjectClassName(obj) {
+  try {
+    const prototype = Object.getPrototypeOf(obj);
+    return prototype ? prototype.constructor.name : void 0;
+  } catch (e2) {
+  }
+}
+function getErrorPropertyFromObject(obj) {
+  for (const prop in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, prop)) {
+      const value = obj[prop];
+      if (value instanceof Error) {
+        return value;
+      }
+    }
+  }
+  return void 0;
+}
+function createUserFeedbackEnvelope(feedback, {
+  metadata,
+  tunnel,
+  dsn
+}) {
+  const headers = {
+    event_id: feedback.event_id,
+    sent_at: (/* @__PURE__ */ new Date()).toISOString(),
+    ...metadata && metadata.sdk && {
+      sdk: {
+        name: metadata.sdk.name,
+        version: metadata.sdk.version
+      }
+    },
+    ...!!tunnel && !!dsn && { dsn: dsnToString(dsn) }
+  };
+  const item = createUserFeedbackEnvelopeItem(feedback);
+  return createEnvelope(headers, [item]);
+}
+function createUserFeedbackEnvelopeItem(feedback) {
+  const feedbackHeaders = {
+    type: "user_report"
+  };
+  return [feedbackHeaders, feedback];
+}
+class BrowserClient extends BaseClient {
+  /**
+   * Creates a new Browser SDK instance.
+   *
+   * @param options Configuration options for this SDK.
+   */
+  constructor(options) {
+    const opts = {
+      // We default this to true, as it is the safer scenario
+      parentSpanIsAlwaysRootSpan: true,
+      ...options
+    };
+    const sdkSource = WINDOW$1.SENTRY_SDK_SOURCE || getSDKSource();
+    applySdkMetadata(opts, "browser", ["browser"], sdkSource);
+    super(opts);
+    if (opts.sendClientReports && WINDOW$1.document) {
+      WINDOW$1.document.addEventListener("visibilitychange", () => {
+        if (WINDOW$1.document.visibilityState === "hidden") {
+          this._flushOutcomes();
+        }
+      });
+    }
+  }
+  /**
+   * @inheritDoc
+   */
+  eventFromException(exception, hint) {
+    return eventFromException(this._options.stackParser, exception, hint, this._options.attachStacktrace);
+  }
+  /**
+   * @inheritDoc
+   */
+  eventFromMessage(message, level = "info", hint) {
+    return eventFromMessage(this._options.stackParser, message, level, hint, this._options.attachStacktrace);
+  }
+  /**
+   * Sends user feedback to Sentry.
+   *
+   * @deprecated Use `captureFeedback` instead.
+   */
+  captureUserFeedback(feedback) {
+    if (!this._isEnabled()) {
+      DEBUG_BUILD$1 && logger.warn("SDK not enabled, will not capture user feedback.");
+      return;
+    }
+    const envelope = createUserFeedbackEnvelope(feedback, {
+      metadata: this.getSdkMetadata(),
+      dsn: this.getDsn(),
+      tunnel: this.getOptions().tunnel
+    });
+    this.sendEnvelope(envelope);
+  }
+  /**
+   * @inheritDoc
+   */
+  _prepareEvent(event, hint, scope) {
+    event.platform = event.platform || "javascript";
+    return super._prepareEvent(event, hint, scope);
+  }
+}
+const DEBUG_BUILD = typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__;
+const WINDOW = GLOBAL_OBJ;
+const DEBOUNCE_DURATION = 1e3;
+let debounceTimerID;
+let lastCapturedEventType;
+let lastCapturedEventTargetId;
+function addClickKeypressInstrumentationHandler(handler) {
+  const type = "dom";
+  addHandler(type, handler);
+  maybeInstrument(type, instrumentDOM);
+}
+function instrumentDOM() {
+  if (!WINDOW.document) {
+    return;
+  }
+  const triggerDOMHandler = triggerHandlers.bind(null, "dom");
+  const globalDOMEventHandler = makeDOMEventHandler(triggerDOMHandler, true);
+  WINDOW.document.addEventListener("click", globalDOMEventHandler, false);
+  WINDOW.document.addEventListener("keypress", globalDOMEventHandler, false);
+  ["EventTarget", "Node"].forEach((target) => {
+    const proto = WINDOW[target] && WINDOW[target].prototype;
+    if (!proto || !proto.hasOwnProperty || !proto.hasOwnProperty("addEventListener")) {
+      return;
+    }
+    fill(proto, "addEventListener", function(originalAddEventListener) {
+      return function(type, listener, options) {
+        if (type === "click" || type == "keypress") {
+          try {
+            const el2 = this;
+            const handlers2 = el2.__sentry_instrumentation_handlers__ = el2.__sentry_instrumentation_handlers__ || {};
+            const handlerForType = handlers2[type] = handlers2[type] || { refCount: 0 };
+            if (!handlerForType.handler) {
+              const handler = makeDOMEventHandler(triggerDOMHandler);
+              handlerForType.handler = handler;
+              originalAddEventListener.call(this, type, handler, options);
+            }
+            handlerForType.refCount++;
+          } catch (e2) {
+          }
+        }
+        return originalAddEventListener.call(this, type, listener, options);
+      };
+    });
+    fill(
+      proto,
+      "removeEventListener",
+      function(originalRemoveEventListener) {
+        return function(type, listener, options) {
+          if (type === "click" || type == "keypress") {
+            try {
+              const el2 = this;
+              const handlers2 = el2.__sentry_instrumentation_handlers__ || {};
+              const handlerForType = handlers2[type];
+              if (handlerForType) {
+                handlerForType.refCount--;
+                if (handlerForType.refCount <= 0) {
+                  originalRemoveEventListener.call(this, type, handlerForType.handler, options);
+                  handlerForType.handler = void 0;
+                  delete handlers2[type];
+                }
+                if (Object.keys(handlers2).length === 0) {
+                  delete el2.__sentry_instrumentation_handlers__;
+                }
+              }
+            } catch (e2) {
+            }
+          }
+          return originalRemoveEventListener.call(this, type, listener, options);
+        };
+      }
+    );
+  });
+}
+function isSimilarToLastCapturedEvent(event) {
+  if (event.type !== lastCapturedEventType) {
+    return false;
+  }
+  try {
+    if (!event.target || event.target._sentryId !== lastCapturedEventTargetId) {
+      return false;
+    }
+  } catch (e2) {
+  }
+  return true;
+}
+function shouldSkipDOMEvent(eventType, target) {
+  if (eventType !== "keypress") {
+    return false;
+  }
+  if (!target || !target.tagName) {
+    return true;
+  }
+  if (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.isContentEditable) {
+    return false;
+  }
+  return true;
+}
+function makeDOMEventHandler(handler, globalListener = false) {
+  return (event) => {
+    if (!event || event["_sentryCaptured"]) {
+      return;
+    }
+    const target = getEventTarget(event);
+    if (shouldSkipDOMEvent(event.type, target)) {
+      return;
+    }
+    addNonEnumerableProperty(event, "_sentryCaptured", true);
+    if (target && !target._sentryId) {
+      addNonEnumerableProperty(target, "_sentryId", uuid4());
+    }
+    const name = event.type === "keypress" ? "input" : event.type;
+    if (!isSimilarToLastCapturedEvent(event)) {
+      const handlerData = { event, name, global: globalListener };
+      handler(handlerData);
+      lastCapturedEventType = event.type;
+      lastCapturedEventTargetId = target ? target._sentryId : void 0;
+    }
+    clearTimeout(debounceTimerID);
+    debounceTimerID = WINDOW.setTimeout(() => {
+      lastCapturedEventTargetId = void 0;
+      lastCapturedEventType = void 0;
+    }, DEBOUNCE_DURATION);
+  };
+}
+function getEventTarget(event) {
+  try {
+    return event.target;
+  } catch (e2) {
+    return null;
+  }
+}
+let lastHref;
+function addHistoryInstrumentationHandler(handler) {
+  const type = "history";
+  addHandler(type, handler);
+  maybeInstrument(type, instrumentHistory);
+}
+function instrumentHistory() {
+  if (!supportsHistory()) {
+    return;
+  }
+  const oldOnPopState = WINDOW.onpopstate;
+  WINDOW.onpopstate = function(...args) {
+    const to = WINDOW.location.href;
+    const from = lastHref;
+    lastHref = to;
+    const handlerData = { from, to };
+    triggerHandlers("history", handlerData);
+    if (oldOnPopState) {
+      try {
+        return oldOnPopState.apply(this, args);
+      } catch (_oO) {
+      }
+    }
+  };
+  function historyReplacementFunction(originalHistoryFunction) {
+    return function(...args) {
+      const url = args.length > 2 ? args[2] : void 0;
+      if (url) {
+        const from = lastHref;
+        const to = String(url);
+        lastHref = to;
+        const handlerData = { from, to };
+        triggerHandlers("history", handlerData);
+      }
+      return originalHistoryFunction.apply(this, args);
+    };
+  }
+  fill(WINDOW.history, "pushState", historyReplacementFunction);
+  fill(WINDOW.history, "replaceState", historyReplacementFunction);
+}
+const cachedImplementations = {};
+function getNativeImplementation(name) {
+  const cached = cachedImplementations[name];
+  if (cached) {
+    return cached;
+  }
+  let impl = WINDOW[name];
+  if (isNativeFunction(impl)) {
+    return cachedImplementations[name] = impl.bind(WINDOW);
+  }
+  const document2 = WINDOW.document;
+  if (document2 && typeof document2.createElement === "function") {
+    try {
+      const sandbox = document2.createElement("iframe");
+      sandbox.hidden = true;
+      document2.head.appendChild(sandbox);
+      const contentWindow = sandbox.contentWindow;
+      if (contentWindow && contentWindow[name]) {
+        impl = contentWindow[name];
+      }
+      document2.head.removeChild(sandbox);
+    } catch (e2) {
+      DEBUG_BUILD && logger.warn(`Could not create sandbox iframe for ${name} check, bailing to window.${name}: `, e2);
+    }
+  }
+  if (!impl) {
+    return impl;
+  }
+  return cachedImplementations[name] = impl.bind(WINDOW);
+}
+function clearCachedImplementation(name) {
+  cachedImplementations[name] = void 0;
+}
+const SENTRY_XHR_DATA_KEY = "__sentry_xhr_v3__";
+function addXhrInstrumentationHandler(handler) {
+  const type = "xhr";
+  addHandler(type, handler);
+  maybeInstrument(type, instrumentXHR);
+}
+function instrumentXHR() {
+  if (!WINDOW.XMLHttpRequest) {
+    return;
+  }
+  const xhrproto = XMLHttpRequest.prototype;
+  fill(xhrproto, "open", function(originalOpen) {
+    return function(...args) {
+      const startTimestamp = timestampInSeconds() * 1e3;
+      const method = isString$1(args[0]) ? args[0].toUpperCase() : void 0;
+      const url = parseUrl(args[1]);
+      if (!method || !url) {
+        return originalOpen.apply(this, args);
+      }
+      this[SENTRY_XHR_DATA_KEY] = {
+        method,
+        url,
+        request_headers: {}
+      };
+      if (method === "POST" && url.match(/sentry_key/)) {
+        this.__sentry_own_request__ = true;
+      }
+      const onreadystatechangeHandler = () => {
+        const xhrInfo = this[SENTRY_XHR_DATA_KEY];
+        if (!xhrInfo) {
+          return;
+        }
+        if (this.readyState === 4) {
+          try {
+            xhrInfo.status_code = this.status;
+          } catch (e2) {
+          }
+          const handlerData = {
+            endTimestamp: timestampInSeconds() * 1e3,
+            startTimestamp,
+            xhr: this
+          };
+          triggerHandlers("xhr", handlerData);
+        }
+      };
+      if ("onreadystatechange" in this && typeof this.onreadystatechange === "function") {
+        fill(this, "onreadystatechange", function(original) {
+          return function(...readyStateArgs) {
+            onreadystatechangeHandler();
+            return original.apply(this, readyStateArgs);
+          };
+        });
+      } else {
+        this.addEventListener("readystatechange", onreadystatechangeHandler);
+      }
+      fill(this, "setRequestHeader", function(original) {
+        return function(...setRequestHeaderArgs) {
+          const [header, value] = setRequestHeaderArgs;
+          const xhrInfo = this[SENTRY_XHR_DATA_KEY];
+          if (xhrInfo && isString$1(header) && isString$1(value)) {
+            xhrInfo.request_headers[header.toLowerCase()] = value;
+          }
+          return original.apply(this, setRequestHeaderArgs);
+        };
+      });
+      return originalOpen.apply(this, args);
+    };
+  });
+  fill(xhrproto, "send", function(originalSend) {
+    return function(...args) {
+      const sentryXhrData = this[SENTRY_XHR_DATA_KEY];
+      if (!sentryXhrData) {
+        return originalSend.apply(this, args);
+      }
+      if (args[0] !== void 0) {
+        sentryXhrData.body = args[0];
+      }
+      const handlerData = {
+        startTimestamp: timestampInSeconds() * 1e3,
+        xhr: this
+      };
+      triggerHandlers("xhr", handlerData);
+      return originalSend.apply(this, args);
+    };
+  });
+}
+function parseUrl(url) {
+  if (isString$1(url)) {
+    return url;
+  }
+  try {
+    return url.toString();
+  } catch (e2) {
+  }
+  return void 0;
+}
+function makeFetchTransport(options, nativeFetch = getNativeImplementation("fetch")) {
+  let pendingBodySize = 0;
+  let pendingCount = 0;
+  function makeRequest(request) {
+    const requestSize = request.body.length;
+    pendingBodySize += requestSize;
+    pendingCount++;
+    const requestOptions = {
+      body: request.body,
+      method: "POST",
+      referrerPolicy: "origin",
+      headers: options.headers,
+      // Outgoing requests are usually cancelled when navigating to a different page, causing a "TypeError: Failed to
+      // fetch" error and sending a "network_error" client-outcome - in Chrome, the request status shows "(cancelled)".
+      // The `keepalive` flag keeps outgoing requests alive, even when switching pages. We want this since we're
+      // frequently sending events right before the user is switching pages (eg. whenfinishing navigation transactions).
+      // Gotchas:
+      // - `keepalive` isn't supported by Firefox
+      // - As per spec (https://fetch.spec.whatwg.org/#http-network-or-cache-fetch):
+      //   If the sum of contentLength and inflightKeepaliveBytes is greater than 64 kibibytes, then return a network error.
+      //   We will therefore only activate the flag when we're below that limit.
+      // There is also a limit of requests that can be open at the same time, so we also limit this to 15
+      // See https://github.com/getsentry/sentry-javascript/pull/7553 for details
+      keepalive: pendingBodySize <= 6e4 && pendingCount < 15,
+      ...options.fetchOptions
+    };
+    if (!nativeFetch) {
+      clearCachedImplementation("fetch");
+      return rejectedSyncPromise("No fetch implementation available");
+    }
+    try {
+      return nativeFetch(options.url, requestOptions).then((response) => {
+        pendingBodySize -= requestSize;
+        pendingCount--;
+        return {
+          statusCode: response.status,
+          headers: {
+            "x-sentry-rate-limits": response.headers.get("X-Sentry-Rate-Limits"),
+            "retry-after": response.headers.get("Retry-After")
+          }
+        };
+      });
+    } catch (e2) {
+      clearCachedImplementation("fetch");
+      pendingBodySize -= requestSize;
+      pendingCount--;
+      return rejectedSyncPromise(e2);
+    }
+  }
+  return createTransport(options, makeRequest);
+}
+const CHROME_PRIORITY = 30;
+const GECKO_PRIORITY = 50;
+function createFrame(filename, func, lineno, colno) {
+  const frame2 = {
+    filename,
+    function: func === "<anonymous>" ? UNKNOWN_FUNCTION : func,
+    in_app: true
+    // All browser frames are considered in_app
+  };
+  if (lineno !== void 0) {
+    frame2.lineno = lineno;
+  }
+  if (colno !== void 0) {
+    frame2.colno = colno;
+  }
+  return frame2;
+}
+const chromeRegexNoFnName = /^\s*at (\S+?)(?::(\d+))(?::(\d+))\s*$/i;
+const chromeRegex = /^\s*at (?:(.+?\)(?: \[.+\])?|.*?) ?\((?:address at )?)?(?:async )?((?:<anonymous>|[-a-z]+:|.*bundle|\/)?.*?)(?::(\d+))?(?::(\d+))?\)?\s*$/i;
+const chromeEvalRegex = /\((\S*)(?::(\d+))(?::(\d+))\)/;
+const chromeStackParserFn = (line) => {
+  const noFnParts = chromeRegexNoFnName.exec(line);
+  if (noFnParts) {
+    const [, filename, line2, col] = noFnParts;
+    return createFrame(filename, UNKNOWN_FUNCTION, +line2, +col);
+  }
+  const parts = chromeRegex.exec(line);
+  if (parts) {
+    const isEval = parts[2] && parts[2].indexOf("eval") === 0;
+    if (isEval) {
+      const subMatch = chromeEvalRegex.exec(parts[2]);
+      if (subMatch) {
+        parts[2] = subMatch[1];
+        parts[3] = subMatch[2];
+        parts[4] = subMatch[3];
+      }
+    }
+    const [func, filename] = extractSafariExtensionDetails(parts[1] || UNKNOWN_FUNCTION, parts[2]);
+    return createFrame(filename, func, parts[3] ? +parts[3] : void 0, parts[4] ? +parts[4] : void 0);
+  }
+  return;
+};
+const chromeStackLineParser = [CHROME_PRIORITY, chromeStackParserFn];
+const geckoREgex = /^\s*(.*?)(?:\((.*?)\))?(?:^|@)?((?:[-a-z]+)?:\/.*?|\[native code\]|[^@]*(?:bundle|\d+\.js)|\/[\w\-. /=]+)(?::(\d+))?(?::(\d+))?\s*$/i;
+const geckoEvalRegex = /(\S+) line (\d+)(?: > eval line \d+)* > eval/i;
+const gecko = (line) => {
+  const parts = geckoREgex.exec(line);
+  if (parts) {
+    const isEval = parts[3] && parts[3].indexOf(" > eval") > -1;
+    if (isEval) {
+      const subMatch = geckoEvalRegex.exec(parts[3]);
+      if (subMatch) {
+        parts[1] = parts[1] || "eval";
+        parts[3] = subMatch[1];
+        parts[4] = subMatch[2];
+        parts[5] = "";
+      }
+    }
+    let filename = parts[3];
+    let func = parts[1] || UNKNOWN_FUNCTION;
+    [func, filename] = extractSafariExtensionDetails(func, filename);
+    return createFrame(filename, func, parts[4] ? +parts[4] : void 0, parts[5] ? +parts[5] : void 0);
+  }
+  return;
+};
+const geckoStackLineParser = [GECKO_PRIORITY, gecko];
+const defaultStackLineParsers = [chromeStackLineParser, geckoStackLineParser];
+const defaultStackParser = createStackParser(...defaultStackLineParsers);
+const extractSafariExtensionDetails = (func, filename) => {
+  const isSafariExtension = func.indexOf("safari-extension") !== -1;
+  const isSafariWebExtension = func.indexOf("safari-web-extension") !== -1;
+  return isSafariExtension || isSafariWebExtension ? [
+    func.indexOf("@") !== -1 ? func.split("@")[0] : UNKNOWN_FUNCTION,
+    isSafariExtension ? `safari-extension:${filename}` : `safari-web-extension:${filename}`
+  ] : [func, filename];
+};
+const MAX_ALLOWED_STRING_LENGTH = 1024;
+const INTEGRATION_NAME$3 = "Breadcrumbs";
+const _breadcrumbsIntegration = (options = {}) => {
+  const _options = {
+    console: true,
+    dom: true,
+    fetch: true,
+    history: true,
+    sentry: true,
+    xhr: true,
+    ...options
+  };
+  return {
+    name: INTEGRATION_NAME$3,
+    setup(client2) {
+      if (_options.console) {
+        addConsoleInstrumentationHandler(_getConsoleBreadcrumbHandler(client2));
+      }
+      if (_options.dom) {
+        addClickKeypressInstrumentationHandler(_getDomBreadcrumbHandler(client2, _options.dom));
+      }
+      if (_options.xhr) {
+        addXhrInstrumentationHandler(_getXhrBreadcrumbHandler(client2));
+      }
+      if (_options.fetch) {
+        addFetchInstrumentationHandler(_getFetchBreadcrumbHandler(client2));
+      }
+      if (_options.history) {
+        addHistoryInstrumentationHandler(_getHistoryBreadcrumbHandler(client2));
+      }
+      if (_options.sentry) {
+        client2.on("beforeSendEvent", _getSentryBreadcrumbHandler(client2));
+      }
+    }
+  };
+};
+const breadcrumbsIntegration = defineIntegration(_breadcrumbsIntegration);
+function _getSentryBreadcrumbHandler(client2) {
+  return function addSentryBreadcrumb(event) {
+    if (getClient() !== client2) {
+      return;
+    }
+    addBreadcrumb(
+      {
+        category: `sentry.${event.type === "transaction" ? "transaction" : "event"}`,
+        event_id: event.event_id,
+        level: event.level,
+        message: getEventDescription(event)
+      },
+      {
+        event
+      }
+    );
+  };
+}
+function _getDomBreadcrumbHandler(client2, dom) {
+  return function _innerDomBreadcrumb(handlerData) {
+    if (getClient() !== client2) {
+      return;
+    }
+    let target;
+    let componentName;
+    let keyAttrs = typeof dom === "object" ? dom.serializeAttribute : void 0;
+    let maxStringLength = typeof dom === "object" && typeof dom.maxStringLength === "number" ? dom.maxStringLength : void 0;
+    if (maxStringLength && maxStringLength > MAX_ALLOWED_STRING_LENGTH) {
+      DEBUG_BUILD$1 && logger.warn(
+        `\`dom.maxStringLength\` cannot exceed ${MAX_ALLOWED_STRING_LENGTH}, but a value of ${maxStringLength} was configured. Sentry will use ${MAX_ALLOWED_STRING_LENGTH} instead.`
+      );
+      maxStringLength = MAX_ALLOWED_STRING_LENGTH;
+    }
+    if (typeof keyAttrs === "string") {
+      keyAttrs = [keyAttrs];
+    }
+    try {
+      const event = handlerData.event;
+      const element = _isEvent(event) ? event.target : event;
+      target = htmlTreeAsString(element, { keyAttrs, maxStringLength });
+      componentName = getComponentName(element);
+    } catch (e2) {
+      target = "<unknown>";
+    }
+    if (target.length === 0) {
+      return;
+    }
+    const breadcrumb = {
+      category: `ui.${handlerData.name}`,
+      message: target
+    };
+    if (componentName) {
+      breadcrumb.data = { "ui.component_name": componentName };
+    }
+    addBreadcrumb(breadcrumb, {
+      event: handlerData.event,
+      name: handlerData.name,
+      global: handlerData.global
+    });
+  };
+}
+function _getConsoleBreadcrumbHandler(client2) {
+  return function _consoleBreadcrumb(handlerData) {
+    if (getClient() !== client2) {
+      return;
+    }
+    const breadcrumb = {
+      category: "console",
+      data: {
+        arguments: handlerData.args,
+        logger: "console"
+      },
+      level: severityLevelFromString(handlerData.level),
+      message: safeJoin(handlerData.args, " ")
+    };
+    if (handlerData.level === "assert") {
+      if (handlerData.args[0] === false) {
+        breadcrumb.message = `Assertion failed: ${safeJoin(handlerData.args.slice(1), " ") || "console.assert"}`;
+        breadcrumb.data.arguments = handlerData.args.slice(1);
+      } else {
+        return;
+      }
+    }
+    addBreadcrumb(breadcrumb, {
+      input: handlerData.args,
+      level: handlerData.level
+    });
+  };
+}
+function _getXhrBreadcrumbHandler(client2) {
+  return function _xhrBreadcrumb(handlerData) {
+    if (getClient() !== client2) {
+      return;
+    }
+    const { startTimestamp, endTimestamp } = handlerData;
+    const sentryXhrData = handlerData.xhr[SENTRY_XHR_DATA_KEY];
+    if (!startTimestamp || !endTimestamp || !sentryXhrData) {
+      return;
+    }
+    const { method, url, status_code, body } = sentryXhrData;
+    const data = {
+      method,
+      url,
+      status_code
+    };
+    const hint = {
+      xhr: handlerData.xhr,
+      input: body,
+      startTimestamp,
+      endTimestamp
+    };
+    addBreadcrumb(
+      {
+        category: "xhr",
+        data,
+        type: "http"
+      },
+      hint
+    );
+  };
+}
+function _getFetchBreadcrumbHandler(client2) {
+  return function _fetchBreadcrumb(handlerData) {
+    if (getClient() !== client2) {
+      return;
+    }
+    const { startTimestamp, endTimestamp } = handlerData;
+    if (!endTimestamp) {
+      return;
+    }
+    if (handlerData.fetchData.url.match(/sentry_key/) && handlerData.fetchData.method === "POST") {
+      return;
+    }
+    if (handlerData.error) {
+      const data = handlerData.fetchData;
+      const hint = {
+        data: handlerData.error,
+        input: handlerData.args,
+        startTimestamp,
+        endTimestamp
+      };
+      addBreadcrumb(
+        {
+          category: "fetch",
+          data,
+          level: "error",
+          type: "http"
+        },
+        hint
+      );
+    } else {
+      const response = handlerData.response;
+      const data = {
+        ...handlerData.fetchData,
+        status_code: response && response.status
+      };
+      const hint = {
+        input: handlerData.args,
+        response,
+        startTimestamp,
+        endTimestamp
+      };
+      addBreadcrumb(
+        {
+          category: "fetch",
+          data,
+          type: "http"
+        },
+        hint
+      );
+    }
+  };
+}
+function _getHistoryBreadcrumbHandler(client2) {
+  return function _historyBreadcrumb(handlerData) {
+    if (getClient() !== client2) {
+      return;
+    }
+    let from = handlerData.from;
+    let to = handlerData.to;
+    const parsedLoc = parseUrl$1(WINDOW$1.location.href);
+    let parsedFrom = from ? parseUrl$1(from) : void 0;
+    const parsedTo = parseUrl$1(to);
+    if (!parsedFrom || !parsedFrom.path) {
+      parsedFrom = parsedLoc;
+    }
+    if (parsedLoc.protocol === parsedTo.protocol && parsedLoc.host === parsedTo.host) {
+      to = parsedTo.relative;
+    }
+    if (parsedLoc.protocol === parsedFrom.protocol && parsedLoc.host === parsedFrom.host) {
+      from = parsedFrom.relative;
+    }
+    addBreadcrumb({
+      category: "navigation",
+      data: {
+        from,
+        to
+      }
+    });
+  };
+}
+function _isEvent(event) {
+  return !!event && !!event.target;
+}
+const DEFAULT_EVENT_TARGET = [
+  "EventTarget",
+  "Window",
+  "Node",
+  "ApplicationCache",
+  "AudioTrackList",
+  "BroadcastChannel",
+  "ChannelMergerNode",
+  "CryptoOperation",
+  "EventSource",
+  "FileReader",
+  "HTMLUnknownElement",
+  "IDBDatabase",
+  "IDBRequest",
+  "IDBTransaction",
+  "KeyOperation",
+  "MediaController",
+  "MessagePort",
+  "ModalWindow",
+  "Notification",
+  "SVGElementInstance",
+  "Screen",
+  "SharedWorker",
+  "TextTrack",
+  "TextTrackCue",
+  "TextTrackList",
+  "WebSocket",
+  "WebSocketWorker",
+  "Worker",
+  "XMLHttpRequest",
+  "XMLHttpRequestEventTarget",
+  "XMLHttpRequestUpload"
+];
+const INTEGRATION_NAME$2 = "BrowserApiErrors";
+const _browserApiErrorsIntegration = (options = {}) => {
+  const _options = {
+    XMLHttpRequest: true,
+    eventTarget: true,
+    requestAnimationFrame: true,
+    setInterval: true,
+    setTimeout: true,
+    ...options
+  };
+  return {
+    name: INTEGRATION_NAME$2,
+    // TODO: This currently only works for the first client this is setup
+    // We may want to adjust this to check for client etc.
+    setupOnce() {
+      if (_options.setTimeout) {
+        fill(WINDOW$1, "setTimeout", _wrapTimeFunction);
+      }
+      if (_options.setInterval) {
+        fill(WINDOW$1, "setInterval", _wrapTimeFunction);
+      }
+      if (_options.requestAnimationFrame) {
+        fill(WINDOW$1, "requestAnimationFrame", _wrapRAF);
+      }
+      if (_options.XMLHttpRequest && "XMLHttpRequest" in WINDOW$1) {
+        fill(XMLHttpRequest.prototype, "send", _wrapXHR);
+      }
+      const eventTargetOption = _options.eventTarget;
+      if (eventTargetOption) {
+        const eventTarget = Array.isArray(eventTargetOption) ? eventTargetOption : DEFAULT_EVENT_TARGET;
+        eventTarget.forEach(_wrapEventTarget);
+      }
+    }
+  };
+};
+const browserApiErrorsIntegration = defineIntegration(_browserApiErrorsIntegration);
+function _wrapTimeFunction(original) {
+  return function(...args) {
+    const originalCallback = args[0];
+    args[0] = wrap(originalCallback, {
+      mechanism: {
+        data: { function: getFunctionName(original) },
+        handled: false,
+        type: "instrument"
+      }
+    });
+    return original.apply(this, args);
+  };
+}
+function _wrapRAF(original) {
+  return function(callback) {
+    return original.apply(this, [
+      wrap(callback, {
+        mechanism: {
+          data: {
+            function: "requestAnimationFrame",
+            handler: getFunctionName(original)
+          },
+          handled: false,
+          type: "instrument"
+        }
+      })
+    ]);
+  };
+}
+function _wrapXHR(originalSend) {
+  return function(...args) {
+    const xhr = this;
+    const xmlHttpRequestProps = ["onload", "onerror", "onprogress", "onreadystatechange"];
+    xmlHttpRequestProps.forEach((prop) => {
+      if (prop in xhr && typeof xhr[prop] === "function") {
+        fill(xhr, prop, function(original) {
+          const wrapOptions = {
+            mechanism: {
+              data: {
+                function: prop,
+                handler: getFunctionName(original)
+              },
+              handled: false,
+              type: "instrument"
+            }
+          };
+          const originalFunction = getOriginalFunction(original);
+          if (originalFunction) {
+            wrapOptions.mechanism.data.handler = getFunctionName(originalFunction);
+          }
+          return wrap(original, wrapOptions);
+        });
+      }
+    });
+    return originalSend.apply(this, args);
+  };
+}
+function _wrapEventTarget(target) {
+  const globalObject = WINDOW$1;
+  const proto = globalObject[target] && globalObject[target].prototype;
+  if (!proto || !proto.hasOwnProperty || !proto.hasOwnProperty("addEventListener")) {
+    return;
+  }
+  fill(proto, "addEventListener", function(original) {
+    return function(eventName, fn, options) {
+      try {
+        if (typeof fn.handleEvent === "function") {
+          fn.handleEvent = wrap(fn.handleEvent, {
+            mechanism: {
+              data: {
+                function: "handleEvent",
+                handler: getFunctionName(fn),
+                target
+              },
+              handled: false,
+              type: "instrument"
+            }
+          });
+        }
+      } catch (err) {
+      }
+      return original.apply(this, [
+        eventName,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        wrap(fn, {
+          mechanism: {
+            data: {
+              function: "addEventListener",
+              handler: getFunctionName(fn),
+              target
+            },
+            handled: false,
+            type: "instrument"
+          }
+        }),
+        options
+      ]);
+    };
+  });
+  fill(
+    proto,
+    "removeEventListener",
+    function(originalRemoveEventListener) {
+      return function(eventName, fn, options) {
+        const wrappedEventHandler = fn;
+        try {
+          const originalEventHandler = wrappedEventHandler && wrappedEventHandler.__sentry_wrapped__;
+          if (originalEventHandler) {
+            originalRemoveEventListener.call(this, eventName, originalEventHandler, options);
+          }
+        } catch (e2) {
+        }
+        return originalRemoveEventListener.call(this, eventName, wrappedEventHandler, options);
+      };
+    }
+  );
+}
+const INTEGRATION_NAME$1 = "GlobalHandlers";
+const _globalHandlersIntegration = (options = {}) => {
+  const _options = {
+    onerror: true,
+    onunhandledrejection: true,
+    ...options
+  };
+  return {
+    name: INTEGRATION_NAME$1,
+    setupOnce() {
+      Error.stackTraceLimit = 50;
+    },
+    setup(client2) {
+      if (_options.onerror) {
+        _installGlobalOnErrorHandler(client2);
+        globalHandlerLog("onerror");
+      }
+      if (_options.onunhandledrejection) {
+        _installGlobalOnUnhandledRejectionHandler(client2);
+        globalHandlerLog("onunhandledrejection");
+      }
+    }
+  };
+};
+const globalHandlersIntegration = defineIntegration(_globalHandlersIntegration);
+function _installGlobalOnErrorHandler(client2) {
+  addGlobalErrorInstrumentationHandler((data) => {
+    const { stackParser, attachStacktrace } = getOptions();
+    if (getClient() !== client2 || shouldIgnoreOnError()) {
+      return;
+    }
+    const { msg, url, line, column, error } = data;
+    const event = _enhanceEventWithInitialFrame(
+      eventFromUnknownInput(stackParser, error || msg, void 0, attachStacktrace, false),
+      url,
+      line,
+      column
+    );
+    event.level = "error";
+    captureEvent(event, {
+      originalException: error,
+      mechanism: {
+        handled: false,
+        type: "onerror"
+      }
+    });
+  });
+}
+function _installGlobalOnUnhandledRejectionHandler(client2) {
+  addGlobalUnhandledRejectionInstrumentationHandler((e2) => {
+    const { stackParser, attachStacktrace } = getOptions();
+    if (getClient() !== client2 || shouldIgnoreOnError()) {
+      return;
+    }
+    const error = _getUnhandledRejectionError(e2);
+    const event = isPrimitive(error) ? _eventFromRejectionWithPrimitive(error) : eventFromUnknownInput(stackParser, error, void 0, attachStacktrace, true);
+    event.level = "error";
+    captureEvent(event, {
+      originalException: error,
+      mechanism: {
+        handled: false,
+        type: "onunhandledrejection"
+      }
+    });
+  });
+}
+function _getUnhandledRejectionError(error) {
+  if (isPrimitive(error)) {
+    return error;
+  }
+  try {
+    if ("reason" in error) {
+      return error.reason;
+    }
+    if ("detail" in error && "reason" in error.detail) {
+      return error.detail.reason;
+    }
+  } catch (e2) {
+  }
+  return error;
+}
+function _eventFromRejectionWithPrimitive(reason) {
+  return {
+    exception: {
+      values: [
+        {
+          type: "UnhandledRejection",
+          // String() is needed because the Primitive type includes symbols (which can't be automatically stringified)
+          value: `Non-Error promise rejection captured with value: ${String(reason)}`
+        }
+      ]
+    }
+  };
+}
+function _enhanceEventWithInitialFrame(event, url, line, column) {
+  const e2 = event.exception = event.exception || {};
+  const ev = e2.values = e2.values || [];
+  const ev0 = ev[0] = ev[0] || {};
+  const ev0s = ev0.stacktrace = ev0.stacktrace || {};
+  const ev0sf = ev0s.frames = ev0s.frames || [];
+  const colno = isNaN(parseInt(column, 10)) ? void 0 : column;
+  const lineno = isNaN(parseInt(line, 10)) ? void 0 : line;
+  const filename = isString$1(url) && url.length > 0 ? url : getLocationHref();
+  if (ev0sf.length === 0) {
+    ev0sf.push({
+      colno,
+      filename,
+      function: UNKNOWN_FUNCTION,
+      in_app: true,
+      lineno
+    });
+  }
+  return event;
+}
+function globalHandlerLog(type) {
+  DEBUG_BUILD$1 && logger.log(`Global Handler attached: ${type}`);
+}
+function getOptions() {
+  const client2 = getClient();
+  const options = client2 && client2.getOptions() || {
+    stackParser: () => [],
+    attachStacktrace: false
+  };
+  return options;
+}
+const httpContextIntegration = defineIntegration(() => {
+  return {
+    name: "HttpContext",
+    preprocessEvent(event) {
+      if (!WINDOW$1.navigator && !WINDOW$1.location && !WINDOW$1.document) {
+        return;
+      }
+      const url = event.request && event.request.url || WINDOW$1.location && WINDOW$1.location.href;
+      const { referrer } = WINDOW$1.document || {};
+      const { userAgent } = WINDOW$1.navigator || {};
+      const headers = {
+        ...event.request && event.request.headers,
+        ...referrer && { Referer: referrer },
+        ...userAgent && { "User-Agent": userAgent }
+      };
+      const request = { ...event.request, ...url && { url }, headers };
+      event.request = request;
+    }
+  };
+});
+const DEFAULT_KEY = "cause";
+const DEFAULT_LIMIT = 5;
+const INTEGRATION_NAME = "LinkedErrors";
+const _linkedErrorsIntegration = (options = {}) => {
+  const limit = options.limit || DEFAULT_LIMIT;
+  const key = options.key || DEFAULT_KEY;
+  return {
+    name: INTEGRATION_NAME,
+    preprocessEvent(event, hint, client2) {
+      const options2 = client2.getOptions();
+      applyAggregateErrorsToEvent(
+        // This differs from the LinkedErrors integration in core by using a different exceptionFromError function
+        exceptionFromError,
+        options2.stackParser,
+        options2.maxValueLength,
+        key,
+        limit,
+        event,
+        hint
+      );
+    }
+  };
+};
+const linkedErrorsIntegration = defineIntegration(_linkedErrorsIntegration);
+function getDefaultIntegrations(_options) {
+  return [
+    inboundFiltersIntegration(),
+    functionToStringIntegration(),
+    browserApiErrorsIntegration(),
+    breadcrumbsIntegration(),
+    globalHandlersIntegration(),
+    linkedErrorsIntegration(),
+    dedupeIntegration(),
+    httpContextIntegration()
+  ];
+}
+function applyDefaultOptions(optionsArg = {}) {
+  const defaultOptions = {
+    defaultIntegrations: getDefaultIntegrations(),
+    release: typeof __SENTRY_RELEASE__ === "string" ? __SENTRY_RELEASE__ : WINDOW$1.SENTRY_RELEASE && WINDOW$1.SENTRY_RELEASE.id ? WINDOW$1.SENTRY_RELEASE.id : void 0,
+    autoSessionTracking: true,
+    sendClientReports: true
+  };
+  return { ...defaultOptions, ...optionsArg };
+}
+function shouldShowBrowserExtensionError() {
+  const windowWithMaybeExtension = typeof WINDOW$1.window !== "undefined" && WINDOW$1;
+  if (!windowWithMaybeExtension) {
+    return false;
+  }
+  const extensionKey = windowWithMaybeExtension.chrome ? "chrome" : "browser";
+  const extensionObject = windowWithMaybeExtension[extensionKey];
+  const runtimeId = extensionObject && extensionObject.runtime && extensionObject.runtime.id;
+  const href = WINDOW$1.location && WINDOW$1.location.href || "";
+  const extensionProtocols = ["chrome-extension:", "moz-extension:", "ms-browser-extension:"];
+  const isDedicatedExtensionPage = !!runtimeId && WINDOW$1 === WINDOW$1.top && extensionProtocols.some((protocol) => href.startsWith(`${protocol}//`));
+  const isNWjs = typeof windowWithMaybeExtension.nw !== "undefined";
+  return !!runtimeId && !isDedicatedExtensionPage && !isNWjs;
+}
+function init$1(browserOptions = {}) {
+  const options = applyDefaultOptions(browserOptions);
+  if (shouldShowBrowserExtensionError()) {
+    consoleSandbox(() => {
+      console.error(
+        "[Sentry] You cannot run Sentry this way in a browser extension, check: https://docs.sentry.io/platforms/javascript/best-practices/browser-extensions/"
+      );
+    });
+    return;
+  }
+  if (DEBUG_BUILD$1) {
+    if (!supportsFetch()) {
+      logger.warn(
+        "No Fetch API detected. The Sentry SDK requires a Fetch API compatible environment to send events. Please add a Fetch API polyfill."
+      );
+    }
+  }
+  const clientOptions = {
+    ...options,
+    stackParser: stackParserFromStackParserOptions(options.stackParser || defaultStackParser),
+    integrations: getIntegrationsToSetup(options),
+    transport: options.transport || makeFetchTransport
+  };
+  const client2 = initAndBind(BrowserClient, clientOptions);
+  if (options.autoSessionTracking) {
+    startSessionTracking();
+  }
+  return client2;
+}
+function startSessionTracking() {
+  if (typeof WINDOW$1.document === "undefined") {
+    DEBUG_BUILD$1 && logger.warn("Session tracking in non-browser environment with @sentry/browser is not supported.");
+    return;
+  }
+  startSession({ ignoreDuration: true });
+  captureSession();
+  addHistoryInstrumentationHandler(({ from, to }) => {
+    if (from !== void 0 && from !== to) {
+      startSession({ ignoreDuration: true });
+      captureSession();
+    }
+  });
+}
+function init(options) {
+  const opts = {
+    ...options
+  };
+  applySdkMetadata(opts, "react");
+  setContext("react", { version: reactExports.version });
+  return init$1(opts);
+}
 function ChevronDownIcon({
   title,
   titleId,
@@ -13304,10 +18906,10 @@ function resolveVariantFromProps(props, definition, custom, visualElement) {
   }
   return definition;
 }
-function useConstant(init) {
+function useConstant(init2) {
   const ref = reactExports.useRef(null);
   if (ref.current === null) {
-    ref.current = init();
+    ref.current = init2();
   }
   return ref.current;
 }
@@ -15792,7 +21394,7 @@ class MotionValue {
    *
    * @internal
    */
-  constructor(init, options = {}) {
+  constructor(init2, options = {}) {
     this.version = "11.3.2";
     this.canTrackVelocity = null;
     this.events = {};
@@ -15811,7 +21413,7 @@ class MotionValue {
       }
     };
     this.hasAnimated = false;
-    this.setCurrent(init);
+    this.setCurrent(init2);
     this.owner = options.owner;
   }
   setCurrent(current) {
@@ -16039,8 +21641,8 @@ class MotionValue {
     }
   }
 }
-function motionValue(init, options) {
-  return new MotionValue(init, options);
+function motionValue(init2, options) {
+  return new MotionValue(init2, options);
 }
 function setMotionValue(visualElement, key, value) {
   if (visualElement.hasValue(key)) {
@@ -16474,7 +22076,7 @@ function distance2D(a3, b2) {
   return Math.sqrt(xDelta ** 2 + yDelta ** 2);
 }
 class PanSession {
-  constructor(event, handlers, { transformPagePoint, contextWindow, dragSnapToOrigin = false } = {}) {
+  constructor(event, handlers2, { transformPagePoint, contextWindow, dragSnapToOrigin = false } = {}) {
     this.startEvent = null;
     this.lastMoveEvent = null;
     this.lastMoveEventInfo = null;
@@ -16519,7 +22121,7 @@ class PanSession {
     if (!isPrimaryPointer(event))
       return;
     this.dragSnapToOrigin = dragSnapToOrigin;
-    this.handlers = handlers;
+    this.handlers = handlers2;
     this.transformPagePoint = transformPagePoint;
     this.contextWindow = contextWindow || window;
     const info = extractEventInfo(event);
@@ -16527,12 +22129,12 @@ class PanSession {
     const { point } = initialInfo;
     const { timestamp } = frameData;
     this.history = [{ ...point, timestamp }];
-    const { onSessionStart } = handlers;
+    const { onSessionStart } = handlers2;
     onSessionStart && onSessionStart(event, getPanInfo(initialInfo, this.history));
     this.removeListeners = pipe(addPointerEvent(this.contextWindow, "pointermove", this.handlePointerMove), addPointerEvent(this.contextWindow, "pointerup", this.handlePointerUp), addPointerEvent(this.contextWindow, "pointercancel", this.handlePointerUp));
   }
-  updateHandlers(handlers) {
-    this.handlers = handlers;
+  updateHandlers(handlers2) {
+    this.handlers = handlers2;
   }
   end() {
     this.removeListeners && this.removeListeners();
@@ -19525,6 +25127,16 @@ const ThemeProvider = ({ children }) => {
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsx(ThemeContext.Provider, { value: { theme, setTheme, toggleTheme }, children });
 };
+var define_import_meta_env_default = { BASE_URL: "/", MODE: "production", DEV: false, PROD: true, SSR: false };
+const appEnv = define_import_meta_env_default.VITE_APP_ENV || false;
+const isProductionEnvironment = "production" === appEnv || true;
+if (isProductionEnvironment) {
+  index$2.initialize("2c54d796-5f59-434c-85e2-1381de1d0d07", "https://abenevaut.piwik.pro");
+}
+init({
+  dsn: "https://bf032283abab4fdb9fbcd7328ed39b28@o229053.ingest.us.sentry.io/1385819",
+  environment: appEnv
+});
 const navItems = [
   { label: "Portfolio", url: "index.html" }
   // { label: 'About me', url: 'profile.html' },
