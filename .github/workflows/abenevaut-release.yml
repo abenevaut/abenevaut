@@ -93,8 +93,9 @@ jobs:
         env:
           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.ABENEVAUT_GITHUB_TOKEN }}
 
+      - name: Create Sentry release JSON Payload
+        run: echo "SENTRY_RELEASE_PAYLOAD={\"version\":\"${{ steps.branch-name.outputs.SOURCE_TAG }}\"}" >> $GITHUB_ENV
+
       - name: Publish release to Sentry
         run: |
-          curl https://us.sentry.io/api/hooks/release/builtin/1385819/11561a48f4aa65a45ec5adf0c59879599b13c0816aa73c3b6f6d64c7efba9862/ -X POST -H 'Content-Type: application/json' -d '{"version": "${{ env.SOURCE_TAG }}"}'
-        env:
-          SOURCE_TAG: ${{ steps.branch-name.outputs.SOURCE_TAG }}
+          curl https://us.sentry.io/api/hooks/release/builtin/1385819/11561a48f4aa65a45ec5adf0c59879599b13c0816aa73c3b6f6d64c7efba9862/ -X POST -H 'Content-Type: application/json' -d ${{ env.SENTRY_RELEASE_PAYLOAD }}
