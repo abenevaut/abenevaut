@@ -7,7 +7,7 @@
     <title>Not Found</title>
     <link rel="stylesheet" href="assets/theme.min.css">
 </head>
-<body class="antialiased text-gray-300 bg-dark-100">
+<body class="antialiased text-black-300 bg-dark-100">
 <div class="py-10 sm:py-32">
     <div class="mx-auto md:w-2/4 lg:w-1/4">
         <div class="px-4 py-24 text-center sm:px-16 bg-dark-400">
