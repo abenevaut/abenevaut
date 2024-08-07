@@ -1,6 +1,7 @@
 'use client'
 
 import { useLocation } from "react-router-dom";
+import PiwikPro from '@piwikpro/react-piwik-pro';
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
 import { Avatar } from '@abenevaut/tailwindui/src/js/Catalyst/avatar'
 import { Dropdown, DropdownButton, DropdownItem, DropdownLabel, DropdownMenu } from '@abenevaut/tailwindui/src/js/Catalyst/dropdown'
@@ -9,6 +10,12 @@ import { Sidebar, SidebarBody, SidebarHeader, SidebarItem, SidebarLabel, Sidebar
 import logoUrl from '@abenevaut/maskot-2013/dist/app-icon.webp'
 import { StackedLayout } from "@abenevaut/tailwindui/src/js/Catalyst/stacked-layout.jsx";
 import { ThemeProvider } from "@abenevaut/tailwindui/src/js/Providers/ThemeProvider.jsx";
+
+const isDevEnvironment = 'dev' === process.env.NODE_ENV || true;
+
+if (!isDevEnvironment) {
+  PiwikPro.initialize('2c54d796-5f59-434c-85e2-1381de1d0d07', 'https://abenevaut.piwik.pro');
+}
 
 const navItems = [
   { label: 'Portfolio', url: 'index.html' },
