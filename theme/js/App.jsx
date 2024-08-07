@@ -2,6 +2,7 @@
 
 import { useLocation } from "react-router-dom";
 import PiwikPro from '@piwikpro/react-piwik-pro';
+import * as Sentry from "@sentry/react";
 import { ChevronDownIcon } from '@heroicons/react/16/solid'
 import { Avatar } from '@abenevaut/tailwindui/src/js/Catalyst/avatar'
 import { Dropdown, DropdownButton, DropdownItem, DropdownLabel, DropdownMenu } from '@abenevaut/tailwindui/src/js/Catalyst/dropdown'
@@ -11,11 +12,17 @@ import logoUrl from '@abenevaut/maskot-2013/dist/app-icon.webp'
 import { StackedLayout } from "@abenevaut/tailwindui/src/js/Catalyst/stacked-layout.jsx";
 import { ThemeProvider } from "@abenevaut/tailwindui/src/js/Providers/ThemeProvider.jsx";
 
-const isDevEnvironment = 'dev' === process.env.NODE_ENV || true;
+const appEnv = import.meta.env.VITE_APP_ENV || false;
+const isProductionEnvironment = 'production' === appEnv || true;
 
-if (!isDevEnvironment) {
+if (isProductionEnvironment) {
   PiwikPro.initialize('2c54d796-5f59-434c-85e2-1381de1d0d07', 'https://abenevaut.piwik.pro');
 }
+
+Sentry.init({
+  dsn: 'https://bf032283abab4fdb9fbcd7328ed39b28@o229053.ingest.us.sentry.io/1385819',
+  environment: appEnv,
+});
 
 const navItems = [
   { label: 'Portfolio', url: 'index.html' },
