@@ -13,20 +13,20 @@ client.createRoot(document.getElementById("root")).render(
         " attache une grande importance au respect de la vie privée, et n’utilise que des données de manière responsable et confidentielle et dans une finalité précise."
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "ppms_cm_privacy_settings", className: "ppms_cm_privacy_settings_widget", "data-editor-centralize": "true", "data-main-container": "true", "data-root": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "ppms_cm_privacy_settings_widget_content", "data-disable-select": "true", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { id: "ppms_cm_privacy_settings", "data-editor-centralize": "true", "data-main-container": "true", "data-root": "true", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { "data-disable-select": "true", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "h3",
           {
             id: "ppms_cm_privacy_settings_form_link_header_id",
-            className: "ppms_cm_privacy_settings_form_link_header pl-4 -ml-4 font-medium border-l-2 sm:pl-6 sm:-ml-6 dark:text-white border-zinc-950/10 dark:border-white/10",
+            className: "pl-4 -ml-4 font-medium border-l-2 sm:pl-6 sm:-ml-6 dark:text-white border-zinc-950/10 dark:border-white/10",
             children: "Privacy settings"
           }
         ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "ppms_cm_privacy_settings_form_link_text dark:text-white", id: "ppms_cm_privacy_settings_form_link_text_id", children: "We collect and process your data on this site to better understand how it is used. We always ask you for consent to do that. You can change your privacy settings here." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "dark:text-white", id: "ppms_cm_privacy_settings_form_link_text_id", children: "We collect and process your data on this site to better understand how it is used. We always ask you for consent to do that. You can change your privacy settings here." }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           Button,
           {
-            className: "ppms_cm_privacy_settings_button_show flex items-center px-4 py-2 text-sm mt-2",
+            className: "flex items-center px-4 py-2 text-sm mt-2",
             id: "ppms_cm_privacy_settings_button",
             children: "Manage settings"
           }
