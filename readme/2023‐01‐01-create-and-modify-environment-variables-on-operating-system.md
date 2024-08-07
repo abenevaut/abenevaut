@@ -9,7 +9,7 @@ Vous pouvez personnaliser ces variables à l'échelle de l'OS ou à l'échelle d
 
 > Si vous souhaitez essayer, je vous recommande de vérifier la documentation de votre OS ainsi que celle de votre terminal
 
-Les variables les plus populaires sont généralement:
+Les variables les plus populaires sont généralement :
 
 - `PATH` qui indique les repertoires ou sont stockés l'ensemble des logiciels de l'OS
 - `USER` qui indique l'utilisateur connecté

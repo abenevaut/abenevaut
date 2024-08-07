@@ -1,19 +1,14 @@
 {
     "name": "abenevaut/www",
     "type": "project",
-    "description": "GamePro Theme TailwindCss, extended for abenevaut",
-    "keywords": ["gamepro", "laravel-one"],
+    "description": "abenevaut portfolio showcase",
+    "keywords": ["abenevaut", "portfolio", "showcase", "laravel-one"],
     "license": "proprietary",
     "require": {
-        "php": "^8.1"
+        "php": "^8.2"
     },
     "require-dev": {
         "abenevaut/laravel-one": "^0.4"
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
     },
     "config": {
         "optimize-autoloader": true,
@@ -23,6 +18,6 @@
             "pestphp/pest-plugin": true
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }

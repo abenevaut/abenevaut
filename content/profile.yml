@@ -34,22 +34,36 @@ projects:
     url: https://github.com/abenevaut/phpunit-slicer
     logo: favicon/android-chrome-96x96.png
     name: phpunit-slicer
-  - laravel-one:
+  - laravel-sentry-handler:
     url: https://github.com/abenevaut/laravel-sentry-handler
     logo: favicon/android-chrome-96x96.png
     name: laravel-sentry-handler
-  - laravel-ohdear:
-    url: https://github.com/abenevaut/laravel-ohdear
-    logo: favicon/android-chrome-96x96.png
-    name: laravel-ohdear
-  - laravel-asana:
-    url: https://github.com/abenevaut/laravel-asana
-    logo: favicon/android-chrome-96x96.png
-    name: laravel-asana
 
 feed:
   title: Career
   company:
+
+    - laravel-france:
+      url: https://laravel-france.com
+      logo: images/laravel-france-logo.jpeg
+      capture: images/laravel-france-app.webp
+      name: Laravel France
+      position: Contributing Writer
+      period: January 2024 to Today
+      description: |
+        Founded in 2023, the Association Francophone des utilisateurs de LAravel (AFLA, or Francophone Laravel Users Association) brings together French-speaking professionals around the PHP framework Laravel. It aims to share knowledge, enhance skills, and animate the community through blog articles and discussions on its forums and social networks.
+
+        As a writer for AFLA, my role is to disseminate knowledge about Laravel and its environment. I write and share technical articles and tutorials. Along with contributors, we collaborate to keep the blog up to date, produce relevant content, and engage discussions on our forums and social networks.
+      how:
+        - Within a team of 6 people
+      missions:
+        - Write articles and tutorials
+      stack:
+        - PHP
+        - Laravel Framework
+        - VueJS
+        - MySQL
+        - TailwindCSS
 
     - globalexam:
       url: https://global-exam.com

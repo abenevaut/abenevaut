@@ -12,6 +12,18 @@ seo:
 portfolio:
   title: Projects
   projects:
+    - on-installe-php-sur-votre-machine-windows:
+      capture: https://cdn.laravel-france.com/images/covers/619a6863-d968-4f27-8171-4a37f75bf3a6.png
+      title: "On installe PHP sur votre machine Windows"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/on-installe-php-sur-votre-machine-windows
+      date: 23-07-2024
+    - ameliorer-le-referencement-avec-spatielaravel-sitemap:
+      capture: https://cdn.laravel-france.com/images/covers/8165f558-64e6-4ef3-80d6-bdd8e6ac534c.jpg
+      title: "Améliorer le référencement avec spatie/laravel-sitemap"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/ameliorer-le-referencement-avec-spatielaravel-sitemap
+      date: 15-05-2024
     - le-driver-mail-failover:
       capture: https://cdn.laravel-france.com/images/covers/b003323c-0b7d-415d-aec1-f5c442dfdadb.png
       title: "Le driver mail failover"
@@ -24,29 +36,29 @@ portfolio:
       brief: Article laravel-france.com
       url: https://laravel-france.com/posts/utilisez-illuminate-en-dehors-de-laravel
       date: 04-03-2024
-    - pikminbloom:
-      capture: images/playperidot.png
-      title: playperidot.blazedcss.com
-      brief: Annuaire de joueurs Peridot
-      url: https://playperidot.blazedcss.com
-      date: 2023
-    - pikminbloom:
-      capture: images/pikminbloom.png
-      title: pikminbloom.blazedcss.com
-      brief: Annuaire de joueurs Pikmin Bloom
-      url: https://pikminbloom.blazedcss.com
-      date: 2023
-    - nbaallworld:
-      capture: images/nbaallworld.png
-      title: nbaallworld.blazedcss.com
-      brief: Annuaire de joueurs NBA All-World
-      url: https://nbaallworld.blazedcss.com
-      date: 2023
+#    - playperidot:
+#      capture: images/playperidot.png
+#      title: playperidot.blazedcss.com
+#      brief: Annuaire Peridot
+#      url:
+#      date: 2023
+#    - pikminbloom:
+#      capture: images/pikminbloom.png
+#      title: pikminbloom.blazedcss.com
+#      brief: Annuaire Pikmin Bloom
+#      url:
+#      date: 2023
+#    - nbaallworld:
+#      capture: images/nbaallworld.png
+#      title: nbaallworld.blazedcss.com
+#      brief: Annuaire NBA All-World
+#      url:
+#      date: 2023
     - pokemongolive:
       capture: images/pokemongolive.png
       title: pokemongo.blazedcss.com
-      brief: Annuaire de joueurs Pokemon Go
-      url: https://pokemongo.blazedcss.com
+      brief: Annuaire Pokemon Go
+      url:
       date: 2022
     - panacea:
       capture: images/dixens-panacea.webp
@@ -70,7 +82,7 @@ portfolio:
       capture: images/dixens-phkd.webp
       title: Paris Hapkido Jongshin Dojang
       brief: Portail associatif
-      url: http://www.parishapkido.fr/
+      url: https://www.parishapkido.fr/
       date: 2013
     - easyserviceinformatique:
       capture: images/dixens-easyserviceinformatique.webp
@@ -100,7 +112,7 @@ portfolio:
       capture: images/dixens-hideho.webp
       title: Hi De Ho blog
       brief: Portail culturel
-      url: http://www.thehidehoblog.com/
+      url: https://www.thehidehoblog.com/
       date: 2013
     - alliance:
       capture: images/dixens-alliance.webp

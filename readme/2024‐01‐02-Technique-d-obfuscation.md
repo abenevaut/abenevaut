@@ -16,7 +16,6 @@ Un lien classique de type
 <button onClick="window.open('/page.html', '_blank');">Lien</button>
 ```
 
-
 ##
 
 # Sitemap

@@ -1,8 +1,3 @@
-| Logs       |            |
-|------------|------------|
-| created at | 2023-08-18 |
-| updated at | 2023-08-18 |
-
 # Fastpass
 
 | OS          | Path                                    |
@@ -30,10 +25,9 @@ contains manually defined DNS entries that allows computer to route network traf
 !! Note that the hosts file only affect the computer on which the changes were made.
 !! You do not need to restart your computer after changes.
 
-!! 127.0.0.1 is a special IP address that allows network communication to loop back to the same computer without going through external networks
+> 127.0.0.1 is a special IP address that allows network communication to loop back to the same computer without going through external networks
 
 # Resources
 
--   <https://en.wikipedia.org/wiki/Hosts_(file)>
-
-          
+- https://en.wikipedia.org/wiki/Hosts_(file)
+         
