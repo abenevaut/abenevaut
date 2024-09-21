@@ -12,12 +12,24 @@ seo:
 portfolio:
   title: Projects
   projects:
+    - optimiser-votre-seo-avec-les-donnees-structurees:
+      capture: https://cdn.laravel-france.com/images/covers/22c060a9-7bef-4514-94ce-e1ccd35e83e0.png
+      title: "Optimiser votre SEO avec les données Structurées"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/optimiser-votre-seo-avec-les-donnees-structurees
+      date: 05-09-2024
     - on-installe-php-sur-votre-machine-windows:
       capture: https://cdn.laravel-france.com/images/covers/619a6863-d968-4f27-8171-4a37f75bf3a6.png
       title: "On installe PHP sur votre machine Windows"
       brief: Article laravel-france.com
       url: https://laravel-france.com/posts/on-installe-php-sur-votre-machine-windows
       date: 23-07-2024
+    - laravel-les-seeders:
+      capture: https://cdn.laravel-france.com/images/covers/296560f1-4f30-4d21-b4ee-73345d7b2d89.jpg
+      title: "Laravel, Les Seeders"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/les-seeders
+      date: 26-06-2024
     - ameliorer-le-referencement-avec-spatielaravel-sitemap:
       capture: https://cdn.laravel-france.com/images/covers/8165f558-64e6-4ef3-80d6-bdd8e6ac534c.jpg
       title: "Améliorer le référencement avec spatie/laravel-sitemap"
