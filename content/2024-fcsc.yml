@@ -1,0 +1,29 @@
+view: CTFContentSection
+language: en
+seo:
+  title: Capture The Flags, FCSC 2024
+  description: Prenez part au France Cybersecurity Challenge (FCSC) et tentez de remporter votre place au sein de l'équipe France qui représentera notre pays à l’European Cybersecurity Challenge (ECSC).
+  keywords: ctf, security, FCSC
+  author: Antoine Benevaut
+  twitter: "@abenevaut"
+  og-image: https://www.abenevaut.dev/seo/abenevaut-og.webp
+  url: https://www.abenevaut.dev/
+
+article:
+  contentCategory: "Capture The Flags"
+  contentTitle: "FCSC 2024"
+  contentBody: "<p class='mt-6'>
+    Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet
+    vitae sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque
+    erat velit. Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris
+    semper sed amet vitae sed turpis id.
+    </p>
+    <p class='mt-8'>
+    Et vitae blandit facilisi magna lacus commodo. Vitae sapien duis odio id et. Id blandit molestie
+    auctor fermentum dignissim. Lacus diam tincidunt ac cursus in vel. Mauris varius vulputate et ultrices
+    hac adipiscing egestas. Iaculis convallis ac tempor et ut. Ac lorem vel integer orci.
+    </p>"
+  caption: "“Prenez part au France Cybersecurity Challenge (FCSC) et tentez de remporter votre place au sein de l'équipe France qui représentera notre pays à l’European Cybersecurity Challenge (ECSC).”"
+  captionImage: "https://cyber.gouv.fr/sites/default/files/image/PNG.png"
+  outlink: "https://hackropole.fr/fr/fcsc2024/"
+  outlinkTitle: "Re-vivez le challenge sur hackropole.fr"

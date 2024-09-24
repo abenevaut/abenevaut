@@ -1,0 +1,30 @@
+view: CTFContentSection
+language: en
+seo:
+  title: Capture The Flags, COMCYBER challenges
+  description: Mettez vos compétences en cybersécurité au service de l'armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.
+  keywords: ctf, security, comcyber
+  author: Antoine Benevaut
+  twitter: "@abenevaut"
+  og-image: https://www.abenevaut.dev/seo/abenevaut-og.webp
+  url: https://www.abenevaut.dev/
+
+article:
+  contentCategory: "Capture The Flags"
+  contentTitle: "COMCYBER challenges"
+  contentBody: "<p class='mt-6'>
+    Missions exceptionnelles, environnement hors du commun : venez découvrir les opérations militaires d'un sous-officier cyber.
+    6 flags sont à trouver au total.
+    </p>
+    <p class='mt-8'>
+    Et vitae blandit facilisi magna lacus commodo. Vitae sapien duis odio id et. Id blandit molestie
+    auctor fermentum dignissim. Lacus diam tincidunt ac cursus in vel. Mauris varius vulputate et ultrices
+    hac adipiscing egestas. Iaculis convallis ac tempor et ut. Ac lorem vel integer orci.
+    </p>"
+  caption: "“Mettez vos compétences en cybersécurité au service de l'armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.”"
+  captionImage: "https://comcyber.challenges.pro.root-me.org/static/img/comcyber.png"
+#  stats:
+#    - { label: 'Score', value: '4/6' }
+#    - { label: 'Fun', value: '100%' }
+  outlink: "https://comcyber.challenges.pro.root-me.org"
+  outlinkTitle: "Glissez-vous dans la peau d'un cybercombattant"

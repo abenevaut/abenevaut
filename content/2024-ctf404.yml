@@ -1,0 +1,26 @@
+view: CTFContentSection
+language: en
+seo:
+  title: Capture The Flags, 404 CTF
+  description:
+  keywords: ctf, security, 404ctf
+  author: Antoine Benevaut
+  twitter: "@abenevaut"
+  og-image: https://www.abenevaut.dev/seo/abenevaut-og.webp
+  url: https://www.abenevaut.dev/
+
+article:
+  contentCategory: "Capture The Flags"
+  contentTitle: "404 CTF - Édition 2024"
+  contentBody: "<p class='mt-6'>
+    L'édition 2024 s'est tenue du 20 avril au 12 mai 2024 et a rassemblé près de 3800 participants autours de 72 de challenges conçus par HackademINT.
+    </p>
+    <p class='mt-8'>
+    Et vitae blandit facilisi magna lacus commodo. Vitae sapien duis odio id et. Id blandit molestie
+    auctor fermentum dignissim. Lacus diam tincidunt ac cursus in vel. Mauris varius vulputate et ultrices
+    hac adipiscing egestas. Iaculis convallis ac tempor et ut. Ac lorem vel integer orci.
+    </p>"
+  caption: "“Le 404 CTF est la plus grande compétition de cybersécurité française.”"
+  captionImage: "https://www.404ctf.fr/assets/2024/logos/logo.png"
+  outlink: "https://github.com/HackademINT/404CTF-2024"
+  outlinkTitle: "Re-vivez les challenges disponibles sur GitHub"
