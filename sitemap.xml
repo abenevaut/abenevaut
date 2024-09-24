@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
+        <loc>https://www.abenevaut.dev/2024-comcyber.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
+        <loc>https://www.abenevaut.dev/2024-ctf404.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
+        <loc>https://www.abenevaut.dev/2024-fcsc.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
         <loc>https://www.abenevaut.dev/404.html</loc>
             <changefreq>monthly</changefreq>
         <priority>0.1</priority>

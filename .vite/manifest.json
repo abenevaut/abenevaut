@@ -22,6 +22,15 @@
     "src": "theme/css/app.css",
     "isEntry": true
   },
+  "theme/js/CTFContentSection.jsx": {
+    "file": "assets/CTFContentSection.js",
+    "name": "CTFContentSection",
+    "src": "theme/js/CTFContentSection.jsx",
+    "isEntry": true,
+    "imports": [
+      "_App2.js"
+    ]
+  },
   "theme/js/Home.jsx": {
     "file": "assets/Home.js",
     "name": "Home",
