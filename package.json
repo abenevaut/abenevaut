@@ -24,6 +24,7 @@
     "@abenevaut/tailwindui": "^0.0.5",
     "@piwikpro/react-piwik-pro": "^2.1.1",
     "@sentry/react": "^8.24.0",
+    "@tailwindcss/typography": "^0.5.15",
     "@tanstack/react-query": "^5.45.0",
     "@vitejs/plugin-react": "^4.2.1",
     "axios": "^1.7.2",

