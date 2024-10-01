@@ -1,6 +1,6 @@
-import { j as jsxRuntimeExports, a as client, W as WithoutRouterProvider, A as App } from "./App2.js";
+import { j as jsxRuntimeExports, a as client, W as WithoutRouterProvider, A as App, r as reactExports } from "./App2.js";
 function ContentSectionWithTestimonialAndStats({ contentCategory, contentTitle, contentBody, caption, captionImage, stats, outlink, outlinkTitle, captionAuthor = "", captionAuthorTitle = "" }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-white py-24 sm:py-32", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto max-w-7xl px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-2xl grid-cols-1 items-start gap-x-8 gap-y-16 sm:gap-y-24 lg:mx-0 lg:max-w-none lg:grid-cols-2", children: [
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "py-12 sm:py-24", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto max-w-7xl px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-2xl grid-cols-1 items-start gap-x-8 gap-y-16 sm:gap-y-24 lg:mx-0 lg:max-w-none lg:grid-cols-2", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "lg:pr-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative overflow-hidden rounded-3xl bg-gray-900 px-6 pb-9 pt-64 shadow-2xl sm:px-12 lg:max-w-lg lg:px-8 lg:pb-8 xl:px-10 xl:pb-10", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "img",
@@ -56,7 +56,7 @@ function ContentSectionWithTestimonialAndStats({ contentCategory, contentTitle, 
       ] })
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-base leading-7 text-gray-700 lg:max-w-lg", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-base leading-7 text-gray-900 dark:text-white lg:max-w-lg", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base font-semibold leading-7 text-indigo-600", children: contentCategory }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl", children: contentTitle }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-xl", children: contentBody })
@@ -73,23 +73,40 @@ function ContentSectionWithTestimonialAndStats({ contentCategory, contentTitle, 
     ] })
   ] }) }) });
 }
-const { data } = window;
-console.log(data);
-const props = JSON.parse(data);
-console.log(props);
-client.createRoot(document.getElementById("root")).render(
-  /* @__PURE__ */ jsxRuntimeExports.jsx(WithoutRouterProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-    ContentSectionWithTestimonialAndStats,
-    {
-      contentCategory: props.contentCategory,
-      contentTitle: props.contentTitle,
-      contentBody: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { dangerouslySetInnerHTML: { __html: props.contentBody } }),
-      caption: props.caption,
-      captionImage: props.captionImage,
-      stats: props.stats,
-      outlink: props.outlink,
-      outlinkTitle: props.outlinkTitle
+const articleObject = JSON.parse(window.article);
+const writeupObject = window.writeup;
+const ScrollToHash = () => {
+  reactExports.useEffect(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      const element = document.getElementById(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
     }
-  ) }) })
+  }, []);
+  return null;
+};
+client.createRoot(document.getElementById("root")).render(
+  /* @__PURE__ */ jsxRuntimeExports.jsx(WithoutRouterProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(App, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollToHash, {}),
+    /* @__PURE__ */ jsxRuntimeExports.jsx(
+      ContentSectionWithTestimonialAndStats,
+      {
+        contentCategory: articleObject.contentCategory,
+        contentTitle: articleObject.contentTitle,
+        contentBody: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { dangerouslySetInnerHTML: { __html: articleObject.contentBody } }),
+        caption: articleObject.caption,
+        captionImage: articleObject.captionImage,
+        stats: articleObject.stats,
+        outlink: articleObject.outlink,
+        outlinkTitle: articleObject.outlinkTitle
+      }
+    ),
+    writeupObject ? (
+      //<div className="py-12 px-6 md:px-0 overflow-hidden bg-white max-w-screen-md mx-auto">
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto max-w-7xl px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto grid max-w-2xl grid-cols-1 items-start gap-x-8 gap-y-16 sm:gap-y-24 lg:mx-0 lg:max-w-none", children: /* @__PURE__ */ jsxRuntimeExports.jsx("article", { className: "\n                    prose dark:prose-invert prose-base max-w-none\n                    prose-headings:no-underline prose-headings:text-gray-900\n                    prose-a:no-underline prose-a:text-indigo-600 hover:prose-a:text-indigo-500\n                    prose-p:text-gray-900 prose-p:dark:text-white\n                    prose-li:text-gray-900 prose-li:dark:text-white\n                  ", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { dangerouslySetInnerHTML: { __html: writeupObject } }) }) }) })
+    ) : ""
+  ] }) })
 );
 //# sourceMappingURL=CTFContentSection.js.map
