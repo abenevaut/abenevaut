@@ -105,7 +105,7 @@ writeup: |+
   PORT     STATE    SERVICE VERSION
   5000/tcp open     http    nginx 1.22.1
   ```
-  [Énumération complete](https://www.abenevaut.dev/images/ctf-2024-comcyber/inital.nmap)
+  [Énumération complete](https://www.abenevaut.dev/images/ctf-2024-comcyber/initial.nmap)
   
   Lorsque l'on visite ce service http://163.172.68.42:5000, on découvre une page de login.
   - nous sommes redirigé vers http://163.172.68.42:5000/login
@@ -184,9 +184,9 @@ writeup: |+
   ## Goliath
 
   Une fois logué, nous arrivons sur cette interface :
-
-  ![Goliath dashboard](https://www.abenevaut.dev/images/ctf-2024-comcyber/Dashboard%20-%20Personnel%20–%20Microsoft_%20Edge%2004_09_2024 12_54_31.png)
   
+  ![Goliath dashboard](https://www.abenevaut.dev/images/ctf-2024-comcyber/Dashboard%20-%20Personnel%20–%20Microsoft_%20Edge%2004_09_2024%2012_54_31.png)
+
   On remarque une liste de vehicule.
   Une fois un vehicule selectionne, des informations sur le vehicule apparaissent.
   
