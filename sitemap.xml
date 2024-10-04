@@ -1,17 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
+        <loc>https://www.abenevaut.dev/2023‐01‐01-create-and-modify-environment-variables-on-operating-system.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
+        <loc>https://www.abenevaut.dev/2023‐01‐12-dotenv-environment-management-on-laravel.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
+        <loc>https://www.abenevaut.dev/2023‐06‐02-compile-PHP-on-windows.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
+        <loc>https://www.abenevaut.dev/2023‐08‐01-PHP-request-lifecycle.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
+        <loc>https://www.abenevaut.dev/2023‐08‐08-YAF-request-lifecycle.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
+        <loc>https://www.abenevaut.dev/2023‐08‐18-Where-is-my-hosts-file.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
+        <loc>https://www.abenevaut.dev/2023‐08‐23-SOLID.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
+        <loc>https://www.abenevaut.dev/2023‐11‐18-docker-shortcuts.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
+        <loc>https://www.abenevaut.dev/2024-404ctf.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
         <loc>https://www.abenevaut.dev/2024-comcyber.html</loc>
             <changefreq>monthly</changefreq>
         <priority>0.1</priority>
         </url>
     <url>
-        <loc>https://www.abenevaut.dev/2024-ctf404.html</loc>
+        <loc>https://www.abenevaut.dev/2024-fcsc.html</loc>
             <changefreq>monthly</changefreq>
         <priority>0.1</priority>
         </url>
     <url>
-        <loc>https://www.abenevaut.dev/2024-fcsc.html</loc>
+        <loc>https://www.abenevaut.dev/2024‐01‐02-Technique-d-obfuscation.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
+        <loc>https://www.abenevaut.dev/2024‐01‐27-how-to-host-php-website-on-windows.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
+        <loc>https://www.abenevaut.dev/2024‐02‐25-windows-path-variables.html</loc>
             <changefreq>monthly</changefreq>
         <priority>0.1</priority>
         </url>
@@ -22,6 +77,11 @@
         </url>
     <url>
         <loc>https://www.abenevaut.dev/index.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
+        <loc>https://www.abenevaut.dev/links.html</loc>
             <changefreq>monthly</changefreq>
         <priority>0.1</priority>
         </url>

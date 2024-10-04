@@ -13,6 +13,13 @@
       "_App2.js"
     ]
   },
+  "_markdown.js": {
+    "file": "assets/markdown.js",
+    "name": "markdown",
+    "imports": [
+      "_App2.js"
+    ]
+  },
   "node_modules/@abenevaut/maskot-2013/dist/app-icon.webp": {
     "file": "assets/app-icon.webp",
     "src": "node_modules/@abenevaut/maskot-2013/dist/app-icon.webp"
@@ -22,13 +29,14 @@
     "src": "theme/css/app.css",
     "isEntry": true
   },
-  "theme/js/CTFContentSection.jsx": {
-    "file": "assets/CTFContentSection.js",
-    "name": "CTFContentSection",
-    "src": "theme/js/CTFContentSection.jsx",
+  "theme/js/Article.jsx": {
+    "file": "assets/Article.js",
+    "name": "Article",
+    "src": "theme/js/Article.jsx",
     "isEntry": true,
     "imports": [
-      "_App2.js"
+      "_App2.js",
+      "_markdown.js"
     ]
   },
   "theme/js/Home.jsx": {
@@ -67,6 +75,16 @@
     "imports": [
       "_App2.js",
       "_divider.js"
+    ]
+  },
+  "theme/js/Writeup.jsx": {
+    "file": "assets/Writeup.js",
+    "name": "Writeup",
+    "src": "theme/js/Writeup.jsx",
+    "isEntry": true,
+    "imports": [
+      "_App2.js",
+      "_markdown.js"
     ]
   }
 }

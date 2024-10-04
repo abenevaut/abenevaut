@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="robots" content="index, follow">
+
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=rubik:400,500,600&display=swap" rel="stylesheet" />
+
+        <title>Capture The Flags, COMCYBER challenges</title>
+        <meta name="description" content="Mettez vos compétences en cybersécurité au service de l&#039;armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.">
+        <meta name="keywords" content="ctf, security, comcyber">
+        <meta name="author" content="Antoine Benevaut">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://www.abenevaut.dev/">
+        <meta property="og:title" content="Capture The Flags, COMCYBER challenges">
+        <meta property="og:description" content="Mettez vos compétences en cybersécurité au service de l&#039;armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.">
+        <meta property="og:image" content="https://www.abenevaut.dev/seo/abenevaut-og.webp">
+
+        <meta property="twitter:card" content="summary_large_image">
+        <meta name=”twitter:creator” content=”@abenevaut”>
+        <meta property="twitter:url" content="https://www.abenevaut.dev/">
+        <meta property="twitter:title" content="Capture The Flags, COMCYBER challenges">
+        <meta property="twitter:description" content="Mettez vos compétences en cybersécurité au service de l&#039;armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.">
+        <meta property="twitter:image" content="https://www.abenevaut.dev/seo/abenevaut-og.webp">
+        <meta property="twitter:image:alt" content="Mettez vos compétences en cybersécurité au service de l&#039;armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.">
+
+            <link rel="canonical" href="//index.html" />
+    <script>
+      window.article = "<a href=\"#le-probleme\"><h1 id='le-probleme'>Le probl\u00e8me<\/h1><\/a>\n<p>Nous utilisons l\u2019extension PHP \u201cYAF\u201d <a href=\"https:\/\/pecl.php.net\/package\/yaf\">https:\/\/pecl.php.net\/package\/yaf<\/a> qui manque de support sur PHP 8.2.<\/p>\n<p>Nous souhaitons soit:<\/p>\n<ul>\n<li>r\u00e9ussir a compiler une version de YAF 3.3.5 pour PHP 8.2 (soit une dll fonctionnel sur PHP 8.2)<\/li>\n<li>r\u00e9ussir a compiler une version de PHP 8.2 qui embarquerai l\u2019extension YAF 3.3.5<\/li>\n<\/ul>\n<p>La compilation de YAF doit se faire a partir des sources de la PR: <a href=\"https:\/\/github.com\/laruence\/yaf\/pull\/579\">https:\/\/github.com\/laruence\/yaf\/pull\/579<\/a> qui fixe la compatibilit\u00e9 de YAF pour PHP 8.2<\/p>\n<a href=\"#prerequis\"><h1 id='prerequis'>Pr\u00e9requis<\/h1><\/a>\n<ul>\n<li>les sources PHP de sont disponible ici <a href=\"https:\/\/github.com\/php\/php-src\">https:\/\/github.com\/php\/php-src<\/a> <strong>mais seront r\u00e9cup\u00e9r\u00e9e d\u2019une autre mani\u00e8re<\/strong>\n<\/li>\n<\/ul>\n<p>Contexte de distribution de PHP:<\/p>\n<ul>\n<li>les livrables officiels PHP sont fournis ici <a href=\"https:\/\/windows.php.net\/download\/\">https:\/\/windows.php.net\/download\/<\/a>, on trouve:\n<ul>\n<li>la distribution compile: \u201cZip\u201c\n<ul>\n<li>une version est propos\u00e9e en plusieurs format\n<ul>\n<li>thread safe (TS) \/ no thread safe (NTS)\n<ul>\n<li>le thread safe est utilise lorsque le serveur qui invoque PHP est multi-threaded (exemple Apache MPM Worker)<\/li>\n<li>nginx, IIS, utiliser php en ligne de commande, utiliser php en CGI\u2026 ne n\u00e9cessite pas l\u2019utilisation du thread safe<\/li>\n<\/ul>\n<\/li>\n<li>x64 ou x86 : l\u2019architecture de la machine sur laquelle a ete compile mais egalement l\u2019architecture de la machine qui va utiliser le binaire PHP (sur windows php.exe etc..)<\/li>\n<\/ul>\n<\/li>\n<li>une information important va aussi nous guider \u201cVS16\u201c qui apparait dans le titre du package\n<ul>\n<li>cette ligne indique avec quelle version de visual studio PHP a ete compile; Nous utiliserons la meme version de visual studio pour nos compilations \u2192 Si cela n\u2019est pas respecter des warning apparaitront dans les logs PHP expliquant qu\u2019il ne parvient pas a charger certaines librairies car un numero de version (sans certitude l\u2019id du compilateur) n\u2019est pas similaire entre PHP et l\u2019extention<\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<\/li>\n<li>le code source: \u201c<strong>Download source code<\/strong>\u201c<\/li>\n<li>un sous-package \u201c<strong>Development package (SDK to develop PHP extensions)<\/strong>&quot;, ce package met a disposition un utilitaire nomm\u00e9 \u201cphpize.bat\u201c qui nous sera utile pour la compilation de YAF<\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<p>Avec ces informations, nous pouvons d\u00e9terminer que:<\/p>\n<ul>\n<li>nous souhaitons compiler YAF 3.3.5 via la PR <a href=\"https:\/\/github.com\/laruence\/yaf\/pull\/579\">https:\/\/github.com\/laruence\/yaf\/pull\/579<\/a>\n<\/li>\n<li>nous allons poursuivre l\u2019utilisation de PHP NTS x64<\/li>\n<li>il nous est impose d\u2019utiliser VS16 (visual studio 2019) pour la compilation\n<ul>\n<li>le package redistribuable est disponible ici <a href=\"https:\/\/learn.microsoft.com\/fr-FR\/cpp\/windows\/latest-supported-vc-redist?view=msvc-170#visual-studio-2015-2017-2019-and-2022\">https:\/\/learn.microsoft.com\/fr-FR\/cpp\/windows\/latest-supported-vc-redist?view=msvc-170#visual-studio-2015-2017-2019-and-2022<\/a>\n<\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<a href=\"#la-mise-en-oeuvre\"><h1 id='la-mise-en-oeuvre'>La mise en \u0153uvre<\/h1><\/a>\n<ul>\n<li>la team PHP windows, met a disposition un sdk pour faciliter la compilation <a href=\"https:\/\/github.com\/php\/php-sdk-binary-tools\">https:\/\/github.com\/php\/php-sdk-binary-tools<\/a>\n<ul>\n<li>a bien lire <a href=\"https:\/\/github.com\/php\/php-sdk-binary-tools\/tree\/master#requirements\">https:\/\/github.com\/php\/php-sdk-binary-tools\/tree\/master#requirements<\/a>\n<\/li>\n<li>exemple d\u2019utilisation pour compiler PHP <a href=\"https:\/\/github.com\/php\/php-sdk-binary-tools\/tree\/master#basic-usage-example\">https:\/\/github.com\/php\/php-sdk-binary-tools\/tree\/master#basic-usage-example<\/a>\n<ul>\n<li>Choisir le tag n\u00e9cessaire pour la compilation (php8.2 =&gt; php-sdk-2.2.0)<\/li>\n<li>On se note dans un coin phpsdk-vs16-x64.bat<\/li>\n<\/ul>\n<\/li>\n<li>see also <a href=\"https:\/\/wiki.php.net\/internals\/windows\/stepbystepbuild_sdk_2\">https:\/\/wiki.php.net\/internals\/windows\/stepbystepbuild_sdk_2<\/a>\n<\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<a href=\"#mise-en-place-de-lenvironnement-de-compilation\"><h1 id='mise-en-place-de-lenvironnement-de-compilation'>Mise en place de l\u2019environnement de compilation<\/h1><\/a>\n<pre><code>git clone https:\/\/github.com\/php\/php-sdk-binary-tools.git c:\\php-sdk\ncd c:\\php-sdk\ngit checkout php-sdk-2.2.0\n\/\/ On invoque\n.\\phpsdk-vc16-x64.bat\n\/\/ telecharge les resources necessaire a la compilation dans `c:\\php-sdk\\phpmaster\\vs16\\x64\\deps\\`\nphpsdk_buildtree phpmaster\n<\/code><\/pre>\n<p>T\u00e9l\u00e9charger \u201c<strong>Development package (SDK to develop PHP extensions)<\/strong>\u201d de la version 8.2.6 et l\u2019extraire dans C:\\php-8.2.6-devel-vs16-x64<\/p>\n<a href=\"#comment-compiler-yaf\"><h1 id='comment-compiler-yaf'>Comment compiler YAF<\/h1><\/a>\n<ul>\n<li>\n<p>t\u00e9l\u00e9charger les sources de YAF de la PR <a href=\"https:\/\/github.com\/remicollet\/php-yaf\/tree\/issue-php82\">https:\/\/github.com\/remicollet\/php-yaf\/tree\/issue-php82<\/a><\/p>\n<\/li>\n<li>\n<p>extraire les sources a ce path cd c:\\php-sdk\\phpmaster\\vs16\\x64<\/p>\n<p>\/\/ On invoque le SDK\n.\\phpsdk-vc16-x64.bat\ncd c:\\php-sdk\\phpmaster\\vs16\\x64\\yaf\nC:\\php-8.2.6-devel-vs16-x64\\phpize.bat\nconfigure --enable-yaf\nnmake<\/p>\n<\/li>\n<\/ul>\n"
+    </script>
+    <script type="module" src="assets/Article.js"></script>
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="assets/app.css">
+        <!-- sentry v4 -->
+
+
+
+
+
+
+    </head>
+    <body class="font-sans antialiased">
+
+
+
+
+
+
+
+
+
+
+        <div id="root"></div>
+    </body>
+</html>

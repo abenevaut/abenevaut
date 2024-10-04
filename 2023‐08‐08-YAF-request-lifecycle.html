@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="robots" content="index, follow">
+
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=rubik:400,500,600&display=swap" rel="stylesheet" />
+
+        <title>Capture The Flags, COMCYBER challenges</title>
+        <meta name="description" content="Mettez vos compétences en cybersécurité au service de l&#039;armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.">
+        <meta name="keywords" content="ctf, security, comcyber">
+        <meta name="author" content="Antoine Benevaut">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://www.abenevaut.dev/">
+        <meta property="og:title" content="Capture The Flags, COMCYBER challenges">
+        <meta property="og:description" content="Mettez vos compétences en cybersécurité au service de l&#039;armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.">
+        <meta property="og:image" content="https://www.abenevaut.dev/seo/abenevaut-og.webp">
+
+        <meta property="twitter:card" content="summary_large_image">
+        <meta name=”twitter:creator” content=”@abenevaut”>
+        <meta property="twitter:url" content="https://www.abenevaut.dev/">
+        <meta property="twitter:title" content="Capture The Flags, COMCYBER challenges">
+        <meta property="twitter:description" content="Mettez vos compétences en cybersécurité au service de l&#039;armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.">
+        <meta property="twitter:image" content="https://www.abenevaut.dev/seo/abenevaut-og.webp">
+        <meta property="twitter:image:alt" content="Mettez vos compétences en cybersécurité au service de l&#039;armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.">
+
+            <link rel="canonical" href="//index.html" />
+    <script>
+      window.article = "<a href=\"#resume\"><h1 id='resume'>Resume<\/h1><\/a>\n<a href=\"#preambule\"><h1 id='preambule'>Preambule<\/h1><\/a>\n<ul>\n<li>Vous devez etre famillier avec le <a href=\"\/abenevaut.dev\/abenevaut.dev\/Articles%20Staging\/PHP%20Request%20lifecycle.md\">PHP Request lifecycle<\/a>\n<\/li>\n<\/ul>\n<a href=\"#what-is-yaf-request-lifecycle\"><h1 id='what-is-yaf-request-lifecycle'>What is YAF request lifecycle?<\/h1><\/a>\n<p>1\/ Le serveur re\u00e7oit une requ\u00eate et par le jeux du rewrite url sais qu\u2019il doit appeler PHP<\/p>\n<p>2\/ PHP est initialis\u00e9 (chargement du php.ini) par le serveur web (IIS) qui transmet les donn\u00e9es de la requ\u00eates en cours<\/p>\n<ul>\n<li>URI<\/li>\n<li>les donn\u00e9es GET, POST, fichier(s) etc.. qui sont transform\u00e9es en $_GET, $_POST, $_FILES etc..<\/li>\n<li>ressource a ex\u00e9cuter (index.php)<\/li>\n<\/ul>\n<p>3\/ execution du index.php<\/p>\n<ul>\n<li>\n<p>setup de Yaf<\/p>\n<\/li>\n<li>\n<p>call du bootstrap (optionnel)<\/p>\n<ul>\n<li>\n<a href=\"https:\/\/www.php.net\/manual\/en\/yaf-application.bootstrap.php\">https:\/\/www.php.net\/manual\/en\/yaf-application.bootstrap.php<\/a>\n<\/li>\n<\/ul>\n<\/li>\n<li>\n<p>run de l\u2019application<\/p>\n<p>3.1\/ setup de Yaf<\/p>\n<\/li>\n<li>\n<p>creation de l\u2019application qui consiste a<\/p>\n<ul>\n<li>parse du fichier config + setup de l\u2019objet configuration (<a href=\"https:\/\/www.php.net\/manual\/fr\/class.yaf-config-abstract.php\">Yaf_Config_Abstract<\/a>)<\/li>\n<li>utilisation de la config pour se configurer lui-m\u00eame\n<ul>\n<li>configuration de l\u2019autoloading des controllers, library, modules, plugins<\/li>\n<li>\n<a href=\"http:\/\/php.net\/manual\/en\/yaf.configuration.php\">http:\/\/php.net\/manual\/en\/yaf.configuration.php<\/a>\n<\/li>\n<li>\n<a href=\"https:\/\/www.php.net\/manual\/en\/yaf.appconfig.php\">https:\/\/www.php.net\/manual\/en\/yaf.appconfig.php<\/a>\n<\/li>\n<\/ul>\n<\/li>\n<li>setup du dispatcher (<a href=\"https:\/\/www.php.net\/manual\/fr\/class.yaf-dispatcher.php\">Yaf_Dispatcher<\/a>)\n<ul>\n<li>le dispatcher va contenir la nouvelle response, c\u2019est son job de distributer la reponse<\/li>\n<li>il va initialiser le router et la view<\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<p>Une fois initialisee l\u2019application est accessible en singleton Yaf_Application::app(); Sur les framework developpe en PHP generalement on n\u2019appel pas directement l\u2019application (ou container) car c\u2019est souvent un tres gros objet et cela peut donner envie d\u2019outre passer les contextes de responsabilit\u00e9s des objets;<\/p>\n<p>Toute fois, pour faciliter l\u2019utilisation de l\u2019instance de configuration de l\u2019applicaiton, il semble necessaire de faire une classe utilitaire qui va aller chercher dans l\u2019application l\u2019instance de la configuration.<\/p>\n<p>( Yaf_Application::app()-&gt;getConfig()-&gt;get($key) ) - Pour rappel, ne permettre que la lecture de la configuration (et donc interdire le \u201cset\u201d) permet d\u2019assurer l\u2019isolation devOps \/ application<\/p>\n<p>3.2\/ call du bootstrap (optionnel)<\/p>\n<p>Le call du bootstrap existe pour initialiser des sp\u00e9cifiques de l\u2019application (il faut retenir qu\u2019il a une utilit\u00e9 100% Applicative et pas metier (domain)).<\/p>\n<p>L\u2019execution du bootstrap n\u2019est pas obligatoire<\/p>\n<p>Le bootstrap execute toutes les methodes prefixe \u201c_init\u201c coder dans la class dans l\u2019ordre (de la premiere a la derniere)<\/p>\n<p>Il base son fonctionnement sur le dispatcher, qui peut etre transmis a chaque methode<\/p>\n<ul>\n<li>\n<p>Il va permettre de g\u00e9rer de l\u2019autoloading de classe (avec ou sans namespace)<\/p>\n<\/li>\n<li>\n<p>initialiser le router<\/p>\n<\/li>\n<li>\n<p>initialiser des comportement applicatif pour la gestion des utilitaires en ligne de commande<\/p>\n<\/li>\n<li>\n<p>initialiser des comportement applicatif pour la gestion des requetes \/ responses<\/p>\n<ul>\n<li>Les plugins (<a href=\"https:\/\/www.php.net\/manual\/fr\/class.yaf-plugin-abstract.php\">Yaf_Plugin<\/a>) sont des outils mis a dispositions par YAF pour ces cas de gestion. Ils vont utiliser les donn\u00e9es de la requ\u00eate pour modifier le comportement applicatif (validation de droit, renouvellement de session, validation de session etc..) et peuvent egalement composer la response en ajoutant des donnees quand necessaire (toujours ajouter un header dans la reponse (X-Frame-Options=DENY), si requete ajax alors ajouter le header Content-Type: application\/json)<\/li>\n<li>un plugin peut intervenir sur les 6 \u00e9tapes suivantes du cycle de vie de l\u2019application:\n<ul>\n<li>routerStartup<\/li>\n<li>routerShutdown<\/li>\n<li>dispatchLoopStartup<\/li>\n<li>preDispatch<\/li>\n<li>postDispatch<\/li>\n<li>dispatchLoopShutdown<\/li>\n<li>preResponse \u2192 renseigne dans la documentation mais n\u2019est pas call<\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<\/li>\n<li>\n<p>initialiser les sessions<\/p>\n<\/li>\n<li>\n<p>initialiser les librairies de type singleton qui ont une utilite transverse comme la BDD, les logs etc..<\/p>\n<p>3.3\/ run de l\u2019application<\/p>\n<\/li>\n<\/ul>\n<a href=\"#la-methode-run\"><h3 id='la-methode-run'>La m\u00e9thode run()<\/h3><\/a>\n<pre><code>(new \\Yaf\\Application(PROJECT_PATH . '\/app.ini'))     -&gt;bootstrap()     -&gt;run();\n<\/code><\/pre>\n<p>Le run peut se faire via le biais de la methode run() qui va recolter les informations serveurs pour constituer la request (baseUri + parametres GET \/ POST \/ FILES), en faire une instance et la passer au dispatcher qui va executer le flow applicatif<\/p>\n<a href=\"#la-methode-du-dispatcher\"><h3 id='la-methode-du-dispatcher'>La methode du dispatcher<\/h3><\/a>\n<pre><code>(new \\Yaf\\Application(PROJECT_PATH . '\/app.ini'))     -&gt;bootstrap()     -&gt;getDispatcher()     -&gt;dispatch(new \\Yaf\\Request\\Simple());\n<\/code><\/pre>\n<p>Le run peut se faire via le biais de ladu dispatcher auquel on va preciser immediatement la \u201croute\u201d a executer pour executer le flow applicatif dedie.<\/p>\n<p>Cela peut servir pour mettre en place un systeme de ligne de commande via le contexte applicatif de YAF<\/p>\n<a href=\"#dans-les-deux-cas-lexecution-du-flow-applicatif-est-le-meme\"><h3 id='dans-les-deux-cas-lexecution-du-flow-applicatif-est-le-meme'>Dans les deux cas, l\u2019execution du flow applicatif est le meme<\/h3><\/a>\n<ul>\n<li>Dig\u00e9rer la requ\u00eate et la conduire sur la bonne route et ainsi trouver le bon controller a ex\u00e9cuter\n<ul>\n<li>ex\u00e9cution des \u00e9tapes plugins\n<ul>\n<li>routerStartup<\/li>\n<li>routerShutdown<\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<\/li>\n<li>Initialiser le controller (qu\u2019il soit dans un module ou non) et la vue associer a la route et executer l\u2019action (methode) du controller\n<ul>\n<li>execution des etapes plugins\n<ul>\n<li>dispatchLoopStartup<\/li>\n<li>preDispatch<\/li>\n<li>postDispatch<\/li>\n<li>dispatchLoopShutdown<\/li>\n<\/ul>\n<\/li>\n<\/ul>\n<\/li>\n<li>Afficher le contenu de la vue<\/li>\n<\/ul>\n<p><a href=\"https:\/\/drive.google.com\/file\/d\/1ZQ5fS4Jt6SRZhLfDFPerBue6hgboCywf\/view?usp=sharing\">https:\/\/drive.google.com\/file\/d\/1ZQ5fS4Jt6SRZhLfDFPerBue6hgboCywf\/view?usp=sharing<\/a><\/p>\n<p><a href=\"https:\/\/drive.google.com\/file\/d\/1ZQ5fS4Jt6SRZhLfDFPerBue6hgboCywf\/view?usp=sharing\">[https:\/\/drive.google.com\/file\/d\/1ZQ5fS4Jt6SRZhLfDFPerBue6hgboCywf\/view?usp=sharing]<\/a><\/p>\n<a href=\"#annexe\"><h1 id='annexe'>Annexe<\/h1><\/a>\n<ul>\n<li>\n<a href=\"https:\/\/www.php.net\/manual\/en\/yaf.constants.php\">https:\/\/www.php.net\/manual\/en\/yaf.constants.php<\/a>\n<\/li>\n<li>\n<a href=\"https:\/\/www.php.net\/manual\/en\/yaf.tutorials.php\">https:\/\/www.php.net\/manual\/en\/yaf.tutorials.php<\/a>\n<\/li>\n<\/ul>\n"
+    </script>
+    <script type="module" src="assets/Article.js"></script>
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="assets/app.css">
+        <!-- sentry v4 -->
+
+
+
+
+
+
+    </head>
+    <body class="font-sans antialiased">
+
+
+
+
+
+
+
+
+
+
+        <div id="root"></div>
+    </body>
+</html>

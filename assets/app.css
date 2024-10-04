@@ -2040,10 +2040,6 @@ select {
   max-width: none;
 }
 
-.max-w-screen-md {
-  max-width: 768px;
-}
-
 .max-w-xl {
   max-width: 36rem;
 }
@@ -2496,16 +2492,6 @@ select {
 
 .bg-cyan-400\/20 {
   background-color: rgb(34 211 238 / 0.2);
-}
-
-.bg-dark-100 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(38 38 45 / var(--tw-bg-opacity));
-}
-
-.bg-dark-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(17 17 20 / var(--tw-bg-opacity));
 }
 
 .bg-emerald-500\/15 {
@@ -5443,18 +5429,18 @@ select {
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
-.prose-a\:text-indigo-600 :is(:where(a):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
+.prose-a\:text-abenevaut-500 :is(:where(a):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
   --tw-text-opacity: 1;
-  color: rgb(79 70 229 / var(--tw-text-opacity));
+  color: rgb(104 162 147 / var(--tw-text-opacity));
 }
 
 .prose-a\:no-underline :is(:where(a):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
   text-decoration-line: none;
 }
 
-.hover\:prose-a\:text-indigo-500 :is(:where(a):not(:where([class~="not-prose"],[class~="not-prose"] *))):hover {
+.hover\:prose-a\:text-abenevaut-600 :is(:where(a):not(:where([class~="not-prose"],[class~="not-prose"] *))):hover {
   --tw-text-opacity: 1;
-  color: rgb(99 102 241 / var(--tw-text-opacity));
+  color: rgb(85 138 123 / var(--tw-text-opacity));
 }
 
 .prose-li\:text-gray-900 :is(:where(li):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
@@ -6141,9 +6127,24 @@ select {
   border-color: rgb(220 38 38 / var(--tw-border-opacity));
 }
 
+.prose-headings\:dark\:text-white:is(.dark *) :is(:where(h1, h2, h3, h4, h5, h6, th):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
 .prose-p\:dark\:text-white:is(.dark *) :is(:where(p):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.prose-a\:dark\:text-abenevaut-600:is(.dark *) :is(:where(a):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
+  --tw-text-opacity: 1;
+  color: rgb(85 138 123 / var(--tw-text-opacity));
+}
+
+.hover\:prose-a\:dark\:text-abenevaut-500:is(.dark *) :is(:where(a):not(:where([class~="not-prose"],[class~="not-prose"] *))):hover {
+  --tw-text-opacity: 1;
+  color: rgb(104 162 147 / var(--tw-text-opacity));
 }
 
 .prose-li\:dark\:text-white:is(.dark *) :is(:where(li):not(:where([class~="not-prose"],[class~="not-prose"] *))) {
@@ -6630,11 +6631,6 @@ select {
 
   .md\:w-2\/4 {
     width: 50%;
-  }
-
-  .md\:px-0 {
-    padding-left: 0px;
-    padding-right: 0px;
   }
 }
 
