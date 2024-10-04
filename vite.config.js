@@ -29,7 +29,8 @@ export default defineConfig({
       input: [
         'theme/css/app.css',
         'theme/js/Home.jsx',
-        'theme/js/CTFContentSection.jsx',
+        'theme/js/Article.jsx',
+        'theme/js/Writeup.jsx',
         'theme/js/Privacy.jsx',
         'theme/js/Profile.jsx',
         'theme/js/Terms.jsx',

@@ -1,4 +1,4 @@
-view: CTFContentSection
+view: writeup
 language: en
 seo:
   title: Capture The Flags, COMCYBER challenges
@@ -39,7 +39,7 @@ writeup: |+
   
   --------
   
-  Cette premiere épreuve nous met à disposition un fichier [capture.pcap](./report/capture.pcap) (packet capture).
+  Cette premiere épreuve nous met à disposition un fichier [capture.pcap](https://www.abenevaut.dev/images/ctf-2024-comcyber/capture.pcap) (packet capture).
   
   ## Analyse du fichier capture.pcap
   
@@ -75,7 +75,7 @@ writeup: |+
   ```
   
   Le reste de l'analyse du fichier capture.pcap, met en avant des actions pour se renseigner sur la configuration du serveur.
-  [Voir le fichier d'analyse](./report/🔍%20Telnet%20-%20Online%20pcap%20files%20viewer%20for%20analyze%20HTTP,%20DNS,%20other%20network%20traffic.pdf) (service gratuit utilisé, https://apackets.com)
+  [Voir le fichier d'analyse](https://www.abenevaut.dev/images/ctf-2024-comcyber/🔍%20Telnet%20-%20Online%20pcap%20files%20viewer%20for%20analyze%20HTTP,%20DNS,%20other%20network%20traffic.pdf) (service gratuit utilisé, https://apackets.com)
   
   Le serveur a l'adresse IP suivante 163.172.68.42.
   
@@ -105,7 +105,7 @@ writeup: |+
   PORT     STATE    SERVICE VERSION
   5000/tcp open     http    nginx 1.22.1
   ```
-  [Énumération complete](./report/inital.nmap)
+  [Énumération complete](https://www.abenevaut.dev/images/ctf-2024-comcyber/inital.nmap)
   
   Lorsque l'on visite ce service http://163.172.68.42:5000, on découvre une page de login.
   - nous sommes redirigé vers http://163.172.68.42:5000/login
@@ -119,7 +119,7 @@ writeup: |+
   ```
   
   On approfondit l'analyse avec SQLmap.
-  - ligne de commande a adapter, le template est [disponible ici](./report/login.template)
+  - ligne de commande a adapter, le template est [disponible ici](https://www.abenevaut.dev/images/ctf-2024-comcyber/login.template)
   
   ```shell
   python3 ../../../../sqlmap/sqlmap.py -v -r "login.template" --batch --level=5 --risk=3 --flush-session --fresh-queries --threads=8 --output-dir=./sqlmap-login -p password
@@ -185,17 +185,17 @@ writeup: |+
 
   Une fois logué, nous arrivons sur cette interface :
 
-  ![Goliath](./report/Dashboard%20-%20Personnel%20–%20Microsoft_%20Edge%2004_09_2024 12_54_31.png)
+  ![Goliath dashboard](https://www.abenevaut.dev/images/ctf-2024-comcyber/Dashboard%20-%20Personnel%20–%20Microsoft_%20Edge%2004_09_2024 12_54_31.png)
   
   On remarque une liste de vehicule.
   Une fois un vehicule selectionne, des informations sur le vehicule apparaissent.
   
   Pour le véhicule GOLIATH, ces informations semblent indisponibles et une zone de contenu avec un bouton permet de récupérer des logs.
-  [Le fichier de logs](./report/server.log)
+  [Le fichier de logs](https://www.abenevaut.dev/images/ctf-2024-comcyber/server.log)
   
   > On trouve dans cette meme zone de contenu un bouton "ENABLE COMMUNICATION", qui ouvre une popin avec une identification ; Le formulaire n'a pas eu l'air d'etre exploitable.
   
-  ![Goliath](./report/Dashboard%20-%20Personnel%20–%20Microsoft​%20Edge%2026_09_2024%2017_50_46.png)
+  ![Goliath](https://www.abenevaut.dev/images/ctf-2024-comcyber/Dashboard%20-%20Personnel%20–%20Microsoft​%20Edge%2026_09_2024%2017_50_46.png)
   
   Apres investigation, le fichier révèle une commande avec une chaine de caractères encodée en hexadecimal qui doit être ajoutée à la crontab du serveur.
   
@@ -264,7 +264,7 @@ writeup: |+
   Nous pouvons l'exécuter sur une machine dédiée et sécurisée pour voir ce qu'il fait.
   
   L'outil https://any.run/ ne révèle pas d'action malveillante (pas d'activité sur le réseau, pas de modification de fichier, pas de modification de registre).
-  [L'outil https://www.hybrid-analysis.com ne révèle rien non plus](./report/Free%20Automated%20Malware%20Analysis%20Service%20-%20powered%20by%20Falcon%20Sandbox.pdf)
+  [L'outil https://www.hybrid-analysis.com ne révèle rien non plus](https://www.abenevaut.dev/images/ctf-2024-comcyber/Free%20Automated%20Malware%20Analysis%20Service%20-%20powered%20by%20Falcon%20Sandbox.pdf)
   
   Apres la mise en place d'une sandbox Linux/Kali, on peut exécuter le fichier librement.
   
@@ -279,7 +279,7 @@ writeup: |+
   
   On continue l'analyse du binaire avec [IDA Free](https://hex-rays.com/ida-free/) qui présente une cartographie complète du fonctionnement du binaire.
   
-  ![input 1](./report/IDA-capture1-flag-input1-Capture d’écran 2024-09-25 à 22.33.48.png)
+  ![input 1](https://www.abenevaut.dev/images/ctf-2024-comcyber/IDA-capture1-flag-input1-Capture%20d’écran%202024-09-25%20à%2022.33.48.png)
   
   Un premier flag, à peine masque, est découvert.
   
@@ -314,7 +314,7 @@ writeup: |+
   // 0x39c463428c629ce94df5bc1cb17bec86cb2231203a5270c598173f31415ff710696318d9e889e1c891728fed2ed14a291a5b3b76e217d6f3bf24bd484b71f08843b4f3cbb30a5d480cf4e34339c5e06acc76574cfbea08a4fca2c73388b4e08831f8e037489092346809d7c164ab270a5e04ae40a327c99590da89025ac48aa5
   ```
   
-  ![hexa m4lw3r3](./report/hexa%20-%20m4lw3r3%2026_09_2024%2014_21_56.png)
+  ![hexa m4lw3r3](https://www.abenevaut.dev/images/ctf-2024-comcyber/hexa%20-%20m4lw3r3%2026_09_2024%2014_21_56.png)
   
   Durant l'investigation, j'ai découvert l'outil en ligne https://dogbolt.org qui permet de désassembler en ligne avec plusieurs outils concurrents, mais complémentaires.
   Deux (Dewolf et RetDec) m'ont permis d'émettre des hypothèses sur la résolution de ce dernier challenge.

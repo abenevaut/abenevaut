@@ -10,21 +10,24 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Rubik, sans-serif'],
+      },
       colors: {
         primary: {
           DEFAULT: '#0089ff',
           100: '#1995ff',
           400: '#1b50e6',
         },
-        dark: {
-          DEFAULT: '#101012',
-          50: '#2f2f38',
-          100: '#26262d',
-          200: '#17171c',
-          300: '#15151a',
-          400: '#111114',
-          600: '#0a0a0b',
-        },
+        // dark: {
+        //     DEFAULT: '#101012',
+        //     50: '#2f2f38',
+        //     100: '#26262d',
+        //     200: '#17171c',
+        //     300: '#15151a',
+        //     400: '#111114',
+        //     600: '#0a0a0b',
+        // },
         'blue-600': '#2a8dea',
         'green-500': '#31fbcc',
         'green-600': '#00ad85',
@@ -37,8 +40,21 @@ export default {
         'gray-600': '#7b7b7b',
         'gray-700': '#9c9c9d',
         'yellow-300': '#fff7c1',
+        // https://html-color.org/fr/5e998a
+        'abenevaut-950': '#121d1a',
+        'abenevaut-900': '#233832',
+        'abenevaut-800': '#34534a',
+        'abenevaut-700': '#446e62',
+        'abenevaut-600': '#558a7b',
+        'abenevaut-500': '#68a293',
+        'abenevaut-400': '#85b3a6',
+        'abenevaut-300': '#a2c4ba',
+        'abenevaut-200': '#bed5ce',
+        'abenevaut-100': '#dae7e3',
+        'abenevaut-50': '#f6f9f8',
       },
       backgroundColor: {
+        abenevaut: '#5e998a',
         facebook: '#3b5999',
         messenger: '#0084ff',
         twitter: '#55acee',
@@ -76,9 +92,11 @@ export default {
       //   xl: '1.375rem',
       //   xxl: '6rem',
       // },
-      fontFamily: {
-        sans: ['Rubik, sans-serif'],
-      },
+      // fontFamily: {
+      //   sans: [
+      //     'Rubik, sans-serif',
+      //   ],
+      // },
       container: {
         center: true,
       },
