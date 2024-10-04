@@ -3099,6 +3099,11 @@ select {
   letter-spacing: -0.05em;
 }
 
+.text-abenevaut-500 {
+  --tw-text-opacity: 1;
+  color: rgb(104 162 147 / var(--tw-text-opacity));
+}
+
 .text-amber-700 {
   --tw-text-opacity: 1;
   color: rgb(180 83 9 / var(--tw-text-opacity));
@@ -5571,6 +5576,11 @@ select {
 
 .dark\:stroke-zinc-400:is(.dark *) {
   stroke: #a1a1aa;
+}
+
+.dark\:text-abenevaut-600:is(.dark *) {
+  --tw-text-opacity: 1;
+  color: rgb(85 138 123 / var(--tw-text-opacity));
 }
 
 .dark\:text-amber-400:is(.dark *) {

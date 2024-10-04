@@ -58,15 +58,15 @@ function ContentSectionWithTestimonialAndStats({ contentCategory, contentTitle, 
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "text-base leading-7 text-gray-900 dark:text-white lg:max-w-lg", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base font-semibold leading-7 text-indigo-600", children: contentCategory }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl", children: contentTitle }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-xl", children: contentBody })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base font-semibold leading-7 text-abenevaut-500 dark:text-abenevaut-600", children: contentCategory }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl", children: contentTitle }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "max-w-xl text-gray-900 dark:text-white", children: contentBody })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("dl", { className: "mt-10 grid grid-cols-2 gap-8 border-t border-gray-900/10 pt-10 sm:grid-cols-4", children: stats ? stats.map((stat, statIdx) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("dt", { className: "text-sm font-semibold leading-6 text-gray-600", children: stat.label }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "mt-2 text-3xl font-bold leading-10 tracking-tight text-gray-900", children: stat.value })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("dt", { className: "text-sm font-semibold leading-6 text-gray-900 dark:text-white", children: stat.label }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("dd", { className: "mt-2 text-3xl font-bold leading-10 tracking-tight text-gray-900 dark:text-white", children: stat.value })
       ] }, statIdx)) : "" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-10 flex", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: outlink, className: "text-base font-semibold leading-7 text-indigo-600", target: "_blank", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-10 flex", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: outlink, className: "text-base font-semibold leading-7 text-abenevaut-500 dark:text-abenevaut-600", target: "_blank", children: [
         outlinkTitle,
         " ",
         /* @__PURE__ */ jsxRuntimeExports.jsx("span", { "aria-hidden": "true", children: "→" })
