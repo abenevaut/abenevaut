@@ -71,24 +71,24 @@ export default function ContentSectionWithTestimonialAndStats({ contentCategory,
 
           <div>
             <div className="text-base leading-7 text-gray-900 dark:text-white lg:max-w-lg">
-              <p className="text-base font-semibold leading-7 text-indigo-600">{contentCategory}</p>
-              <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{contentTitle}</h1>
-              <div className="max-w-xl">{contentBody}</div>
+              <p className="text-base font-semibold leading-7 text-abenevaut-500 dark:text-abenevaut-600">{contentCategory}</p>
+              <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">{contentTitle}</h1>
+              <div className="max-w-xl text-gray-900 dark:text-white">{contentBody}</div>
             </div>
             <dl className="mt-10 grid grid-cols-2 gap-8 border-t border-gray-900/10 pt-10 sm:grid-cols-4">
               {
                 stats
                   ? stats.map((stat, statIdx) => (
                     <div key={statIdx}>
-                      <dt className="text-sm font-semibold leading-6 text-gray-600">{stat.label}</dt>
-                      <dd className="mt-2 text-3xl font-bold leading-10 tracking-tight text-gray-900">{stat.value}</dd>
+                      <dt className="text-sm font-semibold leading-6 text-gray-900 dark:text-white">{stat.label}</dt>
+                      <dd className="mt-2 text-3xl font-bold leading-10 tracking-tight text-gray-900 dark:text-white">{stat.value}</dd>
                     </div>
                   ))
                   : ''
               }
             </dl>
             <div className="mt-10 flex">
-              <a href={outlink} className="text-base font-semibold leading-7 text-indigo-600" target="_blank">
+              <a href={outlink} className="text-base font-semibold leading-7 text-abenevaut-500 dark:text-abenevaut-600" target="_blank">
                 {outlinkTitle} <span aria-hidden="true">&rarr;</span>
               </a>
             </div>
