@@ -11,23 +11,18 @@ seo:
 
 article:
   contentCategory: "Capture The Flags"
-  contentTitle: "FCSC 2024"
+  contentTitle: "France Cybersecurity Challenge 2024"
   contentBody: "<p class='mt-6'>
-    Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet
-    vitae sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque
-    erat velit. Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris
-    semper sed amet vitae sed turpis id.
-    </p>
-    <p class='mt-8'>
-    Et vitae blandit facilisi magna lacus commodo. Vitae sapien duis odio id et. Id blandit molestie
-    auctor fermentum dignissim. Lacus diam tincidunt ac cursus in vel. Mauris varius vulputate et ultrices
-    hac adipiscing egestas. Iaculis convallis ac tempor et ut. Ac lorem vel integer orci.
+    Vous souhaitez vous mesurer à la compétition concoctée par l’ANSSI ?
+     Ce CTF de type « jeopardy » vous permet de tester vos compétences dans une grande variété d’épreuves de difficultés variées :
+      crypto, reverse, pwn, web, forensics, hardware, attaque par canaux auxiliaires ou en faute et misc.
     </p>"
   caption: "“Prenez part au France Cybersecurity Challenge (FCSC) et tentez de remporter votre place au sein de l'équipe France qui représentera notre pays à l’European Cybersecurity Challenge (ECSC).”"
-  captionImage: "https://cyber.gouv.fr/sites/default/files/image/PNG.png"
+  captionImage: images/ctf-2024-FCSC-hackropole.png
   outlink: "https://hackropole.fr/fr/fcsc2024/"
   outlinkTitle: "Re-vivez le challenge sur hackropole.fr"
 
 writeup: |+
+  # Write-up
   
-  Test
+  N/A

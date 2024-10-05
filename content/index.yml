@@ -12,6 +12,12 @@ seo:
 portfolio:
   title: Projects
   projects:
+    - ctf-comcyber-2024:
+      capture: images/ctf-2024-comcyber.png
+      title: "Glissez-vous dans la peau d'un cybercombattant"
+      brief: CTF COMCYBER 2024
+      url: https://www.abenevaut.dev/2024-comcyber.html
+      date: 30-09-2024
     - optimiser-votre-seo-avec-les-donnees-structurees:
       capture: https://cdn.laravel-france.com/images/covers/22c060a9-7bef-4514-94ce-e1ccd35e83e0.png
       title: "Optimiser votre SEO avec les données Structurées"
