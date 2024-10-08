@@ -72,7 +72,7 @@ client.createRoot(document.getElementById("root")).render(
                   /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex gap-x-2.5", children: post.brief })
                 ] })
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-3 text-lg font-semibold leading-6 text-white", children: post.url ? /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: post.url, target: "_blank", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-3 text-lg font-semibold leading-6 text-white", children: post.url ? /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: post.url, target: post.target === void 0 ? "_blank" : void 0, rel: post.target === void 0 ? "noopener noreferrer" : void 0, children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "absolute inset-0" }),
                 post.title
               ] }) : /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { children: [
