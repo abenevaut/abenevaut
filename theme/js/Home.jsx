@@ -56,7 +56,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     {
                       post.url
                         ?
-                        <a href={ post.url } target="_blank">
+                        <a href={ post.url } target={ post.target === undefined ? "_blank" : undefined } rel={post.target === undefined ? "noopener noreferrer" : undefined}>
                           <span className="absolute inset-0"/>
                           { post.title }
                         </a>
