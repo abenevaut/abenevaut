@@ -60,6 +60,7 @@ client.createRoot(document.getElementById("root")).render(
                 {
                   alt: post.title,
                   src: post.capture,
+                  loading: "lazy",
                   className: "absolute inset-0 -z-10 h-full w-full"
                 }
               ),
