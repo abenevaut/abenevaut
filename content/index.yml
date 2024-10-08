@@ -43,6 +43,12 @@ portfolio:
       brief: Article laravel-france.com
       url: https://laravel-france.com/posts/ameliorer-le-referencement-avec-spatielaravel-sitemap
       date: 15-05-2024
+    - lucasbenevaut-com:
+      capture: images/lucasbenevaut-com.png
+      title: "Lucas Benevaut"
+      brief: "Portfolio"
+      url: https://lucasbenevaut.com
+      date: 01-05-2024
     - le-driver-mail-failover:
       capture: https://cdn.laravel-france.com/images/covers/b003323c-0b7d-415d-aec1-f5c442dfdadb.png
       title: "Le driver mail failover"
