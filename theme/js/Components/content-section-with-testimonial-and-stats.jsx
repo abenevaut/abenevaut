@@ -10,6 +10,7 @@ export default function ContentSectionWithTestimonialAndStats({ contentCategory,
               <img
                 alt={caption}
                 src={captionImage}
+                loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover brightness-125 saturate-0"
               />
               <div className="absolute inset-0 bg-gray-900 mix-blend-multiply" />
@@ -39,7 +40,7 @@ export default function ContentSectionWithTestimonialAndStats({ contentCategory,
                   <use x={86} href="#0ef284b8-28c2-426e-9442-8655d393522e" />
                 </svg>
 
-                {/*<img alt="" src="https://tailwindui.com/img/logos/workcation-logo-white.svg" className="h-12 w-auto" />*/}
+                {/*<img alt="" loading="lazy" src="https://tailwindui.com/img/logos/workcation-logo-white.svg" className="h-12 w-auto" />*/}
 
 
                 <blockquote className="mt-6 text-xl font-semibold leading-8 text-white">

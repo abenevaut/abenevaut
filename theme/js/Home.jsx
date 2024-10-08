@@ -32,6 +32,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                   <img
                     alt={ post.title }
                     src={ post.capture }
+                    loading="lazy"
                     className="absolute inset-0 -z-10 h-full w-full"
                     // className="absolute inset-0 -z-10 h-full w-full object-cover"
                   />
@@ -47,7 +48,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                         <circle r={ 1 } cx={ 1 } cy={ 1 }/>
                       </svg>
                       <div className="flex gap-x-2.5">
-                        {/*<img alt="" src={ post.author.imageUrl } className="h-6 w-6 flex-none rounded-full bg-white/10"/>*/}
+                        {/*<img loading="lazy" alt="" src={ post.author.imageUrl } className="h-6 w-6 flex-none rounded-full bg-white/10"/>*/}
                         { post.brief }
                       </div>
                     </div>
@@ -55,13 +56,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                   <h3 className="mt-3 text-lg font-semibold leading-6 text-white">
                     {
                       post.url
-                        ?
-                        <a href={ post.url } target={ post.target === undefined ? "_blank" : undefined } rel={post.target === undefined ? "noopener noreferrer" : undefined}>
+                        ? <a href={ post.url } target={ post.target === undefined ? "_blank" : undefined } rel={ post.target === undefined ? "noopener noreferrer" : undefined }>
                           <span className="absolute inset-0"/>
                           { post.title }
                         </a>
-                        :
-                        <span>
+                        : <span>
                           <span className="absolute inset-0"/>
                           { post.title } <Badge color="red" className="bg-black">offline</Badge>
                         </span>
