@@ -25129,7 +25129,7 @@ const ThemeProvider = ({ children }) => {
 };
 var define_import_meta_env_default = { BASE_URL: "/", MODE: "production", DEV: false, PROD: true, SSR: false };
 const appEnv = define_import_meta_env_default.VITE_APP_ENV || false;
-const isProductionEnvironment = "production" === appEnv || true;
+const isProductionEnvironment = "production" === appEnv || false;
 if (isProductionEnvironment) {
   index$2.initialize("2c54d796-5f59-434c-85e2-1381de1d0d07", "https://abenevaut.piwik.pro");
 }
@@ -25170,7 +25170,7 @@ function App({ children }) {
         /* @__PURE__ */ jsxRuntimeExports.jsx(SidebarHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Dropdown, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs(DropdownButton, { as: SidebarItem, className: "lg:mb-2.5", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { src: logoUrl }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(SidebarLabel, { children: "Tailwind Labs" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(SidebarLabel, { children: "Antoine Benevaut" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(ForwardRef, {})
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(TeamDropdownMenu, {})
