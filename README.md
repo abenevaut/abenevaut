@@ -43,3 +43,24 @@ const abenevaut = {
 - [04 mars 2024 - Utilisez Illuminate en dehors de Laravel](https://laravel-france.com/posts/utilisez-illuminate-en-dehors-de-laravel)
 
 </p>
+
+<h2>Read Me & Tips</h2>
+<p>
+
+- [Install PHP on Windows](https://gist.github.com/abenevaut/149adce59c6dd68da3eda8699888e624)
+- [Install Supervisor on Mac](https://gist.github.com/abenevaut/877b2624b8334c15d4722f3b4724cc7a)
+- [Update your GIT profile](https://gist.github.com/abenevaut/119a0572635d72fc1988d6a0afec3acb)
+- [Easily convert images to new format with GD](https://gist.github.com/abenevaut/4431cee4f6b7e94d61081265f56bf80f)
+- [Look if PHP extensions are installed](https://gist.github.com/abenevaut/e500d542af28ff05b962becdb14fae35)
+- [How to setup Traefik reverse proxy on Windows ?](https://gist.github.com/abenevaut/4eb3b54a84fd7e9f9a80f60d8a990fce)
+- [Setup msys2 in phpstorm](https://gist.github.com/abenevaut/e52da13dc7e8c2be249afb1aafa0408c)
+- [IIS Laravel web.config](https://gist.github.com/abenevaut/13c8bcee7aca59cb7930ac6b94545e4e)
+- [CircleCi Parallelized jobs and tests](https://gist.github.com/abenevaut/cfdd279d7279fc2a15722f7c0e2ceb94)
+- [CircleCI workflow](https://gist.github.com/abenevaut/7a78101ea6ab76c3a003df7102c5dd82)
+- [Newrelic on Laravel Vapor Docker image](https://gist.github.com/abenevaut/ef5b61cc9cc4b76e0f1240d5e73251c8)
+- [MySQL, copy database to database](https://gist.github.com/abenevaut/b33965a7b23ea57c8c8cd0a0c54b9de4)
+- [How to rename a git tag ?](https://gist.github.com/abenevaut/9b32f3a2ddd266b848fa)
+- [Get user age with SQL](https://gist.github.com/abenevaut/4f48d4e849f469b65b47)
+- [Find duplicate rows in SQL table](https://gist.github.com/abenevaut/f913817208dada6311d3)
+
+</p>

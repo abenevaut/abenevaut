@@ -13,7 +13,7 @@ import { StackedLayout } from "@abenevaut/tailwindui/src/js/Catalyst/stacked-lay
 import { ThemeProvider } from "@abenevaut/tailwindui/src/js/Providers/ThemeProvider.jsx";
 
 const appEnv = import.meta.env.VITE_APP_ENV || false;
-const isProductionEnvironment = 'production' === appEnv || true;
+const isProductionEnvironment = 'production' === appEnv || false;
 
 if (isProductionEnvironment) {
   PiwikPro.initialize('2c54d796-5f59-434c-85e2-1381de1d0d07', 'https://abenevaut.piwik.pro');
@@ -158,7 +158,7 @@ export default function App({ children }) {
               <Dropdown>
                 <DropdownButton as={ SidebarItem } className="lg:mb-2.5">
                   <Avatar src={ logoUrl }/>
-                  <SidebarLabel>Tailwind Labs</SidebarLabel>
+                  <SidebarLabel>Antoine Benevaut</SidebarLabel>
                   <ChevronDownIcon/>
                 </DropdownButton>
                 <TeamDropdownMenu/>
