@@ -7,7 +7,7 @@ seo:
   author: Antoine Benevaut
   twitter: "@abenevaut"
   og-image: https://www.abenevaut.dev/seo/abenevaut-og.webp
-  url: https://www.abenevaut.dev/
+  url: https://www.abenevaut.dev/2023‐01‐01-create-and-modify-environment-variables-on-operating-system.html
 
 article: |+
   Dans un système d'exploitation (_OS, pour operating system_), l'environnement est une suite de variables qui définit une configuration de l'OS et qui est accessible à l'ensemble des logiciels installé sur cet OS.
