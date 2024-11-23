@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
     <url>
+        <loc>https://www.abenevaut.dev/2013-hackfest.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
+        <loc>https://www.abenevaut.dev/2013-nuitduhack.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
         <loc>https://www.abenevaut.dev/2023‐01‐01-create-and-modify-environment-variables-on-operating-system.html</loc>
             <changefreq>monthly</changefreq>
         <priority>0.1</priority>
