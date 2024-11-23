@@ -1,0 +1,69 @@
+view: writeup
+language: en
+seo:
+  title: "Hackfest 2013, debriefing - #hf2013"
+  description: Hackfest 2013, debriefing
+  keywords: ctf, security, hackfest
+  author: Antoine Benevaut
+  twitter: "@abenevaut"
+  og-image: https://www.abenevaut.dev/seo/abenevaut-og.webp
+  url: https://www.abenevaut.dev/2013-hackfest
+
+article:
+  contentCategory: "Capture The Flags"
+  contentTitle: "Hackfest 2013, debriefing"
+  contentBody: "<p class='mt-6'>
+    <b>Social Engineer Like A Boss</b>, by Shane MacDougall;
+    <b>Fuzzing in the 5th Dimension</b>, by Blake Cornell;
+    <b>Bypass security controls with mobile devices</b>, by Georgia Weilman;
+    <b>Antivirus evasion techniques</b>, by Francois Harvey;
+    <b>How [not] to suck at CTF</b>, by Olivier Bilodeau;
+    <b>Forgotten your password?</b>, by Laurent Desaulniers;
+    <b>Hide yo Apache, hide yo SSH cause they backdoorin' everyine out there</b>, by Sebastien Duquette & Marc-Etienne M. Leveille.
+    Whowhowhoooo!
+    </p>"
+  caption: "Very interesting conferences about how technologies fails or abused by cyber criminals."
+  captionImage: images/ctf-2013-hackfest.png
+  outlink: "https://hackfest.ca"
+  outlinkTitle: "HACKFEST"
+
+#  stats:
+#    - { label: 'Score', value: '4/6' }
+#    - { label: 'Fun', value: '100%' }
+
+writeup: |+
+  Very interesting conferences about how technologies fails or abused by cyber criminals.
+  
+  ## What to remember?
+  
+  Cool introduction of social enginering with "Social Engineer Like A Boss", by Shane MacDougall. Never forgot that you are the first product to sell to your employer. Be stressless, you're the best! Not really a methodology but good practices to be confident about yourself when you're presenting.
+  
+  "Fuzzing in the 5th Dimension" by Blake Cornell, presented an interogation  about how will be the futur of IT security with quantum processor.
+  To better understand what is a quantum processor, look at following videos. To summary, this is the most powerfull processor existing. Some people like David Deutsch say that processor could be able to emulate the universe behavior, fantastic!
+  This presentation mixed this amazing processor to the fuzzing, libraries or softwares able to try numerous of security failures. Combined together, you got an amazing system able to test all security troubles at the same time, on one processor cycle only!
+
+  - https://www.youtube.com/embed/CMdHDHEuOUE
+  - https://www.youtube.com/embed/RnDmrSb-zAk
+  - https://www.youtube.com/embed/g_IaVepNDT4
+
+  About mobile devices security, Georgia Weilman presented his pentest mobile framework ("Bypass security controls with mobile devices"). This framework could give privilege excalation on the attacked device to send text message, read text messages, take pictures etc... Following, the demonstration video found on Georgia's [blog](http://georgiaweidman.com/wordpress/).
+
+  - https://web.archive.org/web/20160125015822/https://vimeo.com/46160029
+  
+  Unfortunately, i missed "Antivirus evasion techniques" by Francois Harvey. I will edit the post if i find something like blog posts or videos.
+
+  Edit [blog](https://web.archive.org/web/20161002130209/http://francoisharvey.ca/):
+  
+  - http://fr.slideshare.net/FrancoisHarvey/hackfest-2013-vasion-antivirale-francois-harvey
+  - https://fr.slideshare.net/FrancoisHarvey
+
+  At "How [not] to suck at CTF", Olivier Bilodeau presented a very crazy introduction of what is a CTF and how to progress despite its difficulties. Very encouraging for novice like me :)
+  By the way, the CTF has not given anything very good. No attack works. I would have liked to succeed yet something about VOIP servers with SIPVicious, but nothing... Next time.
+
+  Saturday, Laurent Desaulniers presented "Forgotten your password?", a well demonstration to how get password of user account with a parrallel attack based on pseudo random numbers (doing the same thing at the same time or establish prediction by calculating hash to reset password). [Sliders at this link](https://web.archive.org/web/20140511170739/http://rnicrosoft.biz/hackfest/#/jai-oublié-ton-mot-de-passe).
+
+  In early after noon, Sebastien Duquette et Marc-Etienne M. Leveille presented together "Hide yo Apache, hide yo SSH cause they backdoorin' everyine out there". A meaningful analysis on the existence of Linux malware. They studied different SSH backdoor that allow attackers to recover passwords and connect to an infected machine and also to infect another machine.
+
+  In conclusion, a very friendly and very rewarding event.
+
+  - original [post](https://web.archive.org/web/20160910033229/http://cavaencoreparlerdebits.fr/blog/2013/11/hackfest-2013-debriefing-hf2013)

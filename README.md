@@ -34,7 +34,8 @@ const abenevaut = {
 <h2>Articles</h2>
 <p>
 
-- [30 septembre 2024 - CTF COMCYBER 2024](https://www.abenevaut.dev/2024-comcyber.html)
+- [20 novembre 2024 - Automatisez l'insertion d'utilisateurs avec les Seeders](https://laravel-france.com/posts/automatisez-linsertion-dutilisateurs-avec-les-seeders)
+- [30 septembre 2024 - CTF COMCYBER 2024](https://www.abenevaut.dev/2024-comcyber.html?pk_campaign=redirect-linkedin-abenevaut-dev&pk_source=linkedin.com&pk_medium=article&pk_keyword=link&pk_content=v1&pk_cid=20241123)
 - [05 septembre 2024 - Optimiser votre SEO avec les données Structurées](https://laravel-france.com/posts/optimiser-votre-seo-avec-les-donnees-structurees)
 - [23 juillet 2024 - On installe PHP sur votre machine Windows](https://laravel-france.com/posts/on-installe-php-sur-votre-machine-windows)
 - [26 juin 2024 - Laravel, Les Seeders](https://laravel-france.com/posts/les-seeders)

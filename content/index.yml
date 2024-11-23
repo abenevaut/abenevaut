@@ -12,6 +12,12 @@ seo:
 portfolio:
   title: Projects
   projects:
+    - automatisez-linsertion-dutilisateurs-avec-les-seeders:
+      capture: https://cdn.laravel-france.com/images/covers/f9583881-6928-4c5a-8286-caf33d8071f6.png
+      title: "Automatisez l'insertion d'utilisateurs avec les Seeders"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/automatisez-linsertion-dutilisateurs-avec-les-seeders
+      date: 20-11-2024
     - ctf-comcyber-2024:
       capture: images/ctf-2024-comcyber.png
       title: "Glissez-vous dans la peau d'un cybercombattant"
@@ -97,6 +103,13 @@ portfolio:
       brief: Extranet CRM
       url: https://www.placedelaformation.com/
       date: 2015
+    - ctf-hackfest-213:
+      capture: images/ctf-2013-hackfest.png
+      title: "Glissez-vous dans la peau d'un cybercombattant"
+      brief: HACKFEST 2013
+      url: https://www.abenevaut.dev/2013-hackfest.html
+      target: internal
+      date: 20-11-2013
     - addiactive:
       capture: images/dixens-addiactive.webp
       title: Addiactive
