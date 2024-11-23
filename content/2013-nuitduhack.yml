@@ -1,0 +1,76 @@
+view: writeup
+language: en
+seo:
+  title: "Nuit du Hack 2k13"
+  description: Nuit du Hack 2k13
+  keywords: ctf, security, nuit du hack
+  author: Antoine Benevaut
+  twitter: "@abenevaut"
+  og-image: https://www.abenevaut.dev/seo/abenevaut-og.webp
+  url: https://www.abenevaut.dev/2013-nuitduhack
+
+article:
+  contentCategory: "Capture The Flags"
+  contentTitle: "Nuit du Hack 2k13"
+  contentBody: "<p class='mt-6'>
+    <b>L'envers des attaques web</b>, par Davide Canali;
+    <b>Abusing browser user interfaces for fun & profit</b>, par Rosario Valotta;
+    <b>Frameworks web modernes, vulnérabilités modernes</b>, par Florent Batard et Nicolas Oberli;
+    <b>Physical security flaws applied to industrial espionage</b>, par Alexandre T. (MrJack) et Olivier C. (Cocolitos).
+    Whowhowhoooo!
+    </p>"
+  caption: "Voici pour vous un petit résumé des sujets web principalement. Nous ferons également un détour sur une discipline tres lier le lockpicking, l'art de forcer des serrures, qui est la contrainte physique par excellence pour la protection de vos données."
+  captionImage: images/ctf-2013-nuitduhack.jpg
+  outlink: "https://fr.wikipedia.org/wiki/Nuit_du_Hack"
+  outlinkTitle: "Nuit du Hack - wikipedia"
+
+#  stats:
+#    - { label: 'Score', value: '4/6' }
+#    - { label: 'Fun', value: '100%' }
+
+writeup: |+
+  Voici pour vous un petit résumé des sujets web principalement. Nous ferons également un détour sur une discipline tres lier le lockpicking, l'art de forcer des serrures, qui est la contrainte physique par excellence
+  pour la protection de vos données.
+  
+  
+  ## L'ENVERS DES ATTAQUES WEB PAR DAVIDE CANALI
+  
+  
+  Ce premier paper web présent une étude comportementale des pirates de sites internet. Cette analyse a été construite autour de la réalisation de 500 pots de miel web, de faut site internet qui ont la faculté de mettre en échec les attaquants et de produire des analyses sur la façon dont on été mené ces
+  attaques.
+  
+  L'étude tend à montrer que les attaques ont plusieurs buts.
+  - L'acquisition d'information (ex: récupération de base de données)
+  - L'acquisition de machine permettant l'infection des utilisateurs (ex: malware)
+  - L'acquisition de machine pour y exécuter des logiciels malveillants
+  
+  Elle révèle également que les premières attaques se font relativement rapidement
+  - environ 2h après la mise en ligne pour les attaques automatisés
+  - environ 4h après la mise en ligne pour les attaques manuelles.
+  
+  ## ABUSING BROWSER USER INTERFACES FOR FUN & PROFIT BY ROSARIO VALOTTA
+  
+  
+  Cette seconde conférence web présente une analyse des méthodes d'installation de malware par le biais de site internet frauduleux. Ces sites internet profitent de la méconnaissance des utilisateurs dans leurs navigateurs internet. Ils sont construit de manière à enroler l'utilisateur dans un processus en plusieurs étapes pour que celui-ci active de lui-même le téléchargement et l'installation du logiciel malveillant.
+  
+  Une fois que l'utilisateur est pris dans l'engrenage, il est rare qu'il puisse s'en échappé à la fois par méconnaissance de son système informatique que par l'empressement d'atteindre le but alléchant et inexistant proposer par le pirate.
+  
+  
+  ## FRAMEWORKS WEB MODERNES, VULNÉRABILITÉS MODERNES DE FLORENT BATARD ET NICOLAS OBERLI
+  
+  
+  Une présente simple et concrète sur l'exploitation de trois failles très similaires touchant trois Framework de langage diffèrent. Que ce soit en Ruby on Rails, Python ou encore PHP il est de votre devoir de dévelopeur de connaître votre framework et surtout de savoir le configurer.
+  
+  Cette méthode met à mal trois framework web en exploitant les clefs de cryptage des cookies qui sont diffusés par le biais de github et inchangé par les utilisateurs. Une moulinette, un formulaire, le cookie est injecté et les droits administrateurs sont récupérés!
+  
+  
+  ## PHYSICAL SECURITY FLAWS APPLIED TO INDUSTRIAL ESPIONAGE PAR ALEXANDRE T. (MRJACK) ET OLIVIER C. (COCOLITOS)
+  
+  
+  Une incroyable présentation qui montre à quel point il est aisé de briser des serrures. Quelques gestes assurés et ça s'ouvre. Pas de trace. Et si jamais on a du temps, on taille la clef soit même où on fait une impression 3D. Facile non?
+  
+  
+  L'événement a rassemblé environ 1.300 Geeks, Nerds & Hackers dans une ambiance conviviale et relax. Je n'oublierais pas ceux qui faisaient des brutes forces en C# ;p.
+  A l'année prochaine!
+
+  - original [post](https://web.archive.org/web/20160909040146/http://cavaencoreparlerdebits.fr/blog/2013/06/nuit-du-hack-2k13)

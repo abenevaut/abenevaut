@@ -105,11 +105,18 @@ portfolio:
       date: 2015
     - ctf-hackfest-213:
       capture: images/ctf-2013-hackfest.png
-      title: "Glissez-vous dans la peau d'un cybercombattant"
-      brief: HACKFEST 2013
+      title: Hackfest 2013
+      brief: "Hackfest 2013, debriefing - #hf2013"
       url: https://www.abenevaut.dev/2013-hackfest.html
       target: internal
       date: 20-11-2013
+    - ctf-nuitduhack-213:
+      capture: images/ctf-2013-nuitduhack.jpg
+      title: "Nuit du Hack 2k13"
+      brief: Nuit du Hack 2k13, debriefing
+      url: https://www.abenevaut.dev/2013-nuitduhack.html
+      target: internal
+      date: 23-06-2013
     - addiactive:
       capture: images/dixens-addiactive.webp
       title: Addiactive
