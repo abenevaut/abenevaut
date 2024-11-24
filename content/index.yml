@@ -19,7 +19,7 @@ portfolio:
       url: https://laravel-france.com/posts/automatisez-linsertion-dutilisateurs-avec-les-seeders
       date: 20-11-2024
     - ctf-comcyber-2024:
-      capture: images/ctf-2024-comcyber.png
+      capture: images/ctf-2024-comcyber.png.webp
       title: "Glissez-vous dans la peau d'un cybercombattant"
       brief: CTF COMCYBER 2024
       url: https://www.abenevaut.dev/2024-comcyber.html
@@ -50,7 +50,7 @@ portfolio:
       url: https://laravel-france.com/posts/ameliorer-le-referencement-avec-spatielaravel-sitemap
       date: 15-05-2024
     - lucasbenevaut-com:
-      capture: images/lucasbenevaut-com.png
+      capture: images/lucasbenevaut-com.png.webp
       title: "Lucas Benevaut"
       brief: "Portfolio"
       url: https://lucasbenevaut.com
@@ -68,25 +68,25 @@ portfolio:
       url: https://laravel-france.com/posts/utilisez-illuminate-en-dehors-de-laravel
       date: 04-03-2024
 #    - playperidot:
-#      capture: images/playperidot.png
+#      capture: images/playperidot.png.webp
 #      title: playperidot.blazedcss.com
 #      brief: Annuaire Peridot
 #      url:
 #      date: 2023
 #    - pikminbloom:
-#      capture: images/pikminbloom.png
+#      capture: images/pikminbloom.png.webp
 #      title: pikminbloom.blazedcss.com
 #      brief: Annuaire Pikmin Bloom
 #      url:
 #      date: 2023
 #    - nbaallworld:
-#      capture: images/nbaallworld.png
+#      capture: images/nbaallworld.png.webp
 #      title: nbaallworld.blazedcss.com
 #      brief: Annuaire NBA All-World
 #      url:
 #      date: 2023
     - pokemongolive:
-      capture: images/pokemongolive.png
+      capture: images/pokemongolive.png.webp
       title: pokemongo.blazedcss.com
       brief: Annuaire Pokemon Go
       url:
@@ -97,6 +97,12 @@ portfolio:
       brief: Extranet CRM
       url: https://www.panacea-conseil.com/
       date: 2016
+    - 99designs-engelbit-gaming:
+      capture: https://images-platform.99static.com/NqNJeCbFn6daz1uo8xwKqu86HPE=/500x500/top/smart/99designs-contests-attachments/59/59548/attachment_59548104
+      title: "#CVEPDB MultiGaming"
+      brief: Projet de mascotte
+      url: https://99designs.fr/logo-design/contests/multigaming-cvepdb-512656
+      date: 2015
     - placedelaformation:
       capture: images/dixens-placedelaformation.webp
       title: Place de la formation
@@ -104,19 +110,25 @@ portfolio:
       url: https://www.placedelaformation.com/
       date: 2015
     - ctf-hackfest-213:
-      capture: images/ctf-2013-hackfest.png
+      capture: images/ctf-2013-hackfest.png.webp
       title: Hackfest 2013
       brief: "Hackfest 2013, debriefing - #hf2013"
       url: https://www.abenevaut.dev/2013-hackfest.html
       target: internal
       date: 20-11-2013
     - ctf-nuitduhack-213:
-      capture: images/ctf-2013-nuitduhack.jpg
+      capture: images/ctf-2013-nuitduhack.jpg.webp
       title: "Nuit du Hack 2k13"
-      brief: Nuit du Hack 2k13, debriefing
+      brief: "Nuit du Hack 2k13, debriefing"
       url: https://www.abenevaut.dev/2013-nuitduhack.html
       target: internal
       date: 23-06-2013
+    - 99designs-engelbit:
+      capture: https://images-platform.99static.com/iZikJpvgZDUS4dBtzx5Pj6CfCvA=/500x500/top/smart/99designs-contests-attachments/34/34230/attachment_34230637
+      title: "EngelBit, mascotte de #CVEPDB"
+      brief: Projet de mascotte
+      url: https://99designs.fr/logo-business-card-design/contests/chat-alors-ca-va-encore-parler-de-bits-274592
+      date: 2013
     - addiactive:
       capture: images/dixens-addiactive.webp
       title: Addiactive

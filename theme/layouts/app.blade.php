@@ -7,6 +7,8 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=rubik:400,500,600&display=swap" rel="stylesheet" />
 
+{{--        <base href="http://localhost:63342/dev.abenevaut/abenevaut/dist/">--}}
+
         <title>{{ $seo['title'] }}</title>
         <meta name="description" content="{{ $seo['description'] }}">
         <meta name="keywords" content="{{ $seo['keywords'] }}">

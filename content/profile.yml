@@ -45,7 +45,7 @@ feed:
 
     - laravel-france:
       url: https://laravel-france.com
-      logo: images/laravel-france-logo.jpeg
+      logo: images/laravel-france-logo.jpeg.webp
       capture: images/laravel-france-app.webp
       name: Laravel France
       position: Contributing Writer
@@ -67,8 +67,8 @@ feed:
 
     - globalexam:
       url: https://global-exam.com
-      logo: images/globalexam-logo.jpeg
-      capture: images/globalexam-app.png
+      logo: images/globalexam-logo.jpeg.webp
+      capture: images/globalexam-app.png.webp
       name: GlobalExam
       position: Head of Delivery
       period: Oct 2020 to Jan 2023
@@ -112,7 +112,7 @@ feed:
 
     - creads:
       url: https://www.creads.com
-      logo: images/creads-logo.jpeg
+      logo: images/creads-logo.jpeg.webp
       capture: images/creads-app.webp
       name: Creads
       position: Senior Web Developer
@@ -210,7 +210,7 @@ feed:
 
     - dixens:
       url: https://dixens.net
-      logo: images/dixens-logo.jpeg
+      logo: images/dixens-logo.jpeg.webp
       capture:
       name: DIXENS
       position: Web Developer
@@ -243,7 +243,7 @@ feed:
 
     - uqar:
       url: https://www.uqar.ca
-      logo: images/uqar-logo.jpeg
+      logo: images/uqar-logo.jpeg.webp
       capture:
       name: UQAR
       position: Internship - Administrateur Système
@@ -264,7 +264,7 @@ feed:
 
     - thanksdude:
       url: http://thanksdu.de
-      logo: images/thanksdude-logo.jpeg
+      logo: images/thanksdude-logo.jpeg.webp
       capture: images/thanksdude-app.webp
       name: THANKSDU.DE
       position: Web Developer
@@ -292,7 +292,7 @@ feed:
     - peexter:
       url: http://peexter.com
       logo: images/peexter-logo.webp
-      capture: images/peexter-app.png
+      capture: images/peexter-app.png.webp
       name: PEEXTER
       position: Internship - Mobile Developer
       period: June 2011 to August 2011
