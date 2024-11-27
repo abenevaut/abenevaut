@@ -8,6 +8,8 @@ import { Badge } from "@abenevaut/tailwindui/src/js/Catalyst/badge.jsx";
 const { data } = window;
 const props = JSON.parse(data);
 
+let counter = 0
+
 ReactDOM.createRoot(document.getElementById('root')).render(
     <WithoutRouterProvider>
       <App>
@@ -24,15 +26,18 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               </p>
             </div>
             <div className="mx-auto mt-16 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-              { props.projects.map((post) => (
-                <article
+              { props.projects.map((post) => {
+
+                counter += 1
+
+                return <article
                   key={ post.title }
                   className="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-80"
                 >
                   <img
                     alt={ post.title }
                     src={ post.capture }
-                    loading="lazy"
+                    loading={counter > 6 ? "lazy" : undefined}
                     className="absolute inset-0 -z-10 h-full w-full"
                     // className="absolute inset-0 -z-10 h-full w-full object-cover"
                   />
@@ -48,7 +53,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                         <circle r={ 1 } cx={ 1 } cy={ 1 }/>
                       </svg>
                       <div className="flex gap-x-2.5">
-                        {/*<img loading="lazy" alt="" src={ post.author.imageUrl } className="h-6 w-6 flex-none rounded-full bg-white/10"/>*/}
+                        {/*<img loading="lazy" alt="" src={ post.author.imageUrl } className="h-6 w-6 flex-none rounded-full bg-white/10"/>*/ }
                         { post.brief }
                       </div>
                     </div>
@@ -56,7 +61,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                   <h3 className="mt-3 text-lg font-semibold leading-6 text-white">
                     {
                       post.url
-                        ? <a href={ post.url } target={ post.target === undefined ? "_blank" : undefined } rel={ post.target === undefined ? "noopener noreferrer" : undefined }>
+                        ?
+                        <a href={ post.url } target={ post.target === undefined ? "_blank" : undefined } rel={ post.target === undefined ? "noopener noreferrer" : undefined }>
                           <span className="absolute inset-0"/>
                           { post.title }
                         </a>
@@ -67,7 +73,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                     }
                   </h3>
                 </article>
-              )) }
+              }) }
             </div>
           {/*</div>*/}
         </div>

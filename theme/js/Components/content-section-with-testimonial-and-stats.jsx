@@ -10,7 +10,7 @@ export default function ContentSectionWithTestimonialAndStats({ contentCategory,
               <img
                 alt={caption}
                 src={captionImage}
-                loading="lazy"
+                // loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover brightness-125 saturate-0"
               />
               <div className="absolute inset-0 bg-gray-900 mix-blend-multiply" />
