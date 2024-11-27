@@ -8,7 +8,6 @@ function ContentSectionWithTestimonialAndStats({ contentCategory, contentTitle, 
         {
           alt: caption,
           src: captionImage,
-          loading: "lazy",
           className: "absolute inset-0 h-full w-full object-cover brightness-125 saturate-0"
         }
       ),
