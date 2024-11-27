@@ -6,14 +6,14 @@ seo:
   keywords: portfolio, projects, achievement
   author: Antoine Benevaut
   twitter: "@abenevaut"
-  og-image: https://www.abenevaut.dev/seo/abenevaut-og.webp
+  og-image: https://www.abenevaut.dev/images/abenevaut-og.webp
   url: https://www.abenevaut.dev/
 
 portfolio:
   title: Projects
   projects:
     - automatisez-linsertion-dutilisateurs-avec-les-seeders:
-      capture: https://cdn.laravel-france.com/images/covers/f9583881-6928-4c5a-8286-caf33d8071f6.png
+      capture: images/laravel-france-f9583881-6928-4c5a-8286-caf33d8071f6.png.webp
       title: "Automatisez l'insertion d'utilisateurs avec les Seeders"
       brief: Article laravel-france.com
       url: https://laravel-france.com/posts/automatisez-linsertion-dutilisateurs-avec-les-seeders
@@ -26,25 +26,25 @@ portfolio:
       target: internal
       date: 30-09-2024
     - optimiser-votre-seo-avec-les-donnees-structurees:
-      capture: https://cdn.laravel-france.com/images/covers/22c060a9-7bef-4514-94ce-e1ccd35e83e0.png
+      capture: images/laravel-france-22c060a9-7bef-4514-94ce-e1ccd35e83e0.png.webp
       title: "Optimiser votre SEO avec les données Structurées"
       brief: Article laravel-france.com
       url: https://laravel-france.com/posts/optimiser-votre-seo-avec-les-donnees-structurees
       date: 05-09-2024
     - on-installe-php-sur-votre-machine-windows:
-      capture: https://cdn.laravel-france.com/images/covers/619a6863-d968-4f27-8171-4a37f75bf3a6.png
+      capture: images/laravel-france-619a6863-d968-4f27-8171-4a37f75bf3a6.png.webp
       title: "On installe PHP sur votre machine Windows"
       brief: Article laravel-france.com
       url: https://laravel-france.com/posts/on-installe-php-sur-votre-machine-windows
       date: 23-07-2024
     - laravel-les-seeders:
-      capture: https://cdn.laravel-france.com/images/covers/296560f1-4f30-4d21-b4ee-73345d7b2d89.jpg
+      capture: images/laravel-france-296560f1-4f30-4d21-b4ee-73345d7b2d89.jpg.webp
       title: "Laravel, Les Seeders"
       brief: Article laravel-france.com
       url: https://laravel-france.com/posts/les-seeders
       date: 26-06-2024
     - ameliorer-le-referencement-avec-spatielaravel-sitemap:
-      capture: https://cdn.laravel-france.com/images/covers/8165f558-64e6-4ef3-80d6-bdd8e6ac534c.jpg
+      capture: images/laravel-france-8165f558-64e6-4ef3-80d6-bdd8e6ac534c.jpg.webp
       title: "Améliorer le référencement avec spatie/laravel-sitemap"
       brief: Article laravel-france.com
       url: https://laravel-france.com/posts/ameliorer-le-referencement-avec-spatielaravel-sitemap
@@ -56,13 +56,13 @@ portfolio:
       url: https://lucasbenevaut.com
       date: 01-05-2024
     - le-driver-mail-failover:
-      capture: https://cdn.laravel-france.com/images/covers/b003323c-0b7d-415d-aec1-f5c442dfdadb.png
+      capture: images/laravel-france-b003323c-0b7d-415d-aec1-f5c442dfdadb.png.webp
       title: "Le driver mail failover"
       brief: Article laravel-france.com
       url: https://laravel-france.com/posts/le-driver-mail-failover
       date: 21-03-2024
     - utilisez-illuminate-en-dehors-de-laravel:
-      capture: https://cdn.laravel-france.com/images/covers/db0739d5-9318-4bc5-84ce-6069fc5edd73.jpg
+      capture: images/laravel-france-db0739d5-9318-4bc5-84ce-6069fc5edd73.jpg.webp
       title: "Utilisez Illuminate en dehors de Laravel"
       brief: Article laravel-france.com
       url: https://laravel-france.com/posts/utilisez-illuminate-en-dehors-de-laravel
@@ -98,7 +98,7 @@ portfolio:
       url: https://www.panacea-conseil.com/
       date: 2016
     - 99designs-engelbit-gaming:
-      capture: https://images-platform.99static.com/NqNJeCbFn6daz1uo8xwKqu86HPE=/500x500/top/smart/99designs-contests-attachments/59/59548/attachment_59548104
+      capture: images/abenevaut-EngelBitJunior.png.webp
       title: "#CVEPDB MultiGaming"
       brief: Projet de mascotte
       url: https://99designs.fr/logo-design/contests/multigaming-cvepdb-512656
@@ -124,7 +124,7 @@ portfolio:
       target: internal
       date: 23-06-2013
     - 99designs-engelbit:
-      capture: https://images-platform.99static.com/iZikJpvgZDUS4dBtzx5Pj6CfCvA=/500x500/top/smart/99designs-contests-attachments/34/34230/attachment_34230637
+      capture: images/abenevaut-EngelBit.png.webp
       title: "EngelBit, mascotte de #CVEPDB"
       brief: Projet de mascotte
       url: https://99designs.fr/logo-business-card-design/contests/chat-alors-ca-va-encore-parler-de-bits-274592
