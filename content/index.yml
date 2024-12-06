@@ -2,7 +2,7 @@ view: home
 language: en
 seo:
   title: My portfolio, Antoine Benevaut
-  description: My portfolio
+  description: All my websites, projects and opensource contributions
   keywords: portfolio, projects, achievement
   author: Antoine Benevaut
   twitter: "@abenevaut"
