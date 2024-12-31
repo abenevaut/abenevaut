@@ -25147,7 +25147,7 @@ function TeamDropdownMenu() {
     /* @__PURE__ */ jsxRuntimeExports.jsx(DropdownItem, { href: "/privacy.html", children: /* @__PURE__ */ jsxRuntimeExports.jsx(DropdownLabel, { children: "Privacy policy" }) })
   ] });
 }
-function App({ children }) {
+function App({ logo, children }) {
   let pathname = useLocation().pathname;
   return /* @__PURE__ */ jsxRuntimeExports.jsx(ThemeProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(
     StackedLayout,
@@ -25156,7 +25156,7 @@ function App({ children }) {
       navbar: /* @__PURE__ */ jsxRuntimeExports.jsxs(Navbar, { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Dropdown, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs(DropdownButton, { as: NavbarItem, className: "max-lg:hidden", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { src: logoUrl }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { src: logo ?? logoUrl }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(NavbarLabel, { children: "Antoine Benevaut" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(ForwardRef, {})
           ] }),
@@ -25169,7 +25169,7 @@ function App({ children }) {
       sidebar: /* @__PURE__ */ jsxRuntimeExports.jsxs(Sidebar, { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(SidebarHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Dropdown, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs(DropdownButton, { as: SidebarItem, className: "lg:mb-2.5", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { src: logoUrl }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Avatar, { src: logo ?? logoUrl }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(SidebarLabel, { children: "Antoine Benevaut" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(ForwardRef, {})
           ] }),
@@ -25191,6 +25191,7 @@ export {
   clsx as c,
   h$2 as h,
   jsxRuntimeExports as j,
+  logoUrl as l,
   reactExports as r
 };
 //# sourceMappingURL=App2.js.map

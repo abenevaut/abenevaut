@@ -1,4 +1,4 @@
-import { j as jsxRuntimeExports, a as client, W as WithoutRouterProvider, A as App } from "./App2.js";
+import { j as jsxRuntimeExports, a as client, W as WithoutRouterProvider, A as App, l as logoUrl } from "./App2.js";
 import { S as ScrollToHash, M as Markdown } from "./markdown.js";
 function ContentSectionWithTestimonialAndStats({ contentCategory, contentTitle, contentBody, caption, captionImage, stats, outlink, outlinkTitle, captionAuthor = "", captionAuthorTitle = "" }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "py-12 sm:py-24", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto max-w-7xl px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-2xl grid-cols-1 items-start gap-x-8 gap-y-16 sm:gap-y-24 lg:mx-0 lg:max-w-none lg:grid-cols-2", children: [
@@ -77,9 +77,9 @@ function ContentSectionWithTestimonialAndStats({ contentCategory, contentTitle, 
 const articleObject = JSON.parse(window.article);
 const writeupObject = window.writeup;
 client.createRoot(document.getElementById("root")).render(
-  /* @__PURE__ */ jsxRuntimeExports.jsx(WithoutRouterProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(App, { children: [
+  /* @__PURE__ */ jsxRuntimeExports.jsx(WithoutRouterProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(App, { logo: logoUrl, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollToHash, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
+    articleObject.contentCategory ? /* @__PURE__ */ jsxRuntimeExports.jsx(
       ContentSectionWithTestimonialAndStats,
       {
         contentCategory: articleObject.contentCategory,
@@ -91,7 +91,7 @@ client.createRoot(document.getElementById("root")).render(
         outlink: articleObject.outlink,
         outlinkTitle: articleObject.outlinkTitle
       }
-    ),
+    ) : "",
     writeupObject ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto max-w-7xl px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto grid max-w-2xl grid-cols-1 items-start gap-x-8 gap-y-16 sm:gap-y-24 lg:mx-0 lg:max-w-none", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Markdown, { article: writeupObject }) }) }) : ""
   ] }) })
 );
