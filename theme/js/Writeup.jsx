@@ -1,6 +1,7 @@
 'use client'
 
 import ReactDOM from 'react-dom/client'
+import logoUrl from '@abenevaut/maskot-2013/dist/app-icon.webp'
 import WithoutRouterProvider from "./Providers/WithoutRouterProvider.jsx";
 import App from "./App.jsx";
 import ContentSectionWithTestimonialAndStats from "./Components/content-section-with-testimonial-and-stats.jsx";
@@ -12,18 +13,22 @@ const writeupObject = window.writeup;
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <WithoutRouterProvider>
-      <App>
+      <App logo={logoUrl}>
         <ScrollToHash />
-        <ContentSectionWithTestimonialAndStats
-          contentCategory={ articleObject.contentCategory }
-          contentTitle={ articleObject.contentTitle }
-          contentBody={ <div dangerouslySetInnerHTML={ { __html: articleObject.contentBody } }/> }
-          caption={ articleObject.caption }
-          captionImage={ articleObject.captionImage }
-          stats={ articleObject.stats }
-          outlink={ articleObject.outlink }
-          outlinkTitle={ articleObject.outlinkTitle }
-        />
+        {
+          articleObject.contentCategory
+            ? <ContentSectionWithTestimonialAndStats
+                contentCategory={ articleObject.contentCategory }
+                contentTitle={ articleObject.contentTitle }
+                contentBody={ <div dangerouslySetInnerHTML={ { __html: articleObject.contentBody } }/> }
+                caption={ articleObject.caption }
+                captionImage={ articleObject.captionImage }
+                stats={ articleObject.stats }
+                outlink={ articleObject.outlink }
+                outlinkTitle={ articleObject.outlinkTitle }
+              />
+            : ''
+        }
         {
           writeupObject
             ? <div className="mx-auto max-w-7xl px-6 lg:px-8">

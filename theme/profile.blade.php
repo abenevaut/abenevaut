@@ -4,5 +4,5 @@
     <script>
       window.data = '@json(['bio' => $bio])';
     </script>
-    <script type="module" src="assets/Profile.js"></script>
+    <script type="module" src="/assets/Profile.js"></script>
 @endsection

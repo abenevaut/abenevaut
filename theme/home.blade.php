@@ -5,5 +5,5 @@
     <script>
       window.data = '@json($portfolio)';
     </script>
-    <script type="module" src="assets/Home.js"></script>
+    <script type="module" src="/assets/Home.js"></script>
 @endsection

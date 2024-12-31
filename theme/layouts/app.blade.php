@@ -28,7 +28,7 @@
         @yield('meta')
 
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link rel="stylesheet" href="assets/app.css">
+        <link rel="stylesheet" href="/assets/app.css">
         <link rel="shortcut icon" href="/assets/app-icon.webp" type="image/webp">
     </head>
     <body class="font-sans antialiased">

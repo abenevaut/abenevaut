@@ -41,30 +41,11 @@ function TeamDropdownMenu() {
         <DropdownLabel>Privacy policy</DropdownLabel>
       </DropdownItem>
 
-      {/*<DropdownDivider />*/}
-
-      {/*<DropdownItem href="/teams/1">*/}
-      {/*  <Avatar slot="icon" src={logoUrl} />*/}
-      {/*  <DropdownLabel>Tailwind Labs</DropdownLabel>*/}
-      {/*</DropdownItem>*/}
-
-      {/*<DropdownItem href="/teams/2">*/}
-      {/*  <Avatar slot="icon" initials="WC" className="bg-purple-500 text-white" />*/}
-      {/*  <DropdownLabel>Workcation</DropdownLabel>*/}
-      {/*</DropdownItem>*/}
-
-      {/*<DropdownDivider />*/}
-
-      {/*<DropdownItem href="/teams/create">*/}
-      {/*  <PlusIcon />*/}
-      {/*  <DropdownLabel>New team&hellip;</DropdownLabel>*/}
-      {/*</DropdownItem>*/}
-
     </DropdownMenu>
   )
 }
 
-export default function App({ children }) {
+export default function App({ logo, children }) {
 
   let pathname = useLocation().pathname;
 
@@ -78,7 +59,7 @@ export default function App({ children }) {
             <Dropdown>
 
               <DropdownButton as={ NavbarItem } className="max-lg:hidden">
-                <Avatar src={logoUrl}/>
+                <Avatar src={ logo ?? logoUrl }/>
                 <NavbarLabel>Antoine Benevaut</NavbarLabel>
                 <ChevronDownIcon/>
               </DropdownButton>
@@ -101,55 +82,6 @@ export default function App({ children }) {
 
             <NavbarSpacer/>
 
-            {/*<NavbarSection>*/}
-
-            {/*  /!*<NavbarItem href="/search" aria-label="Search">*!/*/}
-            {/*  /!*  <MagnifyingGlassIcon/>*!/*/}
-            {/*  /!*</NavbarItem>*!/*/}
-
-            {/*  /!*<NavbarItem href="/inbox" aria-label="Inbox">*!/*/}
-            {/*  /!*  <InboxIcon/>*!/*/}
-            {/*  /!*</NavbarItem>*!/*/}
-
-            {/*  <Dropdown>*/}
-            {/*    <DropdownButton as={ NavbarItem }>*/}
-            {/*      <Avatar src={logoUrl} square/>*/}
-            {/*    </DropdownButton>*/}
-
-            {/*    <DropdownMenu className="min-w-64" anchor="bottom end">*/}
-
-            {/*      <DropdownItem href="/my-profile">*/}
-            {/*        <UserIcon/>*/}
-            {/*        <DropdownLabel>My profile</DropdownLabel>*/}
-            {/*      </DropdownItem>*/}
-
-            {/*      <DropdownItem href="/settings">*/}
-            {/*        <Cog8ToothIcon/>*/}
-            {/*        <DropdownLabel>Settings</DropdownLabel>*/}
-            {/*      </DropdownItem>*/}
-
-            {/*      <DropdownDivider/>*/}
-
-            {/*      <DropdownItem href="/terms">*/}
-            {/*        <ShieldCheckIcon/>*/}
-            {/*        <DropdownLabel>Privacy policy</DropdownLabel>*/}
-            {/*      </DropdownItem>*/}
-
-            {/*      <DropdownItem href="/share-feedback">*/}
-            {/*        <LightBulbIcon/>*/}
-            {/*        <DropdownLabel>Share feedback</DropdownLabel>*/}
-            {/*      </DropdownItem>*/}
-
-            {/*      <DropdownDivider/>*/}
-
-            {/*      <DropdownItem href="/logout">*/}
-            {/*        <ArrowRightStartOnRectangleIcon/>*/}
-            {/*        <DropdownLabel>Sign out</DropdownLabel>*/}
-            {/*      </DropdownItem>*/}
-
-            {/*    </DropdownMenu>*/}
-            {/*  </Dropdown>*/}
-            {/*</NavbarSection>*/}
           </Navbar>
         }
         sidebar={
@@ -157,7 +89,7 @@ export default function App({ children }) {
             <SidebarHeader>
               <Dropdown>
                 <DropdownButton as={ SidebarItem } className="lg:mb-2.5">
-                  <Avatar src={ logoUrl }/>
+                  <Avatar src={ logo ?? logoUrl }/>
                   <SidebarLabel>Antoine Benevaut</SidebarLabel>
                   <ChevronDownIcon/>
                 </DropdownButton>

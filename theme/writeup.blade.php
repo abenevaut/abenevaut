@@ -7,8 +7,8 @@
 @section('meta')
     <link rel="canonical" href="//index.html" />
     <script>
-      window.article = '@json($article)'
+      window.article = '@json($article ?? "")'
       window.writeup = {!! $writeup !!}
     </script>
-    <script type="module" src="assets/Writeup.js"></script>
+    <script type="module" src="/assets/Writeup.js"></script>
 @endsection

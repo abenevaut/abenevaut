@@ -23,8 +23,8 @@ article:
 
   stats:
     - { label: 'Niveau', value: 'Rookie' }
-    - { label: 'Condition', value: 'Réelle' }
-    - { label: 'Flaggé', value: '5/6' }
+    - { label: 'Condition', value: 'BlackBox' }
+    - { label: 'Flagged', value: '5/6' }
 
 writeup: |+
   # Write-up
@@ -254,8 +254,8 @@ writeup: |+
   RM{6ba4...}
   ```
   
-  >> /!\ On notera que le hacker a laissé sa clef SSH sur la machine avant de supprimer ses traces.
-  >> /!\ -> A SUPPRIMER DONC
+  > /!\ On notera que le hacker a laissé sa clef SSH sur la machine avant de supprimer ses traces.
+  > /!\ -> A SUPPRIMER DONC
   
   ```log
   Aug 27 12:38:49 COMCYBER_SRV root[250822]: CMD(echo 'ssh-rsa AAAAB3NzKV0CWVq3ngl2ThMYDfPehFMEBggHMwQsFqGYirCYEt+XOQWs5wHEZzhDTRfIR29Vgi3UqWOZ2+ddwq5xmcSMwk6BY+sZVRwxuSvNKXnz0jfrz667poinUJD8LRDAiBujt0fbyNpb8aKqAQxPwvRkWIRuktfZk9vs3zjzFYhQRIhn7geAPFCywOfBJVkUfD9mfYow9pihhKnXSvEB/z81edCzXerGxUQ1ztFXZsZmaS5Th1fPF3Vq0dz7kDNo95TP64qO6NY8PS5vbFgw0bppOlK8a8lNw04Zco7iNKtI90+UAfkgookBcG/TkhMcnqk9YTpt+qli1dD7RcxbNBsJBvWDxQYSsBDYsJsBr36TaVpewxWkiPjfTpsvLJGC7SFNX13msjgOFgzzWlMKUrYvsEqprBr6h3cI30Ql1o5HpbL/M04i9UPf+KpvY5PUBX94QbrOFthV/K1gpi/thkBhFqooT9/tnQiIxw== kali@attacker' >> /root/.ssh/authorized_keys) [0]
