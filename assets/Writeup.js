@@ -1,5 +1,6 @@
-import { j as jsxRuntimeExports, a as client, W as WithoutRouterProvider, A as App, l as logoUrl } from "./App2.js";
+import { j as jsxRuntimeExports, R as ReactDOM, W as WithoutRouterProvider, A as App } from "./App2.js";
 import { S as ScrollToHash, M as Markdown } from "./markdown.js";
+const logoUrl = "/assets/logo-black-and-white-pirate-head.webp";
 function ContentSectionWithTestimonialAndStats({ contentCategory, contentTitle, contentBody, caption, captionImage, stats, outlink, outlinkTitle, captionAuthor = "", captionAuthorTitle = "" }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "py-12 sm:py-24", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto max-w-7xl px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-2xl grid-cols-1 items-start gap-x-8 gap-y-16 sm:gap-y-24 lg:mx-0 lg:max-w-none lg:grid-cols-2", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "lg:pr-4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative overflow-hidden rounded-3xl bg-gray-900 px-6 pb-9 pt-64 shadow-2xl sm:px-12 lg:max-w-lg lg:px-8 lg:pb-8 xl:px-10 xl:pb-10", children: [
@@ -76,7 +77,7 @@ function ContentSectionWithTestimonialAndStats({ contentCategory, contentTitle, 
 }
 const articleObject = JSON.parse(window.article);
 const writeupObject = window.writeup;
-client.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(WithoutRouterProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(App, { logo: logoUrl, children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollToHash, {}),
     articleObject.contentCategory ? /* @__PURE__ */ jsxRuntimeExports.jsx(

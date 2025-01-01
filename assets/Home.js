@@ -1,4 +1,4 @@
-import { r as reactExports, c as clsx, j as jsxRuntimeExports, L as Link, T as TouchTarget, h, a as client, W as WithoutRouterProvider, A as App } from "./App2.js";
+import { r as reactExports, c as clsx, j as jsxRuntimeExports, L as Link, T as TouchTarget, H, R as ReactDOM, W as WithoutRouterProvider, A as App } from "./App2.js";
 const colors = {
   red: "bg-red-500/15 text-red-700 group-data-[hover]:bg-red-500/25 dark:bg-red-500/10 dark:text-red-400 dark:group-data-[hover]:bg-red-500/20",
   orange: "bg-orange-500/15 text-orange-700 group-data-[hover]:bg-orange-500/25 dark:bg-orange-500/10 dark:text-orange-400 dark:group-data-[hover]:bg-orange-500/20",
@@ -37,12 +37,12 @@ reactExports.forwardRef(function BadgeButton2({ color = "zinc", className, child
     className,
     "group relative inline-flex rounded-md focus:outline-none data-[focus]:outline data-[focus]:outline-2 data-[focus]:outline-offset-2 data-[focus]:outline-blue-500"
   );
-  return "href" in props2 ? /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { ...props2, className: classes, ref, children: /* @__PURE__ */ jsxRuntimeExports.jsx(TouchTarget, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { color, children }) }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx(h, { ...props2, className: classes, ref, children: /* @__PURE__ */ jsxRuntimeExports.jsx(TouchTarget, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { color, children }) }) });
+  return "href" in props2 ? /* @__PURE__ */ jsxRuntimeExports.jsx(Link, { ...props2, className: classes, ref, children: /* @__PURE__ */ jsxRuntimeExports.jsx(TouchTarget, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { color, children }) }) }) : /* @__PURE__ */ jsxRuntimeExports.jsx(H, { ...props2, className: classes, ref, children: /* @__PURE__ */ jsxRuntimeExports.jsx(TouchTarget, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { color, children }) }) });
 });
 const { data } = window;
 const props = JSON.parse(data);
 let counter = 0;
-client.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(WithoutRouterProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "div",
     {

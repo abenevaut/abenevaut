@@ -1,6 +1,6 @@
-import { a as client, j as jsxRuntimeExports, W as WithoutRouterProvider, A as App, B as Button } from "./App2.js";
+import { R as ReactDOM, j as jsxRuntimeExports, W as WithoutRouterProvider, A as App, B as Button } from "./App2.js";
 import { D as Divider } from "./divider.js";
-client.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(WithoutRouterProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(App, { children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "py-12", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "container", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto lg:w-3/4", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-4 sm:p-6", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "pl-4 mb-1 -ml-4 text-xl font-medium border-l-2 sm:pl-6 sm:-ml-6 dark:text-white border-zinc-950/10 dark:border-white/10", children: "Terms of Services" }),

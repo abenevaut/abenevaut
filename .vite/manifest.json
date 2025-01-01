@@ -24,6 +24,10 @@
     "file": "assets/app-icon.webp",
     "src": "node_modules/@abenevaut/maskot-2013/dist/app-icon.webp"
   },
+  "node_modules/@abenevaut/maskot-2013/dist/logo-black-and-white-pirate-head.webp": {
+    "file": "assets/logo-black-and-white-pirate-head.webp",
+    "src": "node_modules/@abenevaut/maskot-2013/dist/logo-black-and-white-pirate-head.webp"
+  },
   "theme/css/app.css": {
     "file": "assets/app.css",
     "src": "theme/css/app.css",
@@ -85,6 +89,9 @@
     "imports": [
       "_App2.js",
       "_markdown.js"
+    ],
+    "assets": [
+      "assets/logo-black-and-white-pirate-head.webp"
     ]
   }
 }
