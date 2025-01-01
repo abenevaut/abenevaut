@@ -22,7 +22,7 @@ article:
   outlinkTitle: "xmas.root-me.org (plateforme éphémère)"
   stats:
     - { label: 'Niveau', value: 'Rookie' }
-    - { label: 'Condition', value: 'WhiteBox' }
+    - { label: 'Condition', value: 'GreyBox' }
     - { label: 'Flagged', value: '8/25' }
 
 writeup: |+

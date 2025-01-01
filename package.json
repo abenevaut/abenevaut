@@ -21,7 +21,7 @@
     "url": "https://github.com/abenevaut/dev.abenevaut/issues"
   },
   "devDependencies": {
-    "@abenevaut/tailwindui": "^0.0.5",
+    "@abenevaut/tailwindui": "^0.0.7",
     "@piwikpro/react-piwik-pro": "^2.1.1",
     "@sentry/react": "^8.24.0",
     "@tailwindcss/typography": "^0.5.15",

@@ -1,7 +1,7 @@
 'use client'
 
 import ReactDOM from 'react-dom/client'
-import logoUrl from '@abenevaut/maskot-2013/dist/app-icon.webp'
+import logoUrl from '@abenevaut/maskot-2013/dist/logo-black-and-white-pirate-head.webp'
 import WithoutRouterProvider from "./Providers/WithoutRouterProvider.jsx";
 import App from "./App.jsx";
 import ContentSectionWithTestimonialAndStats from "./Components/content-section-with-testimonial-and-stats.jsx";

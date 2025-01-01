@@ -11,4 +11,5 @@ services:
     environment:
       - php_xdebug_log=/var/task/xdebug-errors.log
     volumes:
+      - ~/.npmrc:/root/.npmrc
       - .:/var/task

@@ -33,11 +33,11 @@ function TeamDropdownMenu() {
   return (
     <DropdownMenu className="min-w-80 lg:min-w-64" anchor="bottom start">
 
-      <DropdownItem href="/terms.html">
+      <DropdownItem href="terms.html">
         <DropdownLabel>Terms of services</DropdownLabel>
       </DropdownItem>
 
-      <DropdownItem href="/privacy.html">
+      <DropdownItem href="privacy.html">
         <DropdownLabel>Privacy policy</DropdownLabel>
       </DropdownItem>
 

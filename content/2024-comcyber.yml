@@ -39,7 +39,7 @@ writeup: |+
   > Terminé.
   
   Notre investigation commence avec les derniers logs de communication fournit par notre opérateur. 
-  À notre disposition, un fichier [capture.pcap](https://www.abenevaut.dev/images/ctf-2024-comcyber/capture.pcap.zip).
+  À notre disposition, un fichier [capture.pcap](images/ctf-2024-comcyber/capture.pcap.zip).
   
   ## Analyse avec Wireshark
   
@@ -200,17 +200,17 @@ writeup: |+
 
   Une fois logué, nous arrivons sur cette interface :
   
-  ![Goliath dashboard](https://www.abenevaut.dev/images/ctf-2024-comcyber/goliath-dashboard.webp)
+  ![Goliath dashboard](images/ctf-2024-comcyber/goliath-dashboard.webp)
 
   On remarque une liste de véhicule.
   Une fois un véhicule sélectionné, des informations sur le véhicule apparaissent.
   
   Pour le véhicule GOLIATH, ces informations semblent indisponibles et une zone de contenu avec un bouton permet de récupérer des logs.
-  [Le fichier de logs](https://www.abenevaut.dev/images/ctf-2024-comcyber/server.log.zip)
+  [Le fichier de logs](images/ctf-2024-comcyber/server.log.zip)
   
   > On trouve dans cette meme zone de contenu un bouton "ENABLE COMMUNICATION", qui ouvre une popin avec une identification ; Le formulaire n'a pas eu l'air d'etre exploitable.
   
-  ![Goliath enable communication](https://www.abenevaut.dev/images/ctf-2024-comcyber/goliath-enable-communication.webp)
+  ![Goliath enable communication](images/ctf-2024-comcyber/goliath-enable-communication.webp)
   
   Apres investigation, le fichier révèle une commande avec une chaine de caractères encodée en hexadecimal qui doit être ajoutée à la crontab du serveur.
   
@@ -271,7 +271,7 @@ writeup: |+
   Nous pouvons l'exécuter sur une machine dédiée et sécurisée pour voir ce qu'il fait.
   
   L'outil https://any.run/ ne révèle pas d'action malveillante (pas d'activité sur le réseau, pas de modification de fichier, pas de modification de registre).
-  [L'outil https://www.hybrid-analysis.com ne révèle rien non plus](https://www.abenevaut.dev/images/ctf-2024-comcyber/Free-Automated-Malware-Analysis-Service-powered-by-Falcon-Sandbox.pdf)
+  [L'outil https://www.hybrid-analysis.com ne révèle rien non plus](images/ctf-2024-comcyber/Free-Automated-Malware-Analysis-Service-powered-by-Falcon-Sandbox.pdf)
   
   Apres la mise en place d'une sandbox Linux/Kali, on peut exécuter le fichier librement.
   
@@ -286,7 +286,7 @@ writeup: |+
   
   On continue l'analyse du binaire avec [IDA Free](https://hex-rays.com/ida-free/) qui présente une cartographie complète du fonctionnement du binaire.
   
-  ![IDA flag input 1](https://www.abenevaut.dev/images/ctf-2024-comcyber/IDA-capture1-flag-input1.webp)
+  ![IDA flag input 1](images/ctf-2024-comcyber/IDA-capture1-flag-input1.webp)
   
   Un premier flag, à peine masqué, est découvert `RM{6762...}`.
   
@@ -317,7 +317,7 @@ writeup: |+
   // 0x39c463428c629ce94df5bc1cb17bec86cb2231203a5270c598173f31415ff710696318d9e889e1c891728fed2ed14a291a5b3b76e217d6f3bf24bd484b71f08843b4f3cbb30a5d480cf4e34339c5e06acc76574cfbea08a4fca2c73388b4e08831f8e037489092346809d7c164ab270a5e04ae40a327c99590da89025ac48aa5
   ```
   
-  ![hexa m4lw3r3](https://www.abenevaut.dev/images/ctf-2024-comcyber/hexa-m4lw3r3.webp)
+  ![hexa m4lw3r3](images/ctf-2024-comcyber/hexa-m4lw3r3.webp)
   
   Durant l'investigation, j'ai découvert l'outil en ligne https://dogbolt.org qui permet de désassembler en ligne avec plusieurs outils concurrents, mais complémentaires.
   Deux (Dewolf et RetDec) m'ont permis d'émettre des hypothèses sur la résolution de ce dernier challenge.

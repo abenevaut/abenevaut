@@ -9,5 +9,5 @@
     <script>
       window.article = {!! $article !!}
     </script>
-    <script type="module" src="/assets/Article.js"></script>
+    <script type="module" src="assets/Article.js"></script>
 @endsection

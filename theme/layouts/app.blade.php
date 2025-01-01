@@ -25,11 +25,13 @@
         <meta property="twitter:image" content="{{ $seo['og-image'] }}">
         <meta property="twitter:image:alt" content="{{ $seo['description'] }}">
 
+        <base href="/"> <!-- dev.abenevaut/abenevaut/dist/ -->
+
         @yield('meta')
 
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link rel="stylesheet" href="/assets/app.css">
-        <link rel="shortcut icon" href="/assets/app-icon.webp" type="image/webp">
+        <link rel="stylesheet" href="assets/app.css">
+        <link rel="shortcut icon" href="assets/app-icon.webp" type="image/webp">
     </head>
     <body class="font-sans antialiased">
         <div id="root"></div>

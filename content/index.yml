@@ -17,6 +17,7 @@ portfolio:
       title: "XMAS root-me challenges"
       brief: CTF root-me.org 2024
       url: https://www.abenevaut.dev/2024-xmas-root-me.html
+      target: internal
       date: 31-12-2024
     - automatisez-linsertion-dutilisateurs-avec-les-seeders:
       capture: images/laravel-france-f9583881-6928-4c5a-8286-caf33d8071f6.png.webp

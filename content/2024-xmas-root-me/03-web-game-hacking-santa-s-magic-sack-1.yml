@@ -31,7 +31,7 @@ writeup: |+
   On voit une requête POST qui est faite à la fin du jeu vers le endpoint `/api/scores`, on regarde les paramètres envoyés et on voit un paramètre `data` qui est envoyé.
   `data` contient une string encodé en base64, on la décode et on voit un objet sérialisé, il doit contenir notre score, c'est sûr!
   
-  ![](/images/ctf-2024-rootme-xmas/web-game-hacking-santa-s-magic-sack-1-intercept_first_post.png)
+  ![](images/ctf-2024-rootme-xmas/web-game-hacking-santa-s-magic-sack-1-intercept_first_post.png)
   
   À ce moment là de mon investigation, j'ai perdu un peu de temps à vouloir désérialiser l'objet, et je me suis rendu compte que c'était inutile.
   
@@ -116,7 +116,7 @@ writeup: |+
   
   On va pouvoir tenter de poser un breakpoint et de change la valeur `s.current`.
   
-  ![](/images/ctf-2024-rootme-xmas/web-game-hacking-santa-s-magic-sack-1-change_value.png)
+  ![](images/ctf-2024-rootme-xmas/web-game-hacking-santa-s-magic-sack-1-change_value.png)
   
   On relance l'application avec notre score modifié, et c'est flagé!
   
@@ -124,6 +124,6 @@ writeup: |+
   
   Si comme moi, vous n'avez pas beaucoup expérimentez [Burp Suite](https://portswigger.net/burp), recommencé l'épreuve et intercepté la requête POST pour récupérer le flag. 
   
-  ![](/images/ctf-2024-rootme-xmas/web-game-hacking-santa-s-magic-sack-1-flag.png)
+  ![](images/ctf-2024-rootme-xmas/web-game-hacking-santa-s-magic-sack-1-flag.png)
 
   Crédits du challenge [root-me.org](https://x.com/rootme_org/status/1863902222846669194) et son auteur [Elweth](https://x.com/Elweth_)
