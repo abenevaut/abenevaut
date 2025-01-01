@@ -6,7 +6,7 @@ seo:
   keywords: ctf, cybersécurité, comcyber, challenges, défis cybersécurité, wireshark
   author: Antoine Benevaut
   twitter: "@abenevaut"
-  og-image: https://www.abenevaut.dev/images/abenevaut-og.webp
+  og-image: https://www.abenevaut.dev/images/abenevaut-og-sec.webp
   url: https://www.abenevaut.dev/2024-comcyber.html
 
 article:
@@ -336,4 +336,7 @@ writeup: |+
   
   Je suis ravi qu'il n'y ait pas eu d'OSINT, le challenge aurait pu s'arrêter beaucoup plus tôt pour moi.
   
-  Merci aux équipes qui ont organisé cet événement.
+  Merci [aux équipes](https://www.root-me.org/fr/breve/Le-challenge-COMCYBER-revient-sur-Root-Me) qui ont organisé cet événement.
+
+  > Une erreur, une typo vous pique les yeux ou encore je n'ai pas respectez [The 10 commandments of writing solution](https://blog.root-me.org/posts/10_commandments_solution/).
+  > Contactez-moi via [GitHub](https://github.com/abenevaut/abenevaut/issues), je ferai le nécessaire.
