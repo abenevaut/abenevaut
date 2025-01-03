@@ -12,7 +12,7 @@ seo:
 writeup: |+
   # Write-up The lost gift
   
-  ![Indice, une photo de la rue à retrouver](images/ctf-2024-rootme-xmas/osint-the-lost-gift-clue.jpg)
+  ![Indice, une photo de la rue à retrouver](images/ctf-2024-rootme-xmas/osint-the-lost-gift-clue.jpg.webp)
   
   > I couldn't wait and opened one of my christmas presents in advance, my very first FPV drone, I had been eagerly waiting for it. I decided to try it outside, conditions were perfect: sunny, no wind and a safe spot for a maiden flight.
   > However, shortly after takeoff, my drone flied straight ahead and stopped responding to any of my commands. I saw it disappear in a distance, soaring over the trees, completely out of control. I forgot to activate the FailSafe mode...
@@ -21,13 +21,13 @@ writeup: |+
   
   Les coordonnées sont disponibles dans ce fichiers [beacon.pcap](images/ctf-2024-rootme-xmas/osint-the-lost-gift-beacon.pcap.zip), et on se les affiche tout de suite :
   
-  ![Trouver les coordonnés dans wireshark](images/ctf-2024-rootme-xmas/osint-the-lost-gift-get-coordinates-with-wireshark.png)
+  ![Trouver les coordonnés dans wireshark](images/ctf-2024-rootme-xmas/osint-the-lost-gift-get-coordinates-with-wireshark.png.webp)
   
   Ni la visualisation, ni la manipulation des données sur wireshark n'est pratique, exportons les données "File" > "Export packet dissections" > "As Plain Text...".
   
   Avec les paramètres suivants qui suivent, on obtient un fichier texte exploitable :
   
-  ![Exporter les coordonnés depuis wireshark](images/ctf-2024-rootme-xmas/osint-the-lost-gift-get-coordinates-with-wireshark-export.png)
+  ![Exporter les coordonnés depuis wireshark](images/ctf-2024-rootme-xmas/osint-the-lost-gift-get-coordinates-with-wireshark-export.png.webp)
   
   Super! On a une liste de coordonnées, mais comment les exploiter?
   
@@ -81,28 +81,28 @@ writeup: |+
   
   Une fois importé, on peut voir le parcours du drone.
   
-  ![Visualiser le trajet du drone sur google earth](images/ctf-2024-rootme-xmas/osint-the-lost-gift-google-earth.png)
+  ![Visualiser le trajet du drone sur google earth](images/ctf-2024-rootme-xmas/osint-the-lost-gift-google-earth.png.webp)
   
   Google Earth dispose d'un outil "règle" qui permet de mesurer la distance entre deux points, ce qui place un trait sur la carte.
   On peut ensuite suivre ce tracé et identifier les points d'arrivés qui ressemblent à la photo. On cherche les carrefours avec plusieurs routes.
   
-  ![Hypothèse du trajet du drone](images/ctf-2024-rootme-xmas/osint-the-lost-gift-google-earth-expected-traject.png)
+  ![Hypothèse du trajet du drone](images/ctf-2024-rootme-xmas/osint-the-lost-gift-google-earth-expected-traject.png.webp)
   
   Tant qu'on y est, on se donne des idées pour une prochaine fois : 
   - avec l'outil "Polygon" on peut délimiter des zones de recherche
   - on peut passer la carte en 3D pour voir les reliefs et essayer de retrouver des points de repères
   
-  ![](images/ctf-2024-rootme-xmas/osint-the-lost-gift-google-earth-zoom-as-2D.png)
+  ![](images/ctf-2024-rootme-xmas/osint-the-lost-gift-google-earth-zoom-as-2D.png.webp)
 
   On peut enfin passer en street view pour voir les détails de la rue.
   
   🎅Hohoho! On a trouvé le lieu de la photo.
   
-  ![Le carrefour à retrouver](images/ctf-2024-rootme-xmas/osint-the-lost-gift-google-earth-flag.png)
+  ![Le carrefour à retrouver](images/ctf-2024-rootme-xmas/osint-the-lost-gift-google-earth-flag.png.webp)
   
   Pour la postérité, on peut sauvegarder le lieu sur la map.
   
-  ![Enregistrement de la position du flag avec un marqueur](images/ctf-2024-rootme-xmas/osint-the-lost-gift-google-earth-flag-saved.png)
+  ![Enregistrement de la position du flag avec un marqueur](images/ctf-2024-rootme-xmas/osint-the-lost-gift-google-earth-flag-saved.png.webp)
   
   🎁Dernier challenge, composer le flag avec le bon nom de rue `RM{streetnamewherethedronelanded}` 🏁
 

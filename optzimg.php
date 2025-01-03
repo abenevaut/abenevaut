@@ -1,7 +1,7 @@
 <?php
 
 $dir = getcwd();
-$path = $dir . '/images/';
+$path = $dir . '/images/ctf-2024-rootme-xmas/';
 $files = scandir($path);
 
 foreach ($files as $file) {

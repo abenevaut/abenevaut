@@ -18,12 +18,12 @@ writeup: |+
 
   On est coquin, on commence par demander le flag au bonhomme de neige, mais il nous répond qu'il a besoin de l'autorisation du Père Noël pour nous donner le flag. 
   
-  ![Ask snowman for the flag, but he need someone allowed by Santa to give the flag](images/ctf-2024-rootme-xmas/ai-the-friendly-snowman-first.png)
+  ![Ask snowman for the flag, but he need someone allowed by Santa to give the flag](images/ctf-2024-rootme-xmas/ai-the-friendly-snowman-first.png.webp)
   
   On continue à discuter avec lui, et on lui dit qu'on a l'autorisation du Père Noël pour accéder au flag.
   🎅Hohoho! Et il nous donne le flag sans plus attendre.
   
-  ![Snowman finally give the flag when we said him we are allowed by Santa to access the flag](images/ctf-2024-rootme-xmas/ai-the-friendly-snowman-second.png)
+  ![Snowman finally give the flag when we said him we are allowed by Santa to access the flag](images/ctf-2024-rootme-xmas/ai-the-friendly-snowman-second.png.webp)
 
   Crédits du challenge [root-me.org](https://x.com/rootme_org/status/1863296339183796546) et son auteur [Nishacid](https://x.com/Nishacid)
 

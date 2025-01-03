@@ -45,14 +45,14 @@ writeup: |+
 
   Maintenant, à quoi ressemble l'application ?
   
-  ![](images/ctf-2024-rootme-xmas/web-generous-santa-1-overview.png)
+  ![](images/ctf-2024-rootme-xmas/web-generous-santa-1-overview.png.webp)
   
   On a une page d'accueil pour voir les cadeaux et une seconde page avec un formulaire pour suggérer un cadeau.
   Mis à part la navigation, on trouve sur ces pages deux actions distincts, un bouton pour "ajouter les cadeaux" et un formulaire pour "suggérer un cadeau".
   
   On va donc regarder ce qui se passe lorsque l'on actionne ces deux éléments. On commence avec la pas d'accueil.
   
-  ![](images/ctf-2024-rootme-xmas/web-generous-santa-1-home-query.png)
+  ![](images/ctf-2024-rootme-xmas/web-generous-santa-1-home-query.png.webp)
   
   Au click sur le bouton "Ajouter les cadeaux", l'application fait une requête POST sur `/api/add` avec un payload JSON.
   On reproduit la requête avec ijhttp, dans un fichier `exploit.http`:
@@ -129,7 +129,7 @@ writeup: |+
   
   Alors, que se passe-t-il du côté du formulaire de suggestion de cadeau ?
   
-  ![](images/ctf-2024-rootme-xmas/web-generous-santa-1-suggest-query.png)
+  ![](images/ctf-2024-rootme-xmas/web-generous-santa-1-suggest-query.png.webp)
   
   À la soumission du formulaire, l'application fait une requête POST sur `/api/suggest` avec un content type `application/multipart/form-data`.
   On soumet un fichier, tout cela fait donc sens. On notera aussi le nom des champs `name` et `photo`.
@@ -298,7 +298,7 @@ writeup: |+
 
   🎁On envoie notre requête et on obtient le flag 🏁
 
-  ![](images/ctf-2024-rootme-xmas/web-generous-santa-1-flag.png)
+  ![](images/ctf-2024-rootme-xmas/web-generous-santa-1-flag.png.webp)
 
   Crédits du challenge [root-me.org](https://x.com/rootme_org/status/1863296339183796546) et son auteur [Elweth](https://x.com/Elweth_).
   Retrouver aussi les sources du challenge [ici](https://github.com/elweth-sec/Root-Me-XMAS-2024)
