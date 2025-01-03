@@ -3,7 +3,7 @@ language: en
 seo:
   title: XMAS root-me challenges, The lost gift
   description:
-  keywords: ctf, security, root-me, xmas, OSINT, the lost gift, write-up
+  keywords: ctf, security, root-me, xmas, OSINT , the lost gift, write-up
   author: Antoine Benevaut
   twitter: "@abenevaut"
   og-image: https://www.abenevaut.dev/images/abenevaut-og-sec.webp
@@ -16,3 +16,5 @@ writeup: |+
   🎁On envoie notre requête et on obtient le flag 🏁
 
   Crédits du challenge [root-me.org](https://x.com/rootme_org/status/1863296339183796546) et son auteur Chic0s
+
+  [Sommaire >](2024-xmas-root-me.html)
