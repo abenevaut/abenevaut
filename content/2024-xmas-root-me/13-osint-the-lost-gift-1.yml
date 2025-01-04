@@ -19,17 +19,17 @@ writeup: |+
   > Fortunately, I still have the last coordinates from the beacon signal transmitted via Wi-Fi and the last image captured by the video feed.
   > Could you use these clues to locate my drone?
   
-  Les coordonnées sont disponibles dans ce fichiers [beacon.pcap](images/ctf-2024-rootme-xmas/osint-the-lost-gift-beacon.pcap.zip), et on se les affiche tout de suite :
+  Les coordonnées sont disponibles dans ce fichiers [beacon.pcap](images/ctf-2024-rootme-xmas/osint-the-lost-gift-beacon.pcap.zip), et on se les affiche tout de suite :
   
   ![Trouver les coordonnés dans wireshark](images/ctf-2024-rootme-xmas/osint-the-lost-gift-get-coordinates-with-wireshark.png.webp)
   
-  Ni la visualisation, ni la manipulation des données sur wireshark n'est pratique, exportons les données "File" > "Export packet dissections" > "As Plain Text...".
+  Ni la visualisation, ni la manipulation des données sur wireshark n'est pratique, exportons les données "File" > "Export packet dissections" > "As Plain Text...".
   
-  Avec les paramètres suivants qui suivent, on obtient un fichier texte exploitable :
+  Avec les paramètres suivants qui suivent, on obtient un fichier texte exploitable :
   
   ![Exporter les coordonnés depuis wireshark](images/ctf-2024-rootme-xmas/osint-the-lost-gift-get-coordinates-with-wireshark-export.png.webp)
   
-  Super! On a une liste de coordonnées, mais comment les exploiter?
+  Super! On a une liste de coordonnées, mais comment les exploiter ?
   
   On peut les coller dans un outil de cartographie en ligne. Souvent limité à un champ de départ et un d'arrivé.
   Google maps tire son épingle du jeu avec plusieurs champs possible et on peut renseigner "Latitude,Longitude" comme destination mais dans notre cas on recherche des points au dessus de l'eau et l'outil ne crée pas d'itinéraire.
@@ -88,9 +88,9 @@ writeup: |+
   
   ![Hypothèse du trajet du drone](images/ctf-2024-rootme-xmas/osint-the-lost-gift-google-earth-expected-traject.png.webp)
   
-  Tant qu'on y est, on se donne des idées pour une prochaine fois : 
+  Tant qu'on y est, on se donne des idées pour une prochaine fois : 
   - avec l'outil "Polygon" on peut délimiter des zones de recherche
-  - on peut passer la carte en 3D pour voir les reliefs et essayer de retrouver des points de repères
+  - on peut passer la carte en 3D pour apercevoir les reliefs et essayer de retrouver des points de repères
   
   ![](images/ctf-2024-rootme-xmas/osint-the-lost-gift-google-earth-zoom-as-2D.png.webp)
 

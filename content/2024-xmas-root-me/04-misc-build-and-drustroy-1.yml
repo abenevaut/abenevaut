@@ -18,7 +18,7 @@ writeup: |+
   
   Challenge du jour, abuser un compilateur de code rust en ligne.
   Via une requête HTTP, on envoie un objet JSON qui représente nos fichiers rust à compiler et on récupère via un téléchargement le binaire compilé.
-  Ci-dessous l'exemple de l'énoncé:
+  Ci-dessous l'exemple de l'énoncé :
   
   ```bash
   curl -sSk -X POST -H 'Content-Type: application/json' https://day4.challenges.xmas.root-me.org/remote-build -d '{"src/main.rs":"fn main() { println!(\"Hello, world!\"); }"}' --output binary
@@ -26,7 +26,7 @@ writeup: |+
   ```
   
   La première idée d'exploit qui me traverse l'esprit est de compiler un programme qui lirait le flag dans un fichier et l'enverrait à un serveur distant.
-  L'idée est confirmé à la lecture du code, le docker-compose monte un volume qui contient le flag :
+  L'idée est confirmé à la lecture du code, le docker-compose monte un volume qui contient le flag :
   
   ```yaml
   volumes:
@@ -108,7 +108,7 @@ writeup: |+
   }
   ```
   
-  🎁On envoie notre requête et on obtient le flag 🏁:
+  🎁On envoie notre requête et on obtient le flag 🏁 :
   
   ```
   [79, 102, 102, 101, 110, 83, 107, 105, 108, 108, 83, 97, 121, ... ]

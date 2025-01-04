@@ -25,13 +25,13 @@ writeup: |+
   
   Le but est de faire le meilleur score et franchement vu le rythme du jeux pour battre le premier à 133337, faut s'accrocher.
   
-  On essaie de faire le malin, que se passe-t-il si on réduit la largeur de la fenêtre ? On double à peu près notre score mais ce n'est pas suffisant.
+  On essaie de faire le malin, que se passe-t-il si on réduit la largeur de la fenêtre ? On double à peu près notre score mais ce n'est pas suffisant.
   
-  Qu'est-ce qu'il y a sous le capot? On ouvre les outils de développement et on regarde les requêtes qui sont faites.
+  Qu'est-ce qu'il y a sous le capot ? On ouvre les outils de développement et on regarde les requêtes qui sont faites.
   On voit une requête POST qui est faite à la fin du jeu vers le endpoint `/api/scores`, on regarde les paramètres envoyés et on voit un paramètre `data` qui est envoyé.
-  `data` contient une string encodé en base64, on la décode et on voit un objet sérialisé, il doit contenir notre score, c'est sûr!
+  `data` contient une string encodé en base64, on la décode et on voit un objet sérialisé, il doit contenir notre score, _c'est sûr_!
   
-  ![](images/ctf-2024-rootme-xmas/web-game-hacking-santa-s-magic-sack-1-intercept_first_post.png.webp)
+  ![Analyse du call POST sur `/api/scores`](images/ctf-2024-rootme-xmas/web-game-hacking-santa-s-magic-sack-1-intercept_first_post.png.webp)
   
   À ce moment là de mon investigation, j'ai perdu un peu de temps à vouloir désérialiser l'objet, et je me suis rendu compte que c'était inutile.
   
@@ -85,9 +85,9 @@ writeup: |+
   
   Je prends deux/trois minutes pour souffler dans un sac en papier pour évacuer la frustration de devoir faire du reverse engineering sur un jeu de Noël, et on reprend.
   
-  Ou est-ce que je peux intercepter le score avant qu'il soit encodé, envoyé et utilisé par le backend ?
+  Ou est-ce que je peux intercepter le score avant qu'il soit encodé, envoyé et utilisé par le backend ?
   
-  On poursuit l'analyse des sources et on finit par trouver ce bout de code:
+  On poursuit l'analyse des sources et on finit par trouver ce bout de code :
   
   ```javascript
     const f = async () => {
@@ -110,23 +110,24 @@ writeup: |+
   ```
   
   Si on poursuit l'analyse, on voit que la fonction `Vd` finit par aller jusque l'encodage du score.
-  `Vd(e, v)` prend deux paramètres et la variable `v` est initialisée juste au dessus, qu'y a-t-il dedans ?
+  `Vd(e, v)` prend deux paramètres et la variable `v` est initialisée juste au dessus, qu'y a-t-il dedans ?
   
   🎅Hohoho! On trouve la même valeur que notre score!
   
   On va pouvoir tenter de poser un breakpoint et de change la valeur `s.current`.
   
-  ![](images/ctf-2024-rootme-xmas/web-game-hacking-santa-s-magic-sack-1-change_value.png.webp)
+  ![Manipulation pour ajouter le breakpoint puis lire le flag sur chrome](images/ctf-2024-rootme-xmas/web-game-hacking-santa-s-magic-sack-1-change_value.png.webp)
   
   On relance l'application avec notre score modifié, et c'est flagé!
   
   Le flag est un peu chiant à copier/coller via la modal qui s'ouvre, il est possible de le récupérer via la tabulation "Elements" ou "Réseau" de la console web.
   
-  Si comme moi, vous n'avez pas beaucoup expérimentez [Burp Suite](https://portswigger.net/burp), recommencé l'épreuve et intercepté la requête POST pour récupérer le flag. 
+  Si comme moi, vous n'avez pas beaucoup expérimenté [Burp Suite](https://portswigger.net/burp), recommencez l'épreuve et interceptez la requête POST pour récupérer le flag. 
   
-  ![](images/ctf-2024-rootme-xmas/web-game-hacking-santa-s-magic-sack-1-flag.png.webp)
+  ![Visualisation du flag avec Burp Suite](images/ctf-2024-rootme-xmas/web-game-hacking-santa-s-magic-sack-1-flag.png.webp)
 
-  Crédits du challenge [root-me.org](https://x.com/rootme_org/status/1863902222846669194) et son auteur [Elweth](https://x.com/Elweth_)
-  Retrouver aussi les sources du challenge [ici](https://github.com/elweth-sec/Root-Me-XMAS-2024)
+  Crédits du challenge [root-me.org](https://x.com/rootme_org/status/1863902222846669194) et son auteur [Elweth](https://x.com/Elweth_).
+  
+  Retrouver les sources du challenge [ici](https://github.com/elweth-sec/Root-Me-XMAS-2024).
 
   [Sommaire >](2024-xmas-root-me.html) - [Challenge suivant >](2024-xmas-root-me/04-misc-build-and-drustroy-1.html)
