@@ -47,12 +47,12 @@ export default defineConfig({
         theme_color: '#5e998a',
         icons: [
           {
-            src: '/images/abenevaut-app-icon-192x192.png',
+            src: 'https://abenevaut.dev/images/abenevaut-app-icon-192x192.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: '/images/abenevaut-app-icon-512x512.png',
+            src: 'https://abenevaut.dev/images/abenevaut-app-icon-512x512.png',
             sizes: '512x512',
             type: 'image/png'
           }
