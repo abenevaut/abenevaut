@@ -2,6 +2,7 @@ import path from 'path';
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import laravel from 'laravel-vite-plugin';
+import { VitePWA } from 'vite-plugin-pwa'
 
 const isDevEnvironment = 'dev' === process.env.NODE_ENV || true;
 
@@ -36,6 +37,27 @@ export default defineConfig({
         'theme/js/Terms.jsx',
       ],
       refresh: true,
+    }),
+    VitePWA({
+      includeAssets: ['assets/app-icon.webp'],
+      manifest: {
+        name: 'abenevaut.dev',
+        short_name: 'abenevaut.dev',
+        description: 'All my websites, projects and opensource contributions',
+        theme_color: '#5e998a',
+        icons: [
+          {
+            src: 'abenevaut-app-icon-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
+          },
+          {
+            src: 'abenevaut-app-icon-512x512.png',
+            sizes: '512x512',
+            type: 'image/png'
+          }
+        ]
+      }
     }),
   ],
 })
