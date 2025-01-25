@@ -26,6 +26,7 @@
         <meta property="twitter:image:alt" content="{{ $seo['description'] }}">
 
         <base href="/"> <!-- /dev.abenevaut/abenevaut/dist/ -->
+        <link rel="manifest" href="manifest.webmanifest" />
 
         @yield('meta')
 
