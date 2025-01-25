@@ -12,6 +12,13 @@ seo:
 portfolio:
   title: Projects
   projects:
+    - docker-kata:
+      capture: images/abenevaut-docker-kata.png.webp
+      title: "docker-kata"
+      brief: Get started with Docker through exercises
+      url: https://www.abenevaut.dev/2025-01-20-docker-kata.html
+      target: internal
+      date: 20-01-2025
     - xmas-root-me-challenges:
       capture: images/ctf-2024-rootme-xmas.png.webp
       title: "XMAS root-me challenges"

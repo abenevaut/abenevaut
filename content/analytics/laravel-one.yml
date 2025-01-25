@@ -1,0 +1,5 @@
+view: landing
+language: en
+sitemap: false
+landing:
+  location: https://github.com/abenevaut/laravel-one

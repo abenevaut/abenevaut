@@ -8,7 +8,7 @@
         "php": "^8.2"
     },
     "require-dev": {
-        "abenevaut/laravel-one": "^0.4"
+        "abenevaut/laravel-one": "^0.5"
     },
     "config": {
         "optimize-autoloader": true,

@@ -1,0 +1,32 @@
+view: article
+language: en
+seo:
+  title: docker-kata, get started with Docker through exercises
+  description: docker-kata, get started with Docker through exercises
+  keywords: docker, kata, tech, exercises, beginner, tutorial
+  author: Antoine Benevaut
+  twitter: "@abenevaut"
+  og-image: https://raw.githubusercontent.com/abenevaut/docker-kata/refs/heads/master/.github/github-docker-kata.png
+  url: https://www.abenevaut.dev/2025-01-20-docker-kata.html
+
+article: |+
+  # docker-kata
+
+  ![Docker kata banner](https://raw.githubusercontent.com/abenevaut/docker-kata/refs/heads/master/.github/github-docker-kata.png)
+  
+  Check out the README.md on [GitHub](https://www.abenevaut.dev/analytics/docker-kata.html?pk_campaign=redirect-docker-kata-github-com&pk_source=abenevaut-dev&pk_medium=analytics&pk_keyword=link&pk_content=v1&pk_cid=20250119) and get started with Docker through exercises.
+
+  ## Objectives
+
+  - understand the basics of Docker for local development
+  - understand and practice image and container management
+    - to execute binaries
+    - to run services
+  - understand and practice basics volume and network management
+
+  ## Exercises
+  
+  Each directory contains an exercise to do.
+  - readme.md contains the subject
+  - readme.md contains the solution
+  - the other files will illustrate the build context of a binary or service that will have to run in a container
