@@ -26,6 +26,7 @@ const abenevaut = {
 <h2>Articles</h2>
 <p>
 
+- [23 janvier 2025 - Déployer vos application serverless avec Bref.sh](https://laravel-france.com/posts/deployer-vos-application-serverless-avec-brefsh)
 - [31 décembre 2024 - XMAS root-me challenges](https://www.abenevaut.dev/2024-xmas-root-me.html?pk_campaign=redirect-github-abenevaut-dev&pk_source=github.com&pk_medium=article&pk_keyword=link&pk_content=v1&pk_cid=20241231)
 - [20 novembre 2024 - Automatisez l'insertion d'utilisateurs avec les Seeders](https://laravel-france.com/posts/automatisez-linsertion-dutilisateurs-avec-les-seeders)
 - [30 septembre 2024 - Glissez-vous dans la peau d'un cybercombattant](https://www.abenevaut.dev/2024-comcyber.html?pk_campaign=redirect-github-abenevaut-dev&pk_source=github.com&pk_medium=article&pk_keyword=link&pk_content=v1&pk_cid=20241123)
