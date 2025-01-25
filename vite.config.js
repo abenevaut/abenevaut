@@ -44,15 +44,15 @@ export default defineConfig({
         name: 'abenevaut.dev',
         short_name: 'abenevaut.dev',
         description: 'All my websites, projects and opensource contributions',
-        theme_color: '#5e998a',
+        theme_color: '#f4f4f5',
         icons: [
           {
-            src: 'https://abenevaut.dev/images/abenevaut-app-icon-192x192.png',
+            src: 'https://www.abenevaut.dev/images/abenevaut-app-icon-192x192.png',
             sizes: '192x192',
             type: 'image/png'
           },
           {
-            src: 'https://abenevaut.dev/images/abenevaut-app-icon-512x512.png',
+            src: 'https://www.abenevaut.dev/images/abenevaut-app-icon-512x512.png',
             sizes: '512x512',
             type: 'image/png'
           }
