@@ -12,9 +12,9 @@ seo:
 portfolio:
   title: Projects
   projects:
-    - deployer-vos-application-serverless-avec-bref-sh:
+    - deployer-vos-applications-serverless-avec-bref-sh:
       capture: images/laravel-france-a422ddbb-ccc7-4e2e-af52-9907fa409c44.png.webp
-      title: "Déployer vos application serverless avec Bref.sh"
+      title: "Déployer vos applications serverless avec Bref.sh"
       brief: Article laravel-france.com
       url: https://laravel-france.com/posts/deployer-vos-application-serverless-avec-brefsh
       date: 23-01-2025
