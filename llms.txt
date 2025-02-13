@@ -1,0 +1,23 @@
+# Antoine Benevaut - Portfolio
+
+> Bienvenue sur mon portfolio, Antoine Benevaut, consultant PHP & Laravel et développeur basé à Paris. Ce site présente mes projets, contributions open source et articles de blog.
+
+## Projets
+
+- [Laravel One](https://laravel-one.abenevaut.dev/index.html) : Un outil pour générer des pages web statiques basées sur des templates Blade. :contentReference[oaicite:1]{index=1}
+- [Docker Kata](https://www.abenevaut.dev/2025-01-20-docker-kata.html) : Exercices pour débuter avec Docker, comprendre les bases du développement local et la gestion des images et des conteneurs. :contentReference[oaicite:2]{index=2}
+
+## Articles récents
+
+- [Déployer vos applications serverless avec Bref.sh](https://www.abenevaut.dev/2025-01-23-deployer-vos-applications-serverless-avec-bref-sh.html) : Un guide sur le déploiement d'applications serverless en utilisant Bref.sh.
+
+## À propos
+
+Je suis Antoine Benevaut, consultant PHP & Laravel et développeur. Je vous accompagne dans vos projets web et mobile. Nous assemblons ensemble vos idées pour créer votre projet. :contentReference[oaicite:3]{index=3}
+
+Retrouvez-moi sur :
+
+- GitHub : [abenevaut](https://github.com/abenevaut)
+- LinkedIn : [Antoine Benevaut](https://www.linkedin.com/in/antoine-benevaut/)
+
+Pour plus d'informations, visitez mon site web : [abenevaut.dev](https://abenevaut.dev)
