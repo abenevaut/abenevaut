@@ -81,6 +81,8 @@ jobs:
           vendor/bin/laravel-one generate https://www.abenevaut.dev
           cp -r images dist
           cp robots.txt dist
+          cp ai.txt dist
+          cp llms.txt dist
 
       - uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
