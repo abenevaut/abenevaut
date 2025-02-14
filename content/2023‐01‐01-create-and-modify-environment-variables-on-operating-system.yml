@@ -1,49 +1,63 @@
 view: article
 language: en
 seo:
-  title: Capture The Flags, COMCYBER challenges
-  description: Mettez vos compétences en cybersécurité au service de l'armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.
-  keywords: ctf, security, comcyber
+  title: "Les Variables d'Environnement : Un Guide Pratique pour Windows et Unix"
+  description: Les variables d'environnement sont essentielles pour configurer et personnaliser votre système d'exploitation. Découvrez comment les définir et les gérer sur Windows et Unix.
+  keywords: OS, env, environment variables, envs vars, PATH, USER, HOME, PWD, Windows, Unix, Linux, Mac, bash, zsh, PowerShell
   author: Antoine Benevaut
   twitter: "@abenevaut"
   og-image: https://www.abenevaut.dev/images/abenevaut-og.webp
   url: https://www.abenevaut.dev/2023‐01‐01-create-and-modify-environment-variables-on-operating-system.html
 
 article: |+
-  Dans un système d'exploitation (_OS, pour operating system_), l'environnement est une suite de variables qui définit une configuration de l'OS et qui est accessible à l'ensemble des logiciels installé sur cet OS.
-  
-  Vous pouvez personnaliser ces variables à l'échelle de l'OS ou à l'échelle de son terminal.
-  
-  > Si vous souhaitez essayer, je vous recommande de vérifier la documentation de votre OS ainsi que celle de votre terminal
+  Dans un système d'exploitation (OS), l'environnement est une suite de variables qui définissent une configuration de l'OS et sont accessibles à l'ensemble des logiciels installés sur cet OS.
+  Ces variables peuvent être personnalisées à l'échelle de l'OS ou à l'échelle du terminal utilisé.
 
-  Les variables les plus populaires sont généralement :
+  Les variables d'environnement les plus couramment utilisées incluent :
   
-  - `PATH` qui indique les repertoires ou sont stockés l'ensemble des logiciels de l'OS
-  - `USER` qui indique l'utilisateur connecté
-  - `HOME` qui indique le repertoire principale de l'utilisateur connecté
-  - `PWD` (_print working directory_) qui indique le repertoire courant où l'utilisateur connecté se situe
-  
-  Tous les logiciels qui s'executer sur l'OS peuvent injecter des variables d'environments qui seront accessibles durant l'execution du logiciel (la session du logiciel) et accessible dans la stack memoire de ce logiciel. Par exemple, un terminal pourra ajouter des variables d'environments qui seront accessibles depuis le terminal par les logiciels exécutés dans celui-ci.
-  
-  > **Environment variables** are variables that are available system-wide and are inherited by all spawned child processes and shells.
-  >
-  > **Shell variables** are variables that apply only to the current shell instance. Each shell such as `zsh` and `bash`, has its own set of internal shell variables.
-  >
-  > https://linuxize.com/post/how-to-set-and-list-environment-variables-in-linux/
-  
-  1. Windows
-  
-  - https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html#GUID-DD6F9982-60D5-48F6-8270-A27EC53807D0
-  - sysdm.cpl
-  - dif cmd / powershell
-  - msys2/bash ?
+  - `PATH` : Indique les répertoires où sont stockés les exécutables des logiciels.
+  - `USER` : Indique l'utilisateur actuellement connecté.
+  - `HOME` : Indique le répertoire principal de l'utilisateur connecté.
+  - `PWD` (print working directory) : Indique le répertoire courant où se trouve l'utilisateur.
+
+  Deux types de variables se distinguent, les variables d'environnement disponibles dans la totalité de l'OS et héritées par tous les processus enfants et shells.
+  Et les variables de shell, applicables uniquement à l'instance actuelle du shell. Chaque shell (comme zsh ou bash) possède son propre ensemble de variables internes.
+
+  ## Configuration des Variables d'Environnement
     
-  2. Linux / Mac
+  ### Windows
+    
+  Sur Windows, les variables d'environnement peuvent être configurées via l'interface graphique ou la ligne de commande.
   
-  - with zsh https://linuxhint.com/set-environment-variable-zsh/
-  - with bash
-  - `/etc/environment`
+  > retrouvez [ici](https://gist.github.com/abenevaut/90042f9ed7c1eaf1007f97d0f914ceea) la liste des variables d'environnement qui décrivent les chemins (`PATH`) disponible par défaut.
   
-  # Resources
+  #### Interface Graphique
+    
+  - Ouvrez le Panneau de configuration
+  - Allez dans `Système` > `Paramètres système avancés` > `Variables d'environnement`
+  - Ajoutez ou modifiez les variables selon vos besoins
   
-  - https://kinsta.com/fr/base-de-connaissances/variables-environnement/#questce-quune-variable-denvironnement-
+  #### Ligne de Commande :
+  
+  - `CMD` : Utilisez la commande `set` pour définir une variable temporairement
+  - `PowerShell` : Utilisez `$env:VARIABLE_NAME` pour définir une variable
+    
+  ### Unix (Linux/Mac)
+    
+  Sur les systèmes Unix, les variables d'environnement peuvent être configurées via des fichiers de configuration ou directement dans le shell.
+  
+  ### Configuration Système
+  
+  Modifiez le fichier `/etc/environment` (ou similaire en fonction de votre OS Unix) pour définir des variables d'environnement globales.
+  
+  ### Bash & zsh
+    
+  Ajoutez `export VARIABLE_NAME=value` dans votre fichier ~/.zshrc ou ~/.bashrc ou ~/.bash_profile.
+  Rechargez le fichier avec `source ~/.zshrc` ou `source ~/.bashrc` ou `source ~/.bash_profile`.
+
+  ### Conclusion
+  
+  Les variables d'environnement sont essentielles pour configurer et personnaliser votre système d'exploitation.
+  Aujourd'hui, elles sont une place important dans les hébergements cloud et peuvent parfois être mutualisées à des coffres-forts de données sensibles pour préparer des machines ou serveurs de façon automatisée.
+  
+  Que vous utilisiez Windows ou un système Unix, comprendre comment les définir et les gérer peut grandement améliorer votre productivité et la gestion de vos logiciels.
