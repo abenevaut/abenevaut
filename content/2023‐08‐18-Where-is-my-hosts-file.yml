@@ -1,9 +1,9 @@
 view: article
 language: en
 seo:
-  title: Capture The Flags, COMCYBER challenges
-  description: Mettez vos compétences en cybersécurité au service de l'armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.
-  keywords: ctf, security, comcyber
+  title: "Where is my hosts file?"
+  description: "The `hosts` file contains manually defined DNS entries that allows computer to route network traffic."
+  keywords: hosts, hosts file, DNS, IP, loopback, localhost, network traffic, network, computer, system, administrator, IP v4, IP v6
   author: Antoine Benevaut
   twitter: "@abenevaut"
   og-image: https://www.abenevaut.dev/images/abenevaut-og.webp
@@ -21,7 +21,7 @@ article: |+
   
   contains manually defined DNS entries that allows computer to route network traffic.
   
-  ```php
+  ```markdown
   127.0.0.1 this-computer-name.local
   192.168.xxx.xxx network-computer-name.local
   
@@ -31,11 +31,11 @@ article: |+
   ::1        localhost
   ```
   
-  !! This file is used before the DNS look up, so it has priority rather than look up and can overwrite it.
+  > This file is used before the DNS look up, so it has priority rather than look up and can overwrite it.
   
-  !! You have to be administrator or assimilate to edit this file.
-  !! Note that the hosts file only affect the computer on which the changes were made.
-  !! You do not need to restart your computer after changes.
+  > You have to be administrator or assimilate to edit this file.
+  > Note that the hosts file only affect the computer on which the changes were made.
+  > You do not need to restart your computer after changes.
   
   > 127.0.0.1 is a special IP address that allows network communication to loop back to the same computer without going through external networks
   

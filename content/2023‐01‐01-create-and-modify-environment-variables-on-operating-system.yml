@@ -1,5 +1,7 @@
 view: article
 language: en
+created_at: 2023-01-01
+updated_at: 2025-02-14
 seo:
   title: "Les Variables d'Environnement : Un Guide Pratique pour Windows et Unix"
   description: Les variables d'environnement sont essentielles pour configurer et personnaliser votre système d'exploitation. Découvrez comment les définir et les gérer sur Windows et Unix.
@@ -13,12 +15,12 @@ article: |+
   Dans un système d'exploitation (OS), l'environnement est une suite de variables qui définissent une configuration de l'OS et sont accessibles à l'ensemble des logiciels installés sur cet OS.
   Ces variables peuvent être personnalisées à l'échelle de l'OS ou à l'échelle du terminal utilisé.
 
-  Les variables d'environnement les plus couramment utilisées incluent :
+  Les variables d'environnement les plus couramment utilisées incluent :
   
-  - `PATH` : Indique les répertoires où sont stockés les exécutables des logiciels.
-  - `USER` : Indique l'utilisateur actuellement connecté.
-  - `HOME` : Indique le répertoire principal de l'utilisateur connecté.
-  - `PWD` (print working directory) : Indique le répertoire courant où se trouve l'utilisateur.
+  - `PATH` : Indique les répertoires où sont stockés les exécutables des logiciels.
+  - `USER` : Indique l'utilisateur actuellement connecté.
+  - `HOME` : Indique le répertoire principal de l'utilisateur connecté.
+  - `PWD` (print working directory) : Indique le répertoire courant où se trouve l'utilisateur.
 
   Deux types de variables se distinguent, les variables d'environnement disponibles dans la totalité de l'OS et héritées par tous les processus enfants et shells.
   Et les variables de shell, applicables uniquement à l'instance actuelle du shell. Chaque shell (comme zsh ou bash) possède son propre ensemble de variables internes.
@@ -37,10 +39,10 @@ article: |+
   - Allez dans `Système` > `Paramètres système avancés` > `Variables d'environnement`
   - Ajoutez ou modifiez les variables selon vos besoins
   
-  #### Ligne de Commande :
+  #### Ligne de Commande :
   
-  - `CMD` : Utilisez la commande `set` pour définir une variable temporairement
-  - `PowerShell` : Utilisez `$env:VARIABLE_NAME` pour définir une variable
+  - `CMD` : Utilisez la commande `set` pour définir une variable temporairement
+  - `PowerShell` : Utilisez `$env:VARIABLE_NAME` pour définir une variable
     
   ### Unix (Linux/Mac)
     
@@ -52,12 +54,12 @@ article: |+
   
   ### Bash & zsh
     
-  Ajoutez `export VARIABLE_NAME=value` dans votre fichier ~/.zshrc ou ~/.bashrc ou ~/.bash_profile.
+  Ajoutez `export VARIABLE_NAME=value` dans votre fichier `~/.zshrc` ou `~/.bashrc` ou `~/.bash_profile`.
   Rechargez le fichier avec `source ~/.zshrc` ou `source ~/.bashrc` ou `source ~/.bash_profile`.
 
   ### Conclusion
   
   Les variables d'environnement sont essentielles pour configurer et personnaliser votre système d'exploitation.
-  Aujourd'hui, elles ont une place important dans les hébergements cloud et peuvent parfois être mutualisées à des coffres-forts de données sensibles pour préparer des machines ou serveurs de façon automatisée.
+  Aujourd'hui, elles ont une place importante dans les hébergements cloud et peuvent parfois être mutualisées à des coffres-forts de données sensibles pour préparer des machines ou serveurs de façon automatisée.
   
   Que vous utilisiez Windows ou un système Unix, comprendre comment les définir et les gérer peut grandement améliorer votre productivité et la gestion de vos logiciels.

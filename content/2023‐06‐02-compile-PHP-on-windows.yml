@@ -1,9 +1,9 @@
 view: article
 language: en
 seo:
-    title: Capture The Flags, COMCYBER challenges
-    description: Mettez vos compétences en cybersécurité au service de l'armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.
-    keywords: ctf, security, comcyber
+    title: "Compiler PHP on Windows"
+    description: "Nous utilisons l’extension PHP “YAF” <https://pecl.php.net/package/yaf> qui manque de support sur PHP 8.2."
+    keywords: PHP, Windows, YAF, PHP 8.2, Visual Studio, phpize, php-sdk-binary-tools, phpize.bat, nmake
     author: Antoine Benevaut
     twitter: "@abenevaut"
     og-image: https://www.abenevaut.dev/images/abenevaut-og.webp
@@ -12,70 +12,73 @@ seo:
 article: |+
     # Le problème
     
-    Nous utilisons l’extension PHP “YAF” <https://pecl.php.net/package/yaf> qui manque de support sur PHP 8.2.
+    Nous utilisons l’extension PHP “[YAF](https://pecl.php.net/package/yaf)” qui manque de support sur PHP 8.2.
     
     Nous souhaitons soit:
     
-    -   réussir a compiler une version de YAF 3.3.5 pour PHP 8.2 (soit une dll fonctionnel sur PHP 8.2)
-    -   réussir a compiler une version de PHP 8.2 qui embarquerai l’extension YAF 3.3.5
+    - réussir a compiler une version de YAF 3.3.5 pour PHP 8.2 (soit une dll fonctionnel sur PHP 8.2)
+    - réussir a compiler une version de PHP 8.2 qui embarquerai l’extension YAF 3.3.5
     
-    La compilation de YAF doit se faire a partir des sources de la PR: <https://github.com/laruence/yaf/pull/579> qui fixe la compatibilité de YAF pour PHP 8.2
+    La compilation de YAF doit se faire a partir des sources de la [PR](https://github.com/laruence/yaf/pull/579) qui fixe la compatibilité de YAF pour PHP 8.2
     
     # Prérequis
     
-    -   les sources PHP de sont disponible ici <https://github.com/php/php-src> **mais seront récupérée d’une autre manière**
+    - les sources PHP de sont disponible [ici](https://github.com/php/php-src) **mais seront récupérée d’une autre manière**
     
     Contexte de distribution de PHP:
     
-    -   les livrables officiels PHP sont fournis ici <https://windows.php.net/download/>, on trouve:
-        -   la distribution compile: “Zip“
-            -   une version est proposée en plusieurs format
-                -   thread safe (TS) / no thread safe (NTS)
-                    -   le thread safe est utilise lorsque le serveur qui invoque PHP est multi-threaded (exemple Apache MPM Worker)
-                    -   nginx, IIS, utiliser php en ligne de commande, utiliser php en CGI… ne nécessite pas l’utilisation du thread safe
-                -   x64 ou x86 : l’architecture de la machine sur laquelle a ete compile mais egalement l’architecture de la machine qui va utiliser le binaire PHP (sur windows php.exe etc..)
-            -   une information important va aussi nous guider “VS16“ qui apparait dans le titre du package
-                -   cette ligne indique avec quelle version de visual studio PHP a ete compile; Nous utiliserons la meme version de visual studio pour nos compilations → Si cela n’est pas respecter des warning apparaitront dans les logs PHP expliquant qu’il ne parvient pas a charger certaines librairies car un numero de version (sans certitude l’id du compilateur) n’est pas similaire entre PHP et l’extention
-        -   le code source: “**Download source code**“
-        -   un sous-package “**Development package (SDK to develop PHP extensions)**", ce package met a disposition un utilitaire nommé “phpize.bat“ qui nous sera utile pour la compilation de YAF
+    - les livrables officiels PHP sont fournis [ici](https://windows.php.net/download/), on trouve:
+        - la distribution compile: “Zip“
+            - une version est proposée en plusieurs format
+                - thread safe (TS) / no thread safe (NTS)
+                    - le thread safe est utilise lorsque le serveur qui invoque PHP est multi-threaded (exemple Apache MPM Worker)
+                    - nginx, IIS, utiliser php en ligne de commande, utiliser php en CGI… ne nécessite pas l’utilisation du thread safe
+                - x64 ou x86 : l’architecture de la machine sur laquelle a ete compile mais également l’architecture de la machine qui va utiliser le binaire PHP (sur windows php.exe etc..)
+            - une information important va aussi nous guider “VS16“ qui apparait dans le titre du package
+                - cette ligne indique avec quelle version de visual studio PHP a ete compile; Nous utiliserons la meme version de visual studio pour nos compilations → Si cela n’est pas respecter des warning apparaitront dans les logs PHP expliquant qu’il ne parvient pas a charger certaines librairies car un numéro de version (sans certitude l’id du compilateur) n’est pas similaire entre PHP et l’extension
+        - le code source: “**Download source code**“
+        - un sous-package “**Development package (SDK to develop PHP extensions)**", ce package met a disposition un utilitaire nommé “phpize.bat“ qui nous sera utile pour la compilation de YAF
     
     Avec ces informations, nous pouvons déterminer que:
     
-    -   nous souhaitons compiler YAF 3.3.5 via la PR <https://github.com/laruence/yaf/pull/579>
-    -   nous allons poursuivre l’utilisation de PHP NTS x64
-    -   il nous est impose d’utiliser VS16 (visual studio 2019) pour la compilation
-        -   le package redistribuable est disponible ici <https://learn.microsoft.com/fr-FR/cpp/windows/latest-supported-vc-redist?view=msvc-170#visual-studio-2015-2017-2019-and-2022>
+    - nous souhaitons compiler YAF 3.3.5 via la [PR](https://github.com/laruence/yaf/pull/579)
+    - nous allons poursuivre l’utilisation de PHP NTS x64
+    - il nous est impose d’utiliser VS16 (visual studio 2019) pour la compilation
+        - le package re-distribuable est disponible [ici](https://learn.microsoft.com/fr-FR/cpp/windows/latest-supported-vc-redist?view=msvc-170#visual-studio-2015-2017-2019-and-2022)
     
     # La mise en œuvre
     
-    -   la team PHP windows, met a disposition un sdk pour faciliter la compilation <https://github.com/php/php-sdk-binary-tools>
-        -   a bien lire <https://github.com/php/php-sdk-binary-tools/tree/master#requirements>
-        -   exemple d’utilisation pour compiler PHP <https://github.com/php/php-sdk-binary-tools/tree/master#basic-usage-example>
-            -   Choisir le tag nécessaire pour la compilation (php8.2 => php-sdk-2.2.0)
-            -   On se note dans un coin phpsdk-vs16-x64.bat
-        -   see also <https://wiki.php.net/internals/windows/stepbystepbuild_sdk_2>
+    - la team PHP windows, met a disposition un [sdk](https://github.com/php/php-sdk-binary-tools) pour faciliter la compilation
+        - [à bien lire](https://github.com/php/php-sdk-binary-tools/tree/master#requirements)
+        - [exemple d’utilisation](https://github.com/php/php-sdk-binary-tools/tree/master#basic-usage-example) pour compiler PHP
+            - Choisir le tag nécessaire pour la compilation (php8.2 => php-sdk-2.2.0)
+            - On se note dans un coin phpsdk-vs16-x64.bat
+        - [see also](https://wiki.php.net/internals/windows/stepbystepbuild_sdk_2)
     
     # Mise en place de l’environnement de compilation
     
-        git clone https://github.com/php/php-sdk-binary-tools.git c:\php-sdk
-        cd c:\php-sdk
-        git checkout php-sdk-2.2.0
-        // On invoque
-        .\phpsdk-vc16-x64.bat
-        // telecharge les resources necessaire a la compilation dans `c:\php-sdk\phpmaster\vs16\x64\deps\`
-        phpsdk_buildtree phpmaster
+    ```
+    git clone https://github.com/php/php-sdk-binary-tools.git c:\php-sdk
+    cd c:\php-sdk
+    git checkout php-sdk-2.2.0
+    // On invoque
+    .\phpsdk-vc16-x64.bat
+    // télécharger les resources nécessaire à la compilation dans `c:\php-sdk\phpmaster\vs16\x64\deps\`
+    phpsdk_buildtree phpmaster
+    ```
     
-    Télécharger “**Development package (SDK to develop PHP extensions)**” de la version 8.2.6 et l’extraire dans C:\\php-8.2.6-devel-vs16-x64
+    Télécharger “**Development package (SDK to develop PHP extensions)**” de la version 8.2.6 et l’extraire dans `C:\\php-8.2.6-devel-vs16-x64`
     
     # Comment compiler YAF
     
-    -   télécharger les sources de YAF de la PR <https://github.com/remicollet/php-yaf/tree/issue-php82>
-    -   extraire les sources a ce path cd c:\\php-sdk\\phpmaster\\vs16\\x64
+    - télécharger les sources de YAF de la [PR](https://github.com/remicollet/php-yaf/tree/issue-php82)
+    - extraire les sources à ce path cd `C:\\php-sdk\\phpmaster\\vs16\\x64`
     
-    
-        // On invoque le SDK
-        .\phpsdk-vc16-x64.bat
-        cd c:\php-sdk\phpmaster\vs16\x64\yaf
-        C:\php-8.2.6-devel-vs16-x64\phpize.bat
-        configure --enable-yaf
-        nmake
+    ```
+    // On invoque le SDK
+    .\phpsdk-vc16-x64.bat
+    cd c:\php-sdk\phpmaster\vs16\x64\yaf
+    C:\php-8.2.6-devel-vs16-x64\phpize.bat
+    configure --enable-yaf
+    nmake
+    ```
