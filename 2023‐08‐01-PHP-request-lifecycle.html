@@ -6,31 +6,31 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Capture The Flags, COMCYBER challenges</title>
-        <meta name="description" content="Mettez vos compétences en cybersécurité au service de l&#039;armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.">
-        <meta name="keywords" content="ctf, security, comcyber">
+        <title>PHP Request Lifecycle</title>
+        <meta name="description" content="This cycle in PHP describes the way that a browser and a web server communicate to process user requests.">
+        <meta name="keywords" content="PHP, Apache, nginx, browser, web server, PHP code, database, HTML markup">
         <meta name="author" content="Antoine Benevaut">
 
         <meta property="og:type" content="website">
         <meta property="og:url" content="https://www.abenevaut.dev/2023‐08‐01-PHP-request-lifecycle.html">
-        <meta property="og:title" content="Capture The Flags, COMCYBER challenges">
-        <meta property="og:description" content="Mettez vos compétences en cybersécurité au service de l&#039;armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.">
+        <meta property="og:title" content="PHP Request Lifecycle">
+        <meta property="og:description" content="This cycle in PHP describes the way that a browser and a web server communicate to process user requests.">
         <meta property="og:image" content="https://www.abenevaut.dev/images/abenevaut-og.webp">
 
         <meta property="twitter:card" content="summary_large_image">
         <meta name=”twitter:creator” content=”@abenevaut”>
         <meta property="twitter:url" content="https://www.abenevaut.dev/2023‐08‐01-PHP-request-lifecycle.html">
-        <meta property="twitter:title" content="Capture The Flags, COMCYBER challenges">
-        <meta property="twitter:description" content="Mettez vos compétences en cybersécurité au service de l&#039;armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.">
+        <meta property="twitter:title" content="PHP Request Lifecycle">
+        <meta property="twitter:description" content="This cycle in PHP describes the way that a browser and a web server communicate to process user requests.">
         <meta property="twitter:image" content="https://www.abenevaut.dev/images/abenevaut-og.webp">
-        <meta property="twitter:image:alt" content="Mettez vos compétences en cybersécurité au service de l&#039;armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.">
+        <meta property="twitter:image:alt" content="This cycle in PHP describes the way that a browser and a web server communicate to process user requests.">
 
         <base href="/"> <!-- /dev.abenevaut/abenevaut/dist/ -->
         <link rel="manifest" href="manifest.webmanifest" />
 
             <link rel="canonical" href="//index.html" />
     <script>
-      window.article = "<a href=\"#lexplication-technique\"><h1 id='lexplication-technique'>L'explication technique<\/h1><\/a>\n<p>This cycle in PHP describes the way that a browser and a web server communicate to process user requests. It may seem simple, but it\u2019s important to keep it in mind while developing with PHP because things like header redirection, output buffering and setting cookies are all affected by this cycle.<\/p>\n<p><a href=\"https:\/\/drive.google.com\/file\/d\/147y_6SgHF2yOiJP7IFoGKg0ct7OOkYkn\/view?usp=sharing\">https:\/\/drive.google.com\/file\/d\/147y_6SgHF2yOiJP7IFoGKg0ct7OOkYkn\/view?usp=sharing<\/a><\/p>\n<p><a href=\"https:\/\/drive.google.com\/file\/d\/147y_6SgHF2yOiJP7IFoGKg0ct7OOkYkn\/view?usp=sharing\">[https:\/\/drive.google.com\/file\/d\/147y_6SgHF2yOiJP7IFoGKg0ct7OOkYkn\/view?usp=sharing]<\/a><\/p>\n<ol>\n<li>To start with, we have our browser and the web server.<\/li>\n<li>The browser makes a request to the web server, e.g. you typed in the domain of a site.<\/li>\n<li>On that web server, a software will need to intercept that request and that software is called \u201cApache\u201d.<\/li>\n<li>Apache then sees the request and will search the file that corresponds to it.<\/li>\n<li>Afterwards, it then goes to the file system and looks for that file. When found, it checks if that file has a\u00a0<code>.php<\/code>\u00a0extension and if there is, the PHP code in that file will be processed.<\/li>\n<li>During the processing, Apache may need to go back and forth to the database a couple of times, it may be to request some information from the database, store information in the database, etc.<\/li>\n<li>Once the processing is done, there\u2019s one final step in which it assembles the HTML markup that\u2019s going to be returned and then sends that back to the browser and that\u2019s the response that the user sees.<\/li>\n<\/ol>\n<p>Source: <a href=\"https:\/\/kennyalmendral.github.io\/php-request-response-cycle\/\">https:\/\/kennyalmendral.github.io\/php-request-response-cycle\/<\/a><\/p>\n<a href=\"#pour-aller-plus-loin\"><h1 id='pour-aller-plus-loin'>Pour aller plus loin<\/h1><\/a>\n<ul>\n<li>Approche PHP Lifecycle en C: <a href=\"https:\/\/www.phpinternalsbook.com\/php7\/extensions_design\/php_lifecycle.html\">https:\/\/www.phpinternalsbook.com\/php7\/extensions_design\/php_lifecycle.html<\/a>\n<\/li>\n<li>Laravel Request lifecycle <a href=\"https:\/\/laravel.com\/docs\/master\/lifecycle\">https:\/\/laravel.com\/docs\/master\/lifecycle<\/a>\n<\/li>\n<\/ul>\n"
+      window.article = "<a href=\"#lexplication-technique\"><h1 id='lexplication-technique'>L'explication technique<\/h1><\/a>\n<p>This cycle in PHP describes the way that a browser and a web server communicate to process user requests.\nIt may seem simple, but it\u2019s important to keep it in mind while developing with PHP because things like header redirection, output buffering and setting cookies are all affected by this cycle.<\/p>\n<ol>\n<li>To start with, we have our browser and the web server.<\/li>\n<li>The browser makes a request to the web server, e.g. you typed in the domain of a site.<\/li>\n<li>On that web server, a software will need to intercept that request and that software is called \u201cApache\u201d.<\/li>\n<li>Apache then sees the request and will search the file that corresponds to it.<\/li>\n<li>Afterwards, it then goes to the file system and looks for that file. When found, it checks if that file has a\u00a0<code>.php<\/code>\u00a0extension and if there is, the PHP code in that file will be processed.<\/li>\n<li>During the processing, Apache may need to go back and forth to the database a couple of times, it may be to request some information from the database, store information in the database, etc.<\/li>\n<li>Once the processing is done, there\u2019s one final step in which it assembles the HTML markup that\u2019s going to be returned and then sends that back to the browser and that\u2019s the response that the user sees.<\/li>\n<\/ol>\n<p>Source: https:\/\/kennyalmendral.github.io\/php-request-response-cycle<\/p>\n<a href=\"#pour-aller-plus-loin\"><h1 id='pour-aller-plus-loin'>Pour aller plus loin<\/h1><\/a>\n<ul>\n<li>Approche PHP Lifecycle en C: <a href=\"https:\/\/www.phpinternalsbook.com\/php7\/extensions_design\/php_lifecycle.html\">https:\/\/www.phpinternalsbook.com\/php7\/extensions_design\/php_lifecycle.html<\/a>\n<\/li>\n<li>Laravel Request lifecycle <a href=\"https:\/\/laravel.com\/docs\/master\/lifecycle\">https:\/\/laravel.com\/docs\/master\/lifecycle<\/a>\n<\/li>\n<\/ul>\n"
     </script>
     <script type="module" src="assets/Article.js"></script>
 
