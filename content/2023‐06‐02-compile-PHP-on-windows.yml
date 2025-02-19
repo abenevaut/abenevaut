@@ -1,5 +1,5 @@
 view: article
-language: en
+language: fr
 seo:
     title: "Compiler PHP on Windows"
     description: "Nous utilisons l’extension PHP “YAF” <https://pecl.php.net/package/yaf> qui manque de support sur PHP 8.2."

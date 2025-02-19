@@ -1,0 +1,95 @@
+view: article
+language: fr
+seo:
+    title: Déclarer les dépendances composer que vous utilisez
+    description: Pour moi, dès lors que vous utilisez explicitement un type de donnée qui provient d'un package Composer, ce package doit être explicitement déclaré dans votre `composer.json`.
+    keywords: composer, php, laravel
+    author: Antoine Benevaut
+    twitter: "@abenevaut"
+    og-image: https://www.abenevaut.dev/images/abenevaut-og.webp
+    url: https://www.abenevaut.dev/2024‐04‐26-declarer-les-dependances-composer-que-vous-utilisez.html
+
+article: |+
+    # Déclarer les dépendances composer que vous utilisez
+    
+    Dès lors que vous utilisez explicitement un type de donnée provenant d'un package Composer,
+    ce package doit être explicitement déclaré dans votre `composer.json`.
+    
+    Pour moi, il est essentiel de réduire au maximum les dépendances implicites dans votre projet.
+    
+    Lorsque vous ajoutez un package Composer à votre application, celui-ci peut embarquer d'autres packages qui sont ses dépendances obligatoires.
+    Par exemple, le package `illuminate/validation` nécessite `illuminate/translation` et `illuminate/collections` pour fonctionner.
+    
+    ```shell
+    composer require illuminate/validation
+    ```
+
+    Composer installe alors automatiquement les trois packages `illuminate/validation`, `illuminate/translation` et `illuminate/collections` en raison de la dépendance forte entre eux.
+    Pour vérifier que `illuminate/translation` et `illuminate/collections` sont bien installés, vous pouvez interroger Composer :
+
+    ```shell
+    composer info illuminate/validation
+    ```
+
+    Vous pouvez également vérifier quelles sont les dépendances d'un package dans le sens inverse :
+
+    ```shell
+    composer why illuminate/translation
+    ```
+
+    Cependant, la seule information qui apparaît dans votre `composer.json` est que `illuminate/validation` est installé :
+
+    ```json
+    {
+      "require": {
+          "illuminate/validation": "^11.5"
+      }
+    }
+    ```
+
+    ### Réflexion sur l'utilisation des dépendances
+
+    Posons-nous maintenant quelques questions :
+
+    - Si je ne suis pas familier avec un package, dois-je explorer toutes les dépendances de tous mes packages Composer pour trouver une bibliothèque utilisée dans mon projet ?
+    - Comment m'assurer qu'une bibliothèque est bien présente et utilisée dans le projet ?
+
+    ## Cas 1 : Utilisation de `illuminate/validation`
+
+    Pour créer une instance de validation avec `illuminate/validation`, il faut également instancier `illuminate/translation` :
+
+    ```php
+    <?php
+    
+    require __DIR__ . '/vendor/autoload.php';
+    
+    use Illuminate\Translation\ArrayLoader;
+    use Illuminate\Translation\Translator;
+    use Illuminate\Validation\Factory;
+    
+    // Charger les traductions de validation
+    $validationTranslations = require __DIR__ . '/vendor/illuminate/translation/lang/en/validation.php';
+    $translations = (new ArrayLoader())->addMessages('en', 'validation', $validationTranslations);
+    
+    // Créer une instance du Translator
+    $translator = new Translator($translations, 'en');
+    
+    // Créer une instance du Validator
+    $validator = new Factory($translator);
+    ```
+  
+    ## Cas 2 : Utilisation de `illuminate/translation` seule
+    
+    Imaginons maintenant que nous souhaitons ajouter une fonctionnalité à notre application de QR Code et que celle-ci nécessite uniquement `illuminate/translation`.
+
+    Dans ce cas, il est préférable d'inscrire explicitement cette dépendance dans votre `composer.json` en exécutant :
+
+    ```shell
+    composer require illuminate/translation
+    ```
+    
+    Ainsi, vous garantissez que ce package est bien listé comme une dépendance nécessaire au bon fonctionnement de votre application.
+    
+    Plus tard, si notre application de QR Code n'a plus besoin de la validation et que nous supprimons `illuminate/validation`, nous évitons ainsi de supprimer par erreur `illuminate/translation` si elle est toujours requise ailleurs.
+    
+    Quel est votre avis sur ce point ? Comment gérez-vous les dépendances dans vos projets ? Venez en discuter avec nous sur [Discord](https://laravel-france.com/discord) !

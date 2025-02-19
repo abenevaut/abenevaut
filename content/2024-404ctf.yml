@@ -1,9 +1,9 @@
 view: writeup
-language: en
+language: fr
 seo:
-  title: Capture The Flags, 404 CTF
-  description:
-  keywords: ctf, security, 404ctf
+  title: "Capture The Flags, 404 CTF 2024"
+  description: "L'édition 2024 du 404 CTF a rassemblé près de 3800 participants autours de 72 de challenges conçus par HackademINT."
+  keywords: ctf, security, 404ctf, hackademint
   author: Antoine Benevaut
   twitter: "@abenevaut"
   og-image: https://www.abenevaut.dev/images/abenevaut-og-sec.webp
@@ -22,5 +22,29 @@ article:
 
 writeup: |+
   # Write-up
+
+  Dans cette épreuve de Stéganographie, l'intrigue atteint son paroxysme lorsque l'on découvre la lettre de Francis Vigenère, son postscriptum semble bien étrange.
+
+  ```
+  bonsoir, désolé pour le déranGement. je n'ai pas pu Y aller hier pour l'épreuve de barres asyMétriques. désolé si je N'ai pas été à lA hauteur de voS attenTes, je feraIs mieux aux épreuves publiQUes de dEmain. 
+
+  bises.
+  franciS vigenere.
+
+  ps :
+  Kl qsfwm, r'qc hm s'ynfefmmh wej rc peahxik xi eg lmgigg i uni voqevmmem fuv vkq srnk jcy psmryurnl yiyli hkppee ehv fuck ! Syuf ahkmi orw rmztuw kmsbijifq, w'aa xvvcr ha jq eelkwkpij. Rc hbiub : 404KJZ{RwBmxrzHtaBywVxybramqAlj}
+  ```
   
-  N/A
+  Le chiffrement de Vigenère repose sur une clé et la "table de Vigenère", un tableau d'association entre une lettre de la clé et son équivalent chiffré.
+  
+  Il faut donc trouver la clé ! Avant le postscriptum, on remarque qu'aucune majuscule n'est utilisée à bon escient, en les rassemblant dans l'ordre, on obtient la clé: GYMNASTIQUES
+  
+  Essayons-la sur notre postscriptum chiffré.
+  
+  ```
+  En effet, j'ai du m'absenter car le drapeau de ma nation a ete dissimule par des gens qui voulaient faire perdre mon pays ! Mais apres une longue recherche, j'ai enfin pu le retrouver. Le voici : 404CTF{FLAG-ICI}
+  ```
+  
+  💥 BOOM ! Nous avons déchiffré le message !
+  
+  > Pour déchiffrer plus rapidement, vous pouvez utiliser l'outil en ligne [dcode.fr/vigenere-cipher](https://www.dcode.fr/vigenere-cipher).

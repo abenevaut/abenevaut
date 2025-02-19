@@ -1,5 +1,5 @@
 view: article
-language: en
+language: fr
 seo:
     title: "Le fichier DotEnv au travers de Laravel"
     description: "Cet article présente le cadre d'utilisation du fichier DotEnv (_.env_) disponible sur Laravel pour configurer votre application avec des variables d'environnements fournies par la machine qui l'héberge."

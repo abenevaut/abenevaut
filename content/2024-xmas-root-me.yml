@@ -1,5 +1,5 @@
 view: writeup
-language: en
+language: fr
 seo:
   title: Capture The Flags, XMAS root-me challenges
   description:
@@ -36,8 +36,3 @@ writeup: |+
 
   > Une erreur, une typo vous pique les yeux ou encore je n'ai pas respecté [The 10 commandments of writing solution](https://blog.root-me.org/posts/10_commandments_solution/).
   > Contactez-moi via [GitHub](https://github.com/abenevaut/abenevaut/issues), je ferai le nécessaire.
-
-#  - [Day 08 - Custom HTTP Server](2024-xmas-root-me/08-web-custom-http-server-1.html)
-#  - [Day 10 - Route-Mi Shop](2024-xmas-root-me/10-web-route-mi-shop-1.html)
-#  - [Day 15 - New new .. always new](2024-xmas-root-me/15-web-new-new-always-new-1.html)
-#  - [Day 18 - Santa's sweet words](2024-xmas-root-me/18-web-Santa_s-sweet-words-1.html)
