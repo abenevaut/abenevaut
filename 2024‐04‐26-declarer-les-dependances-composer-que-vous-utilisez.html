@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="robots" content="index, follow">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Déclarer les dépendances composer que vous utilisez</title>
+        <meta name="description" content="Pour moi, dès lors que vous utilisez explicitement un type de donnée qui provient d&#039;un package Composer, ce package doit être explicitement déclaré dans votre `composer.json`.">
+        <meta name="keywords" content="composer, php, laravel">
+        <meta name="author" content="Antoine Benevaut">
+
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://www.abenevaut.dev/2024‐04‐26-declarer-les-dependances-composer-que-vous-utilisez.html">
+        <meta property="og:title" content="Déclarer les dépendances composer que vous utilisez">
+        <meta property="og:description" content="Pour moi, dès lors que vous utilisez explicitement un type de donnée qui provient d&#039;un package Composer, ce package doit être explicitement déclaré dans votre `composer.json`.">
+        <meta property="og:image" content="https://www.abenevaut.dev/images/abenevaut-og.webp">
+
+        <meta property="twitter:card" content="summary_large_image">
+        <meta name=”twitter:creator” content=”@abenevaut”>
+        <meta property="twitter:url" content="https://www.abenevaut.dev/2024‐04‐26-declarer-les-dependances-composer-que-vous-utilisez.html">
+        <meta property="twitter:title" content="Déclarer les dépendances composer que vous utilisez">
+        <meta property="twitter:description" content="Pour moi, dès lors que vous utilisez explicitement un type de donnée qui provient d&#039;un package Composer, ce package doit être explicitement déclaré dans votre `composer.json`.">
+        <meta property="twitter:image" content="https://www.abenevaut.dev/images/abenevaut-og.webp">
+        <meta property="twitter:image:alt" content="Pour moi, dès lors que vous utilisez explicitement un type de donnée qui provient d&#039;un package Composer, ce package doit être explicitement déclaré dans votre `composer.json`.">
+
+        <base href="/"> <!-- /dev.abenevaut/abenevaut/dist/ -->
+        <link rel="manifest" href="manifest.webmanifest" />
+
+            <link rel="canonical" href="//index.html" />
+    <script>
+      window.article = "<a href=\"#declarer-les-dependances-composer-que-vous-utilisez\"><h1 id='declarer-les-dependances-composer-que-vous-utilisez'>D\u00e9clarer les d\u00e9pendances composer que vous utilisez<\/h1><\/a>\n<p>D\u00e8s lors que vous utilisez explicitement un type de donn\u00e9e provenant d'un package Composer,\nce package doit \u00eatre explicitement d\u00e9clar\u00e9 dans votre <code>composer.json<\/code>.<\/p>\n<p>Pour moi, il est essentiel de r\u00e9duire au maximum les d\u00e9pendances implicites dans votre projet.<\/p>\n<p>Lorsque vous ajoutez un package Composer \u00e0 votre application, celui-ci peut embarquer d'autres packages qui sont ses d\u00e9pendances obligatoires.\nPar exemple, le package <code>illuminate\/validation<\/code> n\u00e9cessite <code>illuminate\/translation<\/code> et <code>illuminate\/collections<\/code> pour fonctionner.<\/p>\n<pre><code class=\"language-shell\">composer require illuminate\/validation\n<\/code><\/pre>\n<p>Composer installe alors automatiquement les trois packages <code>illuminate\/validation<\/code>, <code>illuminate\/translation<\/code> et <code>illuminate\/collections<\/code> en raison de la d\u00e9pendance forte entre eux.\nPour v\u00e9rifier que <code>illuminate\/translation<\/code> et <code>illuminate\/collections<\/code> sont bien install\u00e9s, vous pouvez interroger Composer :<\/p>\n<pre><code class=\"language-shell\">composer info illuminate\/validation\n<\/code><\/pre>\n<p>Vous pouvez \u00e9galement v\u00e9rifier quelles sont les d\u00e9pendances d'un package dans le sens inverse :<\/p>\n<pre><code class=\"language-shell\">composer why illuminate\/translation\n<\/code><\/pre>\n<p>Cependant, la seule information qui appara\u00eet dans votre <code>composer.json<\/code> est que <code>illuminate\/validation<\/code> est install\u00e9 :<\/p>\n<pre><code class=\"language-json\">{\n  &quot;require&quot;: {\n      &quot;illuminate\/validation&quot;: &quot;^11.5&quot;\n  }\n}\n<\/code><\/pre>\n<a href=\"#reflexion-sur-lutilisation-des-dependances\"><h3 id='reflexion-sur-lutilisation-des-dependances'>R\u00e9flexion sur l'utilisation des d\u00e9pendances<\/h3><\/a>\n<p>Posons-nous maintenant quelques questions :<\/p>\n<ul>\n<li>Si je ne suis pas familier avec un package, dois-je explorer toutes les d\u00e9pendances de tous mes packages Composer pour trouver une biblioth\u00e8que utilis\u00e9e dans mon projet ?<\/li>\n<li>Comment m'assurer qu'une biblioth\u00e8que est bien pr\u00e9sente et utilis\u00e9e dans le projet ?<\/li>\n<\/ul>\n<a href=\"#cas-1-utilisation-de-codeilluminatevalidationcode\"><h2 id='cas-1-utilisation-de-codeilluminatevalidationcode'>Cas 1 : Utilisation de <code>illuminate\/validation<\/code><\/h2><\/a>\n<p>Pour cr\u00e9er une instance de validation avec <code>illuminate\/validation<\/code>, il faut \u00e9galement instancier <code>illuminate\/translation<\/code> :<\/p>\n<pre><code class=\"language-php\">&lt;?php\n\nrequire __DIR__ . '\/vendor\/autoload.php';\n\nuse Illuminate\\Translation\\ArrayLoader;\nuse Illuminate\\Translation\\Translator;\nuse Illuminate\\Validation\\Factory;\n\n\/\/ Charger les traductions de validation\n$validationTranslations = require __DIR__ . '\/vendor\/illuminate\/translation\/lang\/en\/validation.php';\n$translations = (new ArrayLoader())-&gt;addMessages('en', 'validation', $validationTranslations);\n\n\/\/ Cr\u00e9er une instance du Translator\n$translator = new Translator($translations, 'en');\n\n\/\/ Cr\u00e9er une instance du Validator\n$validator = new Factory($translator);\n<\/code><\/pre>\n<a href=\"#cas-2-utilisation-de-codeilluminatetranslationcode-seule\"><h2 id='cas-2-utilisation-de-codeilluminatetranslationcode-seule'>Cas 2 : Utilisation de <code>illuminate\/translation<\/code> seule<\/h2><\/a>\n<p>Imaginons maintenant que nous souhaitons ajouter une fonctionnalit\u00e9 \u00e0 notre application de QR Code et que celle-ci n\u00e9cessite uniquement <code>illuminate\/translation<\/code>.<\/p>\n<p>Dans ce cas, il est pr\u00e9f\u00e9rable d'inscrire explicitement cette d\u00e9pendance dans votre <code>composer.json<\/code> en ex\u00e9cutant :<\/p>\n<pre><code class=\"language-shell\">composer require illuminate\/translation\n<\/code><\/pre>\n<p>Ainsi, vous garantissez que ce package est bien list\u00e9 comme une d\u00e9pendance n\u00e9cessaire au bon fonctionnement de votre application.<\/p>\n<p>Plus tard, si notre application de QR Code n'a plus besoin de la validation et que nous supprimons <code>illuminate\/validation<\/code>, nous \u00e9vitons ainsi de supprimer par erreur <code>illuminate\/translation<\/code> si elle est toujours requise ailleurs.<\/p>\n<p>Quel est votre avis sur ce point ? Comment g\u00e9rez-vous les d\u00e9pendances dans vos projets ? Venez en discuter avec nous sur <a href=\"https:\/\/laravel-france.com\/discord\">Discord<\/a> !<\/p>\n"
+    </script>
+    <script type="module" src="assets/Article.js"></script>
+
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link rel="stylesheet" href="assets/app.css">
+        <link rel="shortcut icon" href="assets/app-icon.webp" type="image/webp">
+    </head>
+    <body class="font-sans antialiased">
+        <div id="root"></div>
+    </body>
+</html>

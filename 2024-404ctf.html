@@ -1,29 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="robots" content="index, follow">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Capture The Flags, 404 CTF</title>
-        <meta name="description" content="">
-        <meta name="keywords" content="ctf, security, 404ctf">
+        <title>Capture The Flags, 404 CTF 2024</title>
+        <meta name="description" content="L&#039;édition 2024 du 404 CTF a rassemblé près de 3800 participants autours de 72 de challenges conçus par HackademINT.">
+        <meta name="keywords" content="ctf, security, 404ctf, hackademint">
         <meta name="author" content="Antoine Benevaut">
 
         <meta property="og:type" content="website">
         <meta property="og:url" content="https://www.abenevaut.dev/2024-404ctf.html">
-        <meta property="og:title" content="Capture The Flags, 404 CTF">
-        <meta property="og:description" content="">
+        <meta property="og:title" content="Capture The Flags, 404 CTF 2024">
+        <meta property="og:description" content="L&#039;édition 2024 du 404 CTF a rassemblé près de 3800 participants autours de 72 de challenges conçus par HackademINT.">
         <meta property="og:image" content="https://www.abenevaut.dev/images/abenevaut-og-sec.webp">
 
         <meta property="twitter:card" content="summary_large_image">
         <meta name=”twitter:creator” content=”@abenevaut”>
         <meta property="twitter:url" content="https://www.abenevaut.dev/2024-404ctf.html">
-        <meta property="twitter:title" content="Capture The Flags, 404 CTF">
-        <meta property="twitter:description" content="">
+        <meta property="twitter:title" content="Capture The Flags, 404 CTF 2024">
+        <meta property="twitter:description" content="L&#039;édition 2024 du 404 CTF a rassemblé près de 3800 participants autours de 72 de challenges conçus par HackademINT.">
         <meta property="twitter:image" content="https://www.abenevaut.dev/images/abenevaut-og-sec.webp">
-        <meta property="twitter:image:alt" content="">
+        <meta property="twitter:image:alt" content="L&#039;édition 2024 du 404 CTF a rassemblé près de 3800 participants autours de 72 de challenges conçus par HackademINT.">
 
         <base href="/"> <!-- /dev.abenevaut/abenevaut/dist/ -->
         <link rel="manifest" href="manifest.webmanifest" />
@@ -31,7 +31,7 @@
             <link rel="canonical" href="//index.html" />
     <script>
       window.article = '{"contentCategory":"Capture The Flags","contentTitle":"404 CTF - \u00c9dition 2024","contentBody":"\u003Cp class=\u0027mt-6\u0027\u003E L\u0027\u00e9dition 2024 s\u0027est tenue du 20 avril au 12 mai 2024 et a rassembl\u00e9 pr\u00e8s de 3800 participants autours de 72 de challenges con\u00e7us par HackademINT. \u003C\/p\u003E","caption":"\u201cLe 404 CTF est la plus grande comp\u00e9tition de cybers\u00e9curit\u00e9 fran\u00e7aise.\u201d","captionImage":"images\/ctf-2024-404ctf.png.webp","outlink":"https:\/\/github.com\/HackademINT\/404CTF-2024","outlinkTitle":"Re-vivez les challenges disponibles sur GitHub"}'
-      window.writeup = "<a href=\"#write-up\"><h1 id='write-up'>Write-up<\/h1><\/a>\n<p>N\/A<\/p>\n"
+      window.writeup = "<a href=\"#write-up\"><h1 id='write-up'>Write-up<\/h1><\/a>\n<p>Dans cette \u00e9preuve de St\u00e9ganographie, l'intrigue atteint son paroxysme lorsque l'on d\u00e9couvre la lettre de Francis Vigen\u00e8re, son postscriptum semble bien \u00e9trange.<\/p>\n<pre><code>bonsoir, d\u00e9sol\u00e9 pour le d\u00e9ranGement. je n'ai pas pu Y aller hier pour l'\u00e9preuve de barres asyM\u00e9triques. d\u00e9sol\u00e9 si je N'ai pas \u00e9t\u00e9 \u00e0 lA hauteur de voS attenTes, je feraIs mieux aux \u00e9preuves publiQUes de dEmain. \n\nbises.\nfranciS vigenere.\n\nps :\nKl qsfwm, r'qc hm s'ynfefmmh wej rc peahxik xi eg lmgigg i uni voqevmmem fuv vkq srnk jcy psmryurnl yiyli hkppee ehv fuck ! Syuf ahkmi orw rmztuw kmsbijifq, w'aa xvvcr ha jq eelkwkpij. Rc hbiub : 404KJZ{RwBmxrzHtaBywVxybramqAlj}\n<\/code><\/pre>\n<p>Le chiffrement de Vigen\u00e8re repose sur une cl\u00e9 et la &quot;table de Vigen\u00e8re&quot;, un tableau d'association entre une lettre de la cl\u00e9 et son \u00e9quivalent chiffr\u00e9.<\/p>\n<p>Il faut donc trouver la cl\u00e9 ! Avant le postscriptum, on remarque qu'aucune majuscule n'est utilis\u00e9e \u00e0 bon escient, en les rassemblant dans l'ordre, on obtient la cl\u00e9: GYMNASTIQUES<\/p>\n<p>Essayons-la sur notre postscriptum chiffr\u00e9.<\/p>\n<pre><code>En effet, j'ai du m'absenter car le drapeau de ma nation a ete dissimule par des gens qui voulaient faire perdre mon pays ! Mais apres une longue recherche, j'ai enfin pu le retrouver. Le voici : 404CTF{FLAG-ICI}\n<\/code><\/pre>\n<p>\ud83d\udca5 BOOM ! Nous avons d\u00e9chiffr\u00e9 le message !<\/p>\n<blockquote>\n<p>Pour d\u00e9chiffrer plus rapidement, vous pouvez utiliser l'outil en ligne <a href=\"https:\/\/www.dcode.fr\/vigenere-cipher\">dcode.fr\/vigenere-cipher<\/a>.<\/p>\n<\/blockquote>\n"
     </script>
     <script type="module" src="assets/Writeup.js"></script>
 

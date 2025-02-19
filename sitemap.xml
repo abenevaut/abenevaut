@@ -41,22 +41,12 @@
         <priority>0.1</priority>
         </url>
     <url>
-        <loc>https://www.abenevaut.dev/2023‐11‐18-docker-shortcuts.html</loc>
-            <changefreq>monthly</changefreq>
-        <priority>0.1</priority>
-        </url>
-    <url>
         <loc>https://www.abenevaut.dev/2024-404ctf.html</loc>
             <changefreq>monthly</changefreq>
         <priority>0.1</priority>
         </url>
     <url>
         <loc>https://www.abenevaut.dev/2024-comcyber.html</loc>
-            <changefreq>monthly</changefreq>
-        <priority>0.1</priority>
-        </url>
-    <url>
-        <loc>https://www.abenevaut.dev/2024-fcsc.html</loc>
             <changefreq>monthly</changefreq>
         <priority>0.1</priority>
         </url>
@@ -72,6 +62,11 @@
         </url>
     <url>
         <loc>https://www.abenevaut.dev/2024‐01‐27-how-to-host-php-website-on-windows.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
+        <loc>https://www.abenevaut.dev/2024‐04‐26-declarer-les-dependances-composer-que-vous-utilisez.html</loc>
             <changefreq>monthly</changefreq>
         <priority>0.1</priority>
         </url>
@@ -131,27 +126,7 @@
         <priority>0.1</priority>
         </url>
     <url>
-        <loc>https://www.abenevaut.dev/2024-xmas-root-me/08-web-custom-http-server-1.html</loc>
-            <changefreq>monthly</changefreq>
-        <priority>0.1</priority>
-        </url>
-    <url>
-        <loc>https://www.abenevaut.dev/2024-xmas-root-me/10-web-route-mi-shop-1.html</loc>
-            <changefreq>monthly</changefreq>
-        <priority>0.1</priority>
-        </url>
-    <url>
         <loc>https://www.abenevaut.dev/2024-xmas-root-me/13-osint-the-lost-gift-1.html</loc>
-            <changefreq>monthly</changefreq>
-        <priority>0.1</priority>
-        </url>
-    <url>
-        <loc>https://www.abenevaut.dev/2024-xmas-root-me/15-web-new-new-always-new-1.html</loc>
-            <changefreq>monthly</changefreq>
-        <priority>0.1</priority>
-        </url>
-    <url>
-        <loc>https://www.abenevaut.dev/2024-xmas-root-me/18-web-Santa_s-sweet-words-1.html</loc>
             <changefreq>monthly</changefreq>
         <priority>0.1</priority>
         </url>
