@@ -10,21 +10,35 @@ seo:
     url: https://www.abenevaut.dev/2024‐04‐26-declarer-les-dependances-composer-que-vous-utilisez.html
 
 article: |+
-    # Déclarer les dépendances composer que vous utilisez
+    # Composer, le premier fichier de configuration de vos applications
+
+    Composer, aujourd'hui tout le monde connait cet outil qui permet de gérer les dépendances de votre projet PHP.
+    Un incontournable qui vous permet de réduire le temps et le coût de développement de vos applications en utilisant des packages Composer disponibles sur
+    [Packagist](https://packagist.org/).
     
-    Dès lors que vous utilisez explicitement un type de donnée provenant d'un package Composer,
-    ce package doit être explicitement déclaré dans votre `composer.json`.
+    Composer standardise la pratique de découper son code en localisant les packages dans un seul répertoire `vendor/`,
+    en uniformisant le chargement des classes ([PSR-4: Autoloader](https://www.php-fig.org/psr/psr-4/)) et en gérant les dépendances entre les packages.
     
+    Bien que la pratique de découper son code ne soit pas nouvelle, comment en tirer profit dans son code avant que cela finisse en plat de spaghetti ?
+    Quel cadre mettre en place pour garantir la stabilité de votre application ?
+    Quelle ligne ne pas franchir pour ne pas tomber dans le piège des dépendances implicites ?
+
+    ## Déclarer les dépendances Composer que vous utilisez
+    
+    Nous allons faire un zoom sur la mécanique 
+
     Pour moi, il est essentiel de réduire au maximum les dépendances implicites dans votre projet.
+    Dès que vous utilisez explicitement un type de donnée provenant d'un package Composer, ce package doit être explicitement déclaré dans votre `composer.json`.
     
-    Lorsque vous ajoutez un package Composer à votre application, celui-ci peut embarquer d'autres packages qui sont ses dépendances obligatoires.
+    Lorsque vous ajoutez un package Composer à votre application, celui-ci peut inclure d'autres packages qui sont ses dépendances obligatoires.
     Par exemple, le package `illuminate/validation` nécessite `illuminate/translation` et `illuminate/collections` pour fonctionner.
     
     ```shell
     composer require illuminate/validation
     ```
 
-    Composer installe alors automatiquement les trois packages `illuminate/validation`, `illuminate/translation` et `illuminate/collections` en raison de la dépendance forte entre eux.
+    Composer installe alors automatiquement les trois packages `illuminate/validation`, `illuminate/translation`
+    et `illuminate/collections` en raison de la dépendance forte entre eux.
     Pour vérifier que `illuminate/translation` et `illuminate/collections` sont bien installés, vous pouvez interroger Composer :
 
     ```shell
@@ -47,16 +61,16 @@ article: |+
     }
     ```
 
-    ### Réflexion sur l'utilisation des dépendances
-
-    Posons-nous maintenant quelques questions :
-
-    - Si je ne suis pas familier avec un package, dois-je explorer toutes les dépendances de tous mes packages Composer pour trouver une bibliothèque utilisée dans mon projet ?
-    - Comment m'assurer qu'une bibliothèque est bien présente et utilisée dans le projet ?
-
-    ## Cas 1 : Utilisation de `illuminate/validation`
-
-    Pour créer une instance de validation avec `illuminate/validation`, il faut également instancier `illuminate/translation` :
+    A mon sens, le fichier `composer.json` doit être une source de vérité pour les dépendances de votre projet.
+    Il informe les développeurs des packages Composer présents et utilisés dans le projet.
+    
+    Cela facilite la maintenance;
+    Les packages à mettre à jour sont clairement identifiés;
+    Impossible de doublonner les dépendances;
+    Les dépendances inutilisées sont facilement repérables;
+    Les documentation des packages utilisés sont plus facilement identifiables.
+    
+    Pour créer une instance de validation avec `illuminate/validation`, il faut également instancier `illuminate/translation`.
 
     ```php
     <?php
@@ -77,10 +91,8 @@ article: |+
     // Créer une instance du Validator
     $validator = new Factory($translator);
     ```
-  
-    ## Cas 2 : Utilisation de `illuminate/translation` seule
     
-    Imaginons maintenant que nous souhaitons ajouter une fonctionnalité à notre application de QR Code et que celle-ci nécessite uniquement `illuminate/translation`.
+    Imaginons maintenant que nous souhaitons ajouter une fonctionnalité à notre application et que celle-ci nécessite uniquement `illuminate/translation`.
 
     Dans ce cas, il est préférable d'inscrire explicitement cette dépendance dans votre `composer.json` en exécutant :
 
@@ -90,6 +102,4 @@ article: |+
     
     Ainsi, vous garantissez que ce package est bien listé comme une dépendance nécessaire au bon fonctionnement de votre application.
     
-    Plus tard, si notre application de QR Code n'a plus besoin de la validation et que nous supprimons `illuminate/validation`, nous évitons ainsi de supprimer par erreur `illuminate/translation` si elle est toujours requise ailleurs.
-    
-    Quel est votre avis sur ce point ? Comment gérez-vous les dépendances dans vos projets ? Venez en discuter avec nous sur [Discord](https://laravel-france.com/discord) !
+    Plus tard, si notre application n'a plus besoin de la validation et que nous supprimons `illuminate/validation`, nous évitons ainsi de supprimer par erreur `illuminate/translation` si elle est toujours requise ailleurs.

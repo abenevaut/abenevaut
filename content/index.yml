@@ -12,6 +12,12 @@ seo:
 portfolio:
   title: Projects
   projects:
+    - automatisez-vos-tests-avec-github-actions:
+      capture: images/laravel-france-cccaa4f2-5686-4872-8da8-bc3607ef08b9.png.webp
+      title: "Automatisez vos tests avec GitHub Actions"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/automatisez-vos-tests-avec-github-actions
+      date: 28-02-2025
     - deployer-vos-applications-serverless-avec-bref-sh:
       capture: images/laravel-france-a422ddbb-ccc7-4e2e-af52-9907fa409c44.png.webp
       title: "Déployer vos applications serverless avec Bref.sh"

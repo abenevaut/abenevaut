@@ -1,0 +1,27 @@
+view: article
+language: fr
+seo:
+    title: Vider le cache de son navigateur
+    description: En bref, a quoi sert le cache et comment le vider quand on le soupçonne de contenir des données obsolètes.
+    keywords: vulgarisation, cache navigateur, vider le cache, navigateur
+    author: Antoine Benevaut
+    twitter: "@abenevaut"
+    og-image: https://www.abenevaut.dev/images/abenevaut-og.webp
+    url: https://www.abenevaut.dev/2024‐12‐13-Clear-your-browser-cache.html
+
+article: |+
+    # Vider le cache de son navigateur
+
+    **C'est quoi le cache d'un navigateur ?** C'est une mémoire qui stocke temporairement des données pour accélérer le chargement des pages web.
+    Cela permet de ne pas recharger les mêmes éléments à chaque fois que vous visitez un site web et donc d'afficher la page plus rapidement.
+    
+    **Mais alors, pourquoi le vider ?** Parce que parfois, le cache peut contenir des données obsolètes qui perturbe l'affichage des pages web.
+    On remet donc à zéro le cache pour forcer le navigateur à recharger **TOUS** les éléments de la page.
+    
+    ## Vider le cache de Chrome
+    - FR: [Vider le cache et supprimer les cookies - Ordinateur - Aide Compte Google](https://support.google.com/accounts/answer/32050?hl=fr&co=GENIE.Platform%3DDesktop) 
+    - ES: [Borrar la caché y las cookies - Ordenador - Ayuda de Cuenta de Google](https://support.google.com/accounts/answer/32050?hl=es&co=GENIE.Platform%3DDesktop)
+
+    ## Vider le cache de Firefox
+    - FR: [Comment vider le cache de Firefox | Assistance de Firefox](https://support.mozilla.org/fr/kb/comment-vider-cache-firefox)
+    - ES: [Limpia la caché y elimina los archivos temporales de Internet para solucionar problemas habituales con los sitios web | Ayuda de Firefox](https://support.mozilla.org/es/kb/limpia-la-cache-y-elimina-los-archivos-temporales-)
