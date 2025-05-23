@@ -56,12 +56,12 @@
         <priority>0.1</priority>
         </url>
     <url>
-        <loc>https://www.abenevaut.dev/2024‐01‐02-Technique-d-obfuscation.html</loc>
+        <loc>https://www.abenevaut.dev/2024‐01‐27-how-to-host-php-website-on-windows.html</loc>
             <changefreq>monthly</changefreq>
         <priority>0.1</priority>
         </url>
     <url>
-        <loc>https://www.abenevaut.dev/2024‐01‐27-how-to-host-php-website-on-windows.html</loc>
+        <loc>https://www.abenevaut.dev/2024‐02‐25-windows-path-variables.html</loc>
             <changefreq>monthly</changefreq>
         <priority>0.1</priority>
         </url>
@@ -81,17 +81,17 @@
         <priority>0.1</priority>
         </url>
     <url>
+        <loc>https://www.abenevaut.dev/2025-04-08-setup-kali-wsl.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
         <loc>https://www.abenevaut.dev/404.html</loc>
             <changefreq>monthly</changefreq>
         <priority>0.1</priority>
         </url>
     <url>
         <loc>https://www.abenevaut.dev/index.html</loc>
-            <changefreq>monthly</changefreq>
-        <priority>0.1</priority>
-        </url>
-    <url>
-        <loc>https://www.abenevaut.dev/links.html</loc>
             <changefreq>monthly</changefreq>
         <priority>0.1</priority>
         </url>
