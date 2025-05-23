@@ -1,9 +1,9 @@
 view: article
 language: en
 seo:
-  title: Capture The Flags, COMCYBER challenges
-  description: Mettez vos compétences en cybersécurité au service de l'armée de Terre dans un challenge immersif organisé par le Commandement de la cyberdéfense.
-  keywords: ctf, security, comcyber
+  title: How to host PHP website on Windows
+  description: A step-by-step guide to host a PHP website on Windows.
+  keywords: PHP, Windows, IIS, SQL Server, ODBC, SQL Server drivers
   author: Antoine Benevaut
   twitter: "@abenevaut"
   og-image: https://www.abenevaut.dev/images/abenevaut-og.webp

@@ -16,12 +16,8 @@ article: |+
     Un incontournable qui vous permet de réduire le temps et le coût de développement de vos applications en utilisant des packages Composer disponibles sur
     [Packagist](https://packagist.org/).
     
-    Composer standardise la pratique de découper son code en localisant les packages dans un seul répertoire `vendor/`,
+    Composer standardise la pratique de découper son code en packages, en localisant ces packages dans un seul répertoire `vendor/`,
     en uniformisant le chargement des classes ([PSR-4: Autoloader](https://www.php-fig.org/psr/psr-4/)) et en gérant les dépendances entre les packages.
-    
-    Bien que la pratique de découper son code ne soit pas nouvelle, comment en tirer profit dans son code avant que cela finisse en plat de spaghetti ?
-    Quel cadre mettre en place pour garantir la stabilité de votre application ?
-    Quelle ligne ne pas franchir pour ne pas tomber dans le piège des dépendances implicites ?
 
     ## Déclarer les dépendances Composer que vous utilisez
     

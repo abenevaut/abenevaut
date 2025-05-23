@@ -12,6 +12,12 @@ seo:
 portfolio:
   title: Projects
   projects:
+    - deleguez-la-configuration-a-vos-utilisateurs:
+      capture: images/laravel-france.623210f6-ccb0-49fc-b057-3fd8f928c7d7.png.webp
+      title: "Déléguez la configuration à vos utilisateurs"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/deleguez-la-configuration-a-vos-utilisateurs
+      date: 14-04-2025
     - automatisez-vos-tests-avec-github-actions:
       capture: images/laravel-france-cccaa4f2-5686-4872-8da8-bc3607ef08b9.png.webp
       title: "Automatisez vos tests avec GitHub Actions"

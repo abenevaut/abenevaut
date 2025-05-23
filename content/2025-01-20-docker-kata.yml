@@ -1,7 +1,7 @@
 view: article
 language: en
 seo:
-  title: docker-kata, get started with Docker through exercises
+  title: Docker Kata, get started with Docker through exercises
   description: docker-kata, get started with Docker through exercises
   keywords: docker, kata, tech, exercises, beginner, tutorial
   author: Antoine Benevaut
@@ -10,7 +10,7 @@ seo:
   url: https://www.abenevaut.dev/2025-01-20-docker-kata.html
 
 article: |+
-  # docker-kata
+  # Docker Kata
 
   ![Docker kata banner](https://raw.githubusercontent.com/abenevaut/docker-kata/refs/heads/master/.github/github-docker-kata.png)
   

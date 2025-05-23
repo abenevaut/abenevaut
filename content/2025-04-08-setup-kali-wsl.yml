@@ -1,0 +1,37 @@
+view: article
+language: en
+seo:
+  title: Install Kali Linux on WSL
+  description: kali linux wsl, windows subsystem for linux, wsl2, kali linux, install kali linux on wsl
+  keywords: wsl, kali linux, windows subsystem for linux, install kali linux on wsl
+  author: Antoine Benevaut
+  twitter: "@abenevaut"
+  og-image: https://www.abenevaut.dev/images/abenevaut-og.webp
+  url: https://www.abenevaut.dev/2025-04-08-setup-kali-wsl.html
+
+article: |+
+  # Install Kali Linux on WSL
+  
+  Au premier lancement, setup du username et password
+  
+  sudo apt-get update && sudo apt-get upgrade
+  
+  sudo apt-get install emacs hashcat wordlists john build-essential gdb file hydra nmap unzip python3 
+  
+  ls /usr/share/wordlists/
+  sudo gunzip /usr/share/wordlists/rockyou.txt.gz
+
+  https://ngrok.com/downloads/linux
+
+  https://evilsaint.com/article/wsl2-installing-metasploit-kali/
+  rm msfupdate.erb
+  
+  https://github.com/sqlmapproject/sqlmap/releases/tag/1.9
+  wget https://github.com/sqlmapproject/sqlmap/archive/refs/tags/1.9.zip
+  unzip 1.9.zip
+  rm 1.9.zip
+  
+  
+  emacs .bash_aliases
+  alias sqlmap="python3 ~/sqlmap-1.9/sqlmap.py"
+  

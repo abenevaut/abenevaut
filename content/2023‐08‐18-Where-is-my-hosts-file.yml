@@ -10,16 +10,18 @@ seo:
   url: https://www.abenevaut.dev/2023‐08‐18-Where-is-my-hosts-file.html
 
 article: |+
-  # Fastpass
+  # Where is my hosts file?
+  
+  ## Fastpass
   
   | OS          | Path                                    |
   | ----------- | --------------------------------------- |
   | windows     | %WinDir%\\System32\\drivers\\etc\\hosts |
   | linux & mac | /etc/hosts                              |
   
-  # The `hosts` file
-  
-  contains manually defined DNS entries that allows computer to route network traffic.
+  ## Where to define manual DNS entries?
+    
+  The `hosts` file contains manually defined DNS entries that allows computer to route network traffic.
   
   ```markdown
   127.0.0.1 this-computer-name.local
@@ -31,14 +33,11 @@ article: |+
   ::1        localhost
   ```
   
-  > This file is used before the DNS look up, so it has priority rather than look up and can overwrite it.
-  
-  > You have to be administrator or assimilate to edit this file.
-  > Note that the hosts file only affect the computer on which the changes were made.
-  > You do not need to restart your computer after changes.
-  
   > 127.0.0.1 is a special IP address that allows network communication to loop back to the same computer without going through external networks
   
-  # Resources
+  This file is used before the DNS look up, so it has priority rather than look up and can overwrite it,
+  you have to be administrator or assimilate to edit this file and you do not need to restart your computer after changes.
   
-  - https://en.wikipedia.org/wiki/Hosts_(file)
+  > Note : the hosts file only affect the computer on which the changes were made.
+  
+  You can read more on [Wikipedia](https://en.wikipedia.org/wiki/Hosts_(file))

@@ -10,8 +10,6 @@ seo:
     url: https://www.abenevaut.dev/2023‐08‐08-YAF-request-lifecycle.html
 
 article: |+
-    # Resume
-    
     # Preambule
     
     -   Vous devez etre famillier avec le [PHP Request lifecycle](/abenevaut.dev/abenevaut.dev/Articles%20Staging/PHP%20Request%20lifecycle.md)
