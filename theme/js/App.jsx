@@ -13,7 +13,7 @@ import { StackedLayout } from "@abenevaut/tailwindui/src/js/Catalyst/stacked-lay
 import { ThemeProvider } from "@abenevaut/tailwindui/src/js/Providers/ThemeProvider.jsx";
 
 const appEnv = import.meta.env.VITE_APP_ENV || false;
-const isProductionEnvironment = 'production' === appEnv || false;
+const isProductionEnvironment = 'production' === appEnv;
 
 if (isProductionEnvironment) {
   PiwikPro.initialize('2c54d796-5f59-434c-85e2-1381de1d0d07', 'https://abenevaut.piwik.pro');
