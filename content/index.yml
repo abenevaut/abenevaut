@@ -12,6 +12,12 @@ seo:
 portfolio:
   title: Projects
   projects:
+    - votre-application-multi-tenant-avec-laravel-sans-package-tiers:
+      capture: images/laravel-france-146e5c9f-ff9d-478a-8890-41098c428138.png.webp
+      title: "Votre application multi-tenant avec Laravel, sans package tiers"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/votre-application-multi-tenant-avec-laravel-sans-package-tiers
+      date: 25-05-2025
     - deleguez-la-configuration-a-vos-utilisateurs:
       capture: images/laravel-france.623210f6-ccb0-49fc-b057-3fd8f928c7d7.png.webp
       title: "Déléguez la configuration à vos utilisateurs"
