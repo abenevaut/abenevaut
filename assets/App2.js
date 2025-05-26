@@ -1251,16 +1251,16 @@ var isArrayImpl = Array.isArray, ReactDOMSharedInternals = ReactDOM$1.__DOM_INTE
   data: null,
   method: null,
   action: null
-}, valueStack = [], index$2 = -1;
+}, valueStack = [], index$3 = -1;
 function createCursor(defaultValue) {
   return { current: defaultValue };
 }
 function pop(cursor) {
-  0 > index$2 || (cursor.current = valueStack[index$2], valueStack[index$2] = null, index$2--);
+  0 > index$3 || (cursor.current = valueStack[index$3], valueStack[index$3] = null, index$3--);
 }
 function push(cursor, value) {
-  index$2++;
-  valueStack[index$2] = cursor.current;
+  index$3++;
+  valueStack[index$3] = cursor.current;
   cursor.current = value;
 }
 var contextStackCursor = createCursor(null), contextFiberStackCursor = createCursor(null), rootInstanceStackCursor = createCursor(null), hostTransitionProviderCursor = createCursor(null);
@@ -12569,6 +12569,67 @@ const WithoutRouterProvider = ({ children }) => {
 WithoutRouterProvider.propTypes = {
   children: PropTypes.node.isRequired
 };
+const DEFAULT_DATA_LAYER_NAME = "dataLayer";
+function setDataLayerName(name) {
+}
+function getConfig(nonceOrOptions) {
+  if (typeof nonceOrOptions === "string") {
+    return {
+      dataLayerName: DEFAULT_DATA_LAYER_NAME,
+      nonce: nonceOrOptions
+    };
+  }
+  if (!nonceOrOptions) {
+    return {
+      dataLayerName: DEFAULT_DATA_LAYER_NAME
+    };
+  }
+  return nonceOrOptions;
+}
+function init$2(containerId, containerUrl, nonceOrOptions) {
+  if (!containerId) {
+    console.error("Empty tracking code for Piwik Pro.");
+    return;
+  }
+  if (!containerUrl) {
+    console.error("Empty tracking URL for Piwik Pro.");
+    return;
+  }
+  if (typeof window === "undefined") {
+    console.error("Was not possible to access window. Make sure this module is running in a browser");
+    return;
+  }
+  const config = getConfig(nonceOrOptions);
+  if (config.dataLayerName) {
+    setDataLayerName(config.dataLayerName);
+  }
+  const scriptEl = document.createElement("script");
+  scriptEl.id = "PiwikPROInitializer";
+  scriptEl.async = true;
+  if (config.nonce) {
+    scriptEl.nonce = config.nonce;
+  }
+  scriptEl.text = getInitScript({
+    containerId,
+    containerUrl,
+    dataLayerName: config.dataLayerName,
+    nonceValue: config.nonce
+  });
+  const body = document.getElementsByTagName("body")[0];
+  body.prepend(scriptEl);
+}
+function getInitScript({ containerId, containerUrl, dataLayerName: dataLayerName2, nonceValue }) {
+  const dataLayer = dataLayerName2 || DEFAULT_DATA_LAYER_NAME;
+  const nonceTag = nonceValue ? `,tags.nonce="${nonceValue}"` : "";
+  return `(function(window, document, dataLayerName, id) {
+  window[dataLayerName]=window[dataLayerName]||[],window[dataLayerName].push({start:(new Date).getTime(),event:"stg.start"});var scripts=document.getElementsByTagName('script')[0],tags=document.createElement('script');
+  function stgCreateCookie(a,b,c){var d="";if(c){var e=new Date;e.setTime(e.getTime()+24*c*60*60*1e3),d="; expires="+e.toUTCString();f="; SameSite=Strict"}document.cookie=a+"="+b+d+f+"; path=/"}
+  var isStgDebug=(window.location.href.match("stg_debug")||document.cookie.match("stg_debug"))&&!window.location.href.match("stg_disable_debug");stgCreateCookie("stg_debug",isStgDebug?1:"",isStgDebug?14:-1);
+  var qP=[];dataLayerName!=="dataLayer"&&qP.push("data_layer_name="+dataLayerName)${nonceTag},isStgDebug&&qP.push("stg_debug");var qPString=qP.length>0?("?"+qP.join("&")):"";
+  tags.async=!0,tags.src="${containerUrl}/"+id+".js"+qPString,scripts.parentNode.insertBefore(tags,scripts);
+  !function(a,n,i){a[n]=a[n]||{};for(var c=0;c<i.length;c++)!function(i){a[n][i]=a[n][i]||{},a[n][i].api=a[n][i].api||function(){var a=[].slice.call(arguments,0);"string"==typeof a[0]&&window[dataLayerName].push({event:n+"."+i+":"+a[0],parameters:[].slice.call(arguments,1)})}}(i[c])}(window,"ppms",["tm","cm"]);
+  })(window, document, '${dataLayer}', '${containerId}');`;
+}
 var ECOMMERCE_TRACK_EVENT;
 (function(ECOMMERCE_TRACK_EVENT2) {
   ECOMMERCE_TRACK_EVENT2["TRACK_ECOMMERCE_CART_UPDATE"] = "trackEcommerceCartUpdate";
@@ -12659,6 +12720,10 @@ var ERROR_TRACKING_TRACK_EVENT;
   ERROR_TRACKING_TRACK_EVENT2["ENABLE_JS_ERROR_TRACKING"] = "enableJSErrorTracking";
   ERROR_TRACKING_TRACK_EVENT2["TRACK_ERROR"] = "trackError";
 })(ERROR_TRACKING_TRACK_EVENT || (ERROR_TRACKING_TRACK_EVENT = {}));
+const index$2 = {
+  initialize: init$2,
+  getInitScript
+};
 const DEBUG_BUILD$3 = typeof __SENTRY_DEBUG__ === "undefined" || __SENTRY_DEBUG__;
 const SDK_VERSION = "8.47.0";
 const GLOBAL_OBJ = globalThis;
@@ -30269,7 +30334,10 @@ const ThemeProvider = ({ children }) => {
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsx(ThemeContext.Provider, { value: { theme, setTheme, toggleTheme }, children });
 };
-const appEnv = false;
+const appEnv = "production";
+{
+  index$2.initialize("2c54d796-5f59-434c-85e2-1381de1d0d07", "https://abenevaut.piwik.pro");
+}
 init({
   dsn: "https://bf032283abab4fdb9fbcd7328ed39b28@o229053.ingest.us.sentry.io/1385819",
   environment: appEnv
