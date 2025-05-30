@@ -62,15 +62,6 @@
       "_divider.js"
     ]
   },
-  "theme/js/Profile.jsx": {
-    "file": "assets/Profile.js",
-    "name": "Profile",
-    "src": "theme/js/Profile.jsx",
-    "isEntry": true,
-    "imports": [
-      "_App2.js"
-    ]
-  },
   "theme/js/Terms.jsx": {
     "file": "assets/Terms.js",
     "name": "Terms",
