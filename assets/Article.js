@@ -1,1 +1,10 @@
-import{R as e,j as a,W as r,A as t}from"./App2.js";import{S as o,M as x}from"./markdown.js";const s=window.article;e.createRoot(document.getElementById("root")).render(a.jsx(r,{children:a.jsxs(t,{children:[a.jsx(o,{}),s?a.jsx("div",{className:"mx-auto max-w-7xl px-6 lg:px-8",children:a.jsx("div",{className:"mx-auto grid max-w-2xl grid-cols-1 items-start gap-x-8 gap-y-16 sm:gap-y-24 lg:mx-0 lg:max-w-none",children:a.jsx(x,{article:s})})}):""]})}));
+import { R as ReactDOM, j as jsxRuntimeExports, W as WithoutRouterProvider, A as App } from "./App2.js";
+import { S as ScrollToHash, M as Markdown } from "./markdown.js";
+const articleObject = window.article;
+ReactDOM.createRoot(document.getElementById("root")).render(
+  /* @__PURE__ */ jsxRuntimeExports.jsx(WithoutRouterProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(App, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(ScrollToHash, {}),
+    articleObject ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto max-w-7xl px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto grid max-w-2xl grid-cols-1 items-start gap-x-8 gap-y-16 sm:gap-y-24 lg:mx-0 lg:max-w-none", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Markdown, { article: articleObject }) }) }) : ""
+  ] }) })
+);
+//# sourceMappingURL=Article.js.map
