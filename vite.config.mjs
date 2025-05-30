@@ -4,16 +4,16 @@ import react from '@vitejs/plugin-react'
 import laravel from 'laravel-vite-plugin';
 import { VitePWA } from 'vite-plugin-pwa'
 
-const isDevEnvironment = 'dev' === process.env.NODE_ENV || true;
+const isDevEnvironment = 'dev' === process.env.NODE_ENV;
 
 export default defineConfig({
   base: '/',
   build: {
     manifest: true,
-    sourcemap: true,
-    minify: false,
+    sourcemap: isDevEnvironment,
+    minify: !isDevEnvironment,
     css: {
-      minify: false,
+      minify: !isDevEnvironment,
     },
     outDir: path.join(__dirname, 'dist'),
     rollupOptions: {
@@ -33,7 +33,6 @@ export default defineConfig({
         'theme/js/Article.jsx',
         'theme/js/Writeup.jsx',
         'theme/js/Privacy.jsx',
-        'theme/js/Profile.jsx',
         'theme/js/Terms.jsx',
       ],
       refresh: true,
@@ -60,4 +59,4 @@ export default defineConfig({
       }
     }),
   ],
-})
+});

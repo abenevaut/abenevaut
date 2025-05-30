@@ -84,6 +84,7 @@ jobs:
           cp ai.txt dist
           cp llms.txt dist
         env:
+          NODE_ENV: production
           VITE_APP_ENV: production
 
       - uses: JamesIves/github-pages-deploy-action@releases/v4
