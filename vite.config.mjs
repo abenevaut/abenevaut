@@ -1,19 +1,20 @@
+import { globSync } from 'glob';
 import path from 'path';
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import laravel from 'laravel-vite-plugin';
 import { VitePWA } from 'vite-plugin-pwa'
 
-const isDevEnvironment = 'dev' === process.env.NODE_ENV;
+const isProductionEnvironment = 'production' === process.env.NODE_ENV;
 
 export default defineConfig({
   base: '/',
   build: {
     manifest: true,
-    sourcemap: isDevEnvironment,
-    minify: !isDevEnvironment,
+    sourcemap: !isProductionEnvironment,
+    minify: isProductionEnvironment,
     css: {
-      minify: !isDevEnvironment,
+      minify: isProductionEnvironment,
     },
     outDir: path.join(__dirname, 'dist'),
     rollupOptions: {
@@ -29,11 +30,11 @@ export default defineConfig({
     laravel({
       input: [
         'theme/css/app.css',
-        'theme/js/Home.jsx',
-        'theme/js/Article.jsx',
-        'theme/js/Writeup.jsx',
-        'theme/js/Privacy.jsx',
-        'theme/js/Terms.jsx',
+        ...(globSync('theme/js/*.jsx')
+          .filter(function(item) {
+            return !item.includes('AppNavigation.jsx');
+          })
+        ),
       ],
       refresh: true,
     }),

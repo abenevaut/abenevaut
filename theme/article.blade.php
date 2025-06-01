@@ -5,7 +5,6 @@
 @endphp
 
 @section('meta')
-    <link rel="canonical" href="//index.html" />
     <script>
       window.article = {!! $article !!}
     </script>

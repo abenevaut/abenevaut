@@ -25,7 +25,8 @@
         <meta property="twitter:image" content="{{ $seo['og-image'] }}">
         <meta property="twitter:image:alt" content="{{ $seo['description'] }}">
 
-        <base href="/"> <!-- /dev.abenevaut/abenevaut/dist/ -->
+        <base href="/dev.abenevaut/abenevaut/dist/"> <!-- /dev.abenevaut/abenevaut/dist/ -->
+        <link rel="canonical" href="{{ $seo['url'] }}" />
         <link rel="manifest" href="manifest.webmanifest" />
 
         @yield('meta')
