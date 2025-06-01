@@ -1,32 +1,28 @@
 {
-  "_App2.js": {
-    "file": "assets/App2.js",
-    "name": "App",
+  "_AppNavigation.js": {
+    "file": "assets/AppNavigation.js",
+    "name": "AppNavigation",
     "assets": [
       "assets/app-icon.webp"
+    ]
+  },
+  "_Article2.js": {
+    "file": "assets/Article2.js",
+    "name": "Article",
+    "imports": [
+      "_AppNavigation.js"
     ]
   },
   "_divider.js": {
     "file": "assets/divider.js",
     "name": "divider",
     "imports": [
-      "_App2.js"
-    ]
-  },
-  "_markdown.js": {
-    "file": "assets/markdown.js",
-    "name": "markdown",
-    "imports": [
-      "_App2.js"
+      "_AppNavigation.js"
     ]
   },
   "node_modules/@abenevaut/maskot-2013/dist/app-icon.webp": {
     "file": "assets/app-icon.webp",
     "src": "node_modules/@abenevaut/maskot-2013/dist/app-icon.webp"
-  },
-  "node_modules/@abenevaut/maskot-2013/dist/logo-black-and-white-pirate-head.webp": {
-    "file": "assets/logo-black-and-white-pirate-head.webp",
-    "src": "node_modules/@abenevaut/maskot-2013/dist/logo-black-and-white-pirate-head.webp"
   },
   "theme/css/app.css": {
     "file": "assets/app.css",
@@ -39,8 +35,8 @@
     "src": "theme/js/Article.jsx",
     "isEntry": true,
     "imports": [
-      "_App2.js",
-      "_markdown.js"
+      "_AppNavigation.js",
+      "_Article2.js"
     ]
   },
   "theme/js/Home.jsx": {
@@ -49,7 +45,7 @@
     "src": "theme/js/Home.jsx",
     "isEntry": true,
     "imports": [
-      "_App2.js"
+      "_AppNavigation.js"
     ]
   },
   "theme/js/Privacy.jsx": {
@@ -58,7 +54,7 @@
     "src": "theme/js/Privacy.jsx",
     "isEntry": true,
     "imports": [
-      "_App2.js",
+      "_AppNavigation.js",
       "_divider.js"
     ]
   },
@@ -68,7 +64,7 @@
     "src": "theme/js/Terms.jsx",
     "isEntry": true,
     "imports": [
-      "_App2.js",
+      "_AppNavigation.js",
       "_divider.js"
     ]
   },
@@ -78,11 +74,8 @@
     "src": "theme/js/Writeup.jsx",
     "isEntry": true,
     "imports": [
-      "_App2.js",
-      "_markdown.js"
-    ],
-    "assets": [
-      "assets/logo-black-and-white-pirate-head.webp"
+      "_AppNavigation.js",
+      "_Article2.js"
     ]
   }
 }
