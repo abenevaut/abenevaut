@@ -1,1 +1,1 @@
-import{R as a,j as t,W as e,A as r,a as i}from"./AppNavigation.js";import{A as o}from"./Article2.js";a.createRoot(document.getElementById("root")).render(t.jsx(e,{children:t.jsx(o,{navbar:i(),sidebar:r(),withTestimonialAndStats:!1,article:window.article})}));
+import{R as r,j as t,W as a,A as e,a as i}from"./AppNavigation.js";import{A as o}from"./Article2.js";import"./heading.js";r.createRoot(document.getElementById("root")).render(t.jsx(a,{children:t.jsx(o,{navbar:i(),sidebar:e(),withTestimonialAndStats:!1,article:window.article})}));

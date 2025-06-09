@@ -10,12 +10,20 @@
     "file": "assets/Article2.js",
     "name": "Article",
     "imports": [
-      "_AppNavigation.js"
+      "_AppNavigation.js",
+      "_heading.js"
     ]
   },
   "_divider.js": {
     "file": "assets/divider.js",
     "name": "divider",
+    "imports": [
+      "_AppNavigation.js"
+    ]
+  },
+  "_heading.js": {
+    "file": "assets/heading.js",
+    "name": "heading",
     "imports": [
       "_AppNavigation.js"
     ]
@@ -36,7 +44,8 @@
     "isEntry": true,
     "imports": [
       "_AppNavigation.js",
-      "_Article2.js"
+      "_Article2.js",
+      "_heading.js"
     ]
   },
   "theme/js/Home.jsx": {
@@ -55,7 +64,8 @@
     "isEntry": true,
     "imports": [
       "_AppNavigation.js",
-      "_divider.js"
+      "_divider.js",
+      "_heading.js"
     ]
   },
   "theme/js/Terms.jsx": {
@@ -65,7 +75,8 @@
     "isEntry": true,
     "imports": [
       "_AppNavigation.js",
-      "_divider.js"
+      "_divider.js",
+      "_heading.js"
     ]
   },
   "theme/js/Writeup.jsx": {
@@ -75,7 +86,8 @@
     "isEntry": true,
     "imports": [
       "_AppNavigation.js",
-      "_Article2.js"
+      "_Article2.js",
+      "_heading.js"
     ]
   }
 }
