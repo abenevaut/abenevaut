@@ -238,7 +238,7 @@ writeup: |+
   - un fichier message.txt
   - un fichier m4lw3r3
 
-  Le fichier `favicon.ico` a été exfiltré via le lien http://163.172.68.42:5000/static/assets/images/favicon.ico.
+  Le fichier `favicon.ico` a été exfiltré via le lien `http://163.172.68.42:5000/static/assets/images/favicon.ico`.
   
   Analysons ce fichier.
   Avec les logs precedents, nous savons que le mot de passe du fichier zip est `efa3fb1f409aa622dddd7220ad6567580fb68b68`.
