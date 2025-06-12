@@ -1,4 +1,4 @@
-'use client';
+'use client'
 
 import ReactDOM from 'react-dom/client';
 import WithoutRouterProvider from "@abenevaut/tailwindui/src/js/Providers/WithoutRouterProvider.jsx";

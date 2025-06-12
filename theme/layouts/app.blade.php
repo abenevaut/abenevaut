@@ -27,7 +27,8 @@
 
         <base href="/"> <!-- /dev.abenevaut/abenevaut/dist/ -->
         <link rel="canonical" href="{{ $seo['url'] }}" />
-        <link rel="manifest" href="manifest.webmanifest" />
+        <link rel="manifest" href="manifest.webmanifest" crossorigin="use-credentials" />
+        <script src="registerSW.js"></script>
 
         @yield('meta')
 
