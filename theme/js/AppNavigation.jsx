@@ -1,28 +1,79 @@
 'use client'
 
-import { ArrowTopRightOnSquareIcon, ChevronUpIcon, ChevronDownIcon } from '@heroicons/react/16/solid';
+import axios from 'axios';
+import { ArrowTopRightOnSquareIcon, ArrowRightStartOnRectangleIcon, ChevronUpIcon, ChevronDownIcon, ShieldCheckIcon, DocumentCheckIcon } from '@heroicons/react/16/solid';
 import { Avatar } from '@abenevaut/tailwindui/src/js/Catalyst/avatar';
 import { Dropdown, DropdownButton, DropdownDescription, DropdownItem, DropdownLabel, DropdownMenu } from '@abenevaut/tailwindui/src/js/Catalyst/dropdown';
 import { Navbar, NavbarItem, NavbarLabel, NavbarSection, NavbarDivider, NavbarSpacer } from '@abenevaut/tailwindui/src/js/Catalyst/navbar';
 import { Sidebar, SidebarBody, SidebarFooter, SidebarHeader, SidebarItem, SidebarLabel, SidebarSection, SidebarSpacer } from '@abenevaut/tailwindui/src/js/Catalyst/sidebar';
+import { ServiceWorkerProvider } from '@abenevaut/tailwindui/src/js/Providers/ServiceWorkerProvider';
+import { NotificationsProvider } from '@abenevaut/tailwindui/src/js/Providers/NotificationsProvider';
+import ThemeSwitchNavbarItem from "@abenevaut/tailwindui/src/js/Components/theme-switch-navbar-item.jsx";
+import NotificationsSwitchNavbarItem from "./Components/notifications-switch-navbar-item.jsx";
 import logoUrl from '@abenevaut/maskot-2013/dist/app-icon.webp';
 import './bootstrap.js';
-import ThemeSwitchNavbarItem from "@abenevaut/tailwindui/src/js/Components/theme-switch-navbar-item.jsx";
+
+
+const handleNotificationsSubscription = (subscription, resolve, reject) => {
+
+  console.log('POST /notifications/webpush', subscription);
+  resolve();
+
+  // axios
+  //   .post('https://api.abenevaut.dev/notifications/webpush', subscription)
+  //   .then(({ status, data }) => {
+  //     resolve(status);
+  //   })
+  //   .catch((error) => {
+  //     reject(error);
+  //   });
+};
+
+const handleNotificationsUnsubscription = (subscription, resolve, reject) => {
+
+  console.log('DELETE /notifications/webpush', subscription);
+  resolve();
+
+  // axios
+  //   .delete('https://api.abenevaut.dev/notifications/webpush', subscription)
+  //   .then(({ status, data }) => {
+  //     resolve(status);
+  //   })
+  //   .catch((error) => {
+  //     reject(error);
+  //   });
+};
+
+const switchLoading = (state = false) => {
+  console.log('isLoading:', state);
+};
 
 function MainDropdownMenu() {
+
+  /*
+    Aller chercher le menu sur l'API
+    petit composant de chargement
+   */
+
   return (
     <DropdownMenu className="min-w-80 lg:min-w-64" anchor="bottom start">
 
       <DropdownItem href="https://laravel-one.abenevaut.dev/">
         <ArrowTopRightOnSquareIcon/>
-        <DropdownLabel>laravel-one</DropdownLabel>
+        <DropdownLabel>Laravel One</DropdownLabel>
         <DropdownDescription>is a tool to generate static webpages based on Blade Templates</DropdownDescription>
       </DropdownItem>
 
       <DropdownItem href="https://github.com/abenevaut/phpunit-slicer">
         <ArrowTopRightOnSquareIcon/>
-        <DropdownLabel>phpunit-slicer</DropdownLabel>
+        <DropdownLabel>PHPUnit Slicer</DropdownLabel>
         <DropdownDescription>is a tool to slice PHPUnit tests files to tests suites</DropdownDescription>
+      </DropdownItem>
+
+      <DropdownItem href="https://www.abenevaut.dev/2025-01-20-docker-kata.html">
+        <ArrowRightStartOnRectangleIcon/>
+        <DropdownLabel>Docker Kata</DropdownLabel>
+        <DropdownDescription>get started with Docker through exercises</DropdownDescription>
       </DropdownItem>
 
     </DropdownMenu>
@@ -34,12 +85,14 @@ function AccountDropdownMenu({ anchor }) {
     <DropdownMenu className="min-w-64" anchor={anchor}>
 
       <DropdownItem href="terms.html">
+        <DocumentCheckIcon />
         <DropdownLabel>
           Termes d'utilisation
         </DropdownLabel>
       </DropdownItem>
 
       <DropdownItem href="privacy.html">
+        <ShieldCheckIcon />
         <DropdownLabel>
           Politique de confidentialité
         </DropdownLabel>
@@ -50,6 +103,8 @@ function AccountDropdownMenu({ anchor }) {
 }
 
 export function AppNavbar() {
+
+  const deliverPublicVapidKey = async () => "BO4imRW5SYfMtEUyfwMrrxvzJjuoThJ1FNqiUX3Z0C93Ajdrhdy0rX5iwvGBWHffmH3nP-NhVsF5XXbnHxsUnrg";
 
   let pathname = '/'; //useLocation().pathname;
   const navItems = [
@@ -89,6 +144,17 @@ export function AppNavbar() {
 
         <ThemeSwitchNavbarItem className="max-lg:hidden" />
 
+        {/*<ServiceWorkerProvider>*/}
+        {/*  <NotificationsProvider*/}
+        {/*    handlePublicVapidKey={deliverPublicVapidKey}*/}
+        {/*    handleSubscription={handleNotificationsSubscription}*/}
+        {/*    handleUnsubscription={handleNotificationsUnsubscription}*/}
+        {/*    switchLoading={switchLoading}*/}
+        {/*  >*/}
+        {/*    <NotificationsSwitchNavbarItem className="max-lg:hidden" />*/}
+        {/*  </NotificationsProvider>*/}
+        {/*</ServiceWorkerProvider>*/}
+
         <Dropdown>
           <DropdownButton as={ NavbarItem }>
             <Avatar src={ logoUrl } square/>
@@ -103,6 +169,8 @@ export function AppNavbar() {
 }
 
 export function AppSidebar() {
+
+  const deliverPublicVapidKey = async () => "BO4imRW5SYfMtEUyfwMrrxvzJjuoThJ1FNqiUX3Z0C93Ajdrhdy0rX5iwvGBWHffmH3nP-NhVsF5XXbnHxsUnrg";
 
   let pathname = '/'; //useLocation().pathname;
   const navItems = [
@@ -140,6 +208,17 @@ export function AppSidebar() {
         <SidebarSection>
 
           <ThemeSwitchNavbarItem menu="sidebar" />
+
+          {/*<ServiceWorkerProvider>*/}
+          {/*    <NotificationsProvider*/}
+          {/*      handlePublicVapidKey={deliverPublicVapidKey}*/}
+          {/*      handleSubscription={handleNotificationsSubscription}*/}
+          {/*      handleUnsubscription={handleNotificationsUnsubscription}*/}
+          {/*      switchLoading={switchLoading}*/}
+          {/*    >*/}
+          {/*    <NotificationsSwitchNavbarItem menu={'sidebar'} className="max-lg:hidden" />*/}
+          {/*  </NotificationsProvider>*/}
+          {/*</ServiceWorkerProvider>*/}
 
         </SidebarSection>
 

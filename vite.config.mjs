@@ -1,18 +1,16 @@
 import { globSync } from 'glob';
 import path from 'path';
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 import laravel from 'laravel-vite-plugin';
-import { VitePWA } from 'vite-plugin-pwa'
+import { VitePWA } from 'vite-plugin-pwa';
 
 const isProductionEnvironment = 'production' === process.env.NODE_ENV;
 
 export default defineConfig({
-  base: isProductionEnvironment
-    ? '/'
-    : '/dev.abenevaut/abenevaut/dist/',
+  base: '/',
   build: {
-    manifest: true,
+    manifest: 'manifest.json',
     sourcemap: !isProductionEnvironment,
     minify: isProductionEnvironment,
     css: {
@@ -21,9 +19,9 @@ export default defineConfig({
     outDir: path.join(__dirname, 'dist'),
     rollupOptions: {
       output: {
-        entryFileNames: `assets/[name].js`,
-        chunkFileNames: `assets/[name].js`,
-        assetFileNames: `assets/[name].[ext]`,
+        entryFileNames: `assets/[name].[hash].js`,
+        chunkFileNames: `assets/[name].[hash].js`,
+        assetFileNames: `assets/[name].[hash].[ext]`,
       },
     },
   },
@@ -39,35 +37,22 @@ export default defineConfig({
         ),
       ],
       refresh: true,
+      buildDirectory: 'dist',
     }),
     VitePWA({
-      strategies: 'injectManifest',
-      // injectRegister: 'script',
+
+// Public Key: BO4imRW5SYfMtEUyfwMrrxvzJjuoThJ1FNqiUX3Z0C93Ajdrhdy0rX5iwvGBWHffmH3nP-NhVsF5XXbnHxsUnrg
+// Private Key: yI31gBBUlJYKj_7wZmPZsLGFklxNMVSk_9UVpWBXEHc
+
+      strategies: 'generateSW',
       registerType: 'autoUpdate',
       srcDir: 'theme/js',
-      filename: 'sw.js',
+      filename: 'service-worker.js',
       devOptions: {
         enabled: !isProductionEnvironment,
         type: 'module',
       },
-      workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,webp}'],
-        cleanupOutdatedCaches: true,
-        runtimeCaching: [{
-          urlPattern: /^https:\/\/fonts\.bunny\.net\/.*/i,
-          handler: 'CacheFirst',
-          options: {
-            cacheName: 'fonts-bunny-cache',
-            expiration: {
-              maxEntries: 10,
-              maxAgeSeconds: 60 * 60 * 24 * 365 // <== 365 days
-            },
-            cacheableResponse: {
-              statuses: [0, 200]
-            }
-          }
-        }]
-      },
+      workbox: false,
       includeAssets: ['assets/app-icon.webp'],
       manifest: {
         name: 'abenevaut.dev',
@@ -75,8 +60,8 @@ export default defineConfig({
         description: 'All my websites, projects and opensource contributions',
         theme_color: '#f4f4f5',
         start_url: isProductionEnvironment
-          ? '/?source=pwa'
-          : '/dev.abenevaut/abenevaut/dist/',
+          ? '/?pk_source=pwa'
+          : '/',
         display: 'standalone',
         icons: [
           {
