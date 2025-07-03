@@ -25,15 +25,50 @@
         <meta property="twitter:image" content="https://www.abenevaut.dev/images/abenevaut-og.webp">
         <meta property="twitter:image:alt" content="Terms of Services, Antoine Benevaut">
 
-        <base href="/"> <!-- /dev.abenevaut/abenevaut/dist/ -->
+        <base href="/">
         <link rel="canonical" href="https://www.abenevaut.dev/terms.html" />
         <link rel="manifest" href="manifest.webmanifest" crossorigin="use-credentials" />
         <script src="registerSW.js"></script>
 
-            <script type="module" src="assets/Terms.js"></script>
+            <script>
+      const dataPath = 'theme/js/Terms.jsx';
+
+      fetch('/manifest.json')
+        .then(response => response.json())
+        .then(manifest => {
+
+          console.log(manifest);
+
+          const entry = manifest[dataPath];
+
+          if (entry && entry.file) {
+            const script = document.createElement('script');
+            script.type = 'module';
+            script.src = '/' + entry.file;
+            document.head.appendChild(script);
+          }
+          else {
+            console.error(`Entrée ${dataPath} non trouvée dans le manifest Vite.`);
+          }
+
+          const css = manifest['theme/css/app.css'];
+
+          if (css && css.file) {
+            const script = document.createElement('link');
+            script.rel = 'stylesheet';
+            script.href = '/' + css.file;
+            document.head.appendChild(script);
+          }
+          else {
+            console.error(`Entrée 'theme/css/app.css' non trouvée dans le manifest Vite.`);
+          }
+        })
+        .catch(err => {
+          console.error('Erreur lors du chargement du manifest Vite :', err);
+        });
+    </script>
 
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link rel="stylesheet" href="assets/app.css">
         <link rel="shortcut icon" href="assets/app-icon.webp" type="image/webp">
     </head>
     <body class="font-sans antialiased">

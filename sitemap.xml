@@ -86,6 +86,11 @@
         <priority>0.1</priority>
         </url>
     <url>
+        <loc>https://www.abenevaut.dev/2025-06-17-ai-resources.html</loc>
+            <changefreq>monthly</changefreq>
+        <priority>0.1</priority>
+        </url>
+    <url>
         <loc>https://www.abenevaut.dev/404.html</loc>
             <changefreq>monthly</changefreq>
         <priority>0.1</priority>
@@ -97,11 +102,6 @@
         </url>
     <url>
         <loc>https://www.abenevaut.dev/privacy.html</loc>
-            <changefreq>monthly</changefreq>
-        <priority>0.1</priority>
-        </url>
-    <url>
-        <loc>https://www.abenevaut.dev/profile.html</loc>
             <changefreq>monthly</changefreq>
         <priority>0.1</priority>
         </url>

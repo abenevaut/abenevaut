@@ -25,7 +25,7 @@
         <meta property="twitter:image" content="https://www.abenevaut.dev/images/abenevaut-og.webp">
         <meta property="twitter:image:alt" content="A step-by-step guide to host a PHP website on Windows.">
 
-        <base href="/"> <!-- /dev.abenevaut/abenevaut/dist/ -->
+        <base href="/">
         <link rel="canonical" href="https://www.abenevaut.dev/2024‐01‐27-how-to-host-php-website-on-windows.html" />
         <link rel="manifest" href="manifest.webmanifest" crossorigin="use-credentials" />
         <script src="registerSW.js"></script>
@@ -33,10 +33,45 @@
             <script>
       window.article = "<a href=\"#how-to-host-php-website-on-windows\"><h1 id='how-to-host-php-website-on-windows'>How to host PHP website on Windows<\/h1><\/a>\n<ul>\n<li>\n<a href=\"https:\/\/gist.github.com\/abenevaut\/149adce59c6dd68da3eda8699888e624\">Install PHP on Windows<\/a>\n<\/li>\n<li>Install IIS web server<\/li>\n<li>\n<a href=\"https:\/\/gist.github.com\/abenevaut\/13c8bcee7aca59cb7930ac6b94545e4e\">IIS Laravel web.config<\/a>\n<\/li>\n<li>Install SQL Server<\/li>\n<li>Install ODBC and SQL Server drivers<\/li>\n<\/ul>\n"
     </script>
-    <script type="module" src="assets/Article.js"></script>
+    <script>
+      const dataPath = 'theme/js/Article.jsx';
+
+      fetch('/manifest.json')
+        .then(response => response.json())
+        .then(manifest => {
+
+          console.log(manifest);
+
+          const entry = manifest[dataPath];
+
+          if (entry && entry.file) {
+            const script = document.createElement('script');
+            script.type = 'module';
+            script.src = '/' + entry.file;
+            document.head.appendChild(script);
+          }
+          else {
+            console.error(`Entrée ${dataPath} non trouvée dans le manifest Vite.`);
+          }
+
+          const css = manifest['theme/css/app.css'];
+
+          if (css && css.file) {
+            const script = document.createElement('link');
+            script.rel = 'stylesheet';
+            script.href = '/' + css.file;
+            document.head.appendChild(script);
+          }
+          else {
+            console.error(`Entrée 'theme/css/app.css' non trouvée dans le manifest Vite.`);
+          }
+        })
+        .catch(err => {
+          console.error('Erreur lors du chargement du manifest Vite :', err);
+        });
+    </script>
 
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link rel="stylesheet" href="assets/app.css">
         <link rel="shortcut icon" href="assets/app-icon.webp" type="image/webp">
     </head>
     <body class="font-sans antialiased">

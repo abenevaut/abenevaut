@@ -25,7 +25,7 @@
         <meta property="twitter:image" content="https://www.abenevaut.dev/images/abenevaut-og.webp">
         <meta property="twitter:image:alt" content="Pour moi, dès lors que vous utilisez explicitement un type de donnée qui provient d&#039;un package Composer, ce package doit être explicitement déclaré dans votre `composer.json`.">
 
-        <base href="/"> <!-- /dev.abenevaut/abenevaut/dist/ -->
+        <base href="/">
         <link rel="canonical" href="https://www.abenevaut.dev/2024‐04‐26-declarer-les-dependances-composer-que-vous-utilisez.html" />
         <link rel="manifest" href="manifest.webmanifest" crossorigin="use-credentials" />
         <script src="registerSW.js"></script>
@@ -33,10 +33,45 @@
             <script>
       window.article = "<a href=\"#composer-le-premier-fichier-de-configuration-de-vos-applications\"><h1 id='composer-le-premier-fichier-de-configuration-de-vos-applications'>Composer, le premier fichier de configuration de vos applications<\/h1><\/a>\n<p>Composer, aujourd'hui tout le monde connait cet outil qui permet de g\u00e9rer les d\u00e9pendances de votre projet PHP.\nUn incontournable qui vous permet de r\u00e9duire le temps et le co\u00fbt de d\u00e9veloppement de vos applications en utilisant des packages Composer disponibles sur\n<a href=\"https:\/\/packagist.org\/\">Packagist<\/a>.<\/p>\n<p>Composer standardise la pratique de d\u00e9couper son code en packages, en localisant ces packages dans un seul r\u00e9pertoire <code>vendor\/<\/code>,\nen uniformisant le chargement des classes (<a href=\"https:\/\/www.php-fig.org\/psr\/psr-4\/\">PSR-4: Autoloader<\/a>) et en g\u00e9rant les d\u00e9pendances entre les packages.<\/p>\n<a href=\"#declarer-les-dependances-composer-que-vous-utilisez\"><h2 id='declarer-les-dependances-composer-que-vous-utilisez'>D\u00e9clarer les d\u00e9pendances Composer que vous utilisez<\/h2><\/a>\n<p>Nous allons faire un zoom sur la m\u00e9canique<\/p>\n<p>Pour moi, il est essentiel de r\u00e9duire au maximum les d\u00e9pendances implicites dans votre projet.\nD\u00e8s que vous utilisez explicitement un type de donn\u00e9e provenant d'un package Composer, ce package doit \u00eatre explicitement d\u00e9clar\u00e9 dans votre <code>composer.json<\/code>.<\/p>\n<p>Lorsque vous ajoutez un package Composer \u00e0 votre application, celui-ci peut inclure d'autres packages qui sont ses d\u00e9pendances obligatoires.\nPar exemple, le package <code>illuminate\/validation<\/code> n\u00e9cessite <code>illuminate\/translation<\/code> et <code>illuminate\/collections<\/code> pour fonctionner.<\/p>\n<pre><code class=\"language-shell\">composer require illuminate\/validation\n<\/code><\/pre>\n<p>Composer installe alors automatiquement les trois packages <code>illuminate\/validation<\/code>, <code>illuminate\/translation<\/code>\net <code>illuminate\/collections<\/code> en raison de la d\u00e9pendance forte entre eux.\nPour v\u00e9rifier que <code>illuminate\/translation<\/code> et <code>illuminate\/collections<\/code> sont bien install\u00e9s, vous pouvez interroger Composer :<\/p>\n<pre><code class=\"language-shell\">composer info illuminate\/validation\n<\/code><\/pre>\n<p>Vous pouvez \u00e9galement v\u00e9rifier quelles sont les d\u00e9pendances d'un package dans le sens inverse :<\/p>\n<pre><code class=\"language-shell\">composer why illuminate\/translation\n<\/code><\/pre>\n<p>Cependant, la seule information qui appara\u00eet dans votre <code>composer.json<\/code> est que <code>illuminate\/validation<\/code> est install\u00e9 :<\/p>\n<pre><code class=\"language-json\">{\n  &quot;require&quot;: {\n      &quot;illuminate\/validation&quot;: &quot;^11.5&quot;\n  }\n}\n<\/code><\/pre>\n<p>A mon sens, le fichier <code>composer.json<\/code> doit \u00eatre une source de v\u00e9rit\u00e9 pour les d\u00e9pendances de votre projet.\nIl informe les d\u00e9veloppeurs des packages Composer pr\u00e9sents et utilis\u00e9s dans le projet.<\/p>\n<p>Cela facilite la maintenance;\nLes packages \u00e0 mettre \u00e0 jour sont clairement identifi\u00e9s;\nImpossible de doublonner les d\u00e9pendances;\nLes d\u00e9pendances inutilis\u00e9es sont facilement rep\u00e9rables;\nLes documentation des packages utilis\u00e9s sont plus facilement identifiables.<\/p>\n<p>Pour cr\u00e9er une instance de validation avec <code>illuminate\/validation<\/code>, il faut \u00e9galement instancier <code>illuminate\/translation<\/code>.<\/p>\n<pre><code class=\"language-php\">&lt;?php\n\nrequire __DIR__ . '\/vendor\/autoload.php';\n\nuse Illuminate\\Translation\\ArrayLoader;\nuse Illuminate\\Translation\\Translator;\nuse Illuminate\\Validation\\Factory;\n\n\/\/ Charger les traductions de validation\n$validationTranslations = require __DIR__ . '\/vendor\/illuminate\/translation\/lang\/en\/validation.php';\n$translations = (new ArrayLoader())-&gt;addMessages('en', 'validation', $validationTranslations);\n\n\/\/ Cr\u00e9er une instance du Translator\n$translator = new Translator($translations, 'en');\n\n\/\/ Cr\u00e9er une instance du Validator\n$validator = new Factory($translator);\n<\/code><\/pre>\n<p>Imaginons maintenant que nous souhaitons ajouter une fonctionnalit\u00e9 \u00e0 notre application et que celle-ci n\u00e9cessite uniquement <code>illuminate\/translation<\/code>.<\/p>\n<p>Dans ce cas, il est pr\u00e9f\u00e9rable d'inscrire explicitement cette d\u00e9pendance dans votre <code>composer.json<\/code> en ex\u00e9cutant :<\/p>\n<pre><code class=\"language-shell\">composer require illuminate\/translation\n<\/code><\/pre>\n<p>Ainsi, vous garantissez que ce package est bien list\u00e9 comme une d\u00e9pendance n\u00e9cessaire au bon fonctionnement de votre application.<\/p>\n<p>Plus tard, si notre application n'a plus besoin de la validation et que nous supprimons <code>illuminate\/validation<\/code>, nous \u00e9vitons ainsi de supprimer par erreur <code>illuminate\/translation<\/code> si elle est toujours requise ailleurs.<\/p>\n"
     </script>
-    <script type="module" src="assets/Article.js"></script>
+    <script>
+      const dataPath = 'theme/js/Article.jsx';
+
+      fetch('/manifest.json')
+        .then(response => response.json())
+        .then(manifest => {
+
+          console.log(manifest);
+
+          const entry = manifest[dataPath];
+
+          if (entry && entry.file) {
+            const script = document.createElement('script');
+            script.type = 'module';
+            script.src = '/' + entry.file;
+            document.head.appendChild(script);
+          }
+          else {
+            console.error(`Entrée ${dataPath} non trouvée dans le manifest Vite.`);
+          }
+
+          const css = manifest['theme/css/app.css'];
+
+          if (css && css.file) {
+            const script = document.createElement('link');
+            script.rel = 'stylesheet';
+            script.href = '/' + css.file;
+            document.head.appendChild(script);
+          }
+          else {
+            console.error(`Entrée 'theme/css/app.css' non trouvée dans le manifest Vite.`);
+          }
+        })
+        .catch(err => {
+          console.error('Erreur lors du chargement du manifest Vite :', err);
+        });
+    </script>
 
         <link rel="preconnect" href="https://fonts.bunny.net">
-        <link rel="stylesheet" href="assets/app.css">
         <link rel="shortcut icon" href="assets/app-icon.webp" type="image/webp">
     </head>
     <body class="font-sans antialiased">

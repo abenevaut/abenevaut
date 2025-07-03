@@ -1,0 +1,93 @@
+{
+  "_AppNavigation.CL7VUy8w.js": {
+    "file": "assets/AppNavigation.CL7VUy8w.js",
+    "name": "AppNavigation",
+    "assets": [
+      "assets/app-icon.Bw36Fz9x.webp"
+    ]
+  },
+  "_Article.C1b7_ayt.js": {
+    "file": "assets/Article.C1b7_ayt.js",
+    "name": "Article",
+    "imports": [
+      "_AppNavigation.CL7VUy8w.js",
+      "_heading.BEkDFeWS.js"
+    ]
+  },
+  "_divider.D9cet1mR.js": {
+    "file": "assets/divider.D9cet1mR.js",
+    "name": "divider",
+    "imports": [
+      "_AppNavigation.CL7VUy8w.js"
+    ]
+  },
+  "_heading.BEkDFeWS.js": {
+    "file": "assets/heading.BEkDFeWS.js",
+    "name": "heading",
+    "imports": [
+      "_AppNavigation.CL7VUy8w.js"
+    ]
+  },
+  "node_modules/@abenevaut/maskot-2013/dist/app-icon.webp": {
+    "file": "assets/app-icon.Bw36Fz9x.webp",
+    "src": "node_modules/@abenevaut/maskot-2013/dist/app-icon.webp"
+  },
+  "theme/css/app.css": {
+    "file": "assets/app.rfyeSsWG.css",
+    "src": "theme/css/app.css",
+    "isEntry": true
+  },
+  "theme/js/Article.jsx": {
+    "file": "assets/Article.DG2V04_m.js",
+    "name": "Article",
+    "src": "theme/js/Article.jsx",
+    "isEntry": true,
+    "imports": [
+      "_AppNavigation.CL7VUy8w.js",
+      "_Article.C1b7_ayt.js",
+      "_heading.BEkDFeWS.js"
+    ]
+  },
+  "theme/js/Home.jsx": {
+    "file": "assets/Home.ex8-woI_.js",
+    "name": "Home",
+    "src": "theme/js/Home.jsx",
+    "isEntry": true,
+    "imports": [
+      "_AppNavigation.CL7VUy8w.js"
+    ]
+  },
+  "theme/js/Privacy.jsx": {
+    "file": "assets/Privacy.CbGCcGHd.js",
+    "name": "Privacy",
+    "src": "theme/js/Privacy.jsx",
+    "isEntry": true,
+    "imports": [
+      "_AppNavigation.CL7VUy8w.js",
+      "_divider.D9cet1mR.js",
+      "_heading.BEkDFeWS.js"
+    ]
+  },
+  "theme/js/Terms.jsx": {
+    "file": "assets/Terms.eGI9e7qZ.js",
+    "name": "Terms",
+    "src": "theme/js/Terms.jsx",
+    "isEntry": true,
+    "imports": [
+      "_AppNavigation.CL7VUy8w.js",
+      "_divider.D9cet1mR.js",
+      "_heading.BEkDFeWS.js"
+    ]
+  },
+  "theme/js/Writeup.jsx": {
+    "file": "assets/Writeup.C3xRDlH_.js",
+    "name": "Writeup",
+    "src": "theme/js/Writeup.jsx",
+    "isEntry": true,
+    "imports": [
+      "_AppNavigation.CL7VUy8w.js",
+      "_Article.C1b7_ayt.js",
+      "_heading.BEkDFeWS.js"
+    ]
+  }
+}
