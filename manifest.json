@@ -6,8 +6,8 @@
       "assets/app-icon.Bw36Fz9x.webp"
     ]
   },
-  "_Article.C1b7_ayt.js": {
-    "file": "assets/Article.C1b7_ayt.js",
+  "_Article.qUsqw4G7.js": {
+    "file": "assets/Article.qUsqw4G7.js",
     "name": "Article",
     "imports": [
       "_AppNavigation.CL7VUy8w.js",
@@ -33,23 +33,23 @@
     "src": "node_modules/@abenevaut/maskot-2013/dist/app-icon.webp"
   },
   "theme/css/app.css": {
-    "file": "assets/app.rfyeSsWG.css",
+    "file": "assets/app.B4nB4egi.css",
     "src": "theme/css/app.css",
     "isEntry": true
   },
   "theme/js/Article.jsx": {
-    "file": "assets/Article.DG2V04_m.js",
+    "file": "assets/Article.0Jz8xlg5.js",
     "name": "Article",
     "src": "theme/js/Article.jsx",
     "isEntry": true,
     "imports": [
       "_AppNavigation.CL7VUy8w.js",
-      "_Article.C1b7_ayt.js",
+      "_Article.qUsqw4G7.js",
       "_heading.BEkDFeWS.js"
     ]
   },
   "theme/js/Home.jsx": {
-    "file": "assets/Home.ex8-woI_.js",
+    "file": "assets/Home.BlMjB8qC.js",
     "name": "Home",
     "src": "theme/js/Home.jsx",
     "isEntry": true,
@@ -58,7 +58,7 @@
     ]
   },
   "theme/js/Privacy.jsx": {
-    "file": "assets/Privacy.CbGCcGHd.js",
+    "file": "assets/Privacy.BxetM_A7.js",
     "name": "Privacy",
     "src": "theme/js/Privacy.jsx",
     "isEntry": true,
@@ -69,7 +69,7 @@
     ]
   },
   "theme/js/Terms.jsx": {
-    "file": "assets/Terms.eGI9e7qZ.js",
+    "file": "assets/Terms.WsAdHqx8.js",
     "name": "Terms",
     "src": "theme/js/Terms.jsx",
     "isEntry": true,
@@ -80,13 +80,13 @@
     ]
   },
   "theme/js/Writeup.jsx": {
-    "file": "assets/Writeup.C3xRDlH_.js",
+    "file": "assets/Writeup.DSnF2Jn1.js",
     "name": "Writeup",
     "src": "theme/js/Writeup.jsx",
     "isEntry": true,
     "imports": [
       "_AppNavigation.CL7VUy8w.js",
-      "_Article.C1b7_ayt.js",
+      "_Article.qUsqw4G7.js",
       "_heading.BEkDFeWS.js"
     ]
   }
