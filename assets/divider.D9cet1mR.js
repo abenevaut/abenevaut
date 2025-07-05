@@ -1,1 +1,0 @@
-import{j as i,c as s}from"./AppNavigation.CL7VUy8w.js";function a({soft:r=!1,className:e,...o}){return i.jsx("hr",{role:"presentation",...o,className:s(e,"w-full border-t",r&&"border-zinc-950/5 dark:border-white/5",!r&&"border-zinc-950/10 dark:border-white/10")})}export{a as D};

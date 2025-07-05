@@ -1,31 +1,31 @@
 {
-  "_AppNavigation.CL7VUy8w.js": {
-    "file": "assets/AppNavigation.CL7VUy8w.js",
+  "_AppNavigation.CtNWmaNY.js": {
+    "file": "assets/AppNavigation.CtNWmaNY.js",
     "name": "AppNavigation",
     "assets": [
       "assets/app-icon.Bw36Fz9x.webp"
     ]
   },
-  "_Article.qUsqw4G7.js": {
-    "file": "assets/Article.qUsqw4G7.js",
+  "_Article.DoDl5OPG.js": {
+    "file": "assets/Article.DoDl5OPG.js",
     "name": "Article",
     "imports": [
-      "_AppNavigation.CL7VUy8w.js",
-      "_heading.BEkDFeWS.js"
+      "_AppNavigation.CtNWmaNY.js",
+      "_heading.Ck0yTavw.js"
     ]
   },
-  "_divider.D9cet1mR.js": {
-    "file": "assets/divider.D9cet1mR.js",
+  "_divider.CY7gwU6S.js": {
+    "file": "assets/divider.CY7gwU6S.js",
     "name": "divider",
     "imports": [
-      "_AppNavigation.CL7VUy8w.js"
+      "_AppNavigation.CtNWmaNY.js"
     ]
   },
-  "_heading.BEkDFeWS.js": {
-    "file": "assets/heading.BEkDFeWS.js",
+  "_heading.Ck0yTavw.js": {
+    "file": "assets/heading.Ck0yTavw.js",
     "name": "heading",
     "imports": [
-      "_AppNavigation.CL7VUy8w.js"
+      "_AppNavigation.CtNWmaNY.js"
     ]
   },
   "node_modules/@abenevaut/maskot-2013/dist/app-icon.webp": {
@@ -38,56 +38,56 @@
     "isEntry": true
   },
   "theme/js/Article.jsx": {
-    "file": "assets/Article.0Jz8xlg5.js",
+    "file": "assets/Article.BaHMdn5m.js",
     "name": "Article",
     "src": "theme/js/Article.jsx",
     "isEntry": true,
     "imports": [
-      "_AppNavigation.CL7VUy8w.js",
-      "_Article.qUsqw4G7.js",
-      "_heading.BEkDFeWS.js"
+      "_AppNavigation.CtNWmaNY.js",
+      "_Article.DoDl5OPG.js",
+      "_heading.Ck0yTavw.js"
     ]
   },
   "theme/js/Home.jsx": {
-    "file": "assets/Home.BlMjB8qC.js",
+    "file": "assets/Home.CDz-eR7x.js",
     "name": "Home",
     "src": "theme/js/Home.jsx",
     "isEntry": true,
     "imports": [
-      "_AppNavigation.CL7VUy8w.js"
+      "_AppNavigation.CtNWmaNY.js"
     ]
   },
   "theme/js/Privacy.jsx": {
-    "file": "assets/Privacy.BxetM_A7.js",
+    "file": "assets/Privacy.Czzxh_M6.js",
     "name": "Privacy",
     "src": "theme/js/Privacy.jsx",
     "isEntry": true,
     "imports": [
-      "_AppNavigation.CL7VUy8w.js",
-      "_divider.D9cet1mR.js",
-      "_heading.BEkDFeWS.js"
+      "_AppNavigation.CtNWmaNY.js",
+      "_divider.CY7gwU6S.js",
+      "_heading.Ck0yTavw.js"
     ]
   },
   "theme/js/Terms.jsx": {
-    "file": "assets/Terms.WsAdHqx8.js",
+    "file": "assets/Terms.C3qrEBf7.js",
     "name": "Terms",
     "src": "theme/js/Terms.jsx",
     "isEntry": true,
     "imports": [
-      "_AppNavigation.CL7VUy8w.js",
-      "_divider.D9cet1mR.js",
-      "_heading.BEkDFeWS.js"
+      "_AppNavigation.CtNWmaNY.js",
+      "_divider.CY7gwU6S.js",
+      "_heading.Ck0yTavw.js"
     ]
   },
   "theme/js/Writeup.jsx": {
-    "file": "assets/Writeup.DSnF2Jn1.js",
+    "file": "assets/Writeup.Bf9gvexD.js",
     "name": "Writeup",
     "src": "theme/js/Writeup.jsx",
     "isEntry": true,
     "imports": [
-      "_AppNavigation.CL7VUy8w.js",
-      "_Article.qUsqw4G7.js",
-      "_heading.BEkDFeWS.js"
+      "_AppNavigation.CtNWmaNY.js",
+      "_Article.DoDl5OPG.js",
+      "_heading.Ck0yTavw.js"
     ]
   }
 }
