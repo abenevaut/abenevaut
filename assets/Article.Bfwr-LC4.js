@@ -1,1 +1,0 @@
-import{R as r,j as t,W as a,A as e,a as i}from"./AppNavigation.DnqMAi16.js";import{A as o}from"./Article.xvcIdPYJ.js";import"./heading.C4XQ4ewe.js";r.createRoot(document.getElementById("root")).render(t.jsx(a,{children:t.jsx(o,{navbar:i(),sidebar:e(),withTestimonialAndStats:!1,article:window.article})}));
