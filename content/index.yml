@@ -12,6 +12,12 @@ seo:
 portfolio:
   title: Projects
   projects:
+    - authentifier-vos-bots-avec-laravel-passport:
+      capture: images/laravel-france-3d0cc74a-2712-4345-a3f6-e113b01d186f.png.webp
+      title: "Authentifier vos bots avec laravel/passport"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/authentifier-vos-bots-avec-laravel-passport
+      date: 07-07-2025
     - votre-application-multi-tenant-avec-laravel-sans-package-tiers:
       capture: images/laravel-france-146e5c9f-ff9d-478a-8890-41098c428138.png.webp
       title: "Votre application multi-tenant avec Laravel, sans package tiers"

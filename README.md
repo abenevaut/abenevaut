@@ -26,6 +26,7 @@ const abenevaut = {
 <h2>Articles</h2>
 <p>
 
+- [07 juillet 2025 - Authentifier vos bots avec laravel/passport](https://laravel-france.com/posts/authentifier-vos-bots-avec-laravel-passport)
 - [25 mai 2025 - Votre application multi-tenant avec Laravel, sans package tiers](https://laravel-france.com/posts/votre-application-multi-tenant-avec-laravel-sans-package-tiers)
 - [14 avril 2025 - Déléguez la configuration à vos utilisateurs](https://laravel-france.com/posts/deleguez-la-configuration-a-vos-utilisateurs)
 - [28 février 2025 - Automatisez vos tests avec GitHub Actions](https://laravel-france.com/posts/automatisez-vos-tests-avec-github-actions)

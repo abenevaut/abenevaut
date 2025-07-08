@@ -1,0 +1,29 @@
+view: article
+language: en
+seo:
+  title: huggingface.co the AI temple
+  description:
+  keywords: AI, resources, courses, tools, learning
+  author: Antoine Benevaut
+  twitter: "@abenevaut"
+  og-image: https://www.abenevaut.dev/images/abenevaut-og.webp
+  url: https://www.abenevaut.dev/2025-07-05-huggingface-co.html
+
+article: |+
+  # huggingface.co the AI temple
+
+  https://huggingface.co/learn
+  
+  Hugging Face est souvent considéré comme le temple de l'intelligence artificielle, en particulier pour le traitement automatique du langage naturel.
+  Cette plateforme est un incontournable pour les développeurs et chercheurs en IA, offrant une multitude de ressources et d'outils pour explorer et utiliser des modèles d'apprentissage automatique.
+  
+  Sur Hugging Face, vous trouverez une vaste collection de modèles pré-entraînés, accessibles via leur célèbre "Model Hub".
+  Ces modèles couvrent une large gamme de tâches, de la traduction automatique à la génération de texte, en passant par l'analyse de sentiments.
+  
+  En plus des formations et des ressources éducatives pour apprendre à utiliser ces modèles, Hugging Face propose également des outils pour entraîner et déployer vos propres modèles. 
+  La plateforme encourage la collaboration au sein de la communauté, permettant aux utilisateurs de partager leurs modèles et de contribuer à des projets open source.
+  
+  Vous y trouverez aussi des démonstrations interactives pour voir les modèles en action, ainsi que des services cloud pour des projets à grande échelle.
+  Enfin, Hugging Face offre une documentation complète et des tutoriels pour vous guider dans l'utilisation de leurs outils.
+  
+  En résumé, Hugging Face est une ressource essentielle pour quiconque s'intéresse à l'IA, offrant tout ce dont vous avez besoin pour innover et collaborer dans ce domaine en constante évolution.

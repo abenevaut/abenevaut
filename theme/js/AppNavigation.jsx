@@ -1,18 +1,13 @@
 'use client'
 
-import axios from 'axios';
 import { ArrowTopRightOnSquareIcon, ArrowRightStartOnRectangleIcon, ChevronUpIcon, ChevronDownIcon, ShieldCheckIcon, DocumentCheckIcon } from '@heroicons/react/16/solid';
 import { Avatar } from '@abenevaut/tailwindui/src/js/Catalyst/avatar';
 import { Dropdown, DropdownButton, DropdownDescription, DropdownItem, DropdownLabel, DropdownMenu } from '@abenevaut/tailwindui/src/js/Catalyst/dropdown';
 import { Navbar, NavbarItem, NavbarLabel, NavbarSection, NavbarDivider, NavbarSpacer } from '@abenevaut/tailwindui/src/js/Catalyst/navbar';
 import { Sidebar, SidebarBody, SidebarFooter, SidebarHeader, SidebarItem, SidebarLabel, SidebarSection, SidebarSpacer } from '@abenevaut/tailwindui/src/js/Catalyst/sidebar';
-import { ServiceWorkerProvider } from '@abenevaut/tailwindui/src/js/Providers/ServiceWorkerProvider';
-import { NotificationsProvider } from '@abenevaut/tailwindui/src/js/Providers/NotificationsProvider';
 import ThemeSwitchNavbarItem from "@abenevaut/tailwindui/src/js/Components/theme-switch-navbar-item.jsx";
-import NotificationsSwitchNavbarItem from "./Components/notifications-switch-navbar-item.jsx";
 import logoUrl from '@abenevaut/maskot-2013/dist/app-icon.webp';
 import './bootstrap.js';
-
 
 const handleNotificationsSubscription = (subscription, resolve, reject) => {
 
@@ -70,10 +65,10 @@ function MainDropdownMenu() {
         <DropdownDescription>is a tool to slice PHPUnit tests files to tests suites</DropdownDescription>
       </DropdownItem>
 
-      <DropdownItem href="https://www.abenevaut.dev/2025-01-20-docker-kata.html">
+      <DropdownItem href="https://ai-prompt.abenevaut.dev/">
         <ArrowRightStartOnRectangleIcon/>
-        <DropdownLabel>Docker Kata</DropdownLabel>
-        <DropdownDescription>get started with Docker through exercises</DropdownDescription>
+        <DropdownLabel>Générateur de Prompts IA</DropdownLabel>
+        <DropdownDescription>Créez des prompts pour vos projets d'IA</DropdownDescription>
       </DropdownItem>
 
     </DropdownMenu>
