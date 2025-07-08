@@ -66,7 +66,8 @@ function MainDropdownMenu() {
       </DropdownItem>
 
       <DropdownItem href="https://ai-prompt.abenevaut.dev/">
-        <ArrowRightStartOnRectangleIcon/>
+        <ArrowTopRightOnSquareIcon/>
+        {/*<ArrowRightStartOnRectangleIcon/>*/}
         <DropdownLabel>Générateur de Prompts IA</DropdownLabel>
         <DropdownDescription>Créez des prompts pour vos projets d'IA</DropdownDescription>
       </DropdownItem>
