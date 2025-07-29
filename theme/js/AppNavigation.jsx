@@ -53,19 +53,21 @@ function MainDropdownMenu() {
   return (
     <DropdownMenu className="min-w-80 lg:min-w-64" anchor="bottom start">
 
-      <DropdownItem href="https://laravel-one.abenevaut.dev/">
+      <DropdownItem href="https://laravel-one.abenevaut.dev/index.html?pk_source=www&pk_medium=link">
         <ArrowTopRightOnSquareIcon/>
+        {/*<ArrowRightStartOnRectangleIcon/>*/}
         <DropdownLabel>Laravel One</DropdownLabel>
         <DropdownDescription>is a tool to generate static webpages based on Blade Templates</DropdownDescription>
       </DropdownItem>
 
-      <DropdownItem href="https://github.com/abenevaut/phpunit-slicer">
+      <DropdownItem href="https://github.com/abenevaut/phpunit-slicer?pk_source=www&pk_medium=link">
         <ArrowTopRightOnSquareIcon/>
+        {/*<ArrowRightStartOnRectangleIcon/>*/}
         <DropdownLabel>PHPUnit Slicer</DropdownLabel>
         <DropdownDescription>is a tool to slice PHPUnit tests files to tests suites</DropdownDescription>
       </DropdownItem>
 
-      <DropdownItem href="https://ai-prompt.abenevaut.dev/">
+      <DropdownItem href="https://ai-prompt.abenevaut.dev/index.html?pk_source=www&pk_medium=link">
         <ArrowTopRightOnSquareIcon/>
         {/*<ArrowRightStartOnRectangleIcon/>*/}
         <DropdownLabel>Générateur de Prompts IA</DropdownLabel>

@@ -18,7 +18,7 @@
         <meta property="og:image" content="{{ $seo['og-image'] }}">
 
         <meta property="twitter:card" content="summary_large_image">
-        <meta name=”twitter:creator” content=”{{ $seo['twitter'] }}”>
+        <meta property="twitter:creator" content="{{ $seo['twitter'] }}">
         <meta property="twitter:url" content="{{ $seo['url'] }}">
         <meta property="twitter:title" content="{{ $seo['title'] }}">
         <meta property="twitter:description" content="{{ $seo['description'] }}">
