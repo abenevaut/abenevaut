@@ -1,31 +1,31 @@
 {
-  "_AppNavigation.D0QWNYBY.js": {
-    "file": "assets/AppNavigation.D0QWNYBY.js",
+  "_AppNavigation.BR0FP-tc.js": {
+    "file": "assets/AppNavigation.BR0FP-tc.js",
     "name": "AppNavigation",
     "assets": [
       "assets/app-icon.Bw36Fz9x.webp"
     ]
   },
-  "_Article.1ljIIrS0.js": {
-    "file": "assets/Article.1ljIIrS0.js",
+  "_Article.ChC7seYS.js": {
+    "file": "assets/Article.ChC7seYS.js",
     "name": "Article",
     "imports": [
-      "_AppNavigation.D0QWNYBY.js",
-      "_heading.BQoTkqiG.js"
+      "_AppNavigation.BR0FP-tc.js",
+      "_heading.Dmp9LM0x.js"
     ]
   },
-  "_divider.B0BZaLIU.js": {
-    "file": "assets/divider.B0BZaLIU.js",
+  "_divider.DDlb-bGv.js": {
+    "file": "assets/divider.DDlb-bGv.js",
     "name": "divider",
     "imports": [
-      "_AppNavigation.D0QWNYBY.js"
+      "_AppNavigation.BR0FP-tc.js"
     ]
   },
-  "_heading.BQoTkqiG.js": {
-    "file": "assets/heading.BQoTkqiG.js",
+  "_heading.Dmp9LM0x.js": {
+    "file": "assets/heading.Dmp9LM0x.js",
     "name": "heading",
     "imports": [
-      "_AppNavigation.D0QWNYBY.js"
+      "_AppNavigation.BR0FP-tc.js"
     ]
   },
   "node_modules/@abenevaut/maskot-2013/dist/app-icon.webp": {
@@ -38,56 +38,56 @@
     "isEntry": true
   },
   "theme/js/Article.jsx": {
-    "file": "assets/Article.C7uB_kzM.js",
+    "file": "assets/Article.DmtYZKOF.js",
     "name": "Article",
     "src": "theme/js/Article.jsx",
     "isEntry": true,
     "imports": [
-      "_AppNavigation.D0QWNYBY.js",
-      "_Article.1ljIIrS0.js",
-      "_heading.BQoTkqiG.js"
+      "_AppNavigation.BR0FP-tc.js",
+      "_Article.ChC7seYS.js",
+      "_heading.Dmp9LM0x.js"
     ]
   },
   "theme/js/Home.jsx": {
-    "file": "assets/Home.BgT8vuDg.js",
+    "file": "assets/Home.CSEm5pZV.js",
     "name": "Home",
     "src": "theme/js/Home.jsx",
     "isEntry": true,
     "imports": [
-      "_AppNavigation.D0QWNYBY.js"
+      "_AppNavigation.BR0FP-tc.js"
     ]
   },
   "theme/js/Privacy.jsx": {
-    "file": "assets/Privacy.CUadkfwo.js",
+    "file": "assets/Privacy.Cb2SKWs1.js",
     "name": "Privacy",
     "src": "theme/js/Privacy.jsx",
     "isEntry": true,
     "imports": [
-      "_AppNavigation.D0QWNYBY.js",
-      "_divider.B0BZaLIU.js",
-      "_heading.BQoTkqiG.js"
+      "_AppNavigation.BR0FP-tc.js",
+      "_divider.DDlb-bGv.js",
+      "_heading.Dmp9LM0x.js"
     ]
   },
   "theme/js/Terms.jsx": {
-    "file": "assets/Terms.DS0VIEgr.js",
+    "file": "assets/Terms.CRsdvWE1.js",
     "name": "Terms",
     "src": "theme/js/Terms.jsx",
     "isEntry": true,
     "imports": [
-      "_AppNavigation.D0QWNYBY.js",
-      "_divider.B0BZaLIU.js",
-      "_heading.BQoTkqiG.js"
+      "_AppNavigation.BR0FP-tc.js",
+      "_divider.DDlb-bGv.js",
+      "_heading.Dmp9LM0x.js"
     ]
   },
   "theme/js/Writeup.jsx": {
-    "file": "assets/Writeup.DL6epP-G.js",
+    "file": "assets/Writeup.CjQi5yMy.js",
     "name": "Writeup",
     "src": "theme/js/Writeup.jsx",
     "isEntry": true,
     "imports": [
-      "_AppNavigation.D0QWNYBY.js",
-      "_Article.1ljIIrS0.js",
-      "_heading.BQoTkqiG.js"
+      "_AppNavigation.BR0FP-tc.js",
+      "_Article.ChC7seYS.js",
+      "_heading.Dmp9LM0x.js"
     ]
   }
 }
