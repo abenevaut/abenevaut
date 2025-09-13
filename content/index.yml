@@ -13,11 +13,11 @@ portfolio:
   title: Projects
   projects:
     - prism-le-sdk-agentique-pour-laravel:
-        capture: images/laravel-france-51f6bef1-65cd-4363-bf7a-5f7817f203d2.png.webp
-        title: "Prism, le SDK agentique pour Laravel"
-        brief: Article laravel-france.com
-        url: https://laravel-france.com/posts/prism-le-sdk-agentique-pour-laravel
-        date: 10-09-2025
+      capture: images/laravel-france-51f6bef1-65cd-4363-bf7a-5f7817f203d2.png.webp
+      title: "Prism, le SDK agentique pour Laravel"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/prism-le-sdk-agentique-pour-laravel
+      date: 10-09-2025
     - utiliser-un-serveur-mcp-dans-votre-laravel:
       capture: images/laravel-france-4f0a15b0-3d01-4af7-9a44-25e03d988421.png.webp
       title: "Utiliser un serveur MCP dans votre Laravel"
