@@ -17,7 +17,7 @@ article: |+
   - add a node
   
   ```shell
-  docker swarm join --token SWMTKN-1-5pl0s7nss5mk0ozaill5mwm5ne524wjh660z4zyf93z6ur3i60-ay2qf267stax4igqkumq401to 172.31.15.27:2377
+  docker swarm join --token <SWARM TOKEN> <IP SWARM MASTER NODE:2377>
   ```
   
   ![infrastructure](/abenevaut/dev.abenevaut/wiki/swarm-infra-abenevaut-infrastructure.svg)
