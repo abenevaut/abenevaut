@@ -1,0 +1,111 @@
+view: article
+language: en
+seo:
+  title: aiforwork.co Ressources d'invité (prompt) d'IA
+  description:
+  keywords: AI, resources, courses, tools, learning
+  author: Antoine Benevaut
+  twitter: "@abenevaut"
+  og-image: https://www.abenevaut.dev/images/abenevaut-og.webp
+  url: https://www.abenevaut.dev/2025-07-05-aiforwork-co.html
+
+article: |+
+  ## dev-abenevaut-prod-swarm-master
+
+  - AWS ID
+  - use ec2 debian image
+  - add a node
+  
+  ```shell
+  docker swarm join --token SWMTKN-1-5pl0s7nss5mk0ozaill5mwm5ne524wjh660z4zyf93z6ur3i60-ay2qf267stax4igqkumq401to 172.31.15.27:2377
+  ```
+  
+  ![infrastructure](/abenevaut/dev.abenevaut/wiki/swarm-infra-abenevaut-infrastructure.svg)
+  
+  ```shell
+  sudo apt-get update
+  sudo apt-get install ca-certificates curl gnupg emacs
+  
+  sudo install -m 0755 -d /etc/apt/keyrings
+  curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+  sudo chmod a+r /etc/apt/keyrings/docker.gpg
+  
+  echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  
+  sudo apt-get update
+  
+  sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  ```
+  
+  Add right to use docker to admin user
+  ```shell
+  sudo usermod -aG docker admin
+  ```
+  
+  Install swarm
+  ```shell
+  docker swarm init --advertise-addr <private IP>
+  
+  # -> use swam-infra project to load traefik and portainer 
+  
+  ##docker volume create portainer_data
+  ##docker pull portainer/portainer-ce
+  ##docker run -d -p 8000:8000 -p 9443:9443 --name portainer --restart=always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest
+  ```
+  
+  ## Fastpass
+  
+  ### Linux & MacOS
+  ```
+  docker swarm init --advertise-addr 192.168.1.7
+  
+  docker network create -d overlay swarm_network_agent
+  docker network create -d overlay swarm_network_public
+  
+  docker node update --label-add traefik.volume.traefik_data.exists=true $(docker info -f '{{.Swarm.NodeID}}')
+  docker node update --label-add portainer.volume.portainer_data.exists=true $(docker info -f '{{.Swarm.NodeID}}')
+  
+  docker stack deploy --compose-file compose.yml swarm_manager
+  
+  docker stack services swarm_manager
+  
+  docker service logs swarm_manager_traefik -f
+  docker service logs swarm_manager_agent -f
+  docker service logs swarm_manager_portainer -f
+  
+  docker stack rm swarm_manager
+  docker volume rm swarm_manager_portainer_data swarm_manager_traefik_data
+  docker network rm swarm_network_agent swarm_network_public
+  
+  docker node update --label-rm traefik.volume.traefik_data.exists $(docker info -f '{{.Swarm.NodeID}}')
+  docker node update --label-rm portainer.volume.portainer_data.exists $(docker info -f '{{.Swarm.NodeID}}')
+  ```
+  
+  ### Windows
+  ```
+  # Windows ini swarm
+  docker swarm init
+  # Test without success on windows
+  docker swarm init --listen-addr eth0:2377 --advertise-addr 192.168.1.7
+  
+  docker network create -d overlay --attachable swarm_network_agent
+  docker network create -d overlay --attachable swarm_network_public
+  
+  docker node update --label-add traefik.volume.traefik_data.exists=true $(docker info -f '{{.Swarm.NodeID}}')
+  docker node update --label-add portainer.volume.portainer_data.exists=true $(docker info -f '{{.Swarm.NodeID}}')
+  
+  docker stack deploy --compose-file compose.yml swarm_manager
+  
+  docker stack services swarm_manager
+  
+  docker service logs swarm_manager_traefik -f
+  docker service logs swarm_manager_portainer_agent -f
+  docker service logs swarm_manager_portainer -f
+  
+  docker stack rm swarm_manager
+  docker volume rm swarm_manager_portainer_data swarm_manager_traefik_data
+  docker network rm swarm_network_agent swarm_network_public
+  ```

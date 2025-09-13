@@ -31,7 +31,7 @@ article: |+
     
   Sur Windows, les variables d'environnement peuvent être configurées via l'interface graphique ou la ligne de commande.
   
-  > retrouvez [ici](https://gist.github.com/abenevaut/90042f9ed7c1eaf1007f97d0f914ceea) la liste des variables d'environnement qui décrivent les chemins (`PATH`) disponible par défaut.
+  > retrouvez [dans ce gist](https://gist.github.com/abenevaut/90042f9ed7c1eaf1007f97d0f914ceea) la liste des variables d'environnement qui décrivent les chemins (`PATH`) disponible par défaut.
   
   #### Interface Graphique
     
@@ -57,7 +57,7 @@ article: |+
   Ajoutez `export VARIABLE_NAME=value` dans votre fichier `~/.zshrc` ou `~/.bashrc` ou `~/.bash_profile`.
   Rechargez le fichier avec `source ~/.zshrc` ou `source ~/.bashrc` ou `source ~/.bash_profile`.
 
-  ### Conclusion
+  ### En conclusion
   
   Les variables d'environnement sont essentielles pour configurer et personnaliser votre système d'exploitation.
   Aujourd'hui, elles ont une place importante dans les hébergements cloud et peuvent parfois être mutualisées à des coffres-forts de données sensibles pour préparer des machines ou serveurs de façon automatisée.

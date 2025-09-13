@@ -11,7 +11,7 @@ I support you in your web and mobile projects. Let's approach your project from 
 const abenevaut = {
   stack: [
     GIT, Docker, GitHub Actions,
-    PHP, Laravel, Node, Express.js,
+    PHP, Laravel, Node.js, Express.js,
     Vue.js, React.js, TailwindCSS,
   ],
   architectures: [
@@ -26,6 +26,8 @@ const abenevaut = {
 <h2>Articles</h2>
 <p>
 
+- [10 septembre 2025 - Prism, le SDK agentique pour Laravel](https://laravel-france.com/posts/prism-le-sdk-agentique-pour-laravel)
+- [12 août 2025 - Utiliser un serveur MCP dans votre Laravel](https://laravel-france.com/posts/utiliser-un-serveur-mcp-dans-votre-laravel)
 - [07 juillet 2025 - Authentifier vos bots avec laravel/passport](https://laravel-france.com/posts/authentifier-vos-bots-avec-laravel-passport)
 - [25 mai 2025 - Votre application multi-tenant avec Laravel, sans package tiers](https://laravel-france.com/posts/votre-application-multi-tenant-avec-laravel-sans-package-tiers)
 - [14 avril 2025 - Déléguez la configuration à vos utilisateurs](https://laravel-france.com/posts/deleguez-la-configuration-a-vos-utilisateurs)
