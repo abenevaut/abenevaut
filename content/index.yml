@@ -12,6 +12,140 @@ seo:
 portfolio:
   title: Projects
   projects:
+    - docker-kata:
+      capture: images/abenevaut-docker-kata.png.webp
+      title: "docker-kata"
+      brief: Get started with Docker through exercises
+      url: https://www.abenevaut.dev/2025-01-20-docker-kata.html
+      target: internal
+      date: 20-01-2025
+    - xmas-root-me-challenges:
+      capture: images/ctf-2024-rootme-xmas.png.webp
+      title: "XMAS root-me challenges"
+      brief: CTF root-me.org 2024
+      url: https://www.abenevaut.dev/2024-xmas-root-me.html
+      target: internal
+      date: 31-12-2024
+    - ctf-comcyber-2024:
+      capture: images/ctf-2024-comcyber.png.webp
+      title: "Glissez-vous dans la peau d'un cybercombattant"
+      brief: CTF COMCYBER 2024
+      url: https://www.abenevaut.dev/2024-comcyber.html
+      target: internal
+      date: 30-09-2024
+    - ctf-hackfest-213:
+      capture: images/ctf-2013-hackfest.png.webp
+      title: Hackfest 2013
+      brief: "Hackfest 2013, debriefing - #hf2013"
+      url: https://www.abenevaut.dev/2013-hackfest.html
+      target: internal
+      date: 20-11-2013
+    - ctf-nuitduhack-213:
+      capture: images/ctf-2013-nuitduhack.jpg.webp
+      title: "Nuit du Hack 2k13"
+      brief: "Nuit du Hack 2k13, debriefing"
+      url: https://www.abenevaut.dev/2013-nuitduhack.html
+      target: internal
+      date: 23-06-2013
+
+blog-laravel-france:
+  title: Projects
+  projects:
+    - prism-le-sdk-agentique-pour-laravel:
+      capture: images/laravel-france-51f6bef1-65cd-4363-bf7a-5f7817f203d2.png.webp
+      title: "Prism, le SDK agentique pour Laravel"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/prism-le-sdk-agentique-pour-laravel
+      date: 10-09-2025
+    - utiliser-un-serveur-mcp-dans-votre-laravel:
+      capture: images/laravel-france-4f0a15b0-3d01-4af7-9a44-25e03d988421.png.webp
+      title: "Utiliser un serveur MCP dans votre Laravel"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/utiliser-un-serveur-mcp-dans-votre-laravel
+      date: 12-08-2025
+    - authentifier-vos-bots-avec-laravel-passport:
+      capture: images/laravel-france-3d0cc74a-2712-4345-a3f6-e113b01d186f.png.webp
+      title: "Authentifier vos bots avec laravel/passport"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/authentifier-vos-bots-avec-laravel-passport
+      date: 07-07-2025
+    - votre-application-multi-tenant-avec-laravel-sans-package-tiers:
+      capture: images/laravel-france-146e5c9f-ff9d-478a-8890-41098c428138.png.webp
+      title: "Votre application multi-tenant avec Laravel, sans package tiers"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/votre-application-multi-tenant-avec-laravel-sans-package-tiers
+      date: 25-05-2025
+    - deleguez-la-configuration-a-vos-utilisateurs:
+      capture: images/laravel-france.623210f6-ccb0-49fc-b057-3fd8f928c7d7.png.webp
+      title: "Déléguez la configuration à vos utilisateurs"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/deleguez-la-configuration-a-vos-utilisateurs
+      date: 14-04-2025
+    - automatisez-vos-tests-avec-github-actions:
+      capture: images/laravel-france-cccaa4f2-5686-4872-8da8-bc3607ef08b9.png.webp
+      title: "Automatisez vos tests avec GitHub Actions"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/automatisez-vos-tests-avec-github-actions
+      date: 28-02-2025
+    - deployer-vos-applications-serverless-avec-bref-sh:
+      capture: images/laravel-france-a422ddbb-ccc7-4e2e-af52-9907fa409c44.png.webp
+      title: "Déployer vos applications serverless avec Bref.sh"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/deployer-vos-application-serverless-avec-brefsh
+      date: 23-01-2025
+    - xmas-root-me-challenges:
+      capture: images/ctf-2024-rootme-xmas.png.webp
+      title: "XMAS root-me challenges"
+      brief: CTF root-me.org 2024
+      url: https://www.abenevaut.dev/2024-xmas-root-me.html
+      target: internal
+      date: 31-12-2024
+    - automatisez-linsertion-dutilisateurs-avec-les-seeders:
+      capture: images/laravel-france-f9583881-6928-4c5a-8286-caf33d8071f6.png.webp
+      title: "Automatisez l'insertion d'utilisateurs avec les Seeders"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/automatisez-linsertion-dutilisateurs-avec-les-seeders
+      date: 20-11-2024
+    - optimiser-votre-seo-avec-les-donnees-structurees:
+      capture: images/laravel-france-22c060a9-7bef-4514-94ce-e1ccd35e83e0.png.webp
+      title: "Optimiser votre SEO avec les données Structurées"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/optimiser-votre-seo-avec-les-donnees-structurees
+      date: 05-09-2024
+    - on-installe-php-sur-votre-machine-windows:
+      capture: images/laravel-france-619a6863-d968-4f27-8171-4a37f75bf3a6.png.webp
+      title: "On installe PHP sur votre machine Windows"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/on-installe-php-sur-votre-machine-windows
+      date: 23-07-2024
+    - laravel-les-seeders:
+      capture: images/laravel-france-296560f1-4f30-4d21-b4ee-73345d7b2d89.jpg.webp
+      title: "Laravel, Les Seeders"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/les-seeders
+      date: 26-06-2024
+    - ameliorer-le-referencement-avec-spatielaravel-sitemap:
+      capture: images/laravel-france-8165f558-64e6-4ef3-80d6-bdd8e6ac534c.jpg.webp
+      title: "Améliorer le référencement avec spatie/laravel-sitemap"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/ameliorer-le-referencement-avec-spatielaravel-sitemap
+      date: 15-05-2024
+    - le-driver-mail-failover:
+      capture: images/laravel-france-b003323c-0b7d-415d-aec1-f5c442dfdadb.png.webp
+      title: "Le driver mail failover"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/le-driver-mail-failover
+      date: 21-03-2024
+    - utilisez-illuminate-en-dehors-de-laravel:
+      capture: images/laravel-france-db0739d5-9318-4bc5-84ce-6069fc5edd73.jpg.webp
+      title: "Utilisez Illuminate en dehors de Laravel"
+      brief: Article laravel-france.com
+      url: https://laravel-france.com/posts/utilisez-illuminate-en-dehors-de-laravel
+      date: 04-03-2024
+
+portfolio:
+  title: Projects
+  projects:
     - prism-le-sdk-agentique-pour-laravel:
       capture: images/laravel-france-51f6bef1-65cd-4363-bf7a-5f7817f203d2.png.webp
       title: "Prism, le SDK agentique pour Laravel"
